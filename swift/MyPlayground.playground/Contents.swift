@@ -68,7 +68,7 @@ func printFirstFibonacciNumbers(lastNumberIndex: Int) {
     }
 }
 
-printFirstFibonacciNumbers(lastNumberIndex: 15)
+printFirstFibonacciNumbers(lastNumberIndex: 20)
 
 /*
  Напишите программу для сортировки массива, использующую метод пузырька. Сортировка должна происходить в отдельной функции, принимающей на вход исходный массив.
@@ -155,3 +155,85 @@ func incrementNumberByOne(str: String) -> String {
 print(incrementNumberByOne(str: "a999k"))
 
 print("\n____Практические задания Часть 2____\n")
+/*
+ Написать простое замыкание в переменной myClosure, замыкание должно выводить в консоль фразу "I love Swift". Вызвать это замыкание. Далее написать функцию, которая будет запускать заданное замыкание заданное количество раз. Объявить функцию так: func repeatTask (times: Int, task: () -> Void). Функция должна запускать times раз замыкание task. Используйте эту функцию для печати «I love Swift» 10 раз.
+ */
+
+let task = {
+    print("I love Swift")
+}
+task()
+print("\n_Repeat Task")
+func repeatTask (times: Int, task: () -> Void) {
+    for _ in 0..<times {
+        task()
+    }
+}
+repeatTask(times: 10, task: task)
+
+/*
+ Условия: есть начальная позиция на двумерной плоскости, можно осуществлять последовательность шагов по четырем направлениям up, down, left, right. Размерность каждого шага равна 1. Создать перечисление Directions с направлениями движения. Создать переменную location с начальными координатами (0,0), создать массив элементами которого будут направления из перечисления. Положить в этот массив следующую последовательность шагов: [.up, .up, .left, .down, .left, .down, .down, .right, .right, .down, .right]. Программно вычислить, какие будут координаты у переменной location после выполнения этой последовательности шагов.
+ */
+
+enum Directions {
+    case up, down, left, right
+}
+
+func getLocationAfterMoving(movements: [Directions], startLocation: (x: Int, y: Int), stepSize: Int = 1) -> (Int, Int) {
+    var location = startLocation
+    for move in movements {
+        switch move {
+        case .down:
+            location.y += stepSize
+        case .up:
+            location.y -= stepSize
+        case .right:
+            location.x += stepSize
+        case .left:
+            location.x -= stepSize
+        }
+    }
+    return (location)
+}
+
+let location: (x: Int, y: Int) = (0,0)
+print(getLocationAfterMoving(movements: [.up, .up, .left, .down, .left, .down, .down, .right, .right, .down, .right], startLocation: location))
+
+/*
+ Создать класс Rectangle с двумя неопциональными свойствами: ширина и длина. Реализовать в этом классе метод вычисляющий и выводящий в консоль периметр прямоугольника. Создать экземпляр класса и вызвать у него этот метод.
+ */
+
+class Rectangle {
+    
+    private let width: Int
+    private let height: Int
+    
+    init(width: Int, height: Int) {
+        self.width = width
+        self.height = height
+    }
+    
+    convenience init() {
+        self.init(width: 0, height: 0)
+    }
+
+    func perimeter() -> Int {
+        return ((width + height) * 2)
+    }
+}
+
+let rectangle = Rectangle(width: 5, height: 2)
+print(rectangle.perimeter())
+
+/*
+ Создать расширение класса Rectangle, которое будет обладать вычисляемым свойством площадь. Вывести в консоль площадь уже ранее созданного объекта.
+ */
+
+extension Rectangle {
+
+    func area() -> Int {
+        return (width * height)
+    }
+}
+
+print(rectangle.area())
