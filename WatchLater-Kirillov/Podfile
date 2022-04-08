@@ -12,15 +12,15 @@ def common_pods
   pod 'TKGrid', git: 'git@git.technokratos.com:ios/tkgrid.git'
 end
 
-target 'WatchLater_Dev' do
+target 'WatchLater-Kirillov_Dev' do
   use_frameworks!
   common_pods
-#  target 'WatchLater_Dev' do
+#  target 'WatchLater-Kirillov_Dev' do
 #    inherit! :search_paths
 #  end
 end
 
-target 'WatchLater_Prod' do
+target 'WatchLater-Kirillov_Prod' do
   use_frameworks!
   common_pods
 end
