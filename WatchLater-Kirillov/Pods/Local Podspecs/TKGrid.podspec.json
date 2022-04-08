@@ -1,0 +1,24 @@
+{
+  "name": "TKGrid",
+  "version": "1.1",
+  "summary": "Библиотека с сетка по которой верстаются визуальный компоненты",
+  "platforms": {
+    "ios": "11.0"
+  },
+  "swift_versions": "5.0",
+  "description": "Расширение Result",
+  "license": {
+    "type": "Custom",
+    "text": "                   Copyright 2019\n                   Permission is granted to Technokratos\n"
+  },
+  "authors": {
+    "Nurgaliev Rustam": "rustik6030@gmail.com"
+  },
+  "homepage": "https://git.technokratos.com/ios/tkgrid",
+  "source": {
+    "git": "https://git.technokratos.com/ios/tkgrid",
+    "tag": "1.1"
+  },
+  "source_files": "TKGrid/**/*",
+  "swift_version": "5.0"
+}
