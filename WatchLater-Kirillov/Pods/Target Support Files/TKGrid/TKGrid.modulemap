@@ -1,0 +1,6 @@
+framework module TKGrid {
+  umbrella header "TKGrid-umbrella.h"
+
+  export *
+  module * { export * }
+}
