@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1250"
+   LastUpgradeVersion = "1240"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B05722695F7FE5930F3D8DE71255252A"
-               BuildableName = "Pods_WatchLater_Prod.framework"
-               BlueprintName = "Pods-WatchLater_Prod"
+               BlueprintIdentifier = "4559AB4DC6F9C46DB16AC195D9B4869A"
+               BuildableName = "Pods_WatchLater_Kirillov_Dev.framework"
+               BlueprintName = "Pods-WatchLater-Kirillov_Dev"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

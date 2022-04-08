@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_WatchLater_ProdVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_WatchLater_ProdVersionString[];
+FOUNDATION_EXPORT double Pods_WatchLater_Kirillov_DevVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_WatchLater_Kirillov_DevVersionString[];
 

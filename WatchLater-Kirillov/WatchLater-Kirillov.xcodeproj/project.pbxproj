@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0FD81671E7AE70E1C75C9FBC /* Pods_WatchLater_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86E785CC23670B519D7417 /* Pods_WatchLater_Dev.framework */; };
+		113E00BABABD3B01A5073086 /* Pods_WatchLater_Kirillov_Prod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C2949DB62D1110810C8256 /* Pods_WatchLater_Kirillov_Prod.framework */; };
 		30314C9D265AA9FB00CADD41 /* WatchLater_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30314C9C265AA9FB00CADD41 /* WatchLater_Tests.swift */; };
 		30314CC8265AADB500CADD41 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30314CA8265AAA8900CADD41 /* BaseViewController.swift */; };
 		30314CCC265AADB600CADD41 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30314CA8265AAA8900CADD41 /* BaseViewController.swift */; };
@@ -36,7 +36,7 @@
 		30F0800F265A8746009B2398 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 306BF31C25FC8F7300E9B481 /* LaunchScreen.storyboard */; };
 		30F08010265A8746009B2398 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 306BF31A25FC8F7300E9B481 /* Assets.xcassets */; };
 		30F08012265A8746009B2398 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 30D2F271260148EE000134EB /* swiftgen.yml */; };
-		7830A8E8C6C40DD8FA30F7CD /* Pods_WatchLater_Prod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06520A7F71B0551174F1931A /* Pods_WatchLater_Prod.framework */; };
+		6F82F89B8BD4DABC3C5AC3DA /* Pods_WatchLater_Kirillov_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC5C882F16A7A24A91537BA /* Pods_WatchLater_Kirillov_Dev.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		06520A7F71B0551174F1931A /* Pods_WatchLater_Prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CEDB9368628CD58E6A0CC5C /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		30314C9A265AA9FB00CADD41 /* WatchLater-Kirillov_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WatchLater-Kirillov_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30314C9C265AA9FB00CADD41 /* WatchLater_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLater_Tests.swift; sourceTree = "<group>"; };
 		30314C9E265AA9FB00CADD41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,11 +72,11 @@
 		30D2F273260148EE000134EB /* Texts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
 		30F08017265A8746009B2398 /* WatchLater-Kirillov_Prod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchLater-Kirillov_Prod.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30F0801D265A8831009B2398 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6E86E785CC23670B519D7417 /* Pods_WatchLater_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		75EF3BBC82A14B9A3E9ADD23 /* Pods-WatchLater_Prod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater_Prod.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater_Prod/Pods-WatchLater_Prod.debug.xcconfig"; sourceTree = "<group>"; };
-		7F16E29F24B1133CB2977D9A /* Pods-WatchLater_Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater_Dev.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater_Dev/Pods-WatchLater_Dev.debug.xcconfig"; sourceTree = "<group>"; };
-		83A324AF3B289A21C6847271 /* Pods-WatchLater_Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater_Dev.release.xcconfig"; path = "Target Support Files/Pods-WatchLater_Dev/Pods-WatchLater_Dev.release.xcconfig"; sourceTree = "<group>"; };
-		DDBDAAD19DCD3AE0170AC416 /* Pods-WatchLater_Prod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater_Prod.release.xcconfig"; path = "Target Support Files/Pods-WatchLater_Prod/Pods-WatchLater_Prod.release.xcconfig"; sourceTree = "<group>"; };
+		377C1C58B79D226EE8BF40E6 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.release.xcconfig"; sourceTree = "<group>"; };
+		5BC5C882F16A7A24A91537BA /* Pods_WatchLater_Kirillov_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		829947A643F9BFB222C76665 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.release.xcconfig"; sourceTree = "<group>"; };
+		A8C2949DB62D1110810C8256 /* Pods_WatchLater_Kirillov_Prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6831C47F3BFCC718E55773B /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FD81671E7AE70E1C75C9FBC /* Pods_WatchLater_Dev.framework in Frameworks */,
+				6F82F89B8BD4DABC3C5AC3DA /* Pods_WatchLater_Kirillov_Dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7830A8E8C6C40DD8FA30F7CD /* Pods_WatchLater_Prod.framework in Frameworks */,
+				113E00BABABD3B01A5073086 /* Pods_WatchLater_Kirillov_Prod.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,7 +147,7 @@
 				30314C9B265AA9FB00CADD41 /* WatchLater_Tests */,
 				306BF30F25FC8F7200E9B481 /* Products */,
 				970F809B147CFE1BEEE5F075 /* Pods */,
-				58CE569C2BD161D575075FF2 /* Frameworks */,
+				4A1BAC733E8DA2F53E974C3A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -263,11 +263,11 @@
 			path = Prod;
 			sourceTree = "<group>";
 		};
-		58CE569C2BD161D575075FF2 /* Frameworks */ = {
+		4A1BAC733E8DA2F53E974C3A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6E86E785CC23670B519D7417 /* Pods_WatchLater_Dev.framework */,
-				06520A7F71B0551174F1931A /* Pods_WatchLater_Prod.framework */,
+				5BC5C882F16A7A24A91537BA /* Pods_WatchLater_Kirillov_Dev.framework */,
+				A8C2949DB62D1110810C8256 /* Pods_WatchLater_Kirillov_Prod.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -275,10 +275,10 @@
 		970F809B147CFE1BEEE5F075 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7F16E29F24B1133CB2977D9A /* Pods-WatchLater_Dev.debug.xcconfig */,
-				83A324AF3B289A21C6847271 /* Pods-WatchLater_Dev.release.xcconfig */,
-				75EF3BBC82A14B9A3E9ADD23 /* Pods-WatchLater_Prod.debug.xcconfig */,
-				DDBDAAD19DCD3AE0170AC416 /* Pods-WatchLater_Prod.release.xcconfig */,
+				2CEDB9368628CD58E6A0CC5C /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */,
+				829947A643F9BFB222C76665 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */,
+				C6831C47F3BFCC718E55773B /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */,
+				377C1C58B79D226EE8BF40E6 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -308,13 +308,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 306BF32225FC8F7300E9B481 /* Build configuration list for PBXNativeTarget "WatchLater-Kirillov_Dev" */;
 			buildPhases = (
-				8E83F50C3E38BDEB1E3F857E /* [CP] Check Pods Manifest.lock */,
+				FFDE0B0041CE6BA539DD4049 /* [CP] Check Pods Manifest.lock */,
 				30D2F26D26014479000134EB /* Swiftgen */,
 				3076A0632601CD47003B0EF9 /* SwiftLint */,
 				306BF30A25FC8F7200E9B481 /* Sources */,
 				306BF30B25FC8F7200E9B481 /* Frameworks */,
 				306BF30C25FC8F7200E9B481 /* Resources */,
-				E350B8C115D6397296DBA3A7 /* [CP] Embed Pods Frameworks */,
+				BA80273C720310E4CCD7CD8E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -329,13 +329,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30F08014265A8746009B2398 /* Build configuration list for PBXNativeTarget "WatchLater-Kirillov_Prod" */;
 			buildPhases = (
-				D1BACF703CEAE053D7C14A80 /* [CP] Check Pods Manifest.lock */,
+				411F57745AE72CE98C6610DC /* [CP] Check Pods Manifest.lock */,
 				30F07FEE265A8746009B2398 /* Swiftgen */,
 				30F07FEF265A8746009B2398 /* SwiftLint */,
 				30F07FF0265A8746009B2398 /* Sources */,
 				30F08009265A8746009B2398 /* Frameworks */,
 				30F0800B265A8746009B2398 /* Resources */,
-				EAF06D0748CF102F3E9E332B /* [CP] Embed Pods Frameworks */,
+				CDECEFB90696AAA8E4992BA0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -353,7 +353,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					30314C99265AA9FB00CADD41 = {
 						CreatedOnToolsVersion = 12.4;
@@ -490,7 +490,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		8E83F50C3E38BDEB1E3F857E /* [CP] Check Pods Manifest.lock */ = {
+		411F57745AE72CE98C6610DC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -505,14 +505,48 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WatchLater_Dev-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-WatchLater-Kirillov_Prod-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D1BACF703CEAE053D7C14A80 /* [CP] Check Pods Manifest.lock */ = {
+		BA80273C720310E4CCD7CD8E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDECEFB90696AAA8E4992BA0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFDE0B0041CE6BA539DD4049 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -527,45 +561,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WatchLater_Prod-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-WatchLater-Kirillov_Dev-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E350B8C115D6397296DBA3A7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WatchLater_Dev/Pods-WatchLater_Dev-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WatchLater_Dev/Pods-WatchLater_Dev-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WatchLater_Dev/Pods-WatchLater_Dev-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EAF06D0748CF102F3E9E332B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WatchLater_Prod/Pods-WatchLater_Prod-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WatchLater_Prod/Pods-WatchLater_Prod-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WatchLater_Prod/Pods-WatchLater_Prod-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -732,7 +732,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -787,7 +787,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -799,7 +799,7 @@
 		};
 		306BF32325FC8F7300E9B481 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F16E29F24B1133CB2977D9A /* Pods-WatchLater_Dev.debug.xcconfig */;
+			baseConfigurationReference = 2CEDB9368628CD58E6A0CC5C /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -822,7 +822,7 @@
 		};
 		306BF32425FC8F7300E9B481 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83A324AF3B289A21C6847271 /* Pods-WatchLater_Dev.release.xcconfig */;
+			baseConfigurationReference = 829947A643F9BFB222C76665 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -845,7 +845,7 @@
 		};
 		30F08015265A8746009B2398 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 75EF3BBC82A14B9A3E9ADD23 /* Pods-WatchLater_Prod.debug.xcconfig */;
+			baseConfigurationReference = C6831C47F3BFCC718E55773B /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -869,7 +869,7 @@
 		};
 		30F08016265A8746009B2398 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDBDAAD19DCD3AE0170AC416 /* Pods-WatchLater_Prod.release.xcconfig */;
+			baseConfigurationReference = 377C1C58B79D226EE8BF40E6 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
