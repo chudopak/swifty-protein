@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-WatchLater_Dev/Pods-WatchLater_Dev-frameworks.sh
+${BUILT_PRODUCTS_DIR}/MemoryLeakTracker/MemoryLeakTracker.framework
+${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
+${BUILT_PRODUCTS_DIR}/TKGrid/TKGrid.framework
