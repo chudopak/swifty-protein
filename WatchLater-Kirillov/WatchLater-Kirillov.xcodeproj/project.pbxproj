@@ -143,7 +143,7 @@
 		306BF30525FC8F7200E9B481 = {
 			isa = PBXGroup;
 			children = (
-				306BF31025FC8F7200E9B481 /* WatchLater */,
+				306BF31025FC8F7200E9B481 /* WatchLater-Kirillov */,
 				30314C9B265AA9FB00CADD41 /* WatchLater_Tests */,
 				306BF30F25FC8F7200E9B481 /* Products */,
 				970F809B147CFE1BEEE5F075 /* Pods */,
@@ -161,7 +161,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		306BF31025FC8F7200E9B481 /* WatchLater */ = {
+		306BF31025FC8F7200E9B481 /* WatchLater-Kirillov */ = {
 			isa = PBXGroup;
 			children = (
 				30314CDA265AAEDB00CADD41 /* Network */,
@@ -173,7 +173,7 @@
 				306BF31125FC8F7200E9B481 /* AppDelegate.swift */,
 				306BF31C25FC8F7300E9B481 /* LaunchScreen.storyboard */,
 			);
-			path = WatchLater;
+			path = "WatchLater-Kirillov";
 			sourceTree = "<group>";
 		};
 		306BF32625FC8FB800E9B481 /* Modules */ = {
@@ -452,7 +452,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" config run --config ./WatchLater/Resources/swiftgen.yml\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
+			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" config run --config ./WatchLater-Kirillov/Resources/swiftgen.yml\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
 		};
 		30F07FEE265A8746009B2398 /* Swiftgen */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -470,7 +470,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" config run --config ./WatchLater/Resources/swiftgen.yml\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
+			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" config run --config ./WatchLater-Kirillov/Resources/swiftgen.yml\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
 		};
 		30F07FEF265A8746009B2398 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -806,7 +806,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "$(SRCROOT)/WatchLater/Configuration/Dev/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/WatchLater-Kirillov/Configuration/Prod/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -829,7 +829,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "$(SRCROOT)/WatchLater/Configuration/Dev/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/WatchLater-Kirillov/Configuration/Prod/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -852,7 +852,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "$(SRCROOT)/WatchLater/Configuration/Prod/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/WatchLater-Kirillov/Configuration/Prod/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -876,7 +876,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = R943ANSZPZ;
-				INFOPLIST_FILE = "$(SRCROOT)/WatchLater/Configuration/Prod/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/WatchLater-Kirillov/Configuration/Prod/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
