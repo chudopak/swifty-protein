@@ -106,13 +106,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		30314C9B265AA9FB00CADD41 /* WatchLater_Tests */ = {
+		30314C9B265AA9FB00CADD41 /* WatchLater-Kirillov_Tests */ = {
 			isa = PBXGroup;
 			children = (
 				30314C9C265AA9FB00CADD41 /* WatchLater_Tests.swift */,
 				30314C9E265AA9FB00CADD41 /* Info.plist */,
 			);
-			path = WatchLater_Tests;
+			path = "WatchLater-Kirillov_Tests";
 			sourceTree = "<group>";
 		};
 		30314CA7265AAA8100CADD41 /* Base */ = {
@@ -144,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				306BF31025FC8F7200E9B481 /* WatchLater-Kirillov */,
-				30314C9B265AA9FB00CADD41 /* WatchLater_Tests */,
+				30314C9B265AA9FB00CADD41 /* WatchLater-Kirillov_Tests */,
 				306BF30F25FC8F7200E9B481 /* Products */,
 				970F809B147CFE1BEEE5F075 /* Pods */,
 				4A1BAC733E8DA2F53E974C3A /* Frameworks */,
