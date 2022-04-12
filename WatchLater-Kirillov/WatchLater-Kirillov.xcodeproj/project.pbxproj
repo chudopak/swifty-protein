@@ -43,6 +43,7 @@
 		7D112F902804861700BB7ECC /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D112F8E2804861700BB7ECC /* SplashViewController.swift */; };
 		7D99731E28058E7F0094F302 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731D28058E7F0094F302 /* LoginViewController.swift */; };
 		7D99732028058F7E0094F302 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731F28058F7E0094F302 /* LoginRouter.swift */; };
+		7D9973242805A4F00094F302 /* UIColor+HexConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9973232805A4F00094F302 /* UIColor+HexConversion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		7D112F8E2804861700BB7ECC /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		7D99731D28058E7F0094F302 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7D99731F28058F7E0094F302 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		7D9973232805A4F00094F302 /* UIColor+HexConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexConversion.swift"; sourceTree = "<group>"; };
 		829947A643F9BFB222C76665 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.release.xcconfig"; sourceTree = "<group>"; };
 		A8C2949DB62D1110810C8256 /* Pods_WatchLater_Kirillov_Prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6831C47F3BFCC718E55773B /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		30314CA7265AAA8100CADD41 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				7D9973222805A4CB0094F302 /* UIKitClassesExtensions */,
 				30314CA8265AAA8900CADD41 /* BaseViewController.swift */,
 			);
 			path = Base;
@@ -316,6 +319,14 @@
 			children = (
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		7D9973222805A4CB0094F302 /* UIKitClassesExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				7D9973232805A4F00094F302 /* UIColor+HexConversion.swift */,
+			);
+			path = UIKitClassesExtensions;
 			sourceTree = "<group>";
 		};
 		970F809B147CFE1BEEE5F075 /* Pods */ = {
@@ -634,6 +645,7 @@
 				30D2F277260148EE000134EB /* Texts.swift in Sources */,
 				3076A0892601D421003B0EF9 /* StoryboardSegues.swift in Sources */,
 				30D2F274260148EE000134EB /* Asset.swift in Sources */,
+				7D9973242805A4F00094F302 /* UIColor+HexConversion.swift in Sources */,
 				7D112F8A2804641200BB7ECC /* SceneDelegate.swift in Sources */,
 				30314CE6265AAF3200CADD41 /* NetworkConfiguration.swift in Sources */,
 				306BF31225FC8F7200E9B481 /* AppDelegate.swift in Sources */,
