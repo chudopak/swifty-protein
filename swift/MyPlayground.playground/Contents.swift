@@ -36,22 +36,22 @@ safeUnwrapping(value: floatValue2)
  PS я написал, что можно задать не только 15, а произвольное количество чисел
  */
 
-func fillfibonacciArray(firstNbr: Int, fibonacciNumberList: inout [Int]) -> Int {
+func fillFibonacciArray(firstNbr: Int, fibonacciArray: inout [Int]) -> Int {
     //так как в списке две 1, то количество чисел в списке всегда будет на 1 больше
-    if (fibonacciNumberList.capacity != firstNbr + 1) {
-        fibonacciNumberList.reserveCapacity(firstNbr + 1)
+    if fibonacciArray.capacity != firstNbr + 1 {
+        fibonacciArray.reserveCapacity(firstNbr + 1)
     }
-    if (firstNbr <= 1) {
-        if firstNbr == 1 && fibonacciNumberList.isEmpty {
-            fibonacciNumberList.append(0)
-        } else if (firstNbr == 1 && (fibonacciNumberList.count == 1 || fibonacciNumberList.count == 2)) {
-            fibonacciNumberList.append(firstNbr)
+    if firstNbr <= 1 {
+        if firstNbr == 1 && fibonacciArray.isEmpty {
+            fibonacciArray.append(0)
+        } else if firstNbr == 1 && (fibonacciArray.count == 1 || fibonacciArray.count == 2) {
+            fibonacciArray.append(firstNbr)
         }
         return (firstNbr)
     }
-    let nb = fillfibonacciArray(firstNbr: firstNbr - 1, fibonacciNumberList: &fibonacciNumberList) + fillfibonacciArray(firstNbr: firstNbr - 2, fibonacciNumberList: &fibonacciNumberList)
-    if let last = fibonacciNumberList.last, nb > last {
-        fibonacciNumberList.append(nb)
+    let nb = fillFibonacciArray(firstNbr: firstNbr - 1, fibonacciArray: &fibonacciArray) + fillFibonacciArray(firstNbr: firstNbr - 2, fibonacciArray: &fibonacciArray)
+    if let last = fibonacciArray.last, nb > last {
+        fibonacciArray.append(nb)
     }
     return (nb)
 }
@@ -60,11 +60,11 @@ func printFirstFibonacciNumbers(lastNumberIndex: Int) {
     guard lastNumberIndex > 0 else {
         return
     }
-    var fibonacciNumberList = [Int]()
-    let _ = fillfibonacciArray(firstNbr: lastNumberIndex, fibonacciNumberList: &fibonacciNumberList)
-    let minValue = lastNumberIndex < fibonacciNumberList.count ? lastNumberIndex : fibonacciNumberList.count
+    var fibonacciArray = [Int]()
+    let _ = fillFibonacciArray(firstNbr: lastNumberIndex, fibonacciArray: &fibonacciArray)
+    let minValue = lastNumberIndex < fibonacciArray.count ? lastNumberIndex : fibonacciArray.count
     for i in 0..<minValue {
-        print(fibonacciNumberList[i])
+        print(fibonacciArray[i])
     }
 }
 
@@ -78,7 +78,7 @@ func bubleSort<T: Comparable>(array: [T]) -> [T] {
     var arraySorted = array
     for i in 0..<arraySorted.count {
         for j in i + 1..<arraySorted.count {
-            if (arraySorted[i] > arraySorted[j]) {
+            if arraySorted[i] > arraySorted[j] {
                 arraySorted.swapAt(i, j)
             }
         }
@@ -96,7 +96,7 @@ func getNumberRange(strArray: [Character]) -> (Int, Int)? {
     var range = (start: -1, end: -1)
     var i = strArray.count - 1
     while (i >= 0) {
-        if ("0" <= strArray[i] && strArray[i] <= "9") {
+        if "0" <= strArray[i] && strArray[i] <= "9" {
             range.end = i
             while (i >= 0) {
                 if !("0" <= strArray[i] && strArray[i] <= "9") {
@@ -108,10 +108,10 @@ func getNumberRange(strArray: [Character]) -> (Int, Int)? {
         }
         i -= 1
     }
-    if (range.end == -1) {
+    if range.end == -1 {
         return nil
     }
-    if (range.start == -1) {
+    if range.start == -1 {
         range.start = 0
     }
     return range
@@ -133,7 +133,7 @@ func constructFinalStr(strArray: [Character], numberStr: String, range: (start: 
 }
 
 func incrementNumberByOne(str: String) -> String {
-    if ("0" <= str.prefix(1) && str.prefix(1) <= "9") {
+    if "0" <= str.prefix(1) && str.prefix(1) <= "9" {
         return (str)
     }
     let strArray = Array<Character>(str)
