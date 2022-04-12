@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = SwiftGen;
+			productName = SwiftGen;
 		};
 /* End PBXAggregateTarget section */
 
@@ -148,8 +149,8 @@
 
 /* Begin PBXFileReference section */
 		02C672F070E2094008466B890996BA3D /* Pods-WatchLater-Kirillov_Prod-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WatchLater-Kirillov_Prod-umbrella.h"; sourceTree = "<group>"; };
-		03369B878D15F4C8D0F894B2CFF71E2F /* Pods-WatchLater-Kirillov_Prod */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-WatchLater-Kirillov_Prod"; path = Pods_WatchLater_Kirillov_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0393CC48253A2B020DBFBE568F2E20FE /* MemoryLeakTracker */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MemoryLeakTracker; path = MemoryLeakTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		03369B878D15F4C8D0F894B2CFF71E2F /* Pods_WatchLater_Kirillov_Prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0393CC48253A2B020DBFBE568F2E20FE /* MemoryLeakTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MemoryLeakTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0563D238E9126D31D11B0BC90A5160DE /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerRelatable.swift; path = Source/ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
 		07953C03C746E26E86EC2980AEAF61EE /* Pods-WatchLater-Kirillov_Dev-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WatchLater-Kirillov_Dev-frameworks.sh"; sourceTree = "<group>"; };
 		08D3C68190F8334ECDE0A03F92F98084 /* MLTConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MLTConfiguration.swift; path = Source/Core/Models/MLTConfiguration.swift; sourceTree = "<group>"; };
@@ -171,7 +172,7 @@
 		487861FC9B5BD182D957D4E06AF1C679 /* TKGrid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TKGrid.release.xcconfig; sourceTree = "<group>"; };
 		4961802E9E6F754DAA65ADE86CD0B6B8 /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Source/ConstraintDescription.swift; sourceTree = "<group>"; };
 		518A8D9783F263B6777974B8592C2249 /* ConstraintMaker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMaker.swift; path = Source/ConstraintMaker.swift; sourceTree = "<group>"; };
-		542CDCCA18EA7FC89F6014678BB8BE99 /* Pods-WatchLater-Kirillov_Dev */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-WatchLater-Kirillov_Dev"; path = Pods_WatchLater_Kirillov_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		542CDCCA18EA7FC89F6014678BB8BE99 /* Pods_WatchLater_Kirillov_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5876325F8C31F141D7FE31809D0C7ADA /* ConstraintConstantTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConstantTarget.swift; path = Source/ConstraintConstantTarget.swift; sourceTree = "<group>"; };
 		5C8070901483DF150069DCF522D39DDD /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMultiplierTarget.swift; path = Source/ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
 		5CE665457FD44DB66AE425235AA14420 /* Grid.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Grid.swift; path = TKGrid/Grid.swift; sourceTree = "<group>"; };
@@ -204,12 +205,12 @@
 		94E984618360288FA8C27DCE2456F6A1 /* ConstraintDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDSL.swift; path = Source/ConstraintDSL.swift; sourceTree = "<group>"; };
 		964A7A4F3A1E8949F8D30BDC208BDECD /* MemoryLeakTracker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MemoryLeakTracker-dummy.m"; sourceTree = "<group>"; };
 		967BC5D1A8E1631B2BC375087E8EAB45 /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintView+Extensions.swift"; path = "Source/ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
-		979486118B3E90C08386079D57962701 /* SnapKit */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SnapKit; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		979486118B3E90C08386079D57962701 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		989F879C1C9EF2AAF9E22B476442BCB3 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupportDSL.swift; path = Source/ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
 		996C2C1807205D73260ED499F961B7AC /* Pods-WatchLater-Kirillov_Prod-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WatchLater-Kirillov_Prod-dummy.m"; sourceTree = "<group>"; };
 		99C037DCE2E5DD0600710FDB9D59B38B /* ConstraintAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintAttributes.swift; path = Source/ConstraintAttributes.swift; sourceTree = "<group>"; };
 		9CF67CA715056EF012AB9F061AEF1B70 /* TKGrid-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TKGrid-umbrella.h"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9EB59DF2335BA5E9298E1B9E3F94E909 /* Pods-WatchLater-Kirillov_Dev-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WatchLater-Kirillov_Dev-acknowledgements.plist"; sourceTree = "<group>"; };
 		9FB9B210B8876FF9D403D19D872BC6A5 /* ConstraintRelation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelation.swift; path = Source/ConstraintRelation.swift; sourceTree = "<group>"; };
 		A5813BDB5FB6E8DE38709E3F3BA708BD /* MemoryLeakTrackerOfClass.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MemoryLeakTrackerOfClass.swift; path = Source/Core/TODO/MemoryLeakTrackerOfClass.swift; sourceTree = "<group>"; };
@@ -236,7 +237,7 @@
 		DAFFA93CA8969A1110CC7CF56CC34E39 /* Event.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Source/Core/Models/Event.swift; sourceTree = "<group>"; };
 		DD49B64637C2778FAB8D5FFD3C45DD67 /* TKGrid-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TKGrid-dummy.m"; sourceTree = "<group>"; };
 		E103D2193047DB95E27681FBDAF78CA5 /* Pods-WatchLater-Kirillov_Prod-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WatchLater-Kirillov_Prod-acknowledgements.markdown"; sourceTree = "<group>"; };
-		EBE3924E85F00F972872D5EDDB315C95 /* TKGrid */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TKGrid; path = TKGrid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBE3924E85F00F972872D5EDDB315C95 /* TKGrid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TKGrid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA3642A6F6263EB0C69CD71D8D670BF /* ConstraintDirectionalInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsets.swift; path = Source/ConstraintDirectionalInsets.swift; sourceTree = "<group>"; };
 		F2E3129E895CA9F3D5F3902155736387 /* ConstraintConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConfig.swift; path = Source/ConstraintConfig.swift; sourceTree = "<group>"; };
 		F43FBB0354668882E78A415560454AB4 /* TKGrid-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TKGrid-Info.plist"; sourceTree = "<group>"; };
@@ -321,11 +322,11 @@
 		1C341A9F57F1F58C36D5DBC826A75B46 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0393CC48253A2B020DBFBE568F2E20FE /* MemoryLeakTracker */,
-				542CDCCA18EA7FC89F6014678BB8BE99 /* Pods-WatchLater-Kirillov_Dev */,
-				03369B878D15F4C8D0F894B2CFF71E2F /* Pods-WatchLater-Kirillov_Prod */,
-				979486118B3E90C08386079D57962701 /* SnapKit */,
-				EBE3924E85F00F972872D5EDDB315C95 /* TKGrid */,
+				0393CC48253A2B020DBFBE568F2E20FE /* MemoryLeakTracker.framework */,
+				542CDCCA18EA7FC89F6014678BB8BE99 /* Pods_WatchLater_Kirillov_Dev.framework */,
+				03369B878D15F4C8D0F894B2CFF71E2F /* Pods_WatchLater_Kirillov_Prod.framework */,
+				979486118B3E90C08386079D57962701 /* SnapKit.framework */,
+				EBE3924E85F00F972872D5EDDB315C95 /* TKGrid.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -351,7 +352,6 @@
 				5CE665457FD44DB66AE425235AA14420 /* Grid.swift */,
 				887C091EC9FACD0F0AD1CF0216E07021 /* Support Files */,
 			);
-			name = TKGrid;
 			path = TKGrid;
 			sourceTree = "<group>";
 		};
@@ -436,7 +436,6 @@
 			children = (
 				5BEF89675CE568E3BB9813C7BD7BD164 /* Support Files */,
 			);
-			name = SwiftGen;
 			path = SwiftGen;
 			sourceTree = "<group>";
 		};
@@ -467,7 +466,6 @@
 				D20AF7E540E81167A81C45C0CFD2FB85 /* UIViewController+Extension .swift */,
 				B99D4CDD235C9659EB59FD0BAEFE7B1C /* Support Files */,
 			);
-			name = MemoryLeakTracker;
 			path = MemoryLeakTracker;
 			sourceTree = "<group>";
 		};
@@ -512,7 +510,6 @@
 				3A4FE72168982FB8DC6759A0CC5650C1 /* UILayoutSupport+Extensions.swift */,
 				2111275D567198F100B1B348BF87BC76 /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -588,7 +585,7 @@
 			);
 			name = SnapKit;
 			productName = SnapKit;
-			productReference = 979486118B3E90C08386079D57962701 /* SnapKit */;
+			productReference = 979486118B3E90C08386079D57962701 /* SnapKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		3D55A20267EC80BA5548ECDE8D39B49D /* MemoryLeakTracker */ = {
@@ -606,7 +603,7 @@
 			);
 			name = MemoryLeakTracker;
 			productName = MemoryLeakTracker;
-			productReference = 0393CC48253A2B020DBFBE568F2E20FE /* MemoryLeakTracker */;
+			productReference = 0393CC48253A2B020DBFBE568F2E20FE /* MemoryLeakTracker.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		3FA8E55F12E21629C2AA1E273D87C1D1 /* TKGrid */ = {
@@ -624,7 +621,7 @@
 			);
 			name = TKGrid;
 			productName = TKGrid;
-			productReference = EBE3924E85F00F972872D5EDDB315C95 /* TKGrid */;
+			productReference = EBE3924E85F00F972872D5EDDB315C95 /* TKGrid.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		4559AB4DC6F9C46DB16AC195D9B4869A /* Pods-WatchLater-Kirillov_Dev */ = {
@@ -646,7 +643,7 @@
 			);
 			name = "Pods-WatchLater-Kirillov_Dev";
 			productName = Pods_WatchLater_Kirillov_Dev;
-			productReference = 542CDCCA18EA7FC89F6014678BB8BE99 /* Pods-WatchLater-Kirillov_Dev */;
+			productReference = 542CDCCA18EA7FC89F6014678BB8BE99 /* Pods_WatchLater_Kirillov_Dev.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		CE934AD1B148401384D93CF9FC1A1201 /* Pods-WatchLater-Kirillov_Prod */ = {
@@ -668,7 +665,7 @@
 			);
 			name = "Pods-WatchLater-Kirillov_Prod";
 			productName = Pods_WatchLater_Kirillov_Prod;
-			productReference = 03369B878D15F4C8D0F894B2CFF71E2F /* Pods-WatchLater-Kirillov_Prod */;
+			productReference = 03369B878D15F4C8D0F894B2CFF71E2F /* Pods_WatchLater_Kirillov_Prod.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -678,7 +675,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 10.0";
@@ -893,7 +890,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -919,7 +916,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -957,7 +954,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MemoryLeakTracker/MemoryLeakTracker-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MemoryLeakTracker/MemoryLeakTracker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -992,7 +989,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1029,7 +1026,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/TKGrid/TKGrid-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/TKGrid/TKGrid-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1099,7 +1096,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1127,7 +1124,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/TKGrid/TKGrid-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/TKGrid/TKGrid-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1162,7 +1159,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MemoryLeakTracker/MemoryLeakTracker-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MemoryLeakTracker/MemoryLeakTracker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1198,7 +1195,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1273,7 +1270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1302,7 +1299,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1339,7 +1336,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SnapKit/SnapKit-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SnapKit/SnapKit-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1364,7 +1361,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1391,7 +1388,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SnapKit/SnapKit-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SnapKit/SnapKit-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

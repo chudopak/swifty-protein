@@ -13,7 +13,6 @@ class BaseViewController: UIViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
         MemoryLeakTracker.shared.append("\(self)")
     }
     

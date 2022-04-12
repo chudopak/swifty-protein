@@ -41,6 +41,8 @@
 		7D112F8B2804641200BB7ECC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D112F892804641200BB7ECC /* SceneDelegate.swift */; };
 		7D112F8F2804861700BB7ECC /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D112F8E2804861700BB7ECC /* SplashViewController.swift */; };
 		7D112F902804861700BB7ECC /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D112F8E2804861700BB7ECC /* SplashViewController.swift */; };
+		7D99731E28058E7F0094F302 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731D28058E7F0094F302 /* LoginViewController.swift */; };
+		7D99732028058F7E0094F302 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731F28058F7E0094F302 /* LoginRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,8 @@
 		5BC5C882F16A7A24A91537BA /* Pods_WatchLater_Kirillov_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D112F892804641200BB7ECC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7D112F8E2804861700BB7ECC /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		7D99731D28058E7F0094F302 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7D99731F28058F7E0094F302 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		829947A643F9BFB222C76665 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.release.xcconfig"; sourceTree = "<group>"; };
 		A8C2949DB62D1110810C8256 /* Pods_WatchLater_Kirillov_Prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6831C47F3BFCC718E55773B /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; sourceTree = "<group>"; };
@@ -124,7 +128,6 @@
 		30314CA7265AAA8100CADD41 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				7D112F8D280485EC00BB7ECC /* SplashScreen */,
 				30314CA8265AAA8900CADD41 /* BaseViewController.swift */,
 			);
 			path = Base;
@@ -186,6 +189,8 @@
 		306BF32625FC8FB800E9B481 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				7D99731C28058E550094F302 /* LoginScreen */,
+				7D112F8D280485EC00BB7ECC /* SplashScreen */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -291,9 +296,26 @@
 		7D112F8D280485EC00BB7ECC /* SplashScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7D99732128059C220094F302 /* Utils */,
 				7D112F8E2804861700BB7ECC /* SplashViewController.swift */,
 			);
 			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		7D99731C28058E550094F302 /* LoginScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7D99731D28058E7F0094F302 /* LoginViewController.swift */,
+				7D99731F28058F7E0094F302 /* LoginRouter.swift */,
+			);
+			path = LoginScreen;
+			sourceTree = "<group>";
+		};
+		7D99732128059C220094F302 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		970F809B147CFE1BEEE5F075 /* Pods */ = {
@@ -617,6 +639,8 @@
 				306BF31225FC8F7200E9B481 /* AppDelegate.swift in Sources */,
 				30314CCC265AADB600CADD41 /* BaseViewController.swift in Sources */,
 				3095A8BF25FC96BC0010B54A /* ViewModelConfigurable.swift in Sources */,
+				7D99731E28058E7F0094F302 /* LoginViewController.swift in Sources */,
+				7D99732028058F7E0094F302 /* LoginRouter.swift in Sources */,
 				7D112F8F2804861700BB7ECC /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
