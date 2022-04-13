@@ -27,18 +27,24 @@ enum LoginScreenSizes {
         }
     }
     
-    enum EmailField {
-
-        private static let ratioWidthWithHeight: CGFloat = 0.160
+    enum FieldsView {
+        
+        private static let ratioTextFieldWidthWithScreenWidth: CGFloat = 0.945
         private static let ratioTopOffsetToScreenHeight: CGFloat = 0.137
         
         static let width: CGFloat = UIScreen.main.bounds.size.width
-        static let bottomBoarderLineHeight: CGFloat = 0.5
-        static var height: CGFloat {
-            return (width * ratioWidthWithHeight)
-        }
+        static let height: CGFloat = 120
         static var topOffset: CGFloat {
-            return (UIScreen.main.bounds.size.height * ratioTopOffsetToScreenHeight)
+            return (ratioTopOffsetToScreenHeight * UIScreen.main.bounds.size.height)
+        }
+        static let bottomBoarderLineHeight: CGFloat = 0.5
+        static var bottomBoarderLineTopOffset: CGFloat {
+            return (textFieldTopOffset - bottomBoarderLineHeight)
+        }
+        static var textFieldHeight: CGFloat = 22
+        static var textFieldTopOffset: CGFloat = 19
+        static var textFieldZoneHeight: CGFloat {
+            return (height / 2)
         }
     }
 }
