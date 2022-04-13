@@ -12,17 +12,8 @@ import SnapKit
 class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     private lazy var watchLaterLogoImageView = makeWatchLaterLogoImageView()
-    private lazy var emailTextField = makeTextField(
-                                            placeholderString: Text.Authorization.Placeholder.email,
-                                            viewMode: .whileEditing,
-                                            keyboardType: .emailAddress,
-                                            isPassword: false)
-    
-    private lazy var passwordTextField = makeTextField(
-                                            placeholderString: Text.Authorization.Placeholder.password,
-                                            viewMode: .never,
-                                            keyboardType: .default,
-                                            isPassword: true)
+    private lazy var emailTextField = makeTextField(type: .email)
+    private lazy var passwordTextField = makeTextField(type: .password)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +31,44 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         view.addGestureRecognizer(hideKeyboardGuesture)
     }
     
+    private func getLoginData() -> LoginData? {
+        guard let emailText = emailTextField.text,
+              !emailText.isEmpty,
+              let passwordText = passwordTextField.text,
+              !passwordText.isEmpty
+        else {
+            return nil
+        }
+        return LoginData(password: passwordText, email: emailText)
+    }
+    
     @objc private func hideKeyboard(_ guestureRecognizer: UIGestureRecognizer) {
         if emailTextField.isEditing {
             emailTextField.resignFirstResponder()
         } else if passwordTextField.isEditing {
             passwordTextField.resignFirstResponder()
+        }
+    }
+    
+    @objc private func emailTextFieldDonePressed() {
+        emailTextField.resignFirstResponder()
+        if let loginData = getLoginData() {
+            // Do request
+            print(loginData)
+        } else if emailTextField.text != nil
+                    && !emailTextField.text!.isEmpty {
+            passwordTextField.becomeFirstResponder()
+        }
+    }
+    
+    @objc private func passwordTextFieldDonePressed() {
+        passwordTextField.resignFirstResponder()
+        if let loginData = getLoginData() {
+            // Do request
+            print(loginData)
+        } else if passwordTextField.text != nil
+                    && !passwordTextField.text!.isEmpty {
+            emailTextField.becomeFirstResponder()
         }
     }
 }
@@ -58,29 +82,23 @@ extension LoginViewController {
         return imageView
     }
     
-    private func makeTextField(placeholderString: String, viewMode: UITextField.ViewMode, keyboardType: UIKeyboardType, isPassword: Bool) -> AuthorizationTextField {
+    private func makeTextField(type: TextFieldType) -> AuthorizationTextField {
         let inset = UIEdgeInsets(top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
                                  left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
                                  bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
                                  right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset)
-        let textField = AuthorizationTextField(inset: inset)
+        let textField = AuthorizationTextField.makeTextField(type: type, inset: inset)
         textField.delegate = self
-        textField.attributedPlaceholder = NSAttributedString(
-            string: placeholderString,
-            attributes: [NSAttributedString.Key.foregroundColor: Asset.Colors.loginPlaceholderTextColor.color])
-        textField.textAlignment = .center
-        textField.autocapitalizationType = .none
-        textField.clearButtonMode = viewMode
-        textField.textColor = Asset.Colors.loginTextColor.color
-        textField.autocorrectionType = .no
-        textField.keyboardType = keyboardType
-        textField.returnKeyType = .done
-        textField.isSecureTextEntry = isPassword
-        textField.addBottomBoarder(color: Asset.Colors.textFieldBoarderColor.color,
-                                   height: LoginScreenSizes.AuthorizationTextField.bottomBoarderLineHeight,
-                                   sideOffset: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset)
-//        textField.textInputView.backgroundColor = .green
-//        textField.backgroundColor = .red
+        switch type {
+        case .email:
+            textField.addTarget(self, action: #selector(emailTextFieldDonePressed), for: .editingDidEndOnExit)
+        
+        case .password:
+            textField.addTarget(self, action: #selector(passwordTextFieldDonePressed), for: .editingDidEndOnExit)
+
+        default:
+            break
+        }
         return textField
     }
 }
