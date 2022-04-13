@@ -27,24 +27,20 @@ enum LoginScreenSizes {
         }
     }
     
-    enum FieldsView {
+    enum AuthorizationTextField {
         
-        private static let ratioTextFieldWidthWithScreenWidth: CGFloat = 0.945
+        private static let ratioSideOffsetWithScreenWidth: CGFloat = 0.042
         private static let ratioTopOffsetToScreenHeight: CGFloat = 0.137
         
         static let width: CGFloat = UIScreen.main.bounds.size.width
-        static let height: CGFloat = 120
+        static let height: CGFloat = 60
         static var topOffset: CGFloat {
-            return (ratioTopOffsetToScreenHeight * UIScreen.main.bounds.size.height)
+            return ratioTopOffsetToScreenHeight * UIScreen.main.bounds.size.height
         }
         static let bottomBoarderLineHeight: CGFloat = 0.5
-        static var bottomBoarderLineTopOffset: CGFloat {
-            return (textFieldTopOffset - bottomBoarderLineHeight)
-        }
-        static var textFieldHeight: CGFloat = 22
-        static var textFieldTopOffset: CGFloat = 19
-        static var textFieldZoneHeight: CGFloat {
-            return (height / 2)
+        static var textRectangleTopOffset: CGFloat = 19
+        static var textRectangleSideOffset: CGFloat {
+            return UIScreen.main.bounds.size.width * ratioSideOffsetWithScreenWidth
         }
     }
 }
