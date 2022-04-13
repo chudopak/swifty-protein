@@ -14,6 +14,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     private lazy var watchLaterLogoImageView = makeWatchLaterLogoImageView()
     private lazy var emailTextField = makeTextField(type: .email)
     private lazy var passwordTextField = makeTextField(type: .password)
+    private lazy var loginButton = makeLoginButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         view.addSubview(watchLaterLogoImageView)
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
+        view.addSubview(loginButton)
         setGestures()
         setConstraints()
     }
@@ -101,6 +103,18 @@ extension LoginViewController {
         }
         return textField
     }
+    
+    private func makeLoginButton() -> AuthorizationButton {
+        let colorSet = AuthorizationButtonColorSet(
+                                    enabledTint: Asset.Colors.loginTextColor.color,
+                                    enabledBackground: Asset.Colors.loginPlaceholderTextColor.color,
+                                    enabledBorder: Asset.Colors.loginTextColor.color,
+                                    disabledTint: Asset.Colors.loginTextColor.color,
+                                    disabledBackground: Asset.Colors.loginPlaceholderTextColor.color,
+                                    disabledBorder: Asset.Colors.loginPlaceholderTextColor.color)
+        let button = AuthorizationButton(colorSet: colorSet, text: "Войти")
+        return button
+    }
 }
 
 // MARK: Constraints
@@ -110,6 +124,7 @@ extension LoginViewController {
         setWatchLaterLogoConstraints()
         setEmailTextFieldConstraints()
         setPasswordTextFieldConstraints()
+        setLoginButtonConstraints()
     }
     
     private func setWatchLaterLogoConstraints() {
@@ -136,6 +151,15 @@ extension LoginViewController {
             maker.top.equalTo(emailTextField.snp.bottom)
             maker.width.equalTo(LoginScreenSizes.AuthorizationTextField.width)
             maker.height.equalTo(LoginScreenSizes.AuthorizationTextField.height)
+        }
+    }
+    
+    private func setLoginButtonConstraints() {
+        loginButton.snp.makeConstraints { maker in
+            maker.centerX.equalToSuperview()
+            maker.top.equalTo(passwordTextField.snp.bottom).offset(150)
+            maker.width.equalTo(LoginScreenSizes.AuthorizationButton.width)
+            maker.height.equalTo(LoginScreenSizes.AuthorizationButton.height)
         }
     }
 }

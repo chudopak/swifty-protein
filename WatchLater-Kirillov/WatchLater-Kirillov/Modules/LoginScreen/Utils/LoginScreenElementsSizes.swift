@@ -43,4 +43,13 @@ enum LoginScreenSizes {
             return UIScreen.main.bounds.size.width * ratioSideOffsetWithScreenWidth
         }
     }
+    
+    enum AuthorizationButton {
+        static let width: CGFloat = 149
+        static let height: CGFloat = 50
+        static let borderWidth: CGFloat = 7
+        static var cornerRadius: CGFloat {
+            return height * 0.5
+        }
+    }
 }
