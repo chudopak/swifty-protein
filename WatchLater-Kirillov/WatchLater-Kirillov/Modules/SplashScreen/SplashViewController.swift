@@ -165,6 +165,7 @@ extension SplashViewController {
     private func makeAgonaImageView() -> UIImageView {
         let imageView = UIImageView()
         imageView.image = Asset.agonaLogo.image
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.alpha = 0.0
         return (imageView)

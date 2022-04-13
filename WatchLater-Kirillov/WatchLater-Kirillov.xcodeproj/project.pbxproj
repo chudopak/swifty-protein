@@ -46,6 +46,13 @@
 		7D99731E28058E7F0094F302 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731D28058E7F0094F302 /* LoginViewController.swift */; };
 		7D99732028058F7E0094F302 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731F28058F7E0094F302 /* LoginRouter.swift */; };
 		7D9973242805A4F00094F302 /* UIColor+HexConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9973232805A4F00094F302 /* UIColor+HexConversion.swift */; };
+		7DB7E0C52806B56D00996926 /* LoginScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */; };
+		7DB7E0C72806BB1600996926 /* UITextField+addBottomLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7E0C62806BB1600996926 /* UITextField+addBottomLine.swift */; };
+		7DB7E0C82806BBAB00996926 /* LoginScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */; };
+		7DB7E0C92806BBAB00996926 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731D28058E7F0094F302 /* LoginViewController.swift */; };
+		7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731F28058F7E0094F302 /* LoginRouter.swift */; };
+		7DB7E0CB2806BBE400996926 /* UIColor+HexConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9973232805A4F00094F302 /* UIColor+HexConversion.swift */; };
+		7DB7E0CC2806BBE400996926 /* UITextField+addBottomLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7E0C62806BB1600996926 /* UITextField+addBottomLine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +96,8 @@
 		7D99731D28058E7F0094F302 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7D99731F28058F7E0094F302 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		7D9973232805A4F00094F302 /* UIColor+HexConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexConversion.swift"; sourceTree = "<group>"; };
+		7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenElementsSizes.swift; sourceTree = "<group>"; };
+		7DB7E0C62806BB1600996926 /* UITextField+addBottomLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+addBottomLine.swift"; sourceTree = "<group>"; };
 		829947A643F9BFB222C76665 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.release.xcconfig"; sourceTree = "<group>"; };
 		A8C2949DB62D1110810C8256 /* Pods_WatchLater_Kirillov_Prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6831C47F3BFCC718E55773B /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; sourceTree = "<group>"; };
@@ -320,6 +329,7 @@
 		7D99731C28058E550094F302 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7DB7E0C32806B55500996926 /* Utils */,
 				7D99731D28058E7F0094F302 /* LoginViewController.swift */,
 				7D99731F28058F7E0094F302 /* LoginRouter.swift */,
 			);
@@ -337,8 +347,17 @@
 			isa = PBXGroup;
 			children = (
 				7D9973232805A4F00094F302 /* UIColor+HexConversion.swift */,
+				7DB7E0C62806BB1600996926 /* UITextField+addBottomLine.swift */,
 			);
 			path = UIKitClassesExtensions;
+			sourceTree = "<group>";
+		};
+		7DB7E0C32806B55500996926 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		970F809B147CFE1BEEE5F075 /* Pods */ = {
@@ -659,12 +678,14 @@
 				30D2F274260148EE000134EB /* Asset.swift in Sources */,
 				7D9973242805A4F00094F302 /* UIColor+HexConversion.swift in Sources */,
 				7D112F8A2804641200BB7ECC /* SceneDelegate.swift in Sources */,
+				7DB7E0C72806BB1600996926 /* UITextField+addBottomLine.swift in Sources */,
 				30314CE6265AAF3200CADD41 /* NetworkConfiguration.swift in Sources */,
 				306BF31225FC8F7200E9B481 /* AppDelegate.swift in Sources */,
 				7D9715172805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */,
 				30314CCC265AADB600CADD41 /* BaseViewController.swift in Sources */,
 				3095A8BF25FC96BC0010B54A /* ViewModelConfigurable.swift in Sources */,
 				7D99731E28058E7F0094F302 /* LoginViewController.swift in Sources */,
+				7DB7E0C52806B56D00996926 /* LoginScreenElementsSizes.swift in Sources */,
 				7D99732028058F7E0094F302 /* LoginRouter.swift in Sources */,
 				7D112F8F2804861700BB7ECC /* SplashViewController.swift in Sources */,
 			);
@@ -674,6 +695,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DB7E0CB2806BBE400996926 /* UIColor+HexConversion.swift in Sources */,
+				7DB7E0CC2806BBE400996926 /* UITextField+addBottomLine.swift in Sources */,
+				7DB7E0C82806BBAB00996926 /* LoginScreenElementsSizes.swift in Sources */,
+				7DB7E0C92806BBAB00996926 /* LoginViewController.swift in Sources */,
+				7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */,
 				7D9715182805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */,
 				30314CDD265AAEE500CADD41 /* BundleSettingsURL.swift in Sources */,
 				30F07FF2265A8746009B2398 /* StoryboardScenes.swift in Sources */,

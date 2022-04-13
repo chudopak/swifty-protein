@@ -11,6 +11,11 @@ Common.remove = "Удалить";
 Common.update = "Обновить";
 Common.logout = "Выйти";
 
+// MARK: - Authorization
+Authorization.placeholder.email = "Адрес электронной почты";
+Authorization.placeholder.password = "Пароль";
+Authorization.placeholder.repeatPassword = "Повторите пароль";
+
 // MARK: - Test
 
 Test.test = "Test 123";
