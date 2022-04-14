@@ -4,9 +4,9 @@ print("____Практические задания Часть 1____\n")
 /*
  Определить две константы a и b типа Double, присвоить им любые значения. Вычислить среднее значение и сохранить результат в переменную average.
  */
-let a: Double = 1.34
-let b: Double = 3.56
-let average: Double = (a + b) * 0.5
+let a = 1.34
+let b = 3.56
+let average = (a + b) * 0.5
 
 /*
  Создать кортеж, и задать два любых строковых значения с названиями firstName и lastName. Далее необходимо вывести в консоль строку в формате "Full name: [firstName] [lastName]".
@@ -47,13 +47,13 @@ func fillFibonacciArray(firstNbr: Int, fibonacciArray: inout [Int]) -> Int {
         } else if firstNbr == 1 && (fibonacciArray.count == 1 || fibonacciArray.count == 2) {
             fibonacciArray.append(firstNbr)
         }
-        return (firstNbr)
+        return firstNbr
     }
     let nb = fillFibonacciArray(firstNbr: firstNbr - 1, fibonacciArray: &fibonacciArray) + fillFibonacciArray(firstNbr: firstNbr - 2, fibonacciArray: &fibonacciArray)
     if let last = fibonacciArray.last, nb > last {
         fibonacciArray.append(nb)
     }
-    return (nb)
+    return nb
 }
 
 func printFirstFibonacciNumbers(lastNumberIndex: Int) {
@@ -129,16 +129,16 @@ func constructFinalStr(strArray: [Character], numberStr: String, range: (start: 
     for i in range.end + 1..<strArray.count {
         finalStr.append(strArray[i])
     }
-    return(String(finalStr))
+    return String(finalStr)
 }
 
 func incrementNumberByOne(str: String) -> String {
     if "0" <= str.prefix(1) && str.prefix(1) <= "9" {
-        return (str)
+        return str
     }
     let strArray = Array<Character>(str)
     guard let range: (start: Int, end: Int) = getNumberRange(strArray: strArray) else {
-        return (str)
+        return str
     }
     var numberStr = ""
     numberStr.reserveCapacity(range.end - range.start)
@@ -146,11 +146,11 @@ func incrementNumberByOne(str: String) -> String {
         numberStr.append(strArray[i])
     }
     guard let nb = Int(numberStr) else {
-        return (str)
+        return str
     }
     numberStr = String(nb + 1)
 
-    return(constructFinalStr(strArray: strArray, numberStr: numberStr, range: range))
+    return constructFinalStr(strArray: strArray, numberStr: numberStr, range: range)
 }
 print(incrementNumberByOne(str: "a999k"))
 
@@ -179,21 +179,23 @@ enum Directions {
     case up, down, left, right
 }
 
+func handleMovement(direction: Directions, location: inout (x: Int, y: Int), stepSize: Int) {
+    switch direction {
+    case .down:
+        location.y += stepSize
+    case .up:
+        location.y -= stepSize
+    case .right:
+        location.x += stepSize
+    case .left:
+        location.x -= stepSize
+    }
+}
+
 func getLocationAfterMoving(movements: [Directions], startLocation: (x: Int, y: Int), stepSize: Int = 1) -> (Int, Int) {
     var location = startLocation
-    for move in movements {
-        switch move {
-        case .down:
-            location.y += stepSize
-        case .up:
-            location.y -= stepSize
-        case .right:
-            location.x += stepSize
-        case .left:
-            location.x -= stepSize
-        }
-    }
-    return (location)
+    movements.forEach { handleMovement(direction: $0, location: &location, stepSize: stepSize) }
+    return location
 }
 
 let location: (x: Int, y: Int) = (0,0)
@@ -218,7 +220,7 @@ class Rectangle {
     }
 
     func perimeter() -> Int {
-        return ((width + height) * 2)
+        return (width + height) * 2
     }
 }
 
@@ -232,7 +234,7 @@ print(rectangle.perimeter())
 extension Rectangle {
 
     func area() -> Int {
-        return (width * height)
+        return width * height
     }
 }
 
