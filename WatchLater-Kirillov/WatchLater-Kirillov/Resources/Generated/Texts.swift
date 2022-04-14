@@ -31,6 +31,8 @@ internal enum Text {
     internal static let dave = Text.tr("Localizable", "Common.dave")
     /// Готово
     internal static let done = Text.tr("Localizable", "Common.done")
+    /// Войти
+    internal static let login = Text.tr("Localizable", "Common.login")
     /// Выйти
     internal static let logout = Text.tr("Localizable", "Common.logout")
     /// Далее

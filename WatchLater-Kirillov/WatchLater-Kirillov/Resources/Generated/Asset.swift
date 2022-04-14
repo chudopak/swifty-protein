@@ -22,6 +22,10 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
   internal enum Colors {
+    internal static let disabledAuthorizationButtonBackground = ColorAsset(name: "Colors/disabledAuthorizationButtonBackground")
+    internal static let disabledAuthorizationButtonText = ColorAsset(name: "Colors/disabledAuthorizationButtonText")
+    internal static let enabledAuthorizationButtonBorderLine = ColorAsset(name: "Colors/enabledAuthorizationButtonBorderLine")
+    internal static let enabledAuthorizationButtonText = ColorAsset(name: "Colors/enabledAuthorizationButtonText")
     internal static let loginPlaceholderTextColor = ColorAsset(name: "Colors/loginPlaceholderTextColor")
     internal static let loginTextColor = ColorAsset(name: "Colors/loginTextColor")
     internal static let textFieldBoarderColor = ColorAsset(name: "Colors/textFieldBoarderColor")

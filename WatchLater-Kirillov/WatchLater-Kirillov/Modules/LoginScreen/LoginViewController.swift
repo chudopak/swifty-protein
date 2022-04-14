@@ -16,6 +16,13 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     private lazy var passwordTextField = makeTextField(type: .password)
     private lazy var loginButton = makeLoginButton()
     
+    private var isFieldsSet: Bool {
+        return emailTextField.text != nil
+            && !emailTextField.text!.isEmpty
+            && passwordTextField.text != nil
+            && !passwordTextField.text!.isEmpty
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.primaryBackground.color
@@ -28,23 +35,20 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     private func setGestures() {
-        let hideKeyboardGuesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
+        let hideKeyboardGuesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         hideKeyboardGuesture.cancelsTouchesInView = false
         view.addGestureRecognizer(hideKeyboardGuesture)
     }
     
     private func getLoginData() -> LoginData? {
-        guard let emailText = emailTextField.text,
-              !emailText.isEmpty,
-              let passwordText = passwordTextField.text,
-              !passwordText.isEmpty
+        guard isFieldsSet
         else {
             return nil
         }
-        return LoginData(password: passwordText, email: emailText)
+        return LoginData(password: passwordTextField.text!, email: emailTextField.text!)
     }
     
-    @objc private func hideKeyboard(_ guestureRecognizer: UIGestureRecognizer) {
+    @objc private func hideKeyboard() {
         if emailTextField.isEditing {
             emailTextField.resignFirstResponder()
         } else if passwordTextField.isEditing {
@@ -73,6 +77,22 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             emailTextField.becomeFirstResponder()
         }
     }
+    
+    @objc private func loginButtonTaped() {
+        hideKeyboard()
+        if let loginData = getLoginData() {
+            // Do request
+            print(loginData)
+        }
+    }
+    
+    @objc private func textFieldDidChange() {
+        if isFieldsSet && !loginButton.isEnabled {
+            loginButton.isEnabled = true
+        } else if !isFieldsSet && loginButton.isEnabled {
+            loginButton.isEnabled = false
+        }
+    }
 }
 
 // MARK: Extension for element creation
@@ -91,6 +111,7 @@ extension LoginViewController {
                                  right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset)
         let textField = AuthorizationTextField.makeTextField(type: type, inset: inset)
         textField.delegate = self
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         switch type {
         case .email:
             textField.addTarget(self, action: #selector(emailTextFieldDonePressed), for: .editingDidEndOnExit)
@@ -106,13 +127,14 @@ extension LoginViewController {
     
     private func makeLoginButton() -> AuthorizationButton {
         let colorSet = AuthorizationButtonColorSet(
-                                    enabledTint: Asset.Colors.loginTextColor.color,
-                                    enabledBackground: Asset.Colors.loginPlaceholderTextColor.color,
-                                    enabledBorder: Asset.Colors.loginTextColor.color,
-                                    disabledTint: Asset.Colors.loginTextColor.color,
-                                    disabledBackground: Asset.Colors.loginPlaceholderTextColor.color,
-                                    disabledBorder: Asset.Colors.loginPlaceholderTextColor.color)
-        let button = AuthorizationButton(colorSet: colorSet, text: "Войти")
+                                    enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
+                                    enabledBackground: .clear,
+                                    enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
+                                    disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
+                                    disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
+                                    disabledBorder: .clear)
+        let button = AuthorizationButton(colorSet: colorSet, text: Text.Common.login)
+        button.addTarget(self, action: #selector(loginButtonTaped), for: .touchUpInside)
         return button
     }
 }
@@ -157,7 +179,7 @@ extension LoginViewController {
     private func setLoginButtonConstraints() {
         loginButton.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
-            maker.top.equalTo(passwordTextField.snp.bottom).offset(150)
+            maker.top.equalTo(passwordTextField.snp.bottom).offset(LoginScreenSizes.AuthorizationButton.topOffset)
             maker.width.equalTo(LoginScreenSizes.AuthorizationButton.width)
             maker.height.equalTo(LoginScreenSizes.AuthorizationButton.height)
         }

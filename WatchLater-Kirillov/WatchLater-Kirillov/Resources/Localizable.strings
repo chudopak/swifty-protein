@@ -10,6 +10,7 @@ Common.dave = "Сохранить";
 Common.remove = "Удалить";
 Common.update = "Обновить";
 Common.logout = "Выйти";
+Common.login = "Войти";
 
 // MARK: - Authorization
 Authorization.placeholder.email = "Адрес электронной почты";
