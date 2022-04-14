@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         configureMemoryLeakTracker(for: application)
-        
+        setBarsAppearance()
         guard #available(iOS 13.0, *) else {
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let splashVC = SplashViewController()
@@ -67,6 +67,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupPushNotifications(on: application)
         
         print(NetworkConfiguration.url)
+    }
+    
+    private func setBarsAppearance() {
+        UINavigationBar.appearance().barTintColor = Asset.Colors.navigationBar.color
     }
 }
 

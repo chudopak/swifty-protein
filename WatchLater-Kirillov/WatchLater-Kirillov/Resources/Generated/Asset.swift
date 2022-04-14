@@ -32,6 +32,7 @@ internal enum Asset {
     internal static let loginFailedText = ColorAsset(name: "Colors/loginFailedText")
     internal static let registrationQuestionLabelText = ColorAsset(name: "Colors/registrationQuestionLabelText")
     internal static let activeBackground = ColorAsset(name: "Colors/activeBackground")
+    internal static let navigationBar = ColorAsset(name: "Colors/navigationBar")
     internal static let primaryBackground = ColorAsset(name: "Colors/primaryBackground")
     internal static let textColor = ColorAsset(name: "Colors/textColor")
   }

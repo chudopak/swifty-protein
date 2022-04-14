@@ -90,7 +90,10 @@ class SplashViewController: BaseViewController {
                        options: .curveLinear, animations: { [weak self] in
                         self?.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXCenter
                        }, completion: { [weak self] _ in
-                        self?.present(LoginRouter.makeLoginViewController(), animated: true, completion: nil)
+                        let loginVC = LoginRouter.makeLoginViewController()
+                        let navigationController = UINavigationController(rootViewController: loginVC)
+                        navigationController.modalPresentationStyle = .fullScreen
+                        self?.present(navigationController, animated: true, completion: nil)
                        })
     }
 }

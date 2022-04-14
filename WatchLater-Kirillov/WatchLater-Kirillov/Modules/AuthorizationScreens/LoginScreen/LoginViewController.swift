@@ -41,6 +41,11 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         setConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     private func setGestures() {
         let hideKeyboardGuesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         hideKeyboardGuesture.cancelsTouchesInView = false
@@ -121,8 +126,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @objc private func openRegistrationViewController() {
-        // TODO: - Present registration View Controller
-        print("open reegistrationVC")
+        RegistrationRouter.presentRegistrationViewController(navigationController: navigationController!)
     }
 }
 
