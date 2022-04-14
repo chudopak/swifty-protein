@@ -16,6 +16,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     private lazy var passwordTextField = makeTextField(type: .password)
     private lazy var loginButton = makeLoginButton()
     private lazy var registrationButton = makeRegistrationButton()
+    private lazy var loginFailedLabel = makeLoginFailedLabel()
     
     private var isFieldsSet: Bool {
         return emailTextField.text != nil
@@ -23,6 +24,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             && passwordTextField.text != nil
             && !passwordTextField.text!.isEmpty
     }
+    
+    private var isLoginFaieldSateActive = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
         view.addSubview(registrationButton)
+        view.addSubview(loginFailedLabel)
+        loginFailedLabel.isHidden = true
         setGestures()
         setConstraints()
     }
@@ -48,6 +53,20 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             return nil
         }
         return LoginData(password: passwordTextField.text!, email: emailTextField.text!)
+    }
+    
+    private func showLoginFailedState() {
+        isLoginFaieldSateActive = true
+        loginFailedLabel.isHidden = false
+        emailTextField.textColor = Asset.Colors.loginFailedText.color
+        passwordTextField.textColor = Asset.Colors.loginFailedText.color
+    }
+    
+    private func showNormalState() {
+        isLoginFaieldSateActive = false
+        loginFailedLabel.isHidden = true
+        emailTextField.textColor = Asset.Colors.loginTextColor.color
+        passwordTextField.textColor = Asset.Colors.loginTextColor.color
     }
     
     @objc private func hideKeyboard() {
@@ -84,11 +103,16 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         hideKeyboard()
         if let loginData = getLoginData() {
             // Do request
+            // showLoginFailedState - here for test login failed state
+            showLoginFailedState()
             print(loginData)
         }
     }
     
     @objc private func textFieldDidChange() {
+        if isLoginFaieldSateActive {
+            showNormalState()
+        }
         if isFieldsSet && !loginButton.isEnabled {
             loginButton.isEnabled = true
         } else if !isFieldsSet && loginButton.isEnabled {
@@ -133,7 +157,7 @@ extension LoginViewController {
     }
     
     private func makeLoginButton() -> AuthorizationButton {
-        let colorSet = AuthorizationButtonColorSet(
+        let colorSet = AuthorizationButton.ColorSet(
                                     enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
                                     enabledBackground: .clear,
                                     enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
@@ -149,21 +173,40 @@ extension LoginViewController {
         let buttonText = Text.Authorization.registrationQuestion + " " + Text.Authorization.registration
         let questionRange = (buttonText as NSString).range(of: Text.Authorization.registrationQuestion)
         let registrationRange = (buttonText as NSString).range(of: Text.Authorization.registration)
+
         let mutableButtonText = NSMutableAttributedString(string: buttonText)
-        mutableButtonText.addAttribute(.foregroundColor, value: Asset.Colors.registrationQuestionLabelText.color, range: questionRange)
-        mutableButtonText.addAttribute(.foregroundColor, value: Asset.Colors.enabledAuthorizationButtonText.color, range: registrationRange)
+        mutableButtonText.addAttribute(.foregroundColor,
+                                       value: Asset.Colors.registrationQuestionLabelText.color,
+                                       range: questionRange)
+        mutableButtonText.addAttribute(.foregroundColor,
+                                       value: Asset.Colors.enabledAuthorizationButtonText.color,
+                                       range: registrationRange)
         
         let mutableButtonTextHighlited = NSMutableAttributedString(string: buttonText)
-        mutableButtonTextHighlited.addAttribute(.foregroundColor, value: Asset.Colors.registrationQuestionLabelText.color, range: questionRange)
-        mutableButtonTextHighlited.addAttribute(.foregroundColor, value: Asset.Colors.enabledAuthorizationButtonText.color.withAlphaComponent(0.6), range: registrationRange)
+        mutableButtonTextHighlited.addAttribute(.foregroundColor,
+                                                value: Asset.Colors.registrationQuestionLabelText.color,
+                                                range: questionRange)
+        mutableButtonTextHighlited.addAttribute(.foregroundColor,
+                                                value: Asset.Colors.enabledAuthorizationButtonText.color.withAlphaComponent(0.6),
+                                                range: registrationRange)
 
         let button = UIButton()
         button.setAttributedTitle(mutableButtonText, for: .normal)
         button.setAttributedTitle(mutableButtonTextHighlited, for: .highlighted)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: LoginScreenSizes.RegistrationButton.fontSize)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.addTarget(self, action: #selector(openRegistrationViewController), for: .touchUpInside)
         return button
+    }
+    
+    private func makeLoginFailedLabel() -> UILabel {
+        let label = UILabel()
+        label.text = Text.Authorization.failed
+        label.textColor = Asset.Colors.loginFailedText.color
+        label.font = UIFont.systemFont(ofSize: LoginScreenSizes.LoginFailedLabel.fontSize)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        return label
     }
 }
 
@@ -176,6 +219,7 @@ extension LoginViewController {
         setPasswordTextFieldConstraints()
         setLoginButtonConstraints()
         setRegistrationButtonConstraints()
+        setLoginFailedLabelConstraints()
     }
     
     private func setWatchLaterLogoConstraints() {
@@ -220,6 +264,15 @@ extension LoginViewController {
             maker.top.equalTo(loginButton.snp.bottom).offset(LoginScreenSizes.RegistrationButton.topOffset)
             maker.width.equalTo(LoginScreenSizes.RegistrationButton.width)
             maker.height.equalTo(LoginScreenSizes.RegistrationButton.height)
+        }
+    }
+    
+    private func setLoginFailedLabelConstraints() {
+        loginFailedLabel.snp.makeConstraints { maker in
+            maker.centerX.equalToSuperview()
+            maker.top.equalTo(passwordTextField.snp.bottom).offset(LoginScreenSizes.LoginFailedLabel.topOffset)
+            maker.width.equalTo(LoginScreenSizes.LoginFailedLabel.width)
+            maker.height.equalTo(LoginScreenSizes.LoginFailedLabel.height)
         }
     }
 }

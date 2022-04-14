@@ -63,11 +63,24 @@ enum LoginScreenSizes {
         private static let ratioTopOffsetToScreenHeight: CGFloat = 0.064
         
         static let height: CGFloat = 20
+        static let fontSize: CGFloat = 15
         static var width: CGFloat {
             return UIScreen.main.bounds.size.width * ratioButtonWithScreenWidth
         }
         static var topOffset: CGFloat {
             return UIScreen.main.bounds.size.height * ratioTopOffsetToScreenHeight
         }
+    }
+    
+    enum LoginFailedLabel {
+        
+        private static let ratioLabelWithScreenWidth: CGFloat = 0.915
+        
+        static let height: CGFloat = 18
+        static var width: CGFloat {
+            return UIScreen.main.bounds.size.width * ratioLabelWithScreenWidth
+        }
+        static let topOffset: CGFloat = 17.5
+        static let fontSize: CGFloat = 13
     }
 }

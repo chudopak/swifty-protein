@@ -12,6 +12,8 @@ import Foundation
 internal enum Text {
 
   internal enum Authorization {
+    /// Неверные логин или пароль
+    internal static let failed = Text.tr("Localizable", "Authorization.failed")
     /// Регистрация
     internal static let registration = Text.tr("Localizable", "Authorization.registration")
     /// Еще не зарегистрированы?

@@ -8,18 +8,18 @@
 
 import UIKit
 
-struct AuthorizationButtonColorSet {
-    let enabledText: UIColor
-    let enabledBackground: UIColor
-    let enabledBorder: UIColor
-    let disabledText: UIColor
-    let disabledBackground: UIColor
-    let disabledBorder: UIColor
-}
-
 class AuthorizationButton: UIButton {
     
-    private var colorSet: AuthorizationButtonColorSet!
+    struct ColorSet {
+        let enabledText: UIColor
+        let enabledBackground: UIColor
+        let enabledBorder: UIColor
+        let disabledText: UIColor
+        let disabledBackground: UIColor
+        let disabledBorder: UIColor
+    }
+    
+    private var colorSet: ColorSet!
 
     let fontSize: CGFloat = 17
     
@@ -37,7 +37,7 @@ class AuthorizationButton: UIButton {
         }
     }
     
-    init(colorSet: AuthorizationButtonColorSet, text: String) {
+    init(colorSet: AuthorizationButton.ColorSet, text: String) {
         super.init(frame: .zero)
         self.colorSet = colorSet
         isEnabled = false
