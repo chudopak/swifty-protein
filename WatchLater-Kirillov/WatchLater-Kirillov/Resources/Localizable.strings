@@ -16,6 +16,8 @@ Common.login = "Войти";
 Authorization.placeholder.email = "Адрес электронной почты";
 Authorization.placeholder.password = "Пароль";
 Authorization.placeholder.repeatPassword = "Повторите пароль";
+Authorization.registrationQuestion = "Еще не зарегистрированы?";
+Authorization.registration = "Регистрация";
 
 // MARK: - Test
 

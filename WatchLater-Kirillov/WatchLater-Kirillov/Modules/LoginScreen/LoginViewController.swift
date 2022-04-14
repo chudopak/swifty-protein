@@ -15,6 +15,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     private lazy var emailTextField = makeTextField(type: .email)
     private lazy var passwordTextField = makeTextField(type: .password)
     private lazy var loginButton = makeLoginButton()
+    private lazy var registrationButton = makeRegistrationButton()
     
     private var isFieldsSet: Bool {
         return emailTextField.text != nil
@@ -30,6 +31,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
+        view.addSubview(registrationButton)
         setGestures()
         setConstraints()
     }
@@ -93,6 +95,11 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             loginButton.isEnabled = false
         }
     }
+    
+    @objc private func openRegistrationViewController() {
+        // Open
+        print("open reegistrationVC")
+    }
 }
 
 // MARK: Extension for element creation
@@ -137,6 +144,27 @@ extension LoginViewController {
         button.addTarget(self, action: #selector(loginButtonTaped), for: .touchUpInside)
         return button
     }
+    
+    private func makeRegistrationButton() -> UIButton {
+        let buttonText = Text.Authorization.registrationQuestion + " " + Text.Authorization.registration
+        let questionRange = (buttonText as NSString).range(of: Text.Authorization.registrationQuestion)
+        let registrationRange = (buttonText as NSString).range(of: Text.Authorization.registration)
+        let mutableButtonText = NSMutableAttributedString(string: buttonText)
+        mutableButtonText.addAttribute(.foregroundColor, value: Asset.Colors.registrationQuestionLabelText.color, range: questionRange)
+        mutableButtonText.addAttribute(.foregroundColor, value: Asset.Colors.enabledAuthorizationButtonText.color, range: registrationRange)
+        
+        let mutableButtonTextHighlited = NSMutableAttributedString(string: buttonText)
+        mutableButtonTextHighlited.addAttribute(.foregroundColor, value: Asset.Colors.registrationQuestionLabelText.color, range: questionRange)
+        mutableButtonTextHighlited.addAttribute(.foregroundColor, value: Asset.Colors.enabledAuthorizationButtonText.color.withAlphaComponent(0.6), range: registrationRange)
+
+        let button = UIButton()
+        button.setAttributedTitle(mutableButtonText, for: .normal)
+        button.setAttributedTitle(mutableButtonTextHighlited, for: .highlighted)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.addTarget(self, action: #selector(openRegistrationViewController), for: .touchUpInside)
+        return button
+    }
 }
 
 // MARK: Constraints
@@ -147,6 +175,7 @@ extension LoginViewController {
         setEmailTextFieldConstraints()
         setPasswordTextFieldConstraints()
         setLoginButtonConstraints()
+        setRegistrationButtonConstraints()
     }
     
     private func setWatchLaterLogoConstraints() {
@@ -182,6 +211,15 @@ extension LoginViewController {
             maker.top.equalTo(passwordTextField.snp.bottom).offset(LoginScreenSizes.AuthorizationButton.topOffset)
             maker.width.equalTo(LoginScreenSizes.AuthorizationButton.width)
             maker.height.equalTo(LoginScreenSizes.AuthorizationButton.height)
+        }
+    }
+    
+    private func setRegistrationButtonConstraints() {
+        registrationButton.snp.makeConstraints { maker in
+            maker.centerX.equalToSuperview()
+            maker.top.equalTo(loginButton.snp.bottom).offset(LoginScreenSizes.RegistrationButton.topOffset)
+            maker.width.equalTo(LoginScreenSizes.RegistrationButton.width)
+            maker.height.equalTo(LoginScreenSizes.RegistrationButton.height)
         }
     }
 }

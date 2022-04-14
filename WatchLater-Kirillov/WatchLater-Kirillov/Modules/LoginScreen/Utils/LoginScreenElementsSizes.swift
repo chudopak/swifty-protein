@@ -17,13 +17,13 @@ enum LoginScreenSizes {
         private static let ratioTopOffsetToScreenHeight: CGFloat = 0.194
         
         static var width: CGFloat {
-            return (UIScreen.main.bounds.size.width * ratioWatchLaterWithScreenWidth)
+            return UIScreen.main.bounds.size.width * ratioWatchLaterWithScreenWidth
         }
         static var height: CGFloat {
-            return (width * ratioWatchLaterHeightWithWatchLaterWidth)
+            return width * ratioWatchLaterHeightWithWatchLaterWidth
         }
         static var topOffset: CGFloat {
-            return (UIScreen.main.bounds.size.height * ratioTopOffsetToScreenHeight)
+            return UIScreen.main.bounds.size.height * ratioTopOffsetToScreenHeight
         }
     }
     
@@ -55,6 +55,19 @@ enum LoginScreenSizes {
         }
         static var topOffset: CGFloat {
             return ratioTopOffsetToScreenHeight * UIScreen.main.bounds.size.height
+        }
+    }
+    
+    enum RegistrationButton {
+        private static let ratioButtonWithScreenWidth: CGFloat = 0.915
+        private static let ratioTopOffsetToScreenHeight: CGFloat = 0.064
+        
+        static let height: CGFloat = 20
+        static var width: CGFloat {
+            return UIScreen.main.bounds.size.width * ratioButtonWithScreenWidth
+        }
+        static var topOffset: CGFloat {
+            return UIScreen.main.bounds.size.height * ratioTopOffsetToScreenHeight
         }
     }
 }

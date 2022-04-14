@@ -31,7 +31,9 @@ class AuthorizationButton: UIButton {
     
     override var isHighlighted: Bool {
         didSet {
-            isHighlighted ? animateButtonAlpha(duration: 0.1, alpha: 0.5) : animateButtonAlpha(duration: 0.1, alpha: 1)
+            isHighlighted
+                ? animateButtonAlpha(duration: 0.1, alpha: 0.5)
+                : animateButtonAlpha(duration: 0.1, alpha: 1)
         }
     }
     
