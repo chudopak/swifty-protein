@@ -9,54 +9,6 @@ import UIKit
 import SnapKit
 
 class SplashViewController: BaseViewController {
-
-    struct ElementSize {
-        private let ratioScreenWithWatchLaterWidths: CGFloat = 0.527_2
-        private let ratioWatchLaterHeightWithWatchLaterWidth: CGFloat = 0.434_0
-        private let ratioEyeSideWithWatchLaterHeight: CGFloat = 0.410_9
-        private let ratioEyeTopOffsetWithWatchLaterHeight: CGFloat = 0.309_6
-        private let ratioEyeLeftOffsetWithWatchLeterWidthCenter: CGFloat = 0.431_5
-        private let ratioEyeLeftOffsetWithWatchLeterWidthRight: CGFloat = 0.482_0
-        private let ratioEyeLeftOffsetWithWatchLeterWidthLeft: CGFloat = 0.390_9
-        private let ratioScreenWithAgonaWidth: CGFloat = 0.245_3
-        private let ratioAgonaHeightWithAgonaWidth: CGFloat = 0.467_4
-        private let ratioAgonaBottomOffsetToScreenHeight: CGFloat = 0.094_8
-        
-        let sizeRatioBeforeAnimation: CGFloat = 0.8
-        
-        var watchLaterImageViewWidth: CGFloat {
-            return (UIScreen.main.bounds.size.width * ratioScreenWithWatchLaterWidths)
-        }
-        var watchLaterImageViewHeight: CGFloat {
-            return (UIScreen.main.bounds.size.width * ratioScreenWithWatchLaterWidths * ratioWatchLaterHeightWithWatchLaterWidth)
-        }
-        var eyeImageViewSide: CGFloat {
-            return (watchLaterImageViewHeight * ratioEyeSideWithWatchLaterHeight)
-        }
-        var eyeImageViewXCenter: CGFloat {
-            return (watchLaterImageViewWidth * ratioEyeLeftOffsetWithWatchLeterWidthCenter)
-        }
-        var eyeImageViewXRight: CGFloat {
-            return (watchLaterImageViewWidth * ratioEyeLeftOffsetWithWatchLeterWidthRight)
-        }
-        var eyeImageViewXLeft: CGFloat {
-            return (watchLaterImageViewWidth * ratioEyeLeftOffsetWithWatchLeterWidthLeft)
-        }
-        var eyeImageViewY: CGFloat {
-            return (watchLaterImageViewHeight * ratioEyeTopOffsetWithWatchLaterHeight)
-        }
-        var agonaImageViewWidth: CGFloat {
-            return (UIScreen.main.bounds.size.width * ratioScreenWithAgonaWidth)
-        }
-        var agonaImageViewHeight: CGFloat {
-            return (agonaImageViewWidth * ratioAgonaHeightWithAgonaWidth)
-        }
-        var agonaImageViewBottomOffset: CGFloat {
-            return (UIScreen.main.bounds.size.height * ratioAgonaBottomOffsetToScreenHeight)
-        }
-    }
-    
-    private let elementSize = ElementSize()
     
     private lazy var watchLaterImageView = makeWatchLaterImageView()
     private lazy var eyeImageView = makeEyeImageView()
@@ -68,7 +20,7 @@ class SplashViewController: BaseViewController {
         view.addSubview(watchLaterImageView)
         view.addSubview(agonaImageView)
         watchLaterImageView.addSubview(eyeImageView)
-        configureElementSizesAtLaunch()
+        configureSplashScreenSizessAtLaunch()
         setConstraints()
     }
     
@@ -77,26 +29,26 @@ class SplashViewController: BaseViewController {
         viewAnimation()
     }
     
-    private func configureElementSizesAtLaunch() {
+    private func configureSplashScreenSizessAtLaunch() {
         watchLaterImageView.center = view.center
         watchLaterImageView.bounds.size = CGSize(
-            width: elementSize.watchLaterImageViewWidth * elementSize.sizeRatioBeforeAnimation,
-            height: elementSize.watchLaterImageViewHeight * elementSize.sizeRatioBeforeAnimation)
+            width: SplashScreenSizes.watchLaterImageViewWidth * SplashScreenSizes.sizeRatioBeforeAnimation,
+            height: SplashScreenSizes.watchLaterImageViewHeight * SplashScreenSizes.sizeRatioBeforeAnimation)
         
         eyeImageView.frame = CGRect(
-            x: elementSize.eyeImageViewXCenter * elementSize.sizeRatioBeforeAnimation,
-            y: elementSize.eyeImageViewY * elementSize.sizeRatioBeforeAnimation,
-            width: elementSize.eyeImageViewSide * elementSize.sizeRatioBeforeAnimation,
-            height: elementSize.eyeImageViewSide * elementSize.sizeRatioBeforeAnimation)
+            x: SplashScreenSizes.eyeImageViewXCenter * SplashScreenSizes.sizeRatioBeforeAnimation,
+            y: SplashScreenSizes.eyeImageViewY * SplashScreenSizes.sizeRatioBeforeAnimation,
+            width: SplashScreenSizes.eyeImageViewSide * SplashScreenSizes.sizeRatioBeforeAnimation,
+            height: SplashScreenSizes.eyeImageViewSide * SplashScreenSizes.sizeRatioBeforeAnimation)
     }
     
-    private func configureElementSizesAfterFadeInAnimation() {
-        watchLaterImageView.bounds.size = CGSize(width: elementSize.watchLaterImageViewWidth,
-                                                 height: elementSize.watchLaterImageViewHeight)
-        eyeImageView.frame = CGRect(x: elementSize.eyeImageViewXCenter,
-                                    y: elementSize.eyeImageViewY,
-                                    width: elementSize.eyeImageViewSide,
-                                    height: elementSize.eyeImageViewSide)
+    private func configureSplashScreenSizessAfterFadeInAnimation() {
+        watchLaterImageView.bounds.size = CGSize(width: SplashScreenSizes.watchLaterImageViewWidth,
+                                                 height: SplashScreenSizes.watchLaterImageViewHeight)
+        eyeImageView.frame = CGRect(x: SplashScreenSizes.eyeImageViewXCenter,
+                                    y: SplashScreenSizes.eyeImageViewY,
+                                    width: SplashScreenSizes.eyeImageViewSide,
+                                    height: SplashScreenSizes.eyeImageViewSide)
     }
     
     private func viewAnimation() {
@@ -106,7 +58,7 @@ class SplashViewController: BaseViewController {
                         self?.eyeImageView.alpha = 1.0
                         self?.watchLaterImageView.alpha = 1.0
                         self?.agonaImageView.alpha = 1.0
-                        self?.configureElementSizesAfterFadeInAnimation()
+                        self?.configureSplashScreenSizessAfterFadeInAnimation()
                        }, completion: { [weak self] completed in
                         self?.animateEyePhaseOne()
                        })
@@ -116,7 +68,7 @@ class SplashViewController: BaseViewController {
         UIView.animate(withDuration: 0.5,
                        delay: 0.0,
                        options: .curveLinear, animations: { [weak self] in
-                        self?.eyeImageView.frame.origin.x = self!.elementSize.eyeImageViewXRight
+                        self?.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXRight
                        }, completion: { [weak self] _ in
                         self?.animateEyePhaseTwo()
                        })
@@ -126,7 +78,7 @@ class SplashViewController: BaseViewController {
         UIView.animate(withDuration: 0.5,
                        delay: 0.1,
                        options: .curveLinear, animations: { [weak self] in
-                        self?.eyeImageView.frame.origin.x = self!.elementSize.eyeImageViewXLeft
+                        self?.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXLeft
                        }, completion: { [weak self] _ in
                         self?.animateEyePhaseThree()
                        })
@@ -136,7 +88,7 @@ class SplashViewController: BaseViewController {
         UIView.animate(withDuration: 0.5,
                        delay: 0.1,
                        options: .curveLinear, animations: { [weak self] in
-                        self?.eyeImageView.frame.origin.x = self!.elementSize.eyeImageViewXCenter
+                        self?.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXCenter
                        }, completion: { [weak self] _ in
                         self?.present(LoginRouter.makeLoginViewController(), animated: true, completion: nil)
                        })
@@ -177,9 +129,9 @@ extension SplashViewController {
     private func setConstraints() {
         agonaImageView.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
-            maker.bottom.equalToSuperview().inset(elementSize.agonaImageViewBottomOffset)
-            maker.width.equalTo(elementSize.agonaImageViewWidth)
-            maker.height.equalTo(elementSize.agonaImageViewHeight)
+            maker.bottom.equalToSuperview().inset(SplashScreenSizes.agonaImageViewBottomOffset)
+            maker.width.equalTo(SplashScreenSizes.agonaImageViewWidth)
+            maker.height.equalTo(SplashScreenSizes.agonaImageViewHeight)
         }
     }
 }

@@ -80,7 +80,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     @objc private func emailTextFieldDonePressed() {
         emailTextField.resignFirstResponder()
         if let loginData = getLoginData() {
-            // Do request
+            // TODO: - Do request
             print(loginData)
         } else if emailTextField.text != nil
                     && !emailTextField.text!.isEmpty {
@@ -91,7 +91,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     @objc private func passwordTextFieldDonePressed() {
         passwordTextField.resignFirstResponder()
         if let loginData = getLoginData() {
-            // Do request
+            // TODO: - Do request
             print(loginData)
         } else if passwordTextField.text != nil
                     && !passwordTextField.text!.isEmpty {
@@ -102,7 +102,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     @objc private func loginButtonTaped() {
         hideKeyboard()
         if let loginData = getLoginData() {
-            // Do request
+            // TODO: - Do request
             // showLoginFailedState - here for test login failed state
             showLoginFailedState()
             print(loginData)
@@ -121,7 +121,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @objc private func openRegistrationViewController() {
-        // Open
+        // TODO: - Present registration View Controller
         print("open reegistrationVC")
     }
 }

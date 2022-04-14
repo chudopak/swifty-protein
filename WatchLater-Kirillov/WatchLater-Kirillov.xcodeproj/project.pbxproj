@@ -41,6 +41,8 @@
 		7D112F8B2804641200BB7ECC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D112F892804641200BB7ECC /* SceneDelegate.swift */; };
 		7D112F8F2804861700BB7ECC /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D112F8E2804861700BB7ECC /* SplashViewController.swift */; };
 		7D112F902804861700BB7ECC /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D112F8E2804861700BB7ECC /* SplashViewController.swift */; };
+		7D178EA528084DDD009C6280 /* SplashScreenSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D178EA428084DDD009C6280 /* SplashScreenSizes.swift */; };
+		7D178EA628084DDD009C6280 /* SplashScreenSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D178EA428084DDD009C6280 /* SplashScreenSizes.swift */; };
 		7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D562807197100AEBF1A /* LoginModel.swift */; };
 		7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D562807197100AEBF1A /* LoginModel.swift */; };
 		7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */; };
@@ -98,6 +100,7 @@
 		5BC5C882F16A7A24A91537BA /* Pods_WatchLater_Kirillov_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D112F892804641200BB7ECC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7D112F8E2804861700BB7ECC /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		7D178EA428084DDD009C6280 /* SplashScreenSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenSizes.swift; sourceTree = "<group>"; };
 		7D3B5D562807197100AEBF1A /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationButton.swift; sourceTree = "<group>"; };
 		7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLauchChecker.swift; sourceTree = "<group>"; };
@@ -321,8 +324,8 @@
 		7D112F8D280485EC00BB7ECC /* SplashScreen */ = {
 			isa = PBXGroup;
 			children = (
-				7D99732128059C220094F302 /* Utils */,
 				7D112F8E2804861700BB7ECC /* SplashViewController.swift */,
+				7D178EA428084DDD009C6280 /* SplashScreenSizes.swift */,
 			);
 			path = SplashScreen;
 			sourceTree = "<group>";
@@ -344,13 +347,6 @@
 				7D99731F28058F7E0094F302 /* LoginRouter.swift */,
 			);
 			path = LoginScreen;
-			sourceTree = "<group>";
-		};
-		7D99732128059C220094F302 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		7D9973222805A4CB0094F302 /* UIKitClassesExtensions */ = {
@@ -693,6 +689,7 @@
 			files = (
 				7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */,
 				7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
+				7D178EA528084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
 				30314CDC265AAEE500CADD41 /* BundleSettingsURL.swift in Sources */,
 				3076A0882601D421003B0EF9 /* StoryboardScenes.swift in Sources */,
 				30D2F277260148EE000134EB /* Texts.swift in Sources */,
@@ -720,6 +717,7 @@
 			files = (
 				7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */,
 				7D3B5D5B280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
+				7D178EA628084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
 				7DB7E0CB2806BBE400996926 /* UIColor+HexConversion.swift in Sources */,
 				7DB7E0CC2806BBE400996926 /* UITextField+addBottomLine.swift in Sources */,
 				7DB7E0C82806BBAB00996926 /* LoginScreenElementsSizes.swift in Sources */,
