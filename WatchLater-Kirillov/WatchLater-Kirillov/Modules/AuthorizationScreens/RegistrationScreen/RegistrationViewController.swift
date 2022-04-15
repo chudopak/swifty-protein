@@ -55,16 +55,22 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         navigationController?.navigationBar.isHidden = false
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.placeholder = ""
+    }
+    
     private func getAuthorizatioinData() -> RegistrationData? {
         guard isFieldsSet
         else {
             return nil
         }
-        return RegistrationData(email: emailTextField.text!, password: passwordTextField.text!)
+        return RegistrationData(email: emailTextField.text!,
+                                password: passwordTextField.text!)
     }
     
     private func isPasswordsMatch() -> Bool {
-        if isFieldsSet && passwordTextField.text! == repeatPasswordTextField.text! {
+        if isFieldsSet
+            && passwordTextField.text! == repeatPasswordTextField.text! {
             return true
         }
         return false
@@ -98,7 +104,6 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         isRegistrationFaieldSateActive = true
         registrationFailedLabel.isHidden = false
         registrationFailedLabel.text = message
-        emailTextField.textColor = Asset.Colors.loginFailedText.color
         passwordTextField.textColor = Asset.Colors.loginFailedText.color
         repeatPasswordTextField.textColor = Asset.Colors.loginFailedText.color
     }
@@ -106,14 +111,13 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     private func showNormalState() {
         isRegistrationFaieldSateActive = false
         registrationFailedLabel.isHidden = true
-        emailTextField.textColor = Asset.Colors.loginTextColor.color
         passwordTextField.textColor = Asset.Colors.loginTextColor.color
         repeatPasswordTextField.textColor = Asset.Colors.loginTextColor.color
     }
 
     private func handleTextFieldsActivity(active: AuthorizationTextField,
                                           nextToBeField: AuthorizationTextField) {
-        active.resignFirstResponder()
+        _ = active.resignFirstResponder()
         if isFieldsSet {
             validateRegistrationDataForRequest()
         } else if active.text != nil
@@ -123,18 +127,19 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     }
     
     private func setGestures() {
-        let hideKeyboardGuesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        let hideKeyboardGuesture = UITapGestureRecognizer(target: self,
+                                                          action: #selector(hideKeyboard))
         hideKeyboardGuesture.cancelsTouchesInView = false
         view.addGestureRecognizer(hideKeyboardGuesture)
     }
     
     @objc private func hideKeyboard() {
         if emailTextField.isEditing {
-            emailTextField.resignFirstResponder()
+            _ = emailTextField.resignFirstResponder()
         } else if passwordTextField.isEditing {
-            passwordTextField.resignFirstResponder()
+            _ = passwordTextField.resignFirstResponder()
         } else if repeatPasswordTextField.isEditing {
-            repeatPasswordTextField.resignFirstResponder()
+            _ = repeatPasswordTextField.resignFirstResponder()
         }
     }
     
@@ -157,9 +162,11 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         if isRegistrationFaieldSateActive {
             showNormalState()
         }
-        if isFieldsSet && !registerButton.isEnabled {
+        if isFieldsSet
+            && !registerButton.isEnabled {
             registerButton.isEnabled = true
-        } else if !isFieldsSet && registerButton.isEnabled {
+        } else if !isFieldsSet
+                    && registerButton.isEnabled {
             registerButton.isEnabled = false
         }
     }
@@ -179,22 +186,33 @@ extension RegistrationViewController {
     }
     
     private func makeTextField(type: TextFieldType) -> AuthorizationTextField {
-        let inset = UIEdgeInsets(top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
-                                 left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
-                                 bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
-                                 right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset)
-        let textField = AuthorizationTextField.makeTextField(type: type, inset: inset)
+        let inset = UIEdgeInsets(
+                        top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
+                        left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
+                        bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
+                        right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset
+                    )
+        let textField = AuthorizationTextField(type: type,
+                                               inset: inset)
         textField.delegate = self
-        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textField.addTarget(self,
+                            action: #selector(textFieldDidChange),
+                            for: .editingChanged)
         switch type {
         case .email:
-            textField.addTarget(self, action: #selector(emailTextFieldDonePressed), for: .editingDidEndOnExit)
+            textField.addTarget(self,
+                                action: #selector(emailTextFieldDonePressed),
+                                for: .editingDidEndOnExit)
         
         case .password:
-            textField.addTarget(self, action: #selector(passwordTextFieldDonePressed), for: .editingDidEndOnExit)
+            textField.addTarget(self,
+                                action: #selector(passwordTextFieldDonePressed),
+                                for: .editingDidEndOnExit)
 
         case .repeatPassword:
-            textField.addTarget(self, action: #selector(repeatPasswordTextFieldDonePressed), for: .editingDidEndOnExit)
+            textField.addTarget(self,
+                                action: #selector(repeatPasswordTextFieldDonePressed),
+                                for: .editingDidEndOnExit)
         }
         return textField
     }
@@ -217,7 +235,9 @@ extension RegistrationViewController {
                                     disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
                                     disabledBorder: .clear)
         let button = AuthorizationButton(colorSet: colorSet, text: Text.Authorization.registration)
-        button.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        button.addTarget(self,
+                         action: #selector(registerButtonTapped),
+                         for: .touchUpInside)
         return button
     }
     

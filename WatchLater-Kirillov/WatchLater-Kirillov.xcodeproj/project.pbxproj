@@ -59,14 +59,10 @@
 		7D9715182805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */; };
 		7D99731E28058E7F0094F302 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731D28058E7F0094F302 /* LoginViewController.swift */; };
 		7D99732028058F7E0094F302 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731F28058F7E0094F302 /* LoginRouter.swift */; };
-		7D9973242805A4F00094F302 /* UIColor+HexConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9973232805A4F00094F302 /* UIColor+HexConversion.swift */; };
 		7DB7E0C52806B56D00996926 /* LoginScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */; };
-		7DB7E0C72806BB1600996926 /* UITextField+addBottomLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7E0C62806BB1600996926 /* UITextField+addBottomLine.swift */; };
 		7DB7E0C82806BBAB00996926 /* LoginScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */; };
 		7DB7E0C92806BBAB00996926 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731D28058E7F0094F302 /* LoginViewController.swift */; };
 		7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731F28058F7E0094F302 /* LoginRouter.swift */; };
-		7DB7E0CB2806BBE400996926 /* UIColor+HexConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9973232805A4F00094F302 /* UIColor+HexConversion.swift */; };
-		7DB7E0CC2806BBE400996926 /* UITextField+addBottomLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7E0C62806BB1600996926 /* UITextField+addBottomLine.swift */; };
 		7DBC89392807065200F94B6C /* AuthorizationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC89382807065200F94B6C /* AuthorizationTextField.swift */; };
 		7DBC893A2807065200F94B6C /* AuthorizationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC89382807065200F94B6C /* AuthorizationTextField.swift */; };
 /* End PBXBuildFile section */
@@ -118,9 +114,7 @@
 		7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLauchChecker.swift; sourceTree = "<group>"; };
 		7D99731D28058E7F0094F302 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7D99731F28058F7E0094F302 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
-		7D9973232805A4F00094F302 /* UIColor+HexConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexConversion.swift"; sourceTree = "<group>"; };
 		7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenElementsSizes.swift; sourceTree = "<group>"; };
-		7DB7E0C62806BB1600996926 /* UITextField+addBottomLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+addBottomLine.swift"; sourceTree = "<group>"; };
 		7DBC89382807065200F94B6C /* AuthorizationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTextField.swift; sourceTree = "<group>"; };
 		829947A643F9BFB222C76665 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.release.xcconfig"; sourceTree = "<group>"; };
 		A8C2949DB62D1110810C8256 /* Pods_WatchLater_Kirillov_Prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				7D9715192805BB6200CC31B8 /* Utils */,
-				7D9973222805A4CB0094F302 /* UIKitClassesExtensions */,
 				30314CA8265AAA8900CADD41 /* BaseViewController.swift */,
 			);
 			path = Base;
@@ -383,26 +376,17 @@
 			isa = PBXGroup;
 			children = (
 				7DB7E0C32806B55500996926 /* Utils */,
+				7D3B5D562807197100AEBF1A /* LoginModel.swift */,
 				7D99731D28058E7F0094F302 /* LoginViewController.swift */,
 				7D99731F28058F7E0094F302 /* LoginRouter.swift */,
 			);
 			path = LoginScreen;
 			sourceTree = "<group>";
 		};
-		7D9973222805A4CB0094F302 /* UIKitClassesExtensions */ = {
-			isa = PBXGroup;
-			children = (
-				7D9973232805A4F00094F302 /* UIColor+HexConversion.swift */,
-				7DB7E0C62806BB1600996926 /* UITextField+addBottomLine.swift */,
-			);
-			path = UIKitClassesExtensions;
-			sourceTree = "<group>";
-		};
 		7DB7E0C32806B55500996926 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */,
-				7D3B5D562807197100AEBF1A /* LoginModel.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -739,9 +723,7 @@
 				30D2F274260148EE000134EB /* Asset.swift in Sources */,
 				7D178EB128087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
 				7DBC89392807065200F94B6C /* AuthorizationTextField.swift in Sources */,
-				7D9973242805A4F00094F302 /* UIColor+HexConversion.swift in Sources */,
 				7D112F8A2804641200BB7ECC /* SceneDelegate.swift in Sources */,
-				7DB7E0C72806BB1600996926 /* UITextField+addBottomLine.swift in Sources */,
 				30314CE6265AAF3200CADD41 /* NetworkConfiguration.swift in Sources */,
 				306BF31225FC8F7200E9B481 /* AppDelegate.swift in Sources */,
 				7D178EAA280859F0009C6280 /* RegistrationViewController.swift in Sources */,
@@ -764,8 +746,6 @@
 				7D3B5D5B280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
 				7D178EA628084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
 				7D0ACA9928096A2B00777442 /* RegistrationModel.swift in Sources */,
-				7DB7E0CB2806BBE400996926 /* UIColor+HexConversion.swift in Sources */,
-				7DB7E0CC2806BBE400996926 /* UITextField+addBottomLine.swift in Sources */,
 				7DB7E0C82806BBAB00996926 /* LoginScreenElementsSizes.swift in Sources */,
 				7DB7E0C92806BBAB00996926 /* LoginViewController.swift in Sources */,
 				7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */,

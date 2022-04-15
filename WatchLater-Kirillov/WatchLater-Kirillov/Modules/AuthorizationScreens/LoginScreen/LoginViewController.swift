@@ -30,12 +30,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.primaryBackground.color
-        view.addSubview(watchLaterLogoImageView)
-        view.addSubview(emailTextField)
-        view.addSubview(passwordTextField)
-        view.addSubview(loginButton)
-        view.addSubview(registrationButton)
-        view.addSubview(loginFailedLabel)
+        addSubviews()
         loginFailedLabel.isHidden = true
         setGestures()
         setConstraints()
@@ -46,8 +41,22 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         navigationController?.navigationBar.isHidden = true
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.placeholder = ""
+    }
+    
+    private func addSubviews() {
+        view.addSubview(watchLaterLogoImageView)
+        view.addSubview(emailTextField)
+        view.addSubview(passwordTextField)
+        view.addSubview(loginButton)
+        view.addSubview(registrationButton)
+        view.addSubview(loginFailedLabel)
+    }
+    
     private func setGestures() {
-        let hideKeyboardGuesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        let hideKeyboardGuesture = UITapGestureRecognizer(target: self,
+                                                          action: #selector(hideKeyboard))
         hideKeyboardGuesture.cancelsTouchesInView = false
         view.addGestureRecognizer(hideKeyboardGuesture)
     }
@@ -57,7 +66,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         else {
             return nil
         }
-        return LoginData(password: passwordTextField.text!, email: emailTextField.text!)
+        return LoginData(password: passwordTextField.text!,
+                         email: emailTextField.text!)
     }
     
     private func showLoginFailedState() {
@@ -76,7 +86,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     private func handleTextFieldsActivity(active: AuthorizationTextField,
                                           nextToBeField: AuthorizationTextField) {
-        active.resignFirstResponder()
+        _ = active.resignFirstResponder()
         if let loginData = getLoginData() {
             // TODO: - Do request
             print(loginData)
@@ -86,12 +96,20 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         }
     }
     
-    @objc private func hideKeyboard() {
+    private func getActiveTextField() -> AuthorizationTextField? {
         if emailTextField.isEditing {
-            emailTextField.resignFirstResponder()
+            return emailTextField
         } else if passwordTextField.isEditing {
-            passwordTextField.resignFirstResponder()
+            return passwordTextField
         }
+        return nil
+    }
+    
+    @objc private func hideKeyboard() {
+        guard let textField = getActiveTextField() else {
+            return
+        }
+        _ = textField.resignFirstResponder()
     }
     
     @objc private func emailTextFieldDonePressed() {
@@ -118,9 +136,11 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         if isLoginFaieldSateActive {
             showNormalState()
         }
-        if isFieldsSet && !loginButton.isEnabled {
+        if isFieldsSet
+            && !loginButton.isEnabled {
             loginButton.isEnabled = true
-        } else if !isFieldsSet && loginButton.isEnabled {
+        } else if !isFieldsSet
+                    && loginButton.isEnabled {
             loginButton.isEnabled = false
         }
     }
@@ -140,19 +160,34 @@ extension LoginViewController {
     }
     
     private func makeTextField(type: TextFieldType) -> AuthorizationTextField {
-        let inset = UIEdgeInsets(top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
-                                 left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
-                                 bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
-                                 right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset)
-        let textField = AuthorizationTextField.makeTextField(type: type, inset: inset)
+        let inset = UIEdgeInsets(
+                top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
+                left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
+                bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
+                right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset
+            )
+        let textField = AuthorizationTextField(type: type,
+                                               inset: inset)
         textField.delegate = self
-        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textField.addTarget(
+                    self,
+                    action: #selector(textFieldDidChange),
+                    for: .editingChanged
+                )
         switch type {
         case .email:
-            textField.addTarget(self, action: #selector(emailTextFieldDonePressed), for: .editingDidEndOnExit)
+            textField.addTarget(
+                        self,
+                        action: #selector(emailTextFieldDonePressed),
+                        for: .editingDidEndOnExit
+                    )
         
         case .password:
-            textField.addTarget(self, action: #selector(passwordTextFieldDonePressed), for: .editingDidEndOnExit)
+            textField.addTarget(
+                        self,
+                        action: #selector(passwordTextFieldDonePressed),
+                        for: .editingDidEndOnExit
+                    )
 
         default:
             break
@@ -162,14 +197,17 @@ extension LoginViewController {
     
     private func makeLoginButton() -> AuthorizationButton {
         let colorSet = AuthorizationButton.ColorSet(
-                                    enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
-                                    enabledBackground: .clear,
-                                    enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
-                                    disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
-                                    disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
-                                    disabledBorder: .clear)
-        let button = AuthorizationButton(colorSet: colorSet, text: Text.Common.login)
-        button.addTarget(self, action: #selector(loginButtonTaped), for: .touchUpInside)
+                                enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
+                                enabledBackground: .clear,
+                                enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
+                                disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
+                                disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
+                                disabledBorder: .clear)
+        let button = AuthorizationButton(colorSet: colorSet,
+                                         text: Text.Common.login)
+        button.addTarget(self,
+                         action: #selector(loginButtonTaped),
+                         for: .touchUpInside)
         return button
     }
     
@@ -179,27 +217,39 @@ extension LoginViewController {
         let registrationRange = (buttonText as NSString).range(of: Text.Authorization.registration)
 
         let mutableButtonText = NSMutableAttributedString(string: buttonText)
-        mutableButtonText.addAttribute(.foregroundColor,
-                                       value: Asset.Colors.registrationQuestionLabelText.color,
-                                       range: questionRange)
-        mutableButtonText.addAttribute(.foregroundColor,
-                                       value: Asset.Colors.enabledAuthorizationButtonText.color,
-                                       range: registrationRange)
+        mutableButtonText.addAttribute(
+                            .foregroundColor,
+                            value: Asset.Colors.registrationQuestionLabelText.color,
+                            range: questionRange
+                        )
+        mutableButtonText.addAttribute(
+                            .foregroundColor,
+                            value: Asset.Colors.enabledAuthorizationButtonText.color,
+                            range: registrationRange
+                        )
         
         let mutableButtonTextHighlited = NSMutableAttributedString(string: buttonText)
-        mutableButtonTextHighlited.addAttribute(.foregroundColor,
-                                                value: Asset.Colors.registrationQuestionLabelText.color,
-                                                range: questionRange)
-        mutableButtonTextHighlited.addAttribute(.foregroundColor,
-                                                value: Asset.Colors.enabledAuthorizationButtonText.color.withAlphaComponent(0.6),
-                                                range: registrationRange)
+        mutableButtonTextHighlited.addAttribute(
+                                        .foregroundColor,
+                                        value: Asset.Colors.registrationQuestionLabelText.color,
+                                        range: questionRange
+                                    )
+        mutableButtonTextHighlited.addAttribute(
+                        .foregroundColor,
+                        value: Asset.Colors.enabledAuthorizationButtonText.color.withAlphaComponent(0.6),
+                        range: registrationRange
+                    )
 
         let button = UIButton()
-        button.setAttributedTitle(mutableButtonText, for: .normal)
-        button.setAttributedTitle(mutableButtonTextHighlited, for: .highlighted)
+        button.setAttributedTitle(mutableButtonText,
+                                  for: .normal)
+        button.setAttributedTitle(mutableButtonTextHighlited,
+                                  for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: LoginScreenSizes.RegistrationButton.fontSize)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.addTarget(self, action: #selector(openRegistrationViewController), for: .touchUpInside)
+        button.addTarget(self,
+                         action: #selector(openRegistrationViewController),
+                         for: .touchUpInside)
         return button
     }
     
