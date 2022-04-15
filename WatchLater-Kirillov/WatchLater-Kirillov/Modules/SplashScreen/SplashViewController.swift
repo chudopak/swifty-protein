@@ -52,12 +52,12 @@ class SplashViewController: BaseViewController {
     }
     
     private func viewAnimation() {
-        UIView.animate(withDuration: 0.7,
-                       delay: 0.0,
+        UIView.animate(withDuration: SplashScreenAnimation.FadeIn.duration,
+                       delay: SplashScreenAnimation.FadeIn.delay,
                        options: .curveEaseIn, animations: { [weak self] in
-                        self?.eyeImageView.alpha = 1.0
-                        self?.watchLaterImageView.alpha = 1.0
-                        self?.agonaImageView.alpha = 1.0
+                        self?.eyeImageView.alpha = SplashScreenAnimation.FadeIn.alpha
+                        self?.watchLaterImageView.alpha = SplashScreenAnimation.FadeIn.alpha
+                        self?.agonaImageView.alpha = SplashScreenAnimation.FadeIn.alpha
                         self?.configureSplashScreenSizessAfterFadeInAnimation()
                        }, completion: { [weak self] completed in
                         self?.animateEyePhaseOne()
@@ -65,8 +65,8 @@ class SplashViewController: BaseViewController {
     }
     
     private func animateEyePhaseOne() {
-        UIView.animate(withDuration: 0.5,
-                       delay: 0.0,
+        UIView.animate(withDuration: SplashScreenAnimation.PhaseOne.duration,
+                       delay: SplashScreenAnimation.PhaseOne.delay,
                        options: .curveLinear, animations: { [weak self] in
                         self?.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXRight
                        }, completion: { [weak self] _ in
@@ -75,8 +75,8 @@ class SplashViewController: BaseViewController {
     }
     
     private func animateEyePhaseTwo() {
-        UIView.animate(withDuration: 0.5,
-                       delay: 0.1,
+        UIView.animate(withDuration: SplashScreenAnimation.PhaseTwo.duration,
+                       delay: SplashScreenAnimation.PhaseTwo.delay,
                        options: .curveLinear, animations: { [weak self] in
                         self?.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXLeft
                        }, completion: { [weak self] _ in
@@ -85,8 +85,8 @@ class SplashViewController: BaseViewController {
     }
     
     private func animateEyePhaseThree() {
-        UIView.animate(withDuration: 0.5,
-                       delay: 0.1,
+        UIView.animate(withDuration: SplashScreenAnimation.PhaseThree.duration,
+                       delay: SplashScreenAnimation.PhaseThree.delay,
                        options: .curveLinear, animations: { [weak self] in
                         self?.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXCenter
                        }, completion: { [weak self] _ in
@@ -105,7 +105,7 @@ extension SplashViewController {
         let imageView = UIImageView()
         imageView.image = Asset.watchLater.image
         imageView.contentMode = .scaleAspectFit
-        imageView.alpha = 0.0
+        imageView.alpha = .zero
         return (imageView)
     }
     
@@ -113,7 +113,7 @@ extension SplashViewController {
         let imageView = UIImageView()
         imageView.image = Asset.eye.image
         imageView.contentMode = .scaleAspectFit
-        imageView.alpha = 0.0
+        imageView.alpha = .zero
         return (imageView)
     }
     
@@ -122,7 +122,7 @@ extension SplashViewController {
         imageView.image = Asset.agonaLogo.image
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.alpha = 0.0
+        imageView.alpha = .zero
         return (imageView)
     }
 }

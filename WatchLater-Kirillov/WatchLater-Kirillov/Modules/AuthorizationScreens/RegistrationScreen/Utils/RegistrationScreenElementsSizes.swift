@@ -67,6 +67,7 @@ enum RegistrationScreenSizes {
         static var topOffset: CGFloat {
             return ratioTopOffsetToScreenHeight * UIScreen.main.bounds.size.height
         }
+        static let fontSize: CGFloat = 17
     }
     
     enum Spinner {

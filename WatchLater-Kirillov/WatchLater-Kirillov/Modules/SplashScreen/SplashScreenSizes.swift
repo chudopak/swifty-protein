@@ -53,3 +53,27 @@ enum SplashScreenSizes {
         return (UIScreen.main.bounds.size.height * ratioAgonaBottomOffsetToScreenHeight)
     }
 }
+
+enum SplashScreenAnimation {
+    
+    enum FadeIn {
+        static let duration: TimeInterval = 0.7
+        static let delay: TimeInterval = .zero
+        static let alpha: CGFloat = 1.0
+    }
+    
+    enum PhaseOne {
+        static let duration: TimeInterval = 0.5
+        static let delay: TimeInterval = .zero
+    }
+    
+    enum PhaseTwo {
+        static let duration: TimeInterval = 0.5
+        static let delay: TimeInterval = 0.1
+    }
+    
+    enum PhaseThree {
+        static let duration: TimeInterval = 0.5
+        static let delay: TimeInterval = 0.1
+    }
+}

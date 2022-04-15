@@ -204,7 +204,8 @@ extension LoginViewController {
                                 disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
                                 disabledBorder: .clear)
         let button = AuthorizationButton(colorSet: colorSet,
-                                         text: Text.Common.login)
+                                         text: Text.Common.login,
+                                         fontSize: LoginScreenSizes.AuthorizationButton.fontSize)
         button.addTarget(self,
                          action: #selector(loginButtonTaped),
                          for: .touchUpInside)

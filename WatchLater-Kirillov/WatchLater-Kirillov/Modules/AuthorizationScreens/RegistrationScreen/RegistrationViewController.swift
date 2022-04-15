@@ -234,7 +234,9 @@ extension RegistrationViewController {
                                     disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
                                     disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
                                     disabledBorder: .clear)
-        let button = AuthorizationButton(colorSet: colorSet, text: Text.Authorization.registration)
+        let button = AuthorizationButton(colorSet: colorSet,
+                                         text: Text.Authorization.registration,
+                                         fontSize: RegistrationScreenSizes.RegisterButton.fontSize)
         button.addTarget(self,
                          action: #selector(registerButtonTapped),
                          for: .touchUpInside)
