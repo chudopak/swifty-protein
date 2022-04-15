@@ -10,8 +10,12 @@ import UIKit
 
 enum RegistrationRouter {
     
+    private static var registrationVC: RegistrationViewController?
+    
     static func presentRegistrationViewController(navigationController: UINavigationController) {
-        let registrationVC = RegistrationViewController()
-        navigationController.pushViewController(registrationVC, animated: true)
+        if registrationVC == nil {
+            registrationVC = RegistrationViewController()
+        }
+        navigationController.pushViewController(registrationVC!, animated: true)
     }
 }

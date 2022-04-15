@@ -10,9 +10,13 @@ import UIKit
 
 enum LoginRouter {
     
+    private static var loginVC: LoginViewController?
+    
     static func makeLoginViewController() -> LoginViewController {
-        let loginVC = LoginViewController()
-        loginVC.modalPresentationStyle = .fullScreen
-        return (loginVC)
+        if loginVC == nil {
+            loginVC = LoginViewController()
+            loginVC!.modalPresentationStyle = .fullScreen
+        }
+        return (loginVC!)
     }
 }
