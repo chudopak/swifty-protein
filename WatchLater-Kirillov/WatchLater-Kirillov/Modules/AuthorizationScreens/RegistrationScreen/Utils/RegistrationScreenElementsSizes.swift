@@ -42,4 +42,16 @@ enum RegistrationScreenSizes {
             return UIScreen.main.bounds.size.width * ratioSideOffsetWithScreenWidth
         }
     }
+    
+    enum RegistrationFailedLabel {
+        
+        private static let ratioLabelWithScreenWidth: CGFloat = 0.915
+        
+        static let height: CGFloat = 18
+        static var width: CGFloat {
+            return UIScreen.main.bounds.size.width * ratioLabelWithScreenWidth
+        }
+        static let topOffset: CGFloat = 17.5
+        static let fontSize: CGFloat = 13
+    }
 }

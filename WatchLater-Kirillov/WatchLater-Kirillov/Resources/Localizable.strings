@@ -19,6 +19,7 @@ Authorization.placeholder.repeatPassword = "Повторите пароль";
 Authorization.registrationQuestion = "Еще не зарегистрированы?";
 Authorization.registration = "Регистрация";
 Authorization.failed = "Неверные логин или пароль";
+Authorization.passwordsNotMatch = "Пароли не совпадают";
 
 // MARK: - Test
 

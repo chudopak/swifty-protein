@@ -46,18 +46,21 @@ class AuthorizationTextField: UITextField {
             textField.clearButtonMode = .whileEditing
             textField.keyboardType = .emailAddress
             textField.isSecureTextEntry = false
+            textField.textContentType = .none
 
         case .password:
             placeholderString = Text.Authorization.Placeholder.password
             textField.clearButtonMode = .never
             textField.keyboardType = .default
             textField.isSecureTextEntry = true
+            textField.textContentType = .password
 
         case .repeatPassword:
             placeholderString = Text.Authorization.Placeholder.repeatPassword
             textField.clearButtonMode = .never
             textField.keyboardType = .default
             textField.isSecureTextEntry = true
+            textField.textContentType = .password
         }
         textField.attributedPlaceholder = NSAttributedString(
             string: placeholderString,

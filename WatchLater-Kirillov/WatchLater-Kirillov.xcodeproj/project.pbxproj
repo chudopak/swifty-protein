@@ -37,6 +37,8 @@
 		30F08010265A8746009B2398 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 306BF31A25FC8F7300E9B481 /* Assets.xcassets */; };
 		30F08012265A8746009B2398 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 30D2F271260148EE000134EB /* swiftgen.yml */; };
 		6F82F89B8BD4DABC3C5AC3DA /* Pods_WatchLater_Kirillov_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC5C882F16A7A24A91537BA /* Pods_WatchLater_Kirillov_Dev.framework */; };
+		7D0ACA9828096A2B00777442 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0ACA9728096A2B00777442 /* RegistrationModel.swift */; };
+		7D0ACA9928096A2B00777442 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0ACA9728096A2B00777442 /* RegistrationModel.swift */; };
 		7D112F8A2804641200BB7ECC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D112F892804641200BB7ECC /* SceneDelegate.swift */; };
 		7D112F8B2804641200BB7ECC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D112F892804641200BB7ECC /* SceneDelegate.swift */; };
 		7D112F8F2804861700BB7ECC /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D112F8E2804861700BB7ECC /* SplashViewController.swift */; };
@@ -104,6 +106,7 @@
 		30F0801D265A8831009B2398 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		377C1C58B79D226EE8BF40E6 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.release.xcconfig"; sourceTree = "<group>"; };
 		5BC5C882F16A7A24A91537BA /* Pods_WatchLater_Kirillov_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D0ACA9728096A2B00777442 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
 		7D112F892804641200BB7ECC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7D112F8E2804861700BB7ECC /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		7D178EA428084DDD009C6280 /* SplashScreenSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenSizes.swift; sourceTree = "<group>"; };
@@ -345,6 +348,7 @@
 				7D178EAF28087617009C6280 /* Utils */,
 				7D178EA9280859F0009C6280 /* RegistrationViewController.swift */,
 				7D178EAC28085B11009C6280 /* RegistrationRouter.swift */,
+				7D0ACA9728096A2B00777442 /* RegistrationModel.swift */,
 			);
 			path = RegistrationScreen;
 			sourceTree = "<group>";
@@ -727,6 +731,7 @@
 				7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */,
 				7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
 				7D178EA528084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
+				7D0ACA9828096A2B00777442 /* RegistrationModel.swift in Sources */,
 				30314CDC265AAEE500CADD41 /* BundleSettingsURL.swift in Sources */,
 				3076A0882601D421003B0EF9 /* StoryboardScenes.swift in Sources */,
 				30D2F277260148EE000134EB /* Texts.swift in Sources */,
@@ -758,6 +763,7 @@
 				7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */,
 				7D3B5D5B280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
 				7D178EA628084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
+				7D0ACA9928096A2B00777442 /* RegistrationModel.swift in Sources */,
 				7DB7E0CB2806BBE400996926 /* UIColor+HexConversion.swift in Sources */,
 				7DB7E0CC2806BBE400996926 /* UITextField+addBottomLine.swift in Sources */,
 				7DB7E0C82806BBAB00996926 /* LoginScreenElementsSizes.swift in Sources */,
