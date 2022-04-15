@@ -15,6 +15,8 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     private lazy var passwordTextField = makeTextField(type: .password)
     private lazy var repeatPasswordTextField = makeTextField(type: .repeatPassword)
     private lazy var registrationFailedLabel = makeRegistrationFailedLabel()
+    private lazy var registerButton = makeRegisterButton()
+    private lazy var spinner = makeSpinner()
     
     private var isRegistrationFaieldSateActive = false
     
@@ -40,7 +42,10 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         view.addSubview(passwordTextField)
         view.addSubview(repeatPasswordTextField)
         view.addSubview(registrationFailedLabel)
+        view.addSubview(registerButton)
+        view.addSubview(spinner)
         registrationFailedLabel.isHidden = true
+        spinner.isHidden = true
         setGestures()
         setConstraints()
     }
@@ -50,7 +55,6 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         navigationController?.navigationBar.isHidden = false
     }
     
-    // TODO: - must be validate for cmp passwords
     private func getAuthorizatioinData() -> RegistrationData? {
         guard isFieldsSet
         else {
@@ -66,27 +70,37 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         return false
     }
     
-    private func setGestures() {
-        let hideKeyboardGuesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        hideKeyboardGuesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(hideKeyboardGuesture)
-    }
-    
     private func validateRegistrationDataForRequest() {
         if isPasswordsMatch(),
            let loginData = getAuthorizatioinData() {
-            // TODO: - Do request
+            processRegistration()
             print(loginData)
         } else {
-            // show red
+            showRegistrationFailedState(message: Text.Authorization.passwordsNotMatch)
         }
     }
     
-    private func showLoginFailedState() {
+    private func processRegistration() {
+        // TODO: - Do request
+        registerButton.isHidden = true
+        spinner.startAnimating()
+        spinner.isHidden = false
+        DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + 1) { [weak self] in
+            DispatchQueue.main.async {
+                self?.spinner.stopAnimating()
+                self?.spinner.isHidden = true
+                self?.registerButton.isHidden = false
+            }
+        }
+    }
+    
+    private func showRegistrationFailedState(message: String) {
         isRegistrationFaieldSateActive = true
         registrationFailedLabel.isHidden = false
+        registrationFailedLabel.text = message
         emailTextField.textColor = Asset.Colors.loginFailedText.color
         passwordTextField.textColor = Asset.Colors.loginFailedText.color
+        repeatPasswordTextField.textColor = Asset.Colors.loginFailedText.color
     }
     
     private func showNormalState() {
@@ -94,6 +108,24 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         registrationFailedLabel.isHidden = true
         emailTextField.textColor = Asset.Colors.loginTextColor.color
         passwordTextField.textColor = Asset.Colors.loginTextColor.color
+        repeatPasswordTextField.textColor = Asset.Colors.loginTextColor.color
+    }
+
+    private func handleTextFieldsActivity(active: AuthorizationTextField,
+                                          nextToBeField: AuthorizationTextField) {
+        active.resignFirstResponder()
+        if isFieldsSet {
+            validateRegistrationDataForRequest()
+        } else if active.text != nil
+                    && !active.text!.isEmpty {
+            nextToBeField.becomeFirstResponder()
+        }
+    }
+    
+    private func setGestures() {
+        let hideKeyboardGuesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        hideKeyboardGuesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(hideKeyboardGuesture)
     }
     
     @objc private func hideKeyboard() {
@@ -107,33 +139,34 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @objc private func emailTextFieldDonePressed() {
-        emailTextField.resignFirstResponder()
-        if isFieldsSet {
-            validateRegistrationDataForRequest()
-        } else if emailTextField.text != nil
-                    && !emailTextField.text!.isEmpty {
-            passwordTextField.becomeFirstResponder()
-        }
+        handleTextFieldsActivity(active: emailTextField,
+                                 nextToBeField: passwordTextField)
     }
     
     @objc private func passwordTextFieldDonePressed() {
-        passwordTextField.resignFirstResponder()
-        if isFieldsSet {
-            validateRegistrationDataForRequest()
-        } else if passwordTextField.text != nil
-                    && !passwordTextField.text!.isEmpty {
-            repeatPasswordTextField.becomeFirstResponder()
-        }
+        handleTextFieldsActivity(active: passwordTextField,
+                                 nextToBeField: repeatPasswordTextField)
     }
     
     @objc private func repeatPasswordTextFieldDonePressed() {
-        repeatPasswordTextField.resignFirstResponder()
-        if isFieldsSet {
-            validateRegistrationDataForRequest()
-        } else if repeatPasswordTextField.text != nil
-                    && !repeatPasswordTextField.text!.isEmpty {
-            emailTextField.becomeFirstResponder()
+        handleTextFieldsActivity(active: repeatPasswordTextField,
+                                 nextToBeField: emailTextField)
+    }
+    
+    @objc private func textFieldDidChange() {
+        if isRegistrationFaieldSateActive {
+            showNormalState()
         }
+        if isFieldsSet && !registerButton.isEnabled {
+            registerButton.isEnabled = true
+        } else if !isFieldsSet && registerButton.isEnabled {
+            registerButton.isEnabled = false
+        }
+    }
+    
+    @objc private func registerButtonTapped() {
+        hideKeyboard()
+        validateRegistrationDataForRequest()
     }
 }
 
@@ -152,7 +185,7 @@ extension RegistrationViewController {
                                  right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset)
         let textField = AuthorizationTextField.makeTextField(type: type, inset: inset)
         textField.delegate = self
-//        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         switch type {
         case .email:
             textField.addTarget(self, action: #selector(emailTextFieldDonePressed), for: .editingDidEndOnExit)
@@ -174,6 +207,26 @@ extension RegistrationViewController {
         label.textAlignment = .center
         return label
     }
+    
+    private func makeRegisterButton() -> AuthorizationButton {
+        let colorSet = AuthorizationButton.ColorSet(
+                                    enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
+                                    enabledBackground: .clear,
+                                    enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
+                                    disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
+                                    disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
+                                    disabledBorder: .clear)
+        let button = AuthorizationButton(colorSet: colorSet, text: Text.Authorization.registration)
+        button.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        return button
+    }
+    
+    private func makeSpinner() -> UIActivityIndicatorView {
+        let spinner = UIActivityIndicatorView()
+        spinner.style = .whiteLarge
+        spinner.color = .black
+        return spinner
+    }
 }
 
 extension RegistrationViewController {
@@ -184,6 +237,8 @@ extension RegistrationViewController {
         setPasswordTextFieldConstraints()
         setRepeatPasswordTextFieldConstraints()
         setLoginFailedLabelConstraints()
+        setLoginButtonConstraints()
+        setSpinnerConstratints()
     }
     
     private func setWatchLaterLogoConstraints() {
@@ -225,9 +280,27 @@ extension RegistrationViewController {
     private func setLoginFailedLabelConstraints() {
         registrationFailedLabel.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
-            maker.top.equalTo(passwordTextField.snp.bottom).offset(RegistrationScreenSizes.RegistrationFailedLabel.topOffset)
+            maker.top.equalTo(repeatPasswordTextField.snp.bottom).offset(RegistrationScreenSizes.RegistrationFailedLabel.topOffset)
             maker.width.equalTo(RegistrationScreenSizes.RegistrationFailedLabel.width)
             maker.height.equalTo(RegistrationScreenSizes.RegistrationFailedLabel.height)
+        }
+    }
+    
+    private func setLoginButtonConstraints() {
+        registerButton.snp.makeConstraints { maker in
+            maker.centerX.equalToSuperview()
+            maker.top.equalTo(repeatPasswordTextField.snp.bottom).offset(RegistrationScreenSizes.RegisterButton.topOffset)
+            maker.width.equalTo(RegistrationScreenSizes.RegisterButton.width)
+            maker.height.equalTo(RegistrationScreenSizes.RegisterButton.height)
+        }
+    }
+    
+    private func setSpinnerConstratints() {
+        spinner.snp.makeConstraints { maker in
+            maker.centerX.equalToSuperview()
+            maker.top.equalTo(repeatPasswordTextField.snp.bottom).offset(RegistrationScreenSizes.Spinner.topOffset)
+            maker.width.equalTo(RegistrationScreenSizes.Spinner.width)
+            maker.height.equalTo(RegistrationScreenSizes.Spinner.height)
         }
     }
 }

@@ -54,4 +54,28 @@ enum RegistrationScreenSizes {
         static let topOffset: CGFloat = 17.5
         static let fontSize: CGFloat = 13
     }
+    
+    enum RegisterButton {
+        private static let ratioTopOffsetToScreenHeight: CGFloat = 0.119
+        
+        static let width: CGFloat = 149
+        static let height: CGFloat = 50
+        static let borderWidth: CGFloat = 4
+        static var cornerRadius: CGFloat {
+            return height * 0.5
+        }
+        static var topOffset: CGFloat {
+            return ratioTopOffsetToScreenHeight * UIScreen.main.bounds.size.height
+        }
+    }
+    
+    enum Spinner {
+        private static let ratioTopOffsetToScreenHeight: CGFloat = 0.128
+        
+        static let width: CGFloat = 35
+        static let height: CGFloat = 35
+        static var topOffset: CGFloat {
+            return ratioTopOffsetToScreenHeight * UIScreen.main.bounds.size.height
+        }
+    }
 }

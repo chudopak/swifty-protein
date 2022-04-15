@@ -74,6 +74,18 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         passwordTextField.textColor = Asset.Colors.loginTextColor.color
     }
     
+    private func handleTextFieldsActivity(active: AuthorizationTextField,
+                                          nextToBeField: AuthorizationTextField) {
+        active.resignFirstResponder()
+        if let loginData = getLoginData() {
+            // TODO: - Do request
+            print(loginData)
+        } else if active.text != nil
+                    && !active.text!.isEmpty {
+            nextToBeField.becomeFirstResponder()
+        }
+    }
+    
     @objc private func hideKeyboard() {
         if emailTextField.isEditing {
             emailTextField.resignFirstResponder()
@@ -83,25 +95,13 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @objc private func emailTextFieldDonePressed() {
-        emailTextField.resignFirstResponder()
-        if let loginData = getLoginData() {
-            // TODO: - Do request
-            print(loginData)
-        } else if emailTextField.text != nil
-                    && !emailTextField.text!.isEmpty {
-            passwordTextField.becomeFirstResponder()
-        }
+        handleTextFieldsActivity(active: emailTextField,
+                                 nextToBeField: passwordTextField)
     }
     
     @objc private func passwordTextFieldDonePressed() {
-        passwordTextField.resignFirstResponder()
-        if let loginData = getLoginData() {
-            // TODO: - Do request
-            print(loginData)
-        } else if passwordTextField.text != nil
-                    && !passwordTextField.text!.isEmpty {
-            emailTextField.becomeFirstResponder()
-        }
+        handleTextFieldsActivity(active: passwordTextField,
+                                 nextToBeField: emailTextField)
     }
     
     @objc private func loginButtonTaped() {
