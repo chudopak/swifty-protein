@@ -1,0 +1,16 @@
+// MARK: - Common
+
+Common.next = "Далее";
+Common.close = "Закрыть";
+Common.done = "Готово";
+Common.cancel = "Отмена";
+Common.no = "Нет";
+Common.yes = "Да";
+Common.dave = "Сохранить";
+Common.remove = "Удалить";
+Common.update = "Обновить";
+Common.logout = "Выйти";
+
+// MARK: - Test
+
+Test.test = "Test 123";
