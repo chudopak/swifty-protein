@@ -281,8 +281,8 @@ extension LoginViewController {
         watchLaterLogoImageView.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.top.equalToSuperview().inset(LoginScreenSizes.WatchLaterLogo.topOffset)
-            maker.width.equalTo(LoginScreenSizes.WatchLaterLogo.width)
-            maker.height.equalTo(LoginScreenSizes.WatchLaterLogo.height)
+            maker.width.equalToSuperview().multipliedBy(LoginScreenSizes.WatchLaterLogo.ratioWithScreenWidth)
+            maker.height.equalTo(watchLaterLogoImageView.snp.width).multipliedBy(LoginScreenSizes.WatchLaterLogo.ratioHeightWithWidth)
         }
     }
     
@@ -290,7 +290,7 @@ extension LoginViewController {
         emailTextField.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(watchLaterLogoImageView).inset(LoginScreenSizes.AuthorizationTextField.topOffset)
-            maker.width.equalTo(LoginScreenSizes.AuthorizationTextField.width)
+            maker.width.equalToSuperview()
             maker.height.equalTo(LoginScreenSizes.AuthorizationTextField.height)
         }
     }
@@ -299,7 +299,7 @@ extension LoginViewController {
         passwordTextField.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(emailTextField.snp.bottom)
-            maker.width.equalTo(LoginScreenSizes.AuthorizationTextField.width)
+            maker.width.equalToSuperview()
             maker.height.equalTo(LoginScreenSizes.AuthorizationTextField.height)
         }
     }
@@ -317,7 +317,7 @@ extension LoginViewController {
         registrationButton.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(loginButton.snp.bottom).offset(LoginScreenSizes.RegistrationButton.topOffset)
-            maker.width.equalTo(LoginScreenSizes.RegistrationButton.width)
+            maker.width.equalToSuperview().multipliedBy(LoginScreenSizes.RegistrationButton.ratioWithScreenWidth)
             maker.height.equalTo(LoginScreenSizes.RegistrationButton.height)
         }
     }
@@ -326,7 +326,7 @@ extension LoginViewController {
         loginFailedLabel.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(passwordTextField.snp.bottom).offset(LoginScreenSizes.LoginFailedLabel.topOffset)
-            maker.width.equalTo(LoginScreenSizes.LoginFailedLabel.width)
+            maker.width.equalToSuperview().multipliedBy(LoginScreenSizes.LoginFailedLabel.ratioWithScreenWidth)
             maker.height.equalTo(LoginScreenSizes.LoginFailedLabel.height)
         }
     }

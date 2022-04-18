@@ -258,8 +258,8 @@ extension RegistrationViewController {
         setEmailTextFieldConstraints()
         setPasswordTextFieldConstraints()
         setRepeatPasswordTextFieldConstraints()
-        setLoginFailedLabelConstraints()
-        setLoginButtonConstraints()
+        setRegistrationFailedLabelConstraints()
+        setRegisterButtonConstraints()
         setSpinnerConstratints()
     }
     
@@ -267,8 +267,8 @@ extension RegistrationViewController {
         logoImageView.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.top.equalToSuperview().inset(RegistrationScreenSizes.Logo.topOffset)
-            maker.width.equalTo(RegistrationScreenSizes.Logo.width)
-            maker.height.equalTo(RegistrationScreenSizes.Logo.height)
+            maker.width.equalToSuperview().multipliedBy(RegistrationScreenSizes.Logo.ratioWithScreenWidth)
+            maker.height.equalTo(logoImageView.snp.width).multipliedBy(RegistrationScreenSizes.Logo.ratioHeightWithWidth)
         }
     }
     
@@ -276,7 +276,7 @@ extension RegistrationViewController {
         emailTextField.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(logoImageView).inset(RegistrationScreenSizes.AuthorizationTextField.topOffset)
-            maker.width.equalTo(RegistrationScreenSizes.AuthorizationTextField.width)
+            maker.width.equalToSuperview()
             maker.height.equalTo(RegistrationScreenSizes.AuthorizationTextField.height)
         }
     }
@@ -285,7 +285,7 @@ extension RegistrationViewController {
         passwordTextField.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(emailTextField.snp.bottom)
-            maker.width.equalTo(RegistrationScreenSizes.AuthorizationTextField.width)
+            maker.width.equalToSuperview()
             maker.height.equalTo(RegistrationScreenSizes.AuthorizationTextField.height)
         }
     }
@@ -294,21 +294,21 @@ extension RegistrationViewController {
         repeatPasswordTextField.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(passwordTextField.snp.bottom)
-            maker.width.equalTo(RegistrationScreenSizes.AuthorizationTextField.width)
+            maker.width.equalToSuperview()
             maker.height.equalTo(RegistrationScreenSizes.AuthorizationTextField.height)
         }
     }
     
-    private func setLoginFailedLabelConstraints() {
+    private func setRegistrationFailedLabelConstraints() {
         registrationFailedLabel.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(repeatPasswordTextField.snp.bottom).offset(RegistrationScreenSizes.RegistrationFailedLabel.topOffset)
-            maker.width.equalTo(RegistrationScreenSizes.RegistrationFailedLabel.width)
+            maker.width.equalToSuperview().multipliedBy(RegistrationScreenSizes.RegistrationFailedLabel.ratioLabelWithScreenWidth)
             maker.height.equalTo(RegistrationScreenSizes.RegistrationFailedLabel.height)
         }
     }
     
-    private func setLoginButtonConstraints() {
+    private func setRegisterButtonConstraints() {
         registerButton.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(repeatPasswordTextField.snp.bottom).offset(RegistrationScreenSizes.RegisterButton.topOffset)

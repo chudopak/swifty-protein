@@ -11,16 +11,10 @@ import UIKit
 enum RegistrationScreenSizes {
     
     enum Logo {
-        private static let ratioWatchLaterWithScreenWidth: CGFloat = 0.261
-        private static let ratioWatchLaterHeightWithWatchLaterWidth: CGFloat = 0.428
+        static let ratioWithScreenWidth: CGFloat = 0.261
+        static let ratioHeightWithWidth: CGFloat = 0.428
         private static let ratioTopOffsetToScreenHeight: CGFloat = 0.227
         
-        static var width: CGFloat {
-            return UIScreen.main.bounds.size.width * ratioWatchLaterWithScreenWidth
-        }
-        static var height: CGFloat {
-            return width * ratioWatchLaterHeightWithWatchLaterWidth
-        }
         static var topOffset: CGFloat {
             return UIScreen.main.bounds.size.height * ratioTopOffsetToScreenHeight
         }
@@ -31,7 +25,6 @@ enum RegistrationScreenSizes {
         private static let ratioSideOffsetWithScreenWidth: CGFloat = 0.042
         private static let ratioTopOffsetToScreenHeight: CGFloat = 0.122
         
-        static let width: CGFloat = UIScreen.main.bounds.size.width
         static let height: CGFloat = 60
         static var topOffset: CGFloat {
             return ratioTopOffsetToScreenHeight * UIScreen.main.bounds.size.height
@@ -45,12 +38,9 @@ enum RegistrationScreenSizes {
     
     enum RegistrationFailedLabel {
         
-        private static let ratioLabelWithScreenWidth: CGFloat = 0.915
+        static let ratioLabelWithScreenWidth: CGFloat = 0.915
         
         static let height: CGFloat = 18
-        static var width: CGFloat {
-            return UIScreen.main.bounds.size.width * ratioLabelWithScreenWidth
-        }
         static let topOffset: CGFloat = 17.5
         static let fontSize: CGFloat = 13
     }
