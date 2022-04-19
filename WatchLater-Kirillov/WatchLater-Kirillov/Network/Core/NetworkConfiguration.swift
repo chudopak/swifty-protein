@@ -18,20 +18,21 @@ enum NetworkConfiguration {
         var address: String {
             switch self {
             case .prod:
-                return "https://prod"
+                return Text.Api.host
                 
             case .dev:
-                return "http://dev"
+                return Text.Api.host
             }
         }
     }
 
     static var url: URL {
         #if PROD
-        guard let url = URL(string: Environment.prod.address) else { fatalError() }
+        guard let url = URL(string: Environment.prod.address) else { fatalError("Base URL was not created for prod configuration in NetworkConfiguration.swift") }
         return url
         #else
-        return BundleSettingsURL(defaultURLString: Environment.dev.address).url
+        guard let url = URL(string: Environment.dev.address) else { fatalError("Base URL was not created for dev configuration in NetworkConfiguration.swift") }
+        return BundleSettingsURL(defaultURL: url).url
         #endif
     }
 }

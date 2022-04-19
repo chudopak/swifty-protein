@@ -9,8 +9,8 @@
 import UIKit
 
 struct LoginData {
-    let password: String
     let email: String
+    let password: String
 }
 
 enum TextFieldType {

@@ -21,6 +21,15 @@ Authorization.registration = "Регистрация";
 Authorization.failed = "Неверные логин или пароль";
 Authorization.passwordsNotMatch = "Пароли не совпадают";
 
-// MARK: - Test
+// MARK: - API
+API.sceme = "https";
+API.host = "watchlater.cloud.technokratos.com";
+// MARK: - API Authentication controller
+API.AuthController.login = "/auth/login";
+API.AuthController.reset = "/auth/reset";
+API.AuthController.token = "/auth/token";
 
-Test.test = "Test 123";
+// MARK: - API User controllre
+API.UserController.register = "/users";
+
+

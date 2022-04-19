@@ -8,6 +8,7 @@ def common_pods
   use_frameworks!
   pod "SnapKit"
   pod "SwiftGen"
+  pod "Alamofire"
   pod 'MemoryLeakTracker'
   pod 'TKGrid', git: 'git@git.technokratos.com:ios/tkgrid.git'
 end

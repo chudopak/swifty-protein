@@ -11,6 +11,25 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Text {
 
+  internal enum Api {
+    /// watchlater.cloud.technokratos.com
+    internal static let host = Text.tr("Localizable", "API.host")
+    /// https
+    internal static let sceme = Text.tr("Localizable", "API.sceme")
+    internal enum AuthController {
+      /// /auth/login
+      internal static let login = Text.tr("Localizable", "API.AuthController.login")
+      /// /auth/reset
+      internal static let reset = Text.tr("Localizable", "API.AuthController.reset")
+      /// /auth/token
+      internal static let token = Text.tr("Localizable", "API.AuthController.token")
+    }
+    internal enum UserController {
+      /// /users
+      internal static let register = Text.tr("Localizable", "API.UserController.register")
+    }
+  }
+
   internal enum Authorization {
     /// Неверные логин или пароль
     internal static let failed = Text.tr("Localizable", "Authorization.failed")
@@ -53,11 +72,6 @@ internal enum Text {
     internal static let update = Text.tr("Localizable", "Common.update")
     /// Да
     internal static let yes = Text.tr("Localizable", "Common.yes")
-  }
-
-  internal enum Test {
-    /// Test 123
-    internal static let test = Text.tr("Localizable", "Test.test")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

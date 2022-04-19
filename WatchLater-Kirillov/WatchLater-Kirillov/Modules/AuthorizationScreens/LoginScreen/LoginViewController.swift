@@ -66,8 +66,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         else {
             return nil
         }
-        return LoginData(password: passwordTextField.text!,
-                         email: emailTextField.text!)
+        return LoginData(email: emailTextField.text!,
+                         password: passwordTextField.text!)
     }
     
     private func showLoginFailedState() {

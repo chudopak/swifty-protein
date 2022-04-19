@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		113E00BABABD3B01A5073086 /* Pods_WatchLater_Kirillov_Prod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C2949DB62D1110810C8256 /* Pods_WatchLater_Kirillov_Prod.framework */; };
 		30314C9D265AA9FB00CADD41 /* WatchLater_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30314C9C265AA9FB00CADD41 /* WatchLater_Tests.swift */; };
 		30314CC8265AADB500CADD41 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30314CA8265AAA8900CADD41 /* BaseViewController.swift */; };
 		30314CCC265AADB600CADD41 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30314CA8265AAA8900CADD41 /* BaseViewController.swift */; };
@@ -36,7 +35,9 @@
 		30F0800F265A8746009B2398 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 306BF31C25FC8F7300E9B481 /* LaunchScreen.storyboard */; };
 		30F08010265A8746009B2398 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 306BF31A25FC8F7300E9B481 /* Assets.xcassets */; };
 		30F08012265A8746009B2398 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 30D2F271260148EE000134EB /* swiftgen.yml */; };
-		6F82F89B8BD4DABC3C5AC3DA /* Pods_WatchLater_Kirillov_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC5C882F16A7A24A91537BA /* Pods_WatchLater_Kirillov_Dev.framework */; };
+		735B8D530B816A896356D3C2 /* Pods_WatchLater_Kirillov_Prod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A1EFFF1242FD03FDDA907D /* Pods_WatchLater_Kirillov_Prod.framework */; };
+		7D058F18280DC0C800683C3C /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D058F17280DC0C800683C3C /* NetworkLayer.swift */; };
+		7D058F19280DC0C800683C3C /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D058F17280DC0C800683C3C /* NetworkLayer.swift */; };
 		7D0ACA9828096A2B00777442 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0ACA9728096A2B00777442 /* RegistrationModel.swift */; };
 		7D0ACA9928096A2B00777442 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0ACA9728096A2B00777442 /* RegistrationModel.swift */; };
 		7D112F8A2804641200BB7ECC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D112F892804641200BB7ECC /* SceneDelegate.swift */; };
@@ -55,6 +56,8 @@
 		7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D562807197100AEBF1A /* LoginModel.swift */; };
 		7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */; };
 		7D3B5D5B280725DE00AEBF1A /* AuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */; };
+		7D7EF84F280ED70800B99CA4 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF84E280ED70800B99CA4 /* AuthenticationService.swift */; };
+		7D7EF852280EED8F00B99CA4 /* RegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF851280EED8F00B99CA4 /* RegistrationService.swift */; };
 		7D9715172805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */; };
 		7D9715182805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */; };
 		7D99731E28058E7F0094F302 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731D28058E7F0094F302 /* LoginViewController.swift */; };
@@ -65,6 +68,7 @@
 		7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731F28058F7E0094F302 /* LoginRouter.swift */; };
 		7DBC89392807065200F94B6C /* AuthorizationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC89382807065200F94B6C /* AuthorizationTextField.swift */; };
 		7DBC893A2807065200F94B6C /* AuthorizationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC89382807065200F94B6C /* AuthorizationTextField.swift */; };
+		D4CC6A1D00670406BFC120D0 /* Pods_WatchLater_Kirillov_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37BDED8E44546F48BBDB82A /* Pods_WatchLater_Kirillov_Dev.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +82,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2CEDB9368628CD58E6A0CC5C /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.debug.xcconfig"; sourceTree = "<group>"; };
+		04A1EFFF1242FD03FDDA907D /* Pods_WatchLater_Kirillov_Prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		261669487E4C46354FE71804 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.release.xcconfig"; sourceTree = "<group>"; };
 		30314C9A265AA9FB00CADD41 /* WatchLater-Kirillov_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WatchLater-Kirillov_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30314C9C265AA9FB00CADD41 /* WatchLater_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLater_Tests.swift; sourceTree = "<group>"; };
 		30314C9E265AA9FB00CADD41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,8 +105,7 @@
 		30D2F273260148EE000134EB /* Texts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
 		30F08017265A8746009B2398 /* WatchLater-Kirillov_Prod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchLater-Kirillov_Prod.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30F0801D265A8831009B2398 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		377C1C58B79D226EE8BF40E6 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.release.xcconfig"; sourceTree = "<group>"; };
-		5BC5C882F16A7A24A91537BA /* Pods_WatchLater_Kirillov_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D058F17280DC0C800683C3C /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		7D0ACA9728096A2B00777442 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
 		7D112F892804641200BB7ECC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7D112F8E2804861700BB7ECC /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -111,14 +115,17 @@
 		7D178EB028087636009C6280 /* RegistrationScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreenElementsSizes.swift; sourceTree = "<group>"; };
 		7D3B5D562807197100AEBF1A /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationButton.swift; sourceTree = "<group>"; };
+		7D7EF84E280ED70800B99CA4 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		7D7EF851280EED8F00B99CA4 /* RegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
 		7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLauchChecker.swift; sourceTree = "<group>"; };
 		7D99731D28058E7F0094F302 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7D99731F28058F7E0094F302 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenElementsSizes.swift; sourceTree = "<group>"; };
 		7DBC89382807065200F94B6C /* AuthorizationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTextField.swift; sourceTree = "<group>"; };
-		829947A643F9BFB222C76665 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.release.xcconfig"; sourceTree = "<group>"; };
-		A8C2949DB62D1110810C8256 /* Pods_WatchLater_Kirillov_Prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C6831C47F3BFCC718E55773B /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; sourceTree = "<group>"; };
+		84C8D91260B39C124292A4E2 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.release.xcconfig"; sourceTree = "<group>"; };
+		9AFE91D5967653624BAC4B60 /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; sourceTree = "<group>"; };
+		A37BDED8E44546F48BBDB82A /* Pods_WatchLater_Kirillov_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C557668C79D5464ED37D0AD7 /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F82F89B8BD4DABC3C5AC3DA /* Pods_WatchLater_Kirillov_Dev.framework in Frameworks */,
+				D4CC6A1D00670406BFC120D0 /* Pods_WatchLater_Kirillov_Dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				113E00BABABD3B01A5073086 /* Pods_WatchLater_Kirillov_Prod.framework in Frameworks */,
+				735B8D530B816A896356D3C2 /* Pods_WatchLater_Kirillov_Prod.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +186,7 @@
 			children = (
 				30314CDB265AAEE500CADD41 /* BundleSettingsURL.swift */,
 				30314CE5265AAF3200CADD41 /* NetworkConfiguration.swift */,
+				7D058F17280DC0C800683C3C /* NetworkLayer.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -190,7 +198,7 @@
 				30314C9B265AA9FB00CADD41 /* WatchLater-Kirillov_Tests */,
 				306BF30F25FC8F7200E9B481 /* Products */,
 				970F809B147CFE1BEEE5F075 /* Pods */,
-				4A1BAC733E8DA2F53E974C3A /* Frameworks */,
+				880A7C15E73BB626E019F843 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -207,6 +215,7 @@
 		306BF31025FC8F7200E9B481 /* WatchLater-Kirillov */ = {
 			isa = PBXGroup;
 			children = (
+				7D7EF84C280ED6DB00B99CA4 /* Services */,
 				7D112F8C28047ED500BB7ECC /* Delegates */,
 				30314CDA265AAEDB00CADD41 /* Network */,
 				30314CA7265AAA8100CADD41 /* Base */,
@@ -308,15 +317,6 @@
 			path = Prod;
 			sourceTree = "<group>";
 		};
-		4A1BAC733E8DA2F53E974C3A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5BC5C882F16A7A24A91537BA /* Pods_WatchLater_Kirillov_Dev.framework */,
-				A8C2949DB62D1110810C8256 /* Pods_WatchLater_Kirillov_Prod.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		7D112F8C28047ED500BB7ECC /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +364,31 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		7D7EF84C280ED6DB00B99CA4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7D7EF850280EED7600B99CA4 /* RegistrarionService */,
+				7D7EF84D280ED6EA00B99CA4 /* AuthenticationService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7D7EF84D280ED6EA00B99CA4 /* AuthenticationService */ = {
+			isa = PBXGroup;
+			children = (
+				7D7EF84E280ED70800B99CA4 /* AuthenticationService.swift */,
+			);
+			path = AuthenticationService;
+			sourceTree = "<group>";
+		};
+		7D7EF850280EED7600B99CA4 /* RegistrarionService */ = {
+			isa = PBXGroup;
+			children = (
+				7D7EF851280EED8F00B99CA4 /* RegistrationService.swift */,
+			);
+			path = RegistrarionService;
+			sourceTree = "<group>";
+		};
 		7D9715192805BB6200CC31B8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,13 +425,22 @@
 			path = SharedUIElements;
 			sourceTree = "<group>";
 		};
+		880A7C15E73BB626E019F843 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A37BDED8E44546F48BBDB82A /* Pods_WatchLater_Kirillov_Dev.framework */,
+				04A1EFFF1242FD03FDDA907D /* Pods_WatchLater_Kirillov_Prod.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		970F809B147CFE1BEEE5F075 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2CEDB9368628CD58E6A0CC5C /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */,
-				829947A643F9BFB222C76665 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */,
-				C6831C47F3BFCC718E55773B /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */,
-				377C1C58B79D226EE8BF40E6 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */,
+				C557668C79D5464ED37D0AD7 /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */,
+				84C8D91260B39C124292A4E2 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */,
+				9AFE91D5967653624BAC4B60 /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */,
+				261669487E4C46354FE71804 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -436,13 +470,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 306BF32225FC8F7300E9B481 /* Build configuration list for PBXNativeTarget "WatchLater-Kirillov_Dev" */;
 			buildPhases = (
-				FFDE0B0041CE6BA539DD4049 /* [CP] Check Pods Manifest.lock */,
+				A70BE7313A78D36D37BC0EE6 /* [CP] Check Pods Manifest.lock */,
 				30D2F26D26014479000134EB /* Swiftgen */,
 				3076A0632601CD47003B0EF9 /* SwiftLint */,
 				306BF30A25FC8F7200E9B481 /* Sources */,
 				306BF30B25FC8F7200E9B481 /* Frameworks */,
 				306BF30C25FC8F7200E9B481 /* Resources */,
-				BA80273C720310E4CCD7CD8E /* [CP] Embed Pods Frameworks */,
+				2529020D035667AA7562B126 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -457,13 +491,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30F08014265A8746009B2398 /* Build configuration list for PBXNativeTarget "WatchLater-Kirillov_Prod" */;
 			buildPhases = (
-				411F57745AE72CE98C6610DC /* [CP] Check Pods Manifest.lock */,
+				73E3CEA196C05695FAAEF52A /* [CP] Check Pods Manifest.lock */,
 				30F07FEE265A8746009B2398 /* Swiftgen */,
 				30F07FEF265A8746009B2398 /* SwiftLint */,
 				30F07FF0265A8746009B2398 /* Sources */,
 				30F08009265A8746009B2398 /* Frameworks */,
 				30F0800B265A8746009B2398 /* Resources */,
-				CDECEFB90696AAA8E4992BA0 /* [CP] Embed Pods Frameworks */,
+				12D28824380D1A3B0BCAB6BA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -546,6 +580,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		12D28824380D1A3B0BCAB6BA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2529020D035667AA7562B126 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3076A0632601CD47003B0EF9 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -618,7 +686,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		411F57745AE72CE98C6610DC /* [CP] Check Pods Manifest.lock */ = {
+		73E3CEA196C05695FAAEF52A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -640,41 +708,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BA80273C720310E4CCD7CD8E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CDECEFB90696AAA8E4992BA0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FFDE0B0041CE6BA539DD4049 /* [CP] Check Pods Manifest.lock */ = {
+		A70BE7313A78D36D37BC0EE6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -716,6 +750,7 @@
 				7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
 				7D178EA528084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
 				7D0ACA9828096A2B00777442 /* RegistrationModel.swift in Sources */,
+				7D058F18280DC0C800683C3C /* NetworkLayer.swift in Sources */,
 				30314CDC265AAEE500CADD41 /* BundleSettingsURL.swift in Sources */,
 				3076A0882601D421003B0EF9 /* StoryboardScenes.swift in Sources */,
 				30D2F277260148EE000134EB /* Texts.swift in Sources */,
@@ -724,6 +759,7 @@
 				7D178EB128087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
 				7DBC89392807065200F94B6C /* AuthorizationTextField.swift in Sources */,
 				7D112F8A2804641200BB7ECC /* SceneDelegate.swift in Sources */,
+				7D7EF852280EED8F00B99CA4 /* RegistrationService.swift in Sources */,
 				30314CE6265AAF3200CADD41 /* NetworkConfiguration.swift in Sources */,
 				306BF31225FC8F7200E9B481 /* AppDelegate.swift in Sources */,
 				7D178EAA280859F0009C6280 /* RegistrationViewController.swift in Sources */,
@@ -732,6 +768,7 @@
 				3095A8BF25FC96BC0010B54A /* ViewModelConfigurable.swift in Sources */,
 				7D99731E28058E7F0094F302 /* LoginViewController.swift in Sources */,
 				7DB7E0C52806B56D00996926 /* LoginScreenElementsSizes.swift in Sources */,
+				7D7EF84F280ED70800B99CA4 /* AuthenticationService.swift in Sources */,
 				7D99732028058F7E0094F302 /* LoginRouter.swift in Sources */,
 				7D112F8F2804861700BB7ECC /* SplashViewController.swift in Sources */,
 			);
@@ -746,6 +783,7 @@
 				7D3B5D5B280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
 				7D178EA628084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
 				7D0ACA9928096A2B00777442 /* RegistrationModel.swift in Sources */,
+				7D058F19280DC0C800683C3C /* NetworkLayer.swift in Sources */,
 				7DB7E0C82806BBAB00996926 /* LoginScreenElementsSizes.swift in Sources */,
 				7DB7E0C92806BBAB00996926 /* LoginViewController.swift in Sources */,
 				7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */,
@@ -955,7 +993,7 @@
 		};
 		306BF32325FC8F7300E9B481 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2CEDB9368628CD58E6A0CC5C /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */;
+			baseConfigurationReference = C557668C79D5464ED37D0AD7 /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -978,7 +1016,7 @@
 		};
 		306BF32425FC8F7300E9B481 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 829947A643F9BFB222C76665 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */;
+			baseConfigurationReference = 84C8D91260B39C124292A4E2 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1001,7 +1039,7 @@
 		};
 		30F08015265A8746009B2398 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C6831C47F3BFCC718E55773B /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */;
+			baseConfigurationReference = 9AFE91D5967653624BAC4B60 /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1025,7 +1063,7 @@
 		};
 		30F08016265A8746009B2398 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 377C1C58B79D226EE8BF40E6 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */;
+			baseConfigurationReference = 261669487E4C46354FE71804 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
