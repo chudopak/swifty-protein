@@ -14,8 +14,7 @@ enum LoginRouter {
     
     static func makeLoginViewController() -> LoginViewController {
         if loginVC == nil {
-            loginVC = LoginViewController()
-            loginVC!.modalPresentationStyle = .fullScreen
+            loginVC = LoginControllerConfigurator().setupModule()
         }
         return (loginVC!)
     }

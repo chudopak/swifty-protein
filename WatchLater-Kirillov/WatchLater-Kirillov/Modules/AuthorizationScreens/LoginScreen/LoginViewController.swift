@@ -27,6 +27,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     private var isLoginFaieldSateActive = false
     
+    private var interactor: LoginInteractorProtocol!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.primaryBackground.color
@@ -39,6 +41,10 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    func setupComponents(interactor: LoginInteractorProtocol) {
+        self.interactor = interactor
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -88,7 +94,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                                           nextToBeField: AuthorizationTextField) {
         _ = active.resignFirstResponder()
         if let loginData = getLoginData() {
-            // TODO: - Do request
+            interactor.login(data: loginData)
             print(loginData)
         } else if active.text != nil
                     && !active.text!.isEmpty {
@@ -125,7 +131,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     @objc private func loginButtonTaped() {
         hideKeyboard()
         if let loginData = getLoginData() {
-            // TODO: - Do request
+            interactor.login(data: loginData)
             // showLoginFailedState - here for test login failed state
             showLoginFailedState()
             print(loginData)

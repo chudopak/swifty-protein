@@ -8,11 +8,21 @@
 
 import UIKit
 
-struct LoginData {
+struct LoginData: Codable {
     let email: String
     let password: String
 }
 
 enum TextFieldType {
     case password, repeatPassword, email
+}
+
+enum LoginResponseState {
+    case success
+    case failure(String, Error?)
+}
+
+struct Tokens: Codable {
+    let accessToken: String
+    let refreshToken: String
 }

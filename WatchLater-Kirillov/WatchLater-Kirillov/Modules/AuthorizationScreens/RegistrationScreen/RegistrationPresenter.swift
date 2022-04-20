@@ -8,7 +8,11 @@
 
 import UIKit
 
-class RegistrationPresenter {
+protocol RegistrationPresenterProtocol {
+    func proceedRegistrationResult(state: RegistrationResponseState)
+}
+
+final class RegistrationPresenter: RegistrationPresenterProtocol {
 
     private weak var registrationViewController: RegistrationViewController!
     

@@ -14,10 +14,10 @@ protocol RegistrationInteractorProtocol {
 
 class RegistrationInteractor: RegistrationInteractorProtocol {
     
-    private let presenter: RegistrationPresenter
+    private let presenter: RegistrationPresenterProtocol
     private let networkService: RegistrationServiceProtocol
     
-    init(presenter: RegistrationPresenter, networkService: RegistrationServiceProtocol) {
+    init(presenter: RegistrationPresenterProtocol, networkService: RegistrationServiceProtocol) {
         self.presenter = presenter
         self.networkService = networkService
     }
