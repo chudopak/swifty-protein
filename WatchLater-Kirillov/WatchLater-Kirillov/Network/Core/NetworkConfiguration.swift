@@ -18,10 +18,10 @@ enum NetworkConfiguration {
         var address: String {
             switch self {
             case .prod:
-                return Text.Api.host
+                return "watchlater.cloud.technokratos.com"
                 
             case .dev:
-                return Text.Api.host
+                return "watchlater.cloud.technokratos.com"
             }
         }
     }
@@ -34,5 +34,19 @@ enum NetworkConfiguration {
         guard let url = URL(string: Environment.dev.address) else { fatalError("Base URL was not created for dev configuration in NetworkConfiguration.swift") }
         return BundleSettingsURL(defaultURL: url).url
         #endif
+    }
+    
+    static var urlString: String {
+        #if PROD
+        return Environment.prod.address
+        #else
+        return Environment.dev.address
+        #endif
+    }
+    static let sceme = "https"
+    
+    enum Headers {
+        static let acceptJSON = (field: "Accept", value: "application/json")
+        static let contentTypeJSON = (field: "Content-Type", value: "application/json; charset=utf-8")
     }
 }

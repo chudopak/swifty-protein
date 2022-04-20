@@ -35,7 +35,7 @@ final class AuthenticationService: URLRequestBuilder {
         request.httpBody = getBody(authCase)
     }
     
-    func request(completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+    func request(completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         networklayer.request(urlRequest: self,
                              completion: completion)
     }

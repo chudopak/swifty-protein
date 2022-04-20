@@ -22,10 +22,11 @@ protocol URLRequestBuilder: URLRequestConvertible {
 
 protocol NetworkLayerProtocol {
     func request(urlRequest: URLRequestBuilder,
-                 completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+                 completion: @escaping (Data?, URLResponse?, Error?) -> Void)
     func cancel(by url: URL)
 }
 
+// От слеживать статус код 401 и сразу обновить токен
 final class NetworkLayer: NetworkLayerProtocol {
     
     private let session: Session
@@ -35,11 +36,10 @@ final class NetworkLayer: NetworkLayerProtocol {
     }
     
     func request(urlRequest: URLRequestBuilder,
-                 completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
-        let request = session.request(urlRequest)
-        completion(request.data,
-                   request.response,
-                   request.error)
+                 completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        AF.request(urlRequest).response { data in
+            completion(data.data, data.response, data.error)
+        }
     }
     
     func cancel(by url: URL) {

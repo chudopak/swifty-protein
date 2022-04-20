@@ -29,14 +29,27 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
             && !repeatPasswordTextField.text!.isEmpty
     }
     
+    private var interactor: RegistrationInteractorProtocol!
+    
+    init(interactor: RegistrationInteractorProtocol) {
+        super.init(nibName: nil, bundle: nil)
+        self.interactor = interactor
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.primaryBackground.color
         navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(
-                                                                            title: "",
-                                                                            style: .plain,
-                                                                            target: self,
-                                                                            action: nil)
+            title: "",
+            style: .plain,
+            target: self,
+            action: nil
+        )
         view.addSubview(logoImageView)
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
@@ -59,7 +72,11 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         textField.placeholder = ""
     }
     
-    private func getAuthorizatioinData() -> RegistrationData? {
+    func registrationFailedState(displayMessage: String) {
+        showRegistrationFailedState(message: displayMessage)
+    }
+    
+    private func getRegistrationData() -> RegistrationData? {
         guard isFieldsSet
         else {
             return nil
@@ -78,19 +95,21 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     
     private func validateRegistrationDataForRequest() {
         if isPasswordsMatch(),
-           let loginData = getAuthorizatioinData() {
-            processRegistration()
-            print(loginData)
+           let registrationData = getRegistrationData() {
+            processRegistration(with: registrationData)
+            print(registrationData)
         } else {
             showRegistrationFailedState(message: Text.Authorization.passwordsNotMatch)
         }
     }
     
-    private func processRegistration() {
-        // TODO: - Do request
+    private func processRegistration(with data: RegistrationData) {
+        hideKeyboard()
         registerButton.isHidden = true
         spinner.startAnimating()
         spinner.isHidden = false
+        interactor.register(data: data)
+        // TODO: - Do request
         DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + 1) { [weak self] in
             DispatchQueue.main.async {
                 self?.spinner.stopAnimating()
@@ -114,7 +133,7 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         passwordTextField.textColor = Asset.Colors.loginTextColor.color
         repeatPasswordTextField.textColor = Asset.Colors.loginTextColor.color
     }
-
+    
     private func handleTextFieldsActivity(active: AuthorizationTextField,
                                           nextToBeField: AuthorizationTextField) {
         _ = active.resignFirstResponder()
@@ -187,11 +206,11 @@ extension RegistrationViewController {
     
     private func makeTextField(type: TextFieldType) -> AuthorizationTextField {
         let inset = UIEdgeInsets(
-                        top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
-                        left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
-                        bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
-                        right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset
-                    )
+            top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
+            left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
+            bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
+            right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset
+        )
         let textField = AuthorizationTextField(type: type,
                                                inset: inset)
         textField.delegate = self
@@ -203,12 +222,12 @@ extension RegistrationViewController {
             textField.addTarget(self,
                                 action: #selector(emailTextFieldDonePressed),
                                 for: .editingDidEndOnExit)
-        
+            
         case .password:
             textField.addTarget(self,
                                 action: #selector(passwordTextFieldDonePressed),
                                 for: .editingDidEndOnExit)
-
+            
         case .repeatPassword:
             textField.addTarget(self,
                                 action: #selector(repeatPasswordTextFieldDonePressed),
@@ -221,19 +240,19 @@ extension RegistrationViewController {
         let label = UILabel()
         label.textColor = Asset.Colors.loginFailedText.color
         label.font = UIFont.systemFont(ofSize: RegistrationScreenSizes.RegistrationFailedLabel.fontSize)
-        label.adjustsFontSizeToFitWidth = true
+//        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         return label
     }
     
     private func makeRegisterButton() -> AuthorizationButton {
         let colorSet = AuthorizationButton.ColorSet(
-                                    enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
-                                    enabledBackground: .clear,
-                                    enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
-                                    disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
-                                    disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
-                                    disabledBorder: .clear)
+            enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
+            enabledBackground: .clear,
+            enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
+            disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
+            disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
+            disabledBorder: .clear)
         let button = AuthorizationButton(colorSet: colorSet,
                                          text: Text.Authorization.registration,
                                          fontSize: RegistrationScreenSizes.RegisterButton.fontSize)

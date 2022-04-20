@@ -20,6 +20,7 @@ Authorization.registrationQuestion = "Еще не зарегистрирован
 Authorization.registration = "Регистрация";
 Authorization.failed = "Неверные логин или пароль";
 Authorization.passwordsNotMatch = "Пароли не совпадают";
+Authorization.somethingWentWrong = "Что-то пошло не так";
 
 // MARK: - API
 API.sceme = "https";

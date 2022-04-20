@@ -39,6 +39,8 @@ internal enum Text {
     internal static let registration = Text.tr("Localizable", "Authorization.registration")
     /// Еще не зарегистрированы?
     internal static let registrationQuestion = Text.tr("Localizable", "Authorization.registrationQuestion")
+    /// Что-то пошло не так
+    internal static let somethingWentWrong = Text.tr("Localizable", "Authorization.somethingWentWrong")
     internal enum Placeholder {
       /// Адрес электронной почты
       internal static let email = Text.tr("Localizable", "Authorization.placeholder.email")

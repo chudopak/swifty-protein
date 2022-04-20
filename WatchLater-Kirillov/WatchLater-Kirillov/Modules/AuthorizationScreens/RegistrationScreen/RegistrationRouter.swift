@@ -14,7 +14,10 @@ enum RegistrationRouter {
     
     static func presentRegistrationViewController(navigationController: UINavigationController) {
         if registrationVC == nil {
-            registrationVC = RegistrationViewController()
+            let presenter = RegistrationPresenter()
+            let interactor = RegistrationInteractor(presenter: presenter)
+            registrationVC = RegistrationViewController(interactor: interactor)
+            presenter.registrationViewController = registrationVC
         }
         navigationController.pushViewController(registrationVC!, animated: true)
     }
