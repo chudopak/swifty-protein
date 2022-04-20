@@ -76,6 +76,9 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         showRegistrationFailedState(message: displayMessage)
     }
     
+    func presentThumbnailsViewController() {
+    }
+    
     private func getRegistrationData() -> RegistrationData? {
         guard isFieldsSet
         else {
@@ -240,7 +243,6 @@ extension RegistrationViewController {
         let label = UILabel()
         label.textColor = Asset.Colors.loginFailedText.color
         label.font = UIFont.systemFont(ofSize: RegistrationScreenSizes.RegistrationFailedLabel.fontSize)
-//        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         return label
     }

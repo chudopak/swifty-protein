@@ -18,22 +18,31 @@ struct RegistrationError: Codable {
     let timestamp: String
 }
 
+enum RegistrationResponseState {
+    case success
+    case failure(String, Error)
+    case loginFailed
+}
+
 enum RError: Error, LocalizedError {
 
     case unowned
-    case alreadyExist(String)
-    case badEmailFormat(String)
+    case alreadyExist
+    case badEmailFormat
     
     public var errorDescription: String? {
         switch self {
         case .unowned:
-            return NSLocalizedString(Text.Authorization.somethingWentWrong, comment: "Unowned Error")
+            return NSLocalizedString("Something went wrong",
+                                     comment: "Unowned Error")
         
-        case .alreadyExist(let description):
-            return NSLocalizedString(description, comment: "Email Already Exist")
+        case .alreadyExist:
+            return NSLocalizedString("User trying to use email that already registered in data base",
+                                     comment: "Email Already Exist")
             
-        case .badEmailFormat(let description):
-            return NSLocalizedString(description, comment: "Bad email format")
+        case .badEmailFormat:
+            return NSLocalizedString("User trying to register without email address",
+                                     comment: "Bad email format")
         }
     }
 }

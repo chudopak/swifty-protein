@@ -14,12 +14,6 @@ protocol RegistrationInteractorProtocol {
 
 class RegistrationInteractor: RegistrationInteractorProtocol {
     
-    // в сервис
-    enum ResponseState {
-        case success(Data?, Int)
-        case failure(String)
-    }
-    
     private let presenter: RegistrationPresenter
     private let registrationNetworkService: RegistrationServiceProtocol
     
@@ -34,25 +28,7 @@ class RegistrationInteractor: RegistrationInteractorProtocol {
     
     func register(data: RegistrationData) {
         registrationNetworkService.register(with: data) { [weak self] status in
-            switch status {
-            case let .success(data, statusCode):
-                self?.handleResponce(statusCode: statusCode, data: data)
-            
-            case .failure(let failDescription):
-                print("RegistrationInteractor Network Error: \(failDescription)")
-                self?.presenter.present(state: .networkFailure(Text.Authorization.somethingWentWrong))
-            }
-        }
-    }
-    
-    private func handleResponce(statusCode: Int, data: Data?) {
-        switch statusCode {
-        case 200...201:
-            // TODO: - If user registered then login him
-            print("Need to login", statusCode)
-        
-        default:
-            presenter.present(state: .registrationFailure(data, statusCode))
+            self?.presenter.proceedRegistrationResult(state: status)
         }
     }
 }

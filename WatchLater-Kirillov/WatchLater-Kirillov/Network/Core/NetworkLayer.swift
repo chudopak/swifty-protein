@@ -9,17 +9,6 @@
 import UIKit
 import Alamofire
 
-extension URLRequestBuilder {
-
-    func asURLRequest() throws -> URLRequest {
-        return urlRequest
-    }
-}
-
-protocol URLRequestBuilder: URLRequestConvertible {
-    var urlRequest: URLRequest { get }
-}
-
 protocol NetworkLayerProtocol {
     func request(urlRequest: URLRequestBuilder,
                  completion: @escaping (Data?, URLResponse?, Error?) -> Void)
