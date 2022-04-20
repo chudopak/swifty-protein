@@ -18,11 +18,12 @@ final class RegistrationService: RegistrationServiceProtocol {
     
     let path = "/users"
     
-    private let networklayer = NetworkLayer()
+    private let networklayer: NetworkLayerProtocol
     
     private var request: RequestBuilder
     
-    init?(httpBody: Data? = nil) {
+    init?(networkLayer: NetworkLayerProtocol, httpBody: Data? = nil) {
+        self.networklayer = networkLayer
         var urlComponents = URLComponents()
         urlComponents.scheme = NetworkConfiguration.sceme
         urlComponents.host = NetworkConfiguration.urlString

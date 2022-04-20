@@ -8,5 +8,16 @@
 
 import UIKit
 
-enum RegistrationControllerConfigurator {
+final class RegistrationControllerConfigurator {
+    
+    func setupModule() -> RegistrationViewController {
+        let viewController = RegistrationViewController()
+        let presenter = RegistrationPresenter(viewController: viewController)
+        let interactor = RegistrationInteractor(
+            presenter: presenter,
+            networkService: RegistrationService(networkLayer: NetworkLayer())!
+        )
+        viewController.setupComponents(interactor: interactor)
+        return viewController
+    }
 }

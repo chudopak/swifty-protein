@@ -15,19 +15,15 @@ protocol RegistrationInteractorProtocol {
 class RegistrationInteractor: RegistrationInteractorProtocol {
     
     private let presenter: RegistrationPresenter
-    private let registrationNetworkService: RegistrationServiceProtocol
+    private let networkService: RegistrationServiceProtocol
     
-    init(presenter: RegistrationPresenter) {
+    init(presenter: RegistrationPresenter, networkService: RegistrationServiceProtocol) {
         self.presenter = presenter
-        if let registration = RegistrationService() {
-            registrationNetworkService = registration
-        } else {
-            fatalError("Can't create registration URL")
-        }
+        self.networkService = networkService
     }
     
     func register(data: RegistrationData) {
-        registrationNetworkService.register(with: data) { [weak self] status in
+        networkService.register(with: data) { [weak self] status in
             self?.presenter.proceedRegistrationResult(state: status)
         }
     }

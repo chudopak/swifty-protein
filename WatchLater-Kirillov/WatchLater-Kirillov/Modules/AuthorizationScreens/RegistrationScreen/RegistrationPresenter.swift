@@ -10,7 +10,11 @@ import UIKit
 
 class RegistrationPresenter {
 
-    weak var registrationViewController: RegistrationViewController!
+    private weak var registrationViewController: RegistrationViewController!
+    
+    init(viewController: RegistrationViewController) {
+        registrationViewController = viewController
+    }
     
     func proceedRegistrationResult(state: RegistrationResponseState) {
         switch state {
