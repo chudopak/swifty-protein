@@ -23,15 +23,22 @@ final class RegistrationPresenter: RegistrationPresenterProtocol {
     func proceedRegistrationResult(state: RegistrationResponseState) {
         switch state {
         case .success:
-            registrationViewController.presentThumbnailsViewController()
+            DispatchQueue.main.async { [unowned self] in
+                self.registrationViewController.presentThumbnailsViewController()
+            }
         
         case let .failure(displayMessage, error):
-            print(error.localizedDescription)
-            registrationViewController.registrationFailedState(displayMessage: displayMessage)
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            DispatchQueue.main.async { [unowned self] in
+                self.registrationViewController.registrationFailedState(displayMessage: displayMessage)
+            }
             
         case .loginFailed:
-            // TODO: present loginViewController and show alert that user should register
-            break
+            DispatchQueue.main.async { [unowned self] in
+                self.registrationViewController.presentLoginViewControllerWithLoginAlert()
+            }
         }
     }
 }

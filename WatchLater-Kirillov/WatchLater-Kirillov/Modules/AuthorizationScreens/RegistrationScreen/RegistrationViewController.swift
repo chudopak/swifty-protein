@@ -67,10 +67,20 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func registrationFailedState(displayMessage: String) {
+        changeLoadingState(isVisible: false)
         showRegistrationFailedState(message: displayMessage)
     }
     
     func presentThumbnailsViewController() {
+        print("SUCCESS")
+        changeLoadingState(isVisible: false)
+        // TODO: - create new UIWindow and open new viewController there
+    }
+    
+    func presentLoginViewControllerWithLoginAlert() {
+        changeLoadingState(isVisible: false)
+        // TODO: - present alert that will tell user login
+        navigationController?.popViewController(animated: true)
     }
     
     private func getRegistrationData() -> RegistrationData? {
@@ -102,18 +112,18 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     
     private func processRegistration(with data: RegistrationData) {
         hideKeyboard()
-        registerButton.isHidden = true
-        spinner.startAnimating()
-        spinner.isHidden = false
+        changeLoadingState(isVisible: true)
         interactor.register(data: data)
-        // TODO: - Do request
-        DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + 1) { [weak self] in
-            DispatchQueue.main.async {
-                self?.spinner.stopAnimating()
-                self?.spinner.isHidden = true
-                self?.registerButton.isHidden = false
-            }
+    }
+    
+    private func changeLoadingState(isVisible state: Bool) {
+        registerButton.isHidden = state
+        if state {
+            spinner.startAnimating()
+        } else {
+            spinner.stopAnimating()
         }
+        spinner.isHidden = !state
     }
     
     private func showRegistrationFailedState(message: String) {

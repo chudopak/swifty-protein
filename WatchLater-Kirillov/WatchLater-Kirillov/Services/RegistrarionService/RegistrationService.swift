@@ -22,15 +22,16 @@ final class RegistrationService: RegistrationServiceProtocol {
     
     private var request: RequestBuilder
     
-    init?(networkLayer: NetworkLayerProtocol, httpBody: Data? = nil) {
+    private let loginService: LoginServiceProtocol
+    
+    init(networkLayer: NetworkLayerProtocol, loginService: LoginServiceProtocol, httpBody: Data? = nil) {
         self.networklayer = networkLayer
+        self.loginService = loginService
         var urlComponents = URLComponents()
         urlComponents.scheme = NetworkConfiguration.sceme
         urlComponents.host = NetworkConfiguration.urlString
         urlComponents.path = path
-        guard let url = urlComponents.url else {
-            return nil
-        }
+        let url = urlComponents.url!
         request = RequestBuilder(urlRequest: URLRequest(url: url))
         request.urlRequest.method = HTTPMethod.post
         request.urlRequest.setValue(NetworkConfiguration.Headers.contentTypeJSON.value,
@@ -72,18 +73,25 @@ final class RegistrationService: RegistrationServiceProtocol {
                                 completion: @escaping (RegistrationResponseState) -> Void) {
         switch statusCode {
         case 200...201:
-            // TODO: - If user registered then login him
-            let loginService = LoginService(networkLayer: NetworkLayer())
             let loginData = LoginData(email: registrationData.email, password: registrationData.password)
-            loginService?.login(with: loginData) { _ in
+            loginService.login(with: loginData) { state in
+                switch state {
+                case .success:
+                    completion(.success)
+                    
+                case let .failure(_, error):
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    completion(.loginFailed)
+                }
             }
-            print("Need to login", statusCode)
             
         case 400:
-            completion(.failure(getErrorDescriptionMessage(data: data), RError.badEmailFormat))
+            completion(.failure(self.getErrorDescriptionMessage(data: data), RError.badEmailFormat))
             
         case 401:
-            completion(.failure(getErrorDescriptionMessage(data: data), RError.alreadyExist))
+            completion(.failure(self.getErrorDescriptionMessage(data: data), RError.alreadyExist))
             
         default:
             completion(.failure(Text.Authorization.somethingWentWrong, RError.unowned))

@@ -22,15 +22,13 @@ final class LoginService: LoginServiceProtocol {
     
     private var request: RequestBuilder
     
-    init?(networkLayer: NetworkLayerProtocol, httpBody: Data? = nil) {
+    init(networkLayer: NetworkLayerProtocol, httpBody: Data? = nil) {
         self.networklayer = networkLayer
         var urlComponents = URLComponents()
         urlComponents.scheme = NetworkConfiguration.sceme
         urlComponents.host = NetworkConfiguration.urlString
         urlComponents.path = loginPath
-        guard let url = urlComponents.url else {
-            return nil
-        }
+        let url = urlComponents.url!
         request = RequestBuilder(urlRequest: URLRequest(url: url))
         request.urlRequest.method = HTTPMethod.post
         request.urlRequest.setValue(NetworkConfiguration.Headers.contentTypeJSON.value,
@@ -69,20 +67,30 @@ final class LoginService: LoginServiceProtocol {
                                 completion: @escaping (LoginResponseState) -> Void) {
         switch statusCode {
         case 200...201:
-            if let tokens = decodeMessage(data: data, type: Tokens.self) {
-                print(tokens)
-            } else {
-                print("Can't Decode tokens")
+            
+            guard let tokens = decodeMessage(data: data, type: Tokens.self)
+            else {
+                print("LoginService: - Can't Decode tokens")
+                completion(.failure("", nil))
+                return
             }
+            let token = String(tokens.accessToken.suffix(tokens.accessToken.count - "Bearer ".count))
+            guard KeychainService.set(data: token, key: .accessToken),
+                  KeychainService.set(data: tokens.refreshToken, key: .refreshToken)
+            else {
+                print("LoginService: - Can't save tokens to keychain")
+                completion(.failure("", nil))
+                return
+            }
+            print(KeychainService.getString(key: .accessToken)!)
+            print(KeychainService.getString(key: .refreshToken)!)
+            completion(.success)
             
-        case 400:
-            print("Email doesn't registered")
-            
-        case 401:
-            print("Passwords doesn't match")
+        case 400...401:
+            completion(.failure(Text.Authorization.failed, nil))
             
         default:
-            print("Unowend error")
+            completion(.failure(Text.Authorization.somethingWentWrong, nil))
         }
     }
     

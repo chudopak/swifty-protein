@@ -51,6 +51,15 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         textField.placeholder = ""
     }
     
+    func loginFailedStatee(displayMessage: String) {
+        showLoginFailedState(displayMessage: displayMessage)
+    }
+    
+    func presentThumbnailsViewController() {
+        print("SUCCESS")
+        // TODO: - present that screen in new UIWindow
+    }
+    
     private func addSubviews() {
         view.addSubview(watchLaterLogoImageView)
         view.addSubview(emailTextField)
@@ -76,9 +85,10 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                          password: passwordTextField.text!)
     }
     
-    private func showLoginFailedState() {
+    private func showLoginFailedState(displayMessage: String) {
         isLoginFaieldSateActive = true
         loginFailedLabel.isHidden = false
+        loginFailedLabel.text = displayMessage
         emailTextField.textColor = Asset.Colors.loginFailedText.color
         passwordTextField.textColor = Asset.Colors.loginFailedText.color
     }
@@ -132,8 +142,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         hideKeyboard()
         if let loginData = getLoginData() {
             interactor.login(data: loginData)
-            // showLoginFailedState - here for test login failed state
-            showLoginFailedState()
             print(loginData)
         }
     }

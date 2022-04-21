@@ -20,7 +20,7 @@ struct RegistrationError: Codable {
 
 enum RegistrationResponseState {
     case success
-    case failure(String, Error)
+    case failure(String, Error?)
     case loginFailed
 }
 

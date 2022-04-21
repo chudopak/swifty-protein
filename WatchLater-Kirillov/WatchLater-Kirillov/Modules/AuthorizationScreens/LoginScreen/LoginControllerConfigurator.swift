@@ -15,7 +15,7 @@ final class LoginControllerConfigurator {
         let presenter = LoginPresenter(viewController: viewController)
         let interactor = LoginInteractor(
             presenter: presenter,
-            networkService: LoginService(networkLayer: NetworkLayer())!
+            networkService: LoginService(networkLayer: NetworkLayer())
         )
         viewController.setupComponents(interactor: interactor)
         return viewController
