@@ -74,8 +74,7 @@ final class LoginService: LoginServiceProtocol {
                 completion(.failure("", nil))
                 return
             }
-            let token = String(tokens.accessToken.suffix(tokens.accessToken.count - "Bearer ".count))
-            guard KeychainService.set(data: token, key: .accessToken),
+            guard KeychainService.set(data: tokens.accessToken, key: .accessToken),
                   KeychainService.set(data: tokens.refreshToken, key: .refreshToken)
             else {
                 print("LoginService: - Can't save tokens to keychain")

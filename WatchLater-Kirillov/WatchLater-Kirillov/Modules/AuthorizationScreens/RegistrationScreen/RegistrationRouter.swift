@@ -18,4 +18,8 @@ enum RegistrationRouter {
         }
         navigationController.pushViewController(registrationVC!, animated: true)
     }
+    
+    static func removeViewController() {
+        registrationVC = nil
+    }
 }

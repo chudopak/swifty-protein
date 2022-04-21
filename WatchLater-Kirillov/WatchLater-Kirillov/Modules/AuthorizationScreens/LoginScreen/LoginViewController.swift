@@ -9,7 +9,13 @@
 import UIKit
 import SnapKit
 
-class LoginViewController: BaseViewController, UITextFieldDelegate {
+protocol LoginViewControllerProtocol: AnyObject {
+
+    func loginFailedStatee(displayMessage: String)
+    func presentThumbnailsViewController()
+}
+
+class LoginViewController: BaseViewController, UITextFieldDelegate, LoginViewControllerProtocol {
     
     private lazy var watchLaterLogoImageView = makeWatchLaterLogoImageView()
     private lazy var emailTextField = makeTextField(type: .email)
@@ -57,7 +63,9 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     func presentThumbnailsViewController() {
         print("SUCCESS")
-        // TODO: - present that screen in new UIWindow
+        RegistrationRouter.removeViewController()
+        LoginRouter.removeViewController()
+        UIWindowService.replaceWindowWithNewOne(rootViewController: FavouriteThumbnailsViewController())
     }
     
     private func addSubviews() {

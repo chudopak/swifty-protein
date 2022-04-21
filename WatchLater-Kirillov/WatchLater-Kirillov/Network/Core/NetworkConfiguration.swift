@@ -48,5 +48,6 @@ enum NetworkConfiguration {
     enum Headers {
         static let acceptJSON = (field: "Accept", value: "application/json")
         static let contentTypeJSON = (field: "Content-Type", value: "application/json; charset=utf-8")
+        static let authorisation = "Authorization"
     }
 }

@@ -56,6 +56,16 @@
 		7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D562807197100AEBF1A /* LoginModel.swift */; };
 		7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */; };
 		7D3B5D5B280725DE00AEBF1A /* AuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */; };
+		7D612D5528118246007C7515 /* FavouriteThumbnailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D5428118246007C7515 /* FavouriteThumbnailsViewController.swift */; };
+		7D612D5628118246007C7515 /* FavouriteThumbnailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D5428118246007C7515 /* FavouriteThumbnailsViewController.swift */; };
+		7D612D59281182EF007C7515 /* UIWindowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D58281182EF007C7515 /* UIWindowService.swift */; };
+		7D612D5A281182EF007C7515 /* UIWindowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D58281182EF007C7515 /* UIWindowService.swift */; };
+		7D612D5D28119E08007C7515 /* RefreshTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D5C28119E08007C7515 /* RefreshTokenService.swift */; };
+		7D612D5E28119E08007C7515 /* RefreshTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D5C28119E08007C7515 /* RefreshTokenService.swift */; };
+		7D612D6028119F57007C7515 /* BaseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D5F28119F57007C7515 /* BaseModels.swift */; };
+		7D612D6128119F57007C7515 /* BaseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D5F28119F57007C7515 /* BaseModels.swift */; };
+		7D612D632811A335007C7515 /* RefreshServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D622811A335007C7515 /* RefreshServiceModel.swift */; };
+		7D612D642811A335007C7515 /* RefreshServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D622811A335007C7515 /* RefreshServiceModel.swift */; };
 		7D7386D328101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386D228101F36008C00FE /* RegistrationControllerConfigurator.swift */; };
 		7D7386D428101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386D228101F36008C00FE /* RegistrationControllerConfigurator.swift */; };
 		7D7386D7281047F7008C00FE /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386D6281047F7008C00FE /* RequestBuilder.swift */; };
@@ -134,6 +144,11 @@
 		7D178EB028087636009C6280 /* RegistrationScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreenElementsSizes.swift; sourceTree = "<group>"; };
 		7D3B5D562807197100AEBF1A /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationButton.swift; sourceTree = "<group>"; };
+		7D612D5428118246007C7515 /* FavouriteThumbnailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteThumbnailsViewController.swift; sourceTree = "<group>"; };
+		7D612D58281182EF007C7515 /* UIWindowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowService.swift; sourceTree = "<group>"; };
+		7D612D5C28119E08007C7515 /* RefreshTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenService.swift; sourceTree = "<group>"; };
+		7D612D5F28119F57007C7515 /* BaseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModels.swift; sourceTree = "<group>"; };
+		7D612D622811A335007C7515 /* RefreshServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshServiceModel.swift; sourceTree = "<group>"; };
 		7D7386D228101F36008C00FE /* RegistrationControllerConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationControllerConfigurator.swift; sourceTree = "<group>"; };
 		7D7386D6281047F7008C00FE /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		7D7386D9281061EB008C00FE /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
@@ -257,6 +272,7 @@
 		306BF32625FC8FB800E9B481 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				7D612D5328118201007C7515 /* FavouriteScreen */,
 				7D178EA828085906009C6280 /* AuthorizationScreens */,
 				7D112F8D280485EC00BB7ECC /* SplashScreen */,
 			);
@@ -402,6 +418,31 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		7D612D5328118201007C7515 /* FavouriteScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7D612D5428118246007C7515 /* FavouriteThumbnailsViewController.swift */,
+			);
+			path = FavouriteScreen;
+			sourceTree = "<group>";
+		};
+		7D612D57281182C6007C7515 /* UIWindowService */ = {
+			isa = PBXGroup;
+			children = (
+				7D612D58281182EF007C7515 /* UIWindowService.swift */,
+			);
+			path = UIWindowService;
+			sourceTree = "<group>";
+		};
+		7D612D5B28119DEA007C7515 /* RefreshTokenService */ = {
+			isa = PBXGroup;
+			children = (
+				7D612D5C28119E08007C7515 /* RefreshTokenService.swift */,
+				7D612D622811A335007C7515 /* RefreshServiceModel.swift */,
+			);
+			path = RefreshTokenService;
+			sourceTree = "<group>";
+		};
 		7D7386D5281047B9008C00FE /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +454,8 @@
 		7D7EF84C280ED6DB00B99CA4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7D612D5B28119DEA007C7515 /* RefreshTokenService */,
+				7D612D57281182C6007C7515 /* UIWindowService */,
 				7DAE55CE281167FE0006C24A /* KeychainService */,
 				7D7386D5281047B9008C00FE /* Utils */,
 				7D7EF850280EED7600B99CA4 /* RegistrarionService */,
@@ -441,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */,
+				7D612D5F28119F57007C7515 /* BaseModels.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -564,6 +608,9 @@
 		306BF30625FC8F7200E9B481 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
@@ -795,6 +842,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D612D6028119F57007C7515 /* BaseModels.swift in Sources */,
 				7D7386DD2810621A008C00FE /* LoginPresenter.swift in Sources */,
 				7D178EAD28085B11009C6280 /* RegistrationRouter.swift in Sources */,
 				7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */,
@@ -806,6 +854,7 @@
 				3076A0882601D421003B0EF9 /* StoryboardScenes.swift in Sources */,
 				30D2F277260148EE000134EB /* Texts.swift in Sources */,
 				3076A0892601D421003B0EF9 /* StoryboardSegues.swift in Sources */,
+				7D612D59281182EF007C7515 /* UIWindowService.swift in Sources */,
 				30D2F274260148EE000134EB /* Asset.swift in Sources */,
 				7D7386D7281047F7008C00FE /* RequestBuilder.swift in Sources */,
 				7D178EB128087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
@@ -818,12 +867,15 @@
 				30314CE6265AAF3200CADD41 /* NetworkConfiguration.swift in Sources */,
 				306BF31225FC8F7200E9B481 /* AppDelegate.swift in Sources */,
 				7D178EAA280859F0009C6280 /* RegistrationViewController.swift in Sources */,
+				7D612D632811A335007C7515 /* RefreshServiceModel.swift in Sources */,
 				7D9715172805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */,
 				30314CCC265AADB600CADD41 /* BaseViewController.swift in Sources */,
 				7D7EF859280EF0DA00B99CA4 /* RegistrationPresenter.swift in Sources */,
 				3095A8BF25FC96BC0010B54A /* ViewModelConfigurable.swift in Sources */,
 				7D99731E28058E7F0094F302 /* LoginViewController.swift in Sources */,
 				7D7386E0281064C3008C00FE /* LoginControllerConfigurator.swift in Sources */,
+				7D612D5D28119E08007C7515 /* RefreshTokenService.swift in Sources */,
+				7D612D5528118246007C7515 /* FavouriteThumbnailsViewController.swift in Sources */,
 				7DB7E0C52806B56D00996926 /* LoginScreenElementsSizes.swift in Sources */,
 				7D7EF84F280ED70800B99CA4 /* LoginService.swift in Sources */,
 				7D7386DA281061EB008C00FE /* LoginInteractor.swift in Sources */,
@@ -836,6 +888,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D612D6128119F57007C7515 /* BaseModels.swift in Sources */,
 				7D7386DE2810621A008C00FE /* LoginPresenter.swift in Sources */,
 				7D7EF857280EF04100B99CA4 /* LoginService.swift in Sources */,
 				7D7EF856280EF02600B99CA4 /* RegistrationService.swift in Sources */,
@@ -847,6 +900,7 @@
 				7D058F19280DC0C800683C3C /* NetworkLayer.swift in Sources */,
 				7D7EF855280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */,
 				7DB7E0C82806BBAB00996926 /* LoginScreenElementsSizes.swift in Sources */,
+				7D612D5A281182EF007C7515 /* UIWindowService.swift in Sources */,
 				7DB7E0C92806BBAB00996926 /* LoginViewController.swift in Sources */,
 				7D7386D8281047F7008C00FE /* RequestBuilder.swift in Sources */,
 				7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */,
@@ -859,12 +913,15 @@
 				30F07FF2265A8746009B2398 /* StoryboardScenes.swift in Sources */,
 				30F07FF7265A8746009B2398 /* Texts.swift in Sources */,
 				30F07FF8265A8746009B2398 /* StoryboardSegues.swift in Sources */,
+				7D612D642811A335007C7515 /* RefreshServiceModel.swift in Sources */,
 				7D178EAB280859F0009C6280 /* RegistrationViewController.swift in Sources */,
 				30F07FFE265A8746009B2398 /* Asset.swift in Sources */,
 				7D7EF85A280EF0DA00B99CA4 /* RegistrationPresenter.swift in Sources */,
 				7D112F8B2804641200BB7ECC /* SceneDelegate.swift in Sources */,
 				30314CE7265AAF3200CADD41 /* NetworkConfiguration.swift in Sources */,
 				7D7386E1281064C3008C00FE /* LoginControllerConfigurator.swift in Sources */,
+				7D612D5E28119E08007C7515 /* RefreshTokenService.swift in Sources */,
+				7D612D5628118246007C7515 /* FavouriteThumbnailsViewController.swift in Sources */,
 				30F08000265A8746009B2398 /* AppDelegate.swift in Sources */,
 				30314CC8265AADB500CADD41 /* BaseViewController.swift in Sources */,
 				7D7386DB281061EB008C00FE /* LoginInteractor.swift in Sources */,
@@ -902,7 +959,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = WatchLater_Tests/Info.plist;
+				INFOPLIST_FILE = "WatchLater-Kirillov_Tests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -926,7 +983,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = WatchLater_Tests/Info.plist;
+				INFOPLIST_FILE = "WatchLater-Kirillov_Tests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

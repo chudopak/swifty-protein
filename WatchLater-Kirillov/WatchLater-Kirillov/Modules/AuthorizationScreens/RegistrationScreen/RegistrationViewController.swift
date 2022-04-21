@@ -8,7 +8,13 @@
 
 import UIKit
 
-class RegistrationViewController: BaseViewController, UITextFieldDelegate {
+protocol RegistrationViewControllerProtocol: AnyObject {
+    func registrationFailedState(displayMessage: String)
+    func presentThumbnailsViewController()
+    func presentLoginViewControllerWithLoginAlert()
+}
+
+class RegistrationViewController: BaseViewController, UITextFieldDelegate, RegistrationViewControllerProtocol {
     
     private lazy var logoImageView = makeLogoImageView()
     private lazy var emailTextField = makeTextField(type: .email)
@@ -72,14 +78,15 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func presentThumbnailsViewController() {
-        print("SUCCESS")
         changeLoadingState(isVisible: false)
-        // TODO: - create new UIWindow and open new viewController there
+        RegistrationRouter.removeViewController()
+        LoginRouter.removeViewController()
+        UIWindowService.replaceWindowWithNewOne(rootViewController: FavouriteThumbnailsViewController())
     }
     
     func presentLoginViewControllerWithLoginAlert() {
         changeLoadingState(isVisible: false)
-        // TODO: - present alert that will tell user login
+        // We can present some alert here to notify the user about succes registration
         navigationController?.popViewController(animated: true)
     }
     

@@ -18,4 +18,8 @@ enum LoginRouter {
         }
         return (loginVC!)
     }
+    
+    static func removeViewController() {
+        loginVC = nil
+    }
 }

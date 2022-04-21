@@ -14,9 +14,9 @@ protocol RegistrationPresenterProtocol {
 
 final class RegistrationPresenter: RegistrationPresenterProtocol {
 
-    private weak var registrationViewController: RegistrationViewController!
+    private weak var registrationViewController: RegistrationViewControllerProtocol!
     
-    init(viewController: RegistrationViewController) {
+    init(viewController: RegistrationViewControllerProtocol) {
         registrationViewController = viewController
     }
     

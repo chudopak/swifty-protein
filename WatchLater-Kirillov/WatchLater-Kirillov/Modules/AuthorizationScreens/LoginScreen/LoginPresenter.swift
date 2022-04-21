@@ -14,9 +14,9 @@ protocol LoginPresenterProtocol {
 
 final class LoginPresenter: LoginPresenterProtocol {
 
-    private weak var loginViewController: LoginViewController!
+    private weak var loginViewController: LoginViewControllerProtocol!
     
-    init(viewController: LoginViewController) {
+    init(viewController: LoginViewControllerProtocol) {
         loginViewController = viewController
     }
     
