@@ -15,6 +15,9 @@ class SplashViewController: BaseViewController {
     private lazy var agonaImageView = makeAgonaImageView()
     
     private var refreshTokenService: RefreshTokenServiceProtocol!
+    private var isAnimationFinished = false
+    private var isTokenValidationFinished = false
+    private var isTokenActive = false
     
     init(service: RefreshTokenServiceProtocol) {
         super.init(nibName: nil, bundle: nil)
@@ -34,11 +37,64 @@ class SplashViewController: BaseViewController {
         watchLaterImageView.addSubview(eyeImageView)
         configureSplashScreenSizessAtLaunch()
         setConstraints()
+        print(KeychainService.getString(key: .accessToken)!)
+        print(KeychainService.getString(key: .refreshToken)!)
+        validateToken()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewAnimation()
+    }
+    
+    private func validateToken() {
+        refreshTokenService.validateToken { [unowned self] state in
+            switch state {
+            case .success:
+                DispatchQueue.main.async {
+                    self.isTokenValidationFinished = true
+                    self.isTokenActive = true
+                    if self.isAnimationFinished {
+                        self.presentNeededScreen()
+                    }
+                }
+            
+            case .failure:
+                self.recreateToken()
+            }
+        }
+    }
+    
+    private func recreateToken() {
+        refreshTokenService.refresh { state in
+            switch state {
+            case .success:
+                self.isTokenActive = true
+            
+            case .failure:
+                break
+            }
+            DispatchQueue.main.async {
+                self.isTokenValidationFinished = true
+                if self.isAnimationFinished {
+                    self.presentNeededScreen()
+                }
+            }
+        }
+    }
+    
+    private func presentNeededScreen() {
+        if isTokenActive {
+            let tmp = FavouriteThumbnailsViewController()
+            let navigationController = UINavigationController(rootViewController: tmp)
+            navigationController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true, completion: nil)
+        } else {
+            let loginVC = LoginRouter.makeLoginViewController()
+            let navigationController = UINavigationController(rootViewController: loginVC)
+            navigationController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true, completion: nil)
+        }
     }
     
     private func configureSplashScreenSizessAtLaunch() {
@@ -99,13 +155,13 @@ class SplashViewController: BaseViewController {
     private func animateEyePhaseThree() {
         UIView.animate(withDuration: SplashScreenAnimation.PhaseThree.duration,
                        delay: SplashScreenAnimation.PhaseThree.delay,
-                       options: .curveLinear, animations: { [weak self] in
-                        self?.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXCenter
-                       }, completion: { [weak self] _ in
-                        let loginVC = LoginRouter.makeLoginViewController()
-                        let navigationController = UINavigationController(rootViewController: loginVC)
-                        navigationController.modalPresentationStyle = .fullScreen
-                        self?.present(navigationController, animated: true, completion: nil)
+                       options: .curveLinear, animations: { [unowned self] in
+                        self.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXCenter
+                       }, completion: { [unowned self] _ in
+                        self.isAnimationFinished = true
+                        if self.isTokenValidationFinished {
+                            self.presentNeededScreen()
+                        }
                        })
     }
 }

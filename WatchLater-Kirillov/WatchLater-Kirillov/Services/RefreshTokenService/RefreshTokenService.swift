@@ -26,8 +26,8 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
     
     init(networkLayer: NetworkLayerProtocol, httpBody: Data? = nil) {
         self.networklayer = networkLayer
-        self.refreshRequest = RequestBuilder(urlRequest: URLRequest(url: NetworkConfiguration.url))
-        self.validateRequest = RequestBuilder(urlRequest: URLRequest(url: NetworkConfiguration.url))
+        self.refreshRequest = RequestBuilder(urlRequest: URLRequest(url: URL(fileURLWithPath: "String")))
+        self.validateRequest = RequestBuilder(urlRequest: URLRequest(url: URL(fileURLWithPath: "String")))
         self.validateRequest = buildTestRequest()
         self.refreshRequest = buildRefreshRequest()
     }
@@ -46,7 +46,7 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
         } catch {
             completion(.failure)
         }
-        networklayer.request(urlRequest: validateRequest) { [weak self] data, response, error in
+        networklayer.request(urlRequest: refreshRequest) { [weak self] data, response, error in
             guard let responsHTTP = response as? HTTPURLResponse,
                   error == nil
             else {
@@ -107,6 +107,8 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
         case 200...201:
             guard let tokens = decodeMessage(data: data, type: Tokens.self)
             else {
+                let jsonData = try? JSONSerialization.jsonObject(with: data!, options: [])
+                print(jsonData!)
                 print("RefreshTokenService: - Can't Decode tokens")
                 completion(.failure)
                 return
