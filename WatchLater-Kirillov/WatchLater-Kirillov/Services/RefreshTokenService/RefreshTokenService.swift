@@ -107,8 +107,6 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
         case 200...201:
             guard let tokens = decodeMessage(data: data, type: Tokens.self)
             else {
-                let jsonData = try? JSONSerialization.jsonObject(with: data!, options: [])
-                print(jsonData!)
                 print("RefreshTokenService: - Can't Decode tokens")
                 completion(.failure)
                 return
