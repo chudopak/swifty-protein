@@ -15,7 +15,7 @@ protocol NetworkLayerProtocol {
     func cancel(by url: URL)
 }
 
-// От слеживать статус код 401 и сразу обновить токен
+// TODO: - От слеживать статус код 401 и сразу обновить токен
 final class NetworkLayer: NetworkLayerProtocol {
     
     private let session: Session
