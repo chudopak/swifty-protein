@@ -22,3 +22,9 @@ Authorization.registration = "Регистрация";
 Authorization.failed = "Неверные логин или пароль";
 Authorization.passwordsNotMatch = "Пароли не совпадают";
 Authorization.somethingWentWrong = "Что-то пошло не так";
+
+// MARK: - TabBar titles
+
+TabBar.collection = "Коллекция";
+TabBar.add = "Добавить";
+TabBar.profile = "Профиль";

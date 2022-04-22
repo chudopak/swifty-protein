@@ -63,7 +63,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, LoginViewCon
     func presentThumbnailsViewController() {
         RegistrationRouter.removeViewController()
         LoginRouter.removeViewController()
-        UIWindowService.replaceRootViewController(with: FavouriteThumbnailsViewController())
+        UIWindowService.replaceRootViewController(with: MainTabBar())
     }
     
     private func configureView() {

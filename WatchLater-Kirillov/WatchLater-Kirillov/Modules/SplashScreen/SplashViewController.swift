@@ -86,10 +86,11 @@ class SplashViewController: BaseViewController {
     private func presentNeededScreen() {
         // TODO: - change presentation logic for seetuping stuff in router
         if isTokenActive {
-            let tmp = FavouriteThumbnailsViewController()
-            let navigationController = UINavigationController(rootViewController: tmp)
-            navigationController.modalPresentationStyle = .fullScreen
-            UIWindowService.replaceRootViewController(with: navigationController)
+//            let tmp = FavouriteViewController()
+//            let navigationController = UINavigationController(rootViewController: tmp)
+//            navigationController.modalPresentationStyle = .fullScreen
+            let tabBar = MainTabBar()
+            UIWindowService.replaceRootViewController(with: tabBar)
         } else {
             let loginVC = LoginRouter.makeLoginViewController()
             let navigationController = UINavigationController(rootViewController: loginVC)

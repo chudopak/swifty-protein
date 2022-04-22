@@ -39,6 +39,8 @@ internal enum Asset {
   internal static let agonaLogo = ImageAsset(name: "AgonaLogo")
   internal static let watchLater = ImageAsset(name: "WatchLater")
   internal static let eye = ImageAsset(name: "eye")
+  internal static let collectionActive = ImageAsset(name: "CollectionActive")
+  internal static let collectionInactive = ImageAsset(name: "CollectionInactive")
   internal static let watchLaterLogoFull = ImageAsset(name: "WatchLaterLogoFull")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

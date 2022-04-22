@@ -66,7 +66,7 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate, Regis
         changeLoadingState(isVisible: false)
         RegistrationRouter.removeViewController()
         LoginRouter.removeViewController()
-        UIWindowService.replaceRootViewController(with: FavouriteThumbnailsViewController())
+        UIWindowService.replaceRootViewController(with: MainTabBar())
     }
     
     func presentLoginViewControllerWithLoginAlert() {

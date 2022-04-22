@@ -56,6 +56,15 @@ internal enum Text {
     /// Да
     internal static let yes = Text.tr("Localizable", "Common.yes")
   }
+
+  internal enum TabBar {
+    /// Добавить
+    internal static let add = Text.tr("Localizable", "TabBar.add")
+    /// Коллекция
+    internal static let collection = Text.tr("Localizable", "TabBar.collection")
+    /// Профиль
+    internal static let profile = Text.tr("Localizable", "TabBar.profile")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

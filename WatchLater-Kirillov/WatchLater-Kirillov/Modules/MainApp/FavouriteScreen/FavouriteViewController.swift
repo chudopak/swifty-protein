@@ -1,5 +1,5 @@
 //
-//  FavouriteThumbnailsViewController.swift
+//  FavouriteViewController.swift
 //  StartProject-ios
 //
 //  Created by Stepan Kirillov on 4/21/22.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class FavouriteThumbnailsViewController: BaseViewController {
+class FavouriteViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
+        view.backgroundColor = Asset.Colors.primaryBackground.color
     }
 }
