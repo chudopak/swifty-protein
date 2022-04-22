@@ -29,7 +29,7 @@ final class LoginPresenter: LoginPresenterProtocol {
 
         case let .failure(displayMessage, error):
             if let error = error {
-                print(error.localizedDescription)
+                print("LoginPresentererror, procedLoginResult - ", error.localizedDescription)
             }
             DispatchQueue.main.async { [unowned self] in
                 loginViewController.loginFailedStatee(displayMessage: displayMessage)

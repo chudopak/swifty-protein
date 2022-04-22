@@ -37,8 +37,8 @@ class SplashViewController: BaseViewController {
         watchLaterImageView.addSubview(eyeImageView)
         configureSplashScreenSizessAtLaunch()
         setConstraints()
-        print(KeychainService.getString(key: .accessToken)!)
-        print(KeychainService.getString(key: .refreshToken)!)
+//        KeychainService.delete(key: .accessToken)
+//        KeychainService.delete(key: .refreshToken)
         validateToken()
     }
     
@@ -58,7 +58,7 @@ class SplashViewController: BaseViewController {
                         self.presentNeededScreen()
                     }
                 }
-            
+                
             case .failure:
                 self.recreateToken()
             }
@@ -70,7 +70,7 @@ class SplashViewController: BaseViewController {
             switch state {
             case .success:
                 self.isTokenActive = true
-            
+                
             case .failure:
                 break
             }
@@ -84,16 +84,17 @@ class SplashViewController: BaseViewController {
     }
     
     private func presentNeededScreen() {
+        // TODO: - change presentation logic for seetuping stuff in router
         if isTokenActive {
             let tmp = FavouriteThumbnailsViewController()
             let navigationController = UINavigationController(rootViewController: tmp)
             navigationController.modalPresentationStyle = .fullScreen
-            present(navigationController, animated: true, completion: nil)
+            UIWindowService.replaceRootViewController(with: navigationController)
         } else {
             let loginVC = LoginRouter.makeLoginViewController()
             let navigationController = UINavigationController(rootViewController: loginVC)
             navigationController.modalPresentationStyle = .fullScreen
-            present(navigationController, animated: true, completion: nil)
+            UIWindowService.replaceRootViewController(with: navigationController)
         }
     }
     
@@ -167,6 +168,7 @@ class SplashViewController: BaseViewController {
 }
 
 // MARK: Extension for element creation
+
 extension SplashViewController {
     
     private func makeWatchLaterImageView() -> UIImageView {
@@ -194,7 +196,9 @@ extension SplashViewController {
         return (imageView)
     }
 }
+
 // MARK: Constraints
+
 extension SplashViewController {
     
     private func setConstraints() {

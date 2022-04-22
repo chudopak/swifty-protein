@@ -81,8 +81,6 @@ final class LoginService: LoginServiceProtocol {
                 completion(.failure("", nil))
                 return
             }
-            print(KeychainService.getString(key: .accessToken)!)
-            print(KeychainService.getString(key: .refreshToken)!)
             completion(.success)
             
         case 400...401:
@@ -91,14 +89,5 @@ final class LoginService: LoginServiceProtocol {
         default:
             completion(.failure(Text.Authorization.somethingWentWrong, nil))
         }
-    }
-    
-    private func decodeMessage<T: Codable>(data: Data?, type: T.Type) -> T? {
-        guard let data = data,
-              let decoded = try? JSONDecoder().decode(type.self, from: data)
-        else {
-            return nil
-        }
-        return decoded
     }
 }

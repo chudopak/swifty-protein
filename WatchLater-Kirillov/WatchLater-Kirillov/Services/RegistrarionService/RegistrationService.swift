@@ -81,7 +81,7 @@ final class RegistrationService: RegistrationServiceProtocol {
                     
                 case let .failure(_, error):
                     if let error = error {
-                        print(error.localizedDescription)
+                        print("RegistrationService - ", error.localizedDescription)
                     }
                     completion(.loginFailed)
                 }

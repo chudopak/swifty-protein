@@ -52,6 +52,8 @@
 		7D178EAE28085B11009C6280 /* RegistrationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D178EAC28085B11009C6280 /* RegistrationRouter.swift */; };
 		7D178EB128087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D178EB028087636009C6280 /* RegistrationScreenElementsSizes.swift */; };
 		7D178EB228087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D178EB028087636009C6280 /* RegistrationScreenElementsSizes.swift */; };
+		7D2B76ED28129E020051BF9A /* BaseFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2B76EC28129E020051BF9A /* BaseFunctions.swift */; };
+		7D2B76EE28129E020051BF9A /* BaseFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2B76EC28129E020051BF9A /* BaseFunctions.swift */; };
 		7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D562807197100AEBF1A /* LoginModel.swift */; };
 		7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D562807197100AEBF1A /* LoginModel.swift */; };
 		7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */; };
@@ -142,6 +144,7 @@
 		7D178EA9280859F0009C6280 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		7D178EAC28085B11009C6280 /* RegistrationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRouter.swift; sourceTree = "<group>"; };
 		7D178EB028087636009C6280 /* RegistrationScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreenElementsSizes.swift; sourceTree = "<group>"; };
+		7D2B76EC28129E020051BF9A /* BaseFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFunctions.swift; sourceTree = "<group>"; };
 		7D3B5D562807197100AEBF1A /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationButton.swift; sourceTree = "<group>"; };
 		7D612D5428118246007C7515 /* FavouriteThumbnailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteThumbnailsViewController.swift; sourceTree = "<group>"; };
@@ -485,6 +488,7 @@
 			children = (
 				7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */,
 				7D612D5F28119F57007C7515 /* BaseModels.swift */,
+				7D2B76EC28129E020051BF9A /* BaseFunctions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -860,6 +864,7 @@
 				7D178EB128087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
 				7D7EF854280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */,
 				7D7386D328101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
+				7D2B76ED28129E020051BF9A /* BaseFunctions.swift in Sources */,
 				7DBC89392807065200F94B6C /* AuthorizationTextField.swift in Sources */,
 				7D112F8A2804641200BB7ECC /* SceneDelegate.swift in Sources */,
 				7D7EF852280EED8F00B99CA4 /* RegistrationService.swift in Sources */,
@@ -906,6 +911,7 @@
 				7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */,
 				7D178EB228087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
 				7D7386D428101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
+				7D2B76EE28129E020051BF9A /* BaseFunctions.swift in Sources */,
 				7DBC893A2807065200F94B6C /* AuthorizationTextField.swift in Sources */,
 				7D9715182805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */,
 				30314CDD265AAEE500CADD41 /* BundleSettingsURL.swift in Sources */,

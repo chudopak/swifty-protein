@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol LoginViewControllerProtocol: AnyObject {
-
+    
     func loginFailedStatee(displayMessage: String)
     func presentThumbnailsViewController()
 }
@@ -37,8 +37,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, LoginViewCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Asset.Colors.primaryBackground.color
-        addSubviews()
+        configureView()
         loginFailedLabel.isHidden = true
         setGestures()
         setConstraints()
@@ -62,13 +61,13 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, LoginViewCon
     }
     
     func presentThumbnailsViewController() {
-        print("SUCCESS")
         RegistrationRouter.removeViewController()
         LoginRouter.removeViewController()
-        UIWindowService.replaceWindowWithNewOne(rootViewController: FavouriteThumbnailsViewController())
+        UIWindowService.replaceRootViewController(with: FavouriteThumbnailsViewController())
     }
     
-    private func addSubviews() {
+    private func configureView() {
+        view.backgroundColor = Asset.Colors.primaryBackground.color
         view.addSubview(watchLaterLogoImageView)
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
@@ -112,6 +111,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, LoginViewCon
                                           nextToBeField: AuthorizationTextField) {
         _ = active.resignFirstResponder()
         if let loginData = getLoginData() {
+            loginButton.isEnabled = false
             interactor.login(data: loginData)
             print(loginData)
         } else if active.text != nil
@@ -149,6 +149,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, LoginViewCon
     @objc private func loginButtonTaped() {
         hideKeyboard()
         if let loginData = getLoginData() {
+            loginButton.isEnabled = false
             interactor.login(data: loginData)
             print(loginData)
         }
@@ -173,6 +174,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, LoginViewCon
 }
 
 // MARK: Extension for element creation
+
 extension LoginViewController {
     
     private func makeWatchLaterLogoImageView() -> UIImageView {
@@ -183,34 +185,34 @@ extension LoginViewController {
     
     private func makeTextField(type: TextFieldType) -> AuthorizationTextField {
         let inset = UIEdgeInsets(
-                top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
-                left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
-                bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
-                right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset
-            )
+            top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
+            left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
+            bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
+            right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset
+        )
         let textField = AuthorizationTextField(type: type,
                                                inset: inset)
         textField.delegate = self
         textField.addTarget(
-                    self,
-                    action: #selector(textFieldDidChange),
-                    for: .editingChanged
-                )
+            self,
+            action: #selector(textFieldDidChange),
+            for: .editingChanged
+        )
         switch type {
         case .email:
             textField.addTarget(
-                        self,
-                        action: #selector(emailTextFieldDonePressed),
-                        for: .editingDidEndOnExit
-                    )
-        
+                self,
+                action: #selector(emailTextFieldDonePressed),
+                for: .editingDidEndOnExit
+            )
+            
         case .password:
             textField.addTarget(
-                        self,
-                        action: #selector(passwordTextFieldDonePressed),
-                        for: .editingDidEndOnExit
-                    )
-
+                self,
+                action: #selector(passwordTextFieldDonePressed),
+                for: .editingDidEndOnExit
+            )
+            
         default:
             break
         }
@@ -219,12 +221,12 @@ extension LoginViewController {
     
     private func makeLoginButton() -> AuthorizationButton {
         let colorSet = AuthorizationButton.ColorSet(
-                                enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
-                                enabledBackground: .clear,
-                                enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
-                                disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
-                                disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
-                                disabledBorder: .clear)
+            enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
+            enabledBackground: .clear,
+            enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
+            disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
+            disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
+            disabledBorder: .clear)
         let button = AuthorizationButton(colorSet: colorSet,
                                          text: Text.Common.login,
                                          fontSize: LoginScreenSizes.AuthorizationButton.fontSize)
@@ -238,31 +240,31 @@ extension LoginViewController {
         let buttonText = Text.Authorization.registrationQuestion + " " + Text.Authorization.registration
         let questionRange = (buttonText as NSString).range(of: Text.Authorization.registrationQuestion)
         let registrationRange = (buttonText as NSString).range(of: Text.Authorization.registration)
-
+        
         let mutableButtonText = NSMutableAttributedString(string: buttonText)
         mutableButtonText.addAttribute(
-                            .foregroundColor,
-                            value: Asset.Colors.registrationQuestionLabelText.color,
-                            range: questionRange
-                        )
+            .foregroundColor,
+            value: Asset.Colors.registrationQuestionLabelText.color,
+            range: questionRange
+        )
         mutableButtonText.addAttribute(
-                            .foregroundColor,
-                            value: Asset.Colors.enabledAuthorizationButtonText.color,
-                            range: registrationRange
-                        )
+            .foregroundColor,
+            value: Asset.Colors.enabledAuthorizationButtonText.color,
+            range: registrationRange
+        )
         
         let mutableButtonTextHighlited = NSMutableAttributedString(string: buttonText)
         mutableButtonTextHighlited.addAttribute(
-                                        .foregroundColor,
-                                        value: Asset.Colors.registrationQuestionLabelText.color,
-                                        range: questionRange
-                                    )
+            .foregroundColor,
+            value: Asset.Colors.registrationQuestionLabelText.color,
+            range: questionRange
+        )
         mutableButtonTextHighlited.addAttribute(
-                        .foregroundColor,
-                        value: Asset.Colors.enabledAuthorizationButtonText.color.withAlphaComponent(0.6),
-                        range: registrationRange
-                    )
-
+            .foregroundColor,
+            value: Asset.Colors.enabledAuthorizationButtonText.color.withAlphaComponent(0.6),
+            range: registrationRange
+        )
+        
         let button = UIButton()
         button.setAttributedTitle(mutableButtonText,
                                   for: .normal)
@@ -288,6 +290,7 @@ extension LoginViewController {
 }
 
 // MARK: Constraints
+
 extension LoginViewController {
     
     private func setConstraints() {

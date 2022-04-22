@@ -21,13 +21,11 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
     
     private let networklayer: NetworkLayerProtocol
     
-    private var validateRequest: RequestBuilder
-    private var refreshRequest: RequestBuilder
+    private var validateRequest: RequestBuilder!
+    private var refreshRequest: RequestBuilder!
     
     init(networkLayer: NetworkLayerProtocol, httpBody: Data? = nil) {
         self.networklayer = networkLayer
-        self.refreshRequest = RequestBuilder(urlRequest: URLRequest(url: URL(fileURLWithPath: "String")))
-        self.validateRequest = RequestBuilder(urlRequest: URLRequest(url: URL(fileURLWithPath: "String")))
         self.validateRequest = buildTestRequest()
         self.refreshRequest = buildRefreshRequest()
     }
@@ -51,7 +49,7 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
                   error == nil
             else {
                 if let error = error {
-                    print(error.localizedDescription)
+                    print("RefreshTokenService in refreshRequest - ", error.localizedDescription)
                     completion(.failure)
                 } else {
                     completion(.failure)
@@ -77,7 +75,7 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
                   error == nil
             else {
                 if let error = error {
-                    print(error.localizedDescription)
+                    print("RefreshTokenService in validate token - ", error.localizedDescription)
                     completion(.failure)
                 } else {
                     completion(.failure)
@@ -94,7 +92,7 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
         switch statusCode {
         case 200...201:
             completion(.success)
-
+            
         default:
             completion(.failure)
         }
@@ -118,10 +116,8 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
                 completion(.failure)
                 return
             }
-            print(KeychainService.getString(key: .accessToken)!)
-            print(KeychainService.getString(key: .refreshToken)!)
             completion(.success)
-
+            
         default:
             completion(.failure)
         }
@@ -150,7 +146,6 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
                                     forHTTPHeaderField: NetworkConfiguration.Headers.contentTypeJSON.field)
         request.urlRequest.setValue(NetworkConfiguration.Headers.acceptJSON.value,
                                     forHTTPHeaderField: NetworkConfiguration.Headers.acceptJSON.field)
-
         return request
     }
     
@@ -161,14 +156,5 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
             return nil
         }
         return (Tokens(accessToken: accessToken, refreshToken: refreshToken))
-    }
-    
-    private func decodeMessage<T: Codable>(data: Data?, type: T.Type) -> T? {
-        guard let data = data,
-              let decoded = try? JSONDecoder().decode(type.self, from: data)
-        else {
-            return nil
-        }
-        return decoded
     }
 }

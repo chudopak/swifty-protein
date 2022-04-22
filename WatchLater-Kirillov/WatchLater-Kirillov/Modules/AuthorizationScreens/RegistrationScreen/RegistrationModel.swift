@@ -25,7 +25,7 @@ enum RegistrationResponseState {
 }
 
 enum RError: Error, LocalizedError {
-
+    
     case unowned
     case alreadyExist
     case badEmailFormat
@@ -35,7 +35,7 @@ enum RError: Error, LocalizedError {
         case .unowned:
             return NSLocalizedString("Something went wrong",
                                      comment: "Unowned Error")
-        
+            
         case .alreadyExist:
             return NSLocalizedString("User trying to use email that already registered in data base",
                                      comment: "Email Already Exist")

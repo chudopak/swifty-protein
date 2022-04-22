@@ -11,25 +11,6 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Text {
 
-  internal enum Api {
-    /// watchlater.cloud.technokratos.com
-    internal static let host = Text.tr("Localizable", "API.host")
-    /// https
-    internal static let sceme = Text.tr("Localizable", "API.sceme")
-    internal enum AuthController {
-      /// /auth/login
-      internal static let login = Text.tr("Localizable", "API.AuthController.login")
-      /// /auth/reset
-      internal static let reset = Text.tr("Localizable", "API.AuthController.reset")
-      /// /auth/token
-      internal static let token = Text.tr("Localizable", "API.AuthController.token")
-    }
-    internal enum UserController {
-      /// /users
-      internal static let register = Text.tr("Localizable", "API.UserController.register")
-    }
-  }
-
   internal enum Authorization {
     /// Неверные логин или пароль
     internal static let failed = Text.tr("Localizable", "Authorization.failed")

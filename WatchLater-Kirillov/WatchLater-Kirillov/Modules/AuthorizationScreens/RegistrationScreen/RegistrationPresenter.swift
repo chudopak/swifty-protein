@@ -13,7 +13,7 @@ protocol RegistrationPresenterProtocol {
 }
 
 final class RegistrationPresenter: RegistrationPresenterProtocol {
-
+    
     private weak var registrationViewController: RegistrationViewControllerProtocol!
     
     init(viewController: RegistrationViewControllerProtocol) {
@@ -26,10 +26,10 @@ final class RegistrationPresenter: RegistrationPresenterProtocol {
             DispatchQueue.main.async { [unowned self] in
                 self.registrationViewController.presentThumbnailsViewController()
             }
-        
+            
         case let .failure(displayMessage, error):
             if let error = error {
-                print(error.localizedDescription)
+                print("RegistrationPresenter, proceedRegistrationResult - ", error.localizedDescription)
             }
             DispatchQueue.main.async { [unowned self] in
                 self.registrationViewController.registrationFailedState(displayMessage: displayMessage)

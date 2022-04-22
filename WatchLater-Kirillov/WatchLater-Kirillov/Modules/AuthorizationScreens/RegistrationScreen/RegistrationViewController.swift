@@ -39,22 +39,7 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate, Regis
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Asset.Colors.primaryBackground.color
-        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(
-            title: "",
-            style: .plain,
-            target: self,
-            action: nil
-        )
-        view.addSubview(logoImageView)
-        view.addSubview(emailTextField)
-        view.addSubview(passwordTextField)
-        view.addSubview(repeatPasswordTextField)
-        view.addSubview(registrationFailedLabel)
-        view.addSubview(registerButton)
-        view.addSubview(spinner)
-        registrationFailedLabel.isHidden = true
-        spinner.isHidden = true
+        configureView()
         setGestures()
         setConstraints()
     }
@@ -81,13 +66,31 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate, Regis
         changeLoadingState(isVisible: false)
         RegistrationRouter.removeViewController()
         LoginRouter.removeViewController()
-        UIWindowService.replaceWindowWithNewOne(rootViewController: FavouriteThumbnailsViewController())
+        UIWindowService.replaceRootViewController(with: FavouriteThumbnailsViewController())
     }
     
     func presentLoginViewControllerWithLoginAlert() {
         changeLoadingState(isVisible: false)
         // We can present some alert here to notify the user about succes registration
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func configureView() {
+        view.backgroundColor = Asset.Colors.primaryBackground.color
+        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: self,
+            action: nil)
+        view.addSubview(logoImageView)
+        view.addSubview(emailTextField)
+        view.addSubview(passwordTextField)
+        view.addSubview(repeatPasswordTextField)
+        view.addSubview(registrationFailedLabel)
+        view.addSubview(registerButton)
+        view.addSubview(spinner)
+        registrationFailedLabel.isHidden = true
+        spinner.isHidden = true
     }
     
     private func getRegistrationData() -> RegistrationData? {

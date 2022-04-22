@@ -13,6 +13,7 @@ Common.logout = "Выйти";
 Common.login = "Войти";
 
 // MARK: - Authorization
+
 Authorization.placeholder.email = "Адрес электронной почты";
 Authorization.placeholder.password = "Пароль";
 Authorization.placeholder.repeatPassword = "Повторите пароль";
@@ -21,16 +22,3 @@ Authorization.registration = "Регистрация";
 Authorization.failed = "Неверные логин или пароль";
 Authorization.passwordsNotMatch = "Пароли не совпадают";
 Authorization.somethingWentWrong = "Что-то пошло не так";
-
-// MARK: - API
-API.sceme = "https";
-API.host = "watchlater.cloud.technokratos.com";
-// MARK: - API Authentication controller
-API.AuthController.login = "/auth/login";
-API.AuthController.reset = "/auth/reset";
-API.AuthController.token = "/auth/token";
-
-// MARK: - API User controllre
-API.UserController.register = "/users";
-
-

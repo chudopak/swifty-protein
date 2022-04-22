@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "AgonaLogo.png",
+      "filename" : "AgonaLogo.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "AgonaLogo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "AgonaLogo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
