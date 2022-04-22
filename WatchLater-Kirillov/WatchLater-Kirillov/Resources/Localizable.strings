@@ -10,6 +10,16 @@ Common.dave = "Сохранить";
 Common.remove = "Удалить";
 Common.update = "Обновить";
 Common.logout = "Выйти";
+Common.login = "Войти";
+
+// MARK: - Authorization
+Authorization.placeholder.email = "Адрес электронной почты";
+Authorization.placeholder.password = "Пароль";
+Authorization.placeholder.repeatPassword = "Повторите пароль";
+Authorization.registrationQuestion = "Еще не зарегистрированы?";
+Authorization.registration = "Регистрация";
+Authorization.failed = "Неверные логин или пароль";
+Authorization.passwordsNotMatch = "Пароли не совпадают";
 
 // MARK: - Test
 

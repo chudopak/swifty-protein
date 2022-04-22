@@ -11,6 +11,25 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Text {
 
+  internal enum Authorization {
+    /// Неверные логин или пароль
+    internal static let failed = Text.tr("Localizable", "Authorization.failed")
+    /// Пароли не совпадают
+    internal static let passwordsNotMatch = Text.tr("Localizable", "Authorization.passwordsNotMatch")
+    /// Регистрация
+    internal static let registration = Text.tr("Localizable", "Authorization.registration")
+    /// Еще не зарегистрированы?
+    internal static let registrationQuestion = Text.tr("Localizable", "Authorization.registrationQuestion")
+    internal enum Placeholder {
+      /// Адрес электронной почты
+      internal static let email = Text.tr("Localizable", "Authorization.placeholder.email")
+      /// Пароль
+      internal static let password = Text.tr("Localizable", "Authorization.placeholder.password")
+      /// Повторите пароль
+      internal static let repeatPassword = Text.tr("Localizable", "Authorization.placeholder.repeatPassword")
+    }
+  }
+
   internal enum Common {
     /// Отмена
     internal static let cancel = Text.tr("Localizable", "Common.cancel")
@@ -20,6 +39,8 @@ internal enum Text {
     internal static let dave = Text.tr("Localizable", "Common.dave")
     /// Готово
     internal static let done = Text.tr("Localizable", "Common.done")
+    /// Войти
+    internal static let login = Text.tr("Localizable", "Common.login")
     /// Выйти
     internal static let logout = Text.tr("Localizable", "Common.logout")
     /// Далее

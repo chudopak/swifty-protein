@@ -12,6 +12,8 @@
 // Deprecated typealiases
 @available(*, deprecated, renamed: "ColorAsset.Color", message: "This typealias will be removed in SwiftGen 7.0")
 internal typealias AssetColorTypeAlias = ColorAsset.Color
+@available(*, deprecated, renamed: "ImageAsset.Image", message: "This typealias will be removed in SwiftGen 7.0")
+internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable superfluous_disable_command file_length implicit_return
 
@@ -20,10 +22,24 @@ internal typealias AssetColorTypeAlias = ColorAsset.Color
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
   internal enum Colors {
+    internal static let disabledAuthorizationButtonBackground = ColorAsset(name: "Colors/disabledAuthorizationButtonBackground")
+    internal static let disabledAuthorizationButtonText = ColorAsset(name: "Colors/disabledAuthorizationButtonText")
+    internal static let enabledAuthorizationButtonBorderLine = ColorAsset(name: "Colors/enabledAuthorizationButtonBorderLine")
+    internal static let enabledAuthorizationButtonText = ColorAsset(name: "Colors/enabledAuthorizationButtonText")
+    internal static let loginPlaceholderTextColor = ColorAsset(name: "Colors/loginPlaceholderTextColor")
+    internal static let loginTextColor = ColorAsset(name: "Colors/loginTextColor")
+    internal static let textFieldBoarderColor = ColorAsset(name: "Colors/textFieldBoarderColor")
+    internal static let loginFailedText = ColorAsset(name: "Colors/loginFailedText")
+    internal static let registrationQuestionLabelText = ColorAsset(name: "Colors/registrationQuestionLabelText")
     internal static let activeBackground = ColorAsset(name: "Colors/activeBackground")
+    internal static let navigationBar = ColorAsset(name: "Colors/navigationBar")
     internal static let primaryBackground = ColorAsset(name: "Colors/primaryBackground")
     internal static let textColor = ColorAsset(name: "Colors/textColor")
   }
+  internal static let agonaLogo = ImageAsset(name: "AgonaLogo")
+  internal static let watchLater = ImageAsset(name: "WatchLater")
+  internal static let eye = ImageAsset(name: "eye")
+  internal static let watchLaterLogoFull = ImageAsset(name: "WatchLaterLogoFull")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
@@ -70,6 +86,60 @@ internal extension ColorAsset.Color {
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
     self.init(named: NSColor.Name(asset.name), bundle: bundle)
+    #elseif os(watchOS)
+    self.init(named: asset.name)
+    #endif
+  }
+}
+
+internal struct ImageAsset {
+  internal fileprivate(set) var name: String
+
+  #if os(macOS)
+  internal typealias Image = NSImage
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  internal typealias Image = UIImage
+  #endif
+
+  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.7, *)
+  internal var image: Image {
+    let bundle = BundleToken.bundle
+    #if os(iOS) || os(tvOS)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    #elseif os(macOS)
+    let name = NSImage.Name(self.name)
+    let image = (bundle == .main) ? NSImage(named: name) : bundle.image(forResource: name)
+    #elseif os(watchOS)
+    let image = Image(named: name)
+    #endif
+    guard let result = image else {
+      fatalError("Unable to load image asset named \(name).")
+    }
+    return result
+  }
+
+  #if os(iOS) || os(tvOS)
+  @available(iOS 8.0, tvOS 9.0, *)
+  internal func image(compatibleWith traitCollection: UITraitCollection) -> Image {
+    let bundle = BundleToken.bundle
+    guard let result = Image(named: name, in: bundle, compatibleWith: traitCollection) else {
+      fatalError("Unable to load image asset named \(name).")
+    }
+    return result
+  }
+  #endif
+}
+
+internal extension ImageAsset.Image {
+  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, *)
+  @available(macOS, deprecated,
+    message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
+  convenience init?(asset: ImageAsset) {
+    #if os(iOS) || os(tvOS)
+    let bundle = BundleToken.bundle
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(macOS)
+    self.init(named: NSImage.Name(asset.name))
     #elseif os(watchOS)
     self.init(named: asset.name)
     #endif
