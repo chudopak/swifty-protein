@@ -31,21 +31,7 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Asset.Colors.primaryBackground.color
-        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(
-                                                                            title: "",
-                                                                            style: .plain,
-                                                                            target: self,
-                                                                            action: nil)
-        view.addSubview(logoImageView)
-        view.addSubview(emailTextField)
-        view.addSubview(passwordTextField)
-        view.addSubview(repeatPasswordTextField)
-        view.addSubview(registrationFailedLabel)
-        view.addSubview(registerButton)
-        view.addSubview(spinner)
-        registrationFailedLabel.isHidden = true
-        spinner.isHidden = true
+        configureView()
         setGestures()
         setConstraints()
     }
@@ -57,6 +43,24 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.placeholder = ""
+    }
+    
+    private func configureView() {
+        view.backgroundColor = Asset.Colors.primaryBackground.color
+        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: self,
+            action: nil)
+        view.addSubview(logoImageView)
+        view.addSubview(emailTextField)
+        view.addSubview(passwordTextField)
+        view.addSubview(repeatPasswordTextField)
+        view.addSubview(registrationFailedLabel)
+        view.addSubview(registerButton)
+        view.addSubview(spinner)
+        registrationFailedLabel.isHidden = true
+        spinner.isHidden = true
     }
     
     private func getAuthorizatioinData() -> RegistrationData? {
@@ -114,7 +118,7 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         passwordTextField.textColor = Asset.Colors.loginTextColor.color
         repeatPasswordTextField.textColor = Asset.Colors.loginTextColor.color
     }
-
+    
     private func handleTextFieldsActivity(active: AuthorizationTextField,
                                           nextToBeField: AuthorizationTextField) {
         _ = active.resignFirstResponder()
@@ -187,11 +191,11 @@ extension RegistrationViewController {
     
     private func makeTextField(type: TextFieldType) -> AuthorizationTextField {
         let inset = UIEdgeInsets(
-                        top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
-                        left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
-                        bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
-                        right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset
-                    )
+            top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
+            left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
+            bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
+            right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset
+        )
         let textField = AuthorizationTextField(type: type,
                                                inset: inset)
         textField.delegate = self
@@ -203,12 +207,12 @@ extension RegistrationViewController {
             textField.addTarget(self,
                                 action: #selector(emailTextFieldDonePressed),
                                 for: .editingDidEndOnExit)
-        
+            
         case .password:
             textField.addTarget(self,
                                 action: #selector(passwordTextFieldDonePressed),
                                 for: .editingDidEndOnExit)
-
+            
         case .repeatPassword:
             textField.addTarget(self,
                                 action: #selector(repeatPasswordTextFieldDonePressed),
@@ -228,12 +232,12 @@ extension RegistrationViewController {
     
     private func makeRegisterButton() -> AuthorizationButton {
         let colorSet = AuthorizationButton.ColorSet(
-                                    enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
-                                    enabledBackground: .clear,
-                                    enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
-                                    disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
-                                    disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
-                                    disabledBorder: .clear)
+            enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
+            enabledBackground: .clear,
+            enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
+            disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
+            disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
+            disabledBorder: .clear)
         let button = AuthorizationButton(colorSet: colorSet,
                                          text: Text.Authorization.registration,
                                          fontSize: RegistrationScreenSizes.RegisterButton.fontSize)

@@ -29,8 +29,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Asset.Colors.primaryBackground.color
-        addSubviews()
+        configureView()
         loginFailedLabel.isHidden = true
         setGestures()
         setConstraints()
@@ -45,7 +44,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         textField.placeholder = ""
     }
     
-    private func addSubviews() {
+    private func configureView() {
+        view.backgroundColor = Asset.Colors.primaryBackground.color
         view.addSubview(watchLaterLogoImageView)
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)

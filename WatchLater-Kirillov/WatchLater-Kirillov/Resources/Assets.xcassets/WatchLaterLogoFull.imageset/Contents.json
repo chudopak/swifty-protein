@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Watch_Later_Logo_Full.png",
+      "filename" : "WatchLaterLogoFull.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Watch_Later_Logo_Full@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Watch_Later_Logo_Full@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
