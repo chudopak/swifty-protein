@@ -92,6 +92,8 @@
 		7D9715182805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */; };
 		7D99731E28058E7F0094F302 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731D28058E7F0094F302 /* LoginViewController.swift */; };
 		7D99732028058F7E0094F302 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731F28058F7E0094F302 /* LoginRouter.swift */; };
+		7D9CDA3328169C6100DDEDBD /* ViewStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9CDA3228169C6100DDEDBD /* ViewStyleButton.swift */; };
+		7D9CDA3428169C6100DDEDBD /* ViewStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9CDA3228169C6100DDEDBD /* ViewStyleButton.swift */; };
 		7DAE55D02811681B0006C24A /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE55CF2811681B0006C24A /* KeychainService.swift */; };
 		7DAE55D12811681B0006C24A /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE55CF2811681B0006C24A /* KeychainService.swift */; };
 		7DB7E0C52806B56D00996926 /* LoginScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */; };
@@ -165,6 +167,7 @@
 		7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLauchChecker.swift; sourceTree = "<group>"; };
 		7D99731D28058E7F0094F302 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7D99731F28058F7E0094F302 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		7D9CDA3228169C6100DDEDBD /* ViewStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStyleButton.swift; sourceTree = "<group>"; };
 		7DAE55CF2811681B0006C24A /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenElementsSizes.swift; sourceTree = "<group>"; };
 		7DBC89382807065200F94B6C /* AuthorizationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTextField.swift; sourceTree = "<group>"; };
@@ -317,6 +320,8 @@
 		30D2F26426014275000134EB /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */,
+				7D9CDA3228169C6100DDEDBD /* ViewStyleButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 		30D2F27F26014F16000134EB /* TextField */ = {
 			isa = PBXGroup;
 			children = (
+				7DBC89382807065200F94B6C /* AuthorizationTextField.swift */,
 			);
 			path = TextField;
 			sourceTree = "<group>";
@@ -426,7 +432,6 @@
 		7D178EA828085906009C6280 /* AuthorizationScreens */ = {
 			isa = PBXGroup;
 			children = (
-				7DB7E0CD2806CFD200996926 /* SharedUIElements */,
 				7D99731C28058E550094F302 /* LoginScreen */,
 				7D178EA7280858DD009C6280 /* RegistrationScreen */,
 			);
@@ -541,15 +546,6 @@
 				7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		7DB7E0CD2806CFD200996926 /* SharedUIElements */ = {
-			isa = PBXGroup;
-			children = (
-				7DBC89382807065200F94B6C /* AuthorizationTextField.swift */,
-				7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */,
-			);
-			path = SharedUIElements;
 			sourceTree = "<group>";
 		};
 		970F809B147CFE1BEEE5F075 /* Pods */ = {
@@ -878,6 +874,7 @@
 				3076A0882601D421003B0EF9 /* StoryboardScenes.swift in Sources */,
 				30D2F277260148EE000134EB /* Texts.swift in Sources */,
 				3076A0892601D421003B0EF9 /* StoryboardSegues.swift in Sources */,
+				7D9CDA3328169C6100DDEDBD /* ViewStyleButton.swift in Sources */,
 				7D612D59281182EF007C7515 /* UIWindowService.swift in Sources */,
 				30D2F274260148EE000134EB /* Asset.swift in Sources */,
 				7D7386D7281047F7008C00FE /* RequestBuilder.swift in Sources */,
@@ -926,6 +923,7 @@
 				7D058F19280DC0C800683C3C /* NetworkLayer.swift in Sources */,
 				7D7EF855280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */,
 				7DB7E0C82806BBAB00996926 /* LoginScreenElementsSizes.swift in Sources */,
+				7D9CDA3428169C6100DDEDBD /* ViewStyleButton.swift in Sources */,
 				7D612D5A281182EF007C7515 /* UIWindowService.swift in Sources */,
 				7DB7E0C92806BBAB00996926 /* LoginViewController.swift in Sources */,
 				7D7386D8281047F7008C00FE /* RequestBuilder.swift in Sources */,

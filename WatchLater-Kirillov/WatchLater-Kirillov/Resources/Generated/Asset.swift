@@ -32,16 +32,23 @@ internal enum Asset {
     internal static let loginFailedText = ColorAsset(name: "Colors/loginFailedText")
     internal static let registrationQuestionLabelText = ColorAsset(name: "Colors/registrationQuestionLabelText")
     internal static let activeBackground = ColorAsset(name: "Colors/activeBackground")
-    internal static let navigationBar = ColorAsset(name: "Colors/navigationBar")
+    internal static let navigationBarBackground = ColorAsset(name: "Colors/navigationBarBackground")
+    internal static let navigationBarTextColor = ColorAsset(name: "Colors/navigationBarTextColor")
     internal static let primaryBackground = ColorAsset(name: "Colors/primaryBackground")
+    internal static let tabBarBackground = ColorAsset(name: "Colors/tabBarBackground")
+    internal static let tabBarTextColor = ColorAsset(name: "Colors/tabBarTextColor")
     internal static let textColor = ColorAsset(name: "Colors/textColor")
   }
+  internal static let collectionViewImage = ImageAsset(name: "collectionViewImage")
+  internal static let searchIcon = ImageAsset(name: "searchIcon")
+  internal static let tabelViewImage = ImageAsset(name: "tabelViewImage")
   internal static let agonaLogo = ImageAsset(name: "AgonaLogo")
   internal static let watchLater = ImageAsset(name: "WatchLater")
   internal static let eye = ImageAsset(name: "eye")
   internal static let collectionActive = ImageAsset(name: "CollectionActive")
   internal static let collectionInactive = ImageAsset(name: "CollectionInactive")
   internal static let watchLaterLogoFull = ImageAsset(name: "WatchLaterLogoFull")
+  internal static let logoShort = ImageAsset(name: "logoShort")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

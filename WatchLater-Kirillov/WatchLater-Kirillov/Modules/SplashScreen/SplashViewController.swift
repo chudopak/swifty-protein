@@ -84,11 +84,7 @@ class SplashViewController: BaseViewController {
     }
     
     private func presentNeededScreen() {
-        // TODO: - change presentation logic for seetuping stuff in router
         if isTokenActive {
-//            let tmp = FavouriteViewController()
-//            let navigationController = UINavigationController(rootViewController: tmp)
-//            navigationController.modalPresentationStyle = .fullScreen
             let tabBar = MainTabBar()
             UIWindowService.replaceRootViewController(with: tabBar)
         } else {

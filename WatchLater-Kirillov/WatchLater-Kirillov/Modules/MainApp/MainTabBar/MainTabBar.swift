@@ -27,10 +27,6 @@ class MainTabBar: UITabBarController {
     private func setUpViewControllers() {
         let favouriteVC = FavouriteViewController()
         let favouriteNavigatonController = UINavigationController(rootViewController: favouriteVC)
-        favouriteNavigatonController.navigationBar.prefersLargeTitles = true
-        favouriteNavigatonController.navigationBar.barTintColor = .black
-        favouriteNavigatonController.navigationBar.titleTextAttributes =
-            [NSAttributedString.Key.foregroundColor: UIColor.black]
         favouriteVC.title = NSLocalizedString(Text.TabBar.collection, comment: "")
         
         setViewControllers([favouriteNavigatonController], animated: true)

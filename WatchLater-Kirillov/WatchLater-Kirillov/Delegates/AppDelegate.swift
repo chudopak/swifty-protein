@@ -70,7 +70,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setBarsAppearance() {
-        UINavigationBar.appearance().barTintColor = Asset.Colors.navigationBar.color
+        setNavigationBarAppearance()
+        setTabBarAppearance()
+    }
+    
+    private func setNavigationBarAppearance() {
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes =
+                [.foregroundColor: Asset.Colors.navigationBarTextColor.color]
+            navBarAppearance.largeTitleTextAttributes =
+                [.foregroundColor: Asset.Colors.navigationBarTextColor.color]
+            navBarAppearance.backgroundColor = Asset.Colors.navigationBarBackground.color
+            UINavigationBar.appearance().standardAppearance = navBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        } else {
+            UINavigationBar.appearance().barTintColor = Asset.Colors.navigationBarBackground.color
+            UINavigationBar.appearance().titleTextAttributes =
+                [.foregroundColor: Asset.Colors.navigationBarTextColor.color]
+            UINavigationBar.appearance().largeTitleTextAttributes =
+                [.foregroundColor: Asset.Colors.navigationBarTextColor.color]
+        }
+    }
+    
+    private func setTabBarAppearance() {
+        UITabBar.appearance().backgroundColor = Asset.Colors.tabBarBackground.color
+        UITabBar.appearance().barTintColor = Asset.Colors.tabBarBackground.color
+        UITabBar.appearance().tintColor = Asset.Colors.tabBarTextColor.color
     }
 }
 
