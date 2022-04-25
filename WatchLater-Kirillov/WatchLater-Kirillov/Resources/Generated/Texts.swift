@@ -53,6 +53,10 @@ internal enum Text {
     internal static let remove = Text.tr("Localizable", "Common.remove")
     /// Обновить
     internal static let update = Text.tr("Localizable", "Common.update")
+    /// Просмотрено
+    internal static let viewed = Text.tr("Localizable", "Common.viewed")
+    /// Буду смотреть
+    internal static let willWatch = Text.tr("Localizable", "Common.willWatch")
     /// Да
     internal static let yes = Text.tr("Localizable", "Common.yes")
   }

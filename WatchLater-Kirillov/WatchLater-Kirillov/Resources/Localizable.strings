@@ -11,6 +11,8 @@ Common.remove = "Удалить";
 Common.update = "Обновить";
 Common.logout = "Выйти";
 Common.login = "Войти";
+Common.willWatch = "Буду смотреть";
+Common.viewed = "Просмотрено";
 
 // MARK: - Authorization
 
