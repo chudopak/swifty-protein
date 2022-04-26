@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         self.window = UIWindow(windowScene: windowScene)
-        let splashVC = SplashViewController(service: RefreshTokenService(networkLayer: NetworkLayer()))
+        let splashVC = SplashViewController(service: RefreshTokenService())
         self.window!.rootViewController = splashVC
         self.window!.makeKeyAndVisible()
     }

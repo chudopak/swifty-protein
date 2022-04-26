@@ -102,6 +102,12 @@
 		7DAD276128181592005B9D6F /* FilmsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD275F28181592005B9D6F /* FilmsTableView.swift */; };
 		7DAD276328181730005B9D6F /* FilmsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD276228181730005B9D6F /* FilmsTableViewCell.swift */; };
 		7DAD276428181730005B9D6F /* FilmsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD276228181730005B9D6F /* FilmsTableViewCell.swift */; };
+		7DAD2766281830AB005B9D6F /* FavouriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD2765281830AB005B9D6F /* FavouriteInteractor.swift */; };
+		7DAD2767281830AB005B9D6F /* FavouriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD2765281830AB005B9D6F /* FavouriteInteractor.swift */; };
+		7DAD27692818316D005B9D6F /* FavouritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD27682818316D005B9D6F /* FavouritePresenter.swift */; };
+		7DAD276A2818316D005B9D6F /* FavouritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD27682818316D005B9D6F /* FavouritePresenter.swift */; };
+		7DAD276C281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD276B281833AD005B9D6F /* FavouriteConfigurator.swift */; };
+		7DAD276D281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD276B281833AD005B9D6F /* FavouriteConfigurator.swift */; };
 		7DAE55D02811681B0006C24A /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE55CF2811681B0006C24A /* KeychainService.swift */; };
 		7DAE55D12811681B0006C24A /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE55CF2811681B0006C24A /* KeychainService.swift */; };
 		7DB7E0C52806B56D00996926 /* LoginScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */; };
@@ -189,6 +195,9 @@
 		7DAD275C2817E790005B9D6F /* ImageDownloadingCacheConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadingCacheConfigProvider.swift; sourceTree = "<group>"; };
 		7DAD275F28181592005B9D6F /* FilmsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsTableView.swift; sourceTree = "<group>"; };
 		7DAD276228181730005B9D6F /* FilmsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsTableViewCell.swift; sourceTree = "<group>"; };
+		7DAD2765281830AB005B9D6F /* FavouriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteInteractor.swift; sourceTree = "<group>"; };
+		7DAD27682818316D005B9D6F /* FavouritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePresenter.swift; sourceTree = "<group>"; };
+		7DAD276B281833AD005B9D6F /* FavouriteConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteConfigurator.swift; sourceTree = "<group>"; };
 		7DAE55CF2811681B0006C24A /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenElementsSizes.swift; sourceTree = "<group>"; };
 		7DBC89382807065200F94B6C /* AuthorizationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTextField.swift; sourceTree = "<group>"; };
@@ -476,6 +485,9 @@
 				7DE0E2422816BA1300670DE3 /* Utils */,
 				7D612D5428118246007C7515 /* FavouriteViewController.swift */,
 				7DE0E24F2816F20900670DE3 /* FavouriteModels.swift */,
+				7DAD2765281830AB005B9D6F /* FavouriteInteractor.swift */,
+				7DAD27682818316D005B9D6F /* FavouritePresenter.swift */,
+				7DAD276B281833AD005B9D6F /* FavouriteConfigurator.swift */,
 			);
 			path = FavouriteScreen;
 			sourceTree = "<group>";
@@ -915,6 +927,7 @@
 				7D178EAD28085B11009C6280 /* RegistrationRouter.swift in Sources */,
 				7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */,
 				7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
+				7DAD276C281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */,
 				7D178EA528084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
 				7DE0E24D2816DEBC00670DE3 /* FilmCollectionViewCell.swift in Sources */,
 				7D0ACA9828096A2B00777442 /* RegistrationModel.swift in Sources */,
@@ -932,7 +945,9 @@
 				7D178EB128087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
 				7D7EF854280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */,
 				7DAD276328181730005B9D6F /* FilmsTableViewCell.swift in Sources */,
+				7DAD2766281830AB005B9D6F /* FavouriteInteractor.swift in Sources */,
 				7D7386D328101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
+				7DAD27692818316D005B9D6F /* FavouritePresenter.swift in Sources */,
 				7D2B76ED28129E020051BF9A /* BaseFunctions.swift in Sources */,
 				7DAD275A2817E365005B9D6F /* ImageDownloadingService.swift in Sources */,
 				7DBC89392807065200F94B6C /* AuthorizationTextField.swift in Sources */,
@@ -972,6 +987,7 @@
 				7D7EF857280EF04100B99CA4 /* LoginService.swift in Sources */,
 				7D7EF856280EF02600B99CA4 /* RegistrationService.swift in Sources */,
 				7D178EAE28085B11009C6280 /* RegistrationRouter.swift in Sources */,
+				7DAD276D281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */,
 				7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */,
 				7DE0E24E2816DEBC00670DE3 /* FilmCollectionViewCell.swift in Sources */,
 				7D3B5D5B280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
@@ -989,7 +1005,9 @@
 				7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */,
 				7D178EB228087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
 				7DAD276428181730005B9D6F /* FilmsTableViewCell.swift in Sources */,
+				7DAD2767281830AB005B9D6F /* FavouriteInteractor.swift in Sources */,
 				7D7386D428101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
+				7DAD276A2818316D005B9D6F /* FavouritePresenter.swift in Sources */,
 				7D2B76EE28129E020051BF9A /* BaseFunctions.swift in Sources */,
 				7DAD275B2817E365005B9D6F /* ImageDownloadingService.swift in Sources */,
 				7DBC893A2807065200F94B6C /* AuthorizationTextField.swift in Sources */,

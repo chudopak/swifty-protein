@@ -9,7 +9,10 @@
 import UIKit
 import SnapKit
 
-class FavouriteViewController: BaseViewController {
+protocol FavouriteViewControllerProtocol: AnyObject {
+}
+
+class FavouriteViewController: BaseViewController, FavouriteViewControllerProtocol {
     
     enum ViewStyle {
         case collectionView, tableView
@@ -22,6 +25,8 @@ class FavouriteViewController: BaseViewController {
     private lazy var segmentControl = makeSegmentControll()
     private lazy var filmsCollectionView = makeFilmsCollectionView()
     private lazy var filmsTableView = makeFilmsTableView()
+    
+    private var interactor: FavouriteInteractorProtocol!
 
     private var filmsWillWatch = [FilmInfo(id: "tt4682562",
                                            resultType: "Title",
@@ -50,6 +55,10 @@ class FavouriteViewController: BaseViewController {
         super.viewDidLoad()
         setView()
         setConstraints()
+    }
+    
+    func setupComponents(interactor: FavouriteInteractorProtocol) {
+        self.interactor = interactor
     }
     
     private func setView() {

@@ -15,8 +15,8 @@ final class RegistrationControllerConfigurator {
         let presenter = RegistrationPresenter(viewController: viewController)
         let interactor = RegistrationInteractor(
             presenter: presenter,
-            networkService: RegistrationService(networkLayer: NetworkLayer(),
-                                                loginService: LoginService(networkLayer: NetworkLayer()))
+            networkService: RegistrationService(networkLayer: NetworkLayer(refreshService: RefreshTokenService()),
+                                                loginService: LoginService(networkLayer: NetworkLayer(refreshService: RefreshTokenService())))
         )
         viewController.setupComponents(interactor: interactor)
         return viewController

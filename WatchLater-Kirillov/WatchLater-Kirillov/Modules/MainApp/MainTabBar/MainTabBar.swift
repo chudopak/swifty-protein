@@ -25,7 +25,7 @@ class MainTabBar: UITabBarController {
     }
     
     private func setUpViewControllers() {
-        let favouriteVC = FavouriteViewController()
+        let favouriteVC = FavouriteConfigurator().setupModule()
         let favouriteNavigatonController = UINavigationController(rootViewController: favouriteVC)
         favouriteVC.title = NSLocalizedString(Text.TabBar.collection, comment: "")
         
