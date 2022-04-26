@@ -13,14 +13,8 @@ class FilmCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "FilmCollectionViewCell"
     
-    private lazy var filmImageView = makeFilmImageView()
-    private lazy var titleLabel = makeTitleLabel()
-    
-    var filmInfo: FilmInfo! {
-        didSet {
-            updateView()
-        }
-    }
+    lazy var filmImageView = makeFilmImageView()
+    lazy var titleLabel = makeTitleLabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,10 +26,6 @@ class FilmCollectionViewCell: UICollectionViewCell {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func updateView() {
-        titleLabel.text = filmInfo.title
     }
 }
 
@@ -54,7 +44,6 @@ extension FilmCollectionViewCell {
         label.textAlignment = .left
         label.numberOfLines = 1
         label.text = ""
-        label.backgroundColor = .red
         return label
     }
 }

@@ -12,6 +12,8 @@ import Alamofire
 protocol NetworkLayerProtocol {
     func request(urlRequest: URLRequestBuilder,
                  completion: @escaping (Data?, URLResponse?, Error?) -> Void)
+    func request(url: URL,
+                 completion: @escaping (Data?, URLResponse?, Error?) -> Void)
     func cancel(by url: URL)
 }
 
@@ -27,6 +29,13 @@ final class NetworkLayer: NetworkLayerProtocol {
     func request(urlRequest: URLRequestBuilder,
                  completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         AF.request(urlRequest).response { data in
+            completion(data.data, data.response, data.error)
+        }
+    }
+    
+    func request(url: URL,
+                 completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        AF.request(url).response { data in
             completion(data.data, data.response, data.error)
         }
     }

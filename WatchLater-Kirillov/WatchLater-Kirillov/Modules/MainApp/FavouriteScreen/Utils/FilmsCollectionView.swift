@@ -8,23 +8,25 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
-class FilmsView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private var filmsCollectionView: UICollectionView!
     
     var filmsInfo = [FilmInfo]() {
         didSet {
-            setNeedsLayout()
+            filmsCollectionView.reloadData()
         }
     }
     
     init(collectionViewLayout: UICollectionViewFlowLayout) {
         super.init(frame: .zero)
+        KingfisherManager.shared.cache = ImageDownloadingCacheConfigProvider.cacheConfig
         filmsCollectionView = makeFilmsCollectionView(collectionViewLayout: collectionViewLayout)
         addSubview(filmsCollectionView)
-        setCollectionViewConstraints()
         backgroundColor = .clear
+        setCollectionViewConstraints()
     }
     
     @available(*, unavailable)
@@ -33,15 +35,14 @@ class FilmsView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, U
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: - Delete 7
-        return filmsInfo.count + 7
+        return filmsInfo.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifier, for: indexPath) as! FilmCollectionViewCell
-        cell.backgroundColor = .blue
-        if !filmsInfo.isEmpty {
-            cell.filmInfo = filmsInfo[0]
+        cell.titleLabel.text = filmsInfo[indexPath.row].title
+        if let url = URL(string: filmsInfo[indexPath.row].image) {
+            cell.filmImageView.kf.setImage(with: url)
         }
         return cell
     }
@@ -54,7 +55,7 @@ class FilmsView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, U
     }
 }
 
-extension FilmsView {
+extension FilmsCollectionView {
     
     private func makeFilmsCollectionView(collectionViewLayout: UICollectionViewFlowLayout) -> UICollectionView {
         let collectionView = UICollectionView(frame: .zero,
@@ -68,7 +69,7 @@ extension FilmsView {
     }
 }
 
-extension FilmsView {
+extension FilmsCollectionView {
 
     private func setCollectionViewConstraints() {
         filmsCollectionView.snp.makeConstraints { maker in

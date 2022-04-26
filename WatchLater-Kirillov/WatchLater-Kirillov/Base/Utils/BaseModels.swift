@@ -12,3 +12,33 @@ struct Tokens: Codable {
     let accessToken: String
     let refreshToken: String
 }
+
+enum BaseError: Error {
+    case imageLoadingError
+    case noResponse
+    case unownedResponseCode
+}
+
+extension BaseError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .imageLoadingError:
+            return NSLocalizedString(
+                "Can not download image.",
+                comment: ""
+            )
+        
+        case .noResponse:
+            return NSLocalizedString(
+                "No response provided in request.",
+                comment: ""
+            )
+            
+        case .unownedResponseCode:
+            return NSLocalizedString(
+                "Unowned Response Code.",
+                comment: ""
+            )
+        }
+    }
+}

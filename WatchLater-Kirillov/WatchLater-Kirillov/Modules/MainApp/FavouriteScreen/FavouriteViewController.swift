@@ -20,7 +20,31 @@ class FavouriteViewController: BaseViewController {
     private lazy var searchBarButton = makeSearchBarButtonItem()
     private lazy var styleBarButton = makeStyleBarButtonItem()
     private lazy var segmentControl = makeSegmentControll()
-    private lazy var filmsView = makeFilmsView()
+    private lazy var filmsCollectionView = makeFilmsCollectionView()
+    private lazy var filmsTableView = makeFilmsTableView()
+
+    private var filmsWillWatch = [FilmInfo(id: "tt4682562",
+                                           resultType: "Title",
+                                           image: "https://imdb-api.com/images/original/MV5BZTA0NDM0ZWMtZDI0Zi00OWI5LWJlOTYtZTk5ZjAzYzIyNjQ3XkEyXkFqcGdeQXVyNDE2NjE1Njc@._V1_Ratio0.7273_AL_.jpg",
+                                           title: "Office",
+                                           description: "(2015)"),
+                                  FilmInfo(id: "tt9288848",
+                                           resultType: "Title",
+                                           image: "https://imdb-api.com/images/original/MV5BYThkYTFiYTUtNTY0NS00Y2Y0LTk3ZmItMzZjMjZjZWE3NDRiXkEyXkFqcGdeQXVyMjQ3MjU3NTU@._V1_Ratio0.7273_AL_.jpg",
+                                           title: "Pacific Rim: The Black",
+                                           description: "(2015)")
+        ]
+    private var filmsViewd = [FilmInfo(id: "tt11859542",
+                                       resultType: "Title",
+                                       image: "https://imdb-api.com/images/original/MV5BZWNiYjllNjgtY2VlOC00NDM4LTk4YzQtNGU1Zjk4NDUzN2Q4XkEyXkFqcGdeQXVyMTA2ODkwNzM5._V1_Ratio0.7273_AL_.jpg",
+                                       title: "In from the Cold",
+                                       description: "(2015)"),
+                              FilmInfo(id: "tt3921180",
+                                       resultType: "Title",
+                                       image: "https://imdb-api.com/images/original/MV5BNjVmY2M3ZTUtMDhkZC00ODk4LTkwMjktNDRjNGRjYTIxZGZiXkEyXkFqcGdeQXVyNjEwNTM2Mzc@._V1_Ratio0.7273_AL_.jpg",
+                                       title: "Scream: The TV Series",
+                                       description: "(2015)")
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +59,48 @@ class FavouriteViewController: BaseViewController {
         navigationItem.titleView = UIImageView(image: Asset.logoShort.image)
         view.backgroundColor = Asset.Colors.primaryBackground.color
         view.addSubview(segmentControl)
-        view.addSubview(filmsView)
-        filmsView.filmsInfo = [FilmInfo(id: "tt4682562",
-                                        resultType: "Title",
-                                        image: "https://imdb-api.com/images/original/MV5BZTA0NDM0ZWMtZDI0Zi00OWI5LWJlOTYtZTk5ZjAzYzIyNjQ3XkEyXkFqcGdeQXVyNDE2NjE1Njc@._V1_Ratio0.7273_AL_.jpg",
-                                        title: "Office",
-                                        description: "(2015)")]
+        view.addSubview(filmsCollectionView)
+        view.addSubview(filmsTableView)
+        filmsTableView.isHidden = true
+        // TODO: - Put films from core data in films info
+        filmsCollectionView.filmsInfo = filmsWillWatch
+        filmsTableView.filmsInfo = filmsWillWatch
     }
     
+    private func setActiveFilms(for view: FilmsCollectionView) {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            view.filmsInfo = filmsWillWatch
+
+        case 1:
+            view.filmsInfo = filmsViewd
+        
+        default:
+            break
+        }
+    }
+    
+    private func getActiveFilms() -> [FilmInfo] {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            return filmsWillWatch
+
+        case 1:
+            return filmsViewd
+        
+        default:
+            return [FilmInfo]()
+        }
+    }
+    
+    private func setFilmsToActiveView(films: [FilmInfo]) {
+        if !filmsCollectionView.isHidden {
+            filmsCollectionView.filmsInfo = films
+        } else {
+            filmsTableView.filmsInfo = films
+        }
+    }
+
     @objc private func searchFilm() {
         print("hello")
     }
@@ -52,21 +110,27 @@ class FavouriteViewController: BaseViewController {
         switch activeViewStyle {
         case .collectionView:
             activeViewStyle = .tableView
-            button.style = .tableVeiw(Asset.tabelViewImage.image)
+            button.style = .collectionView(Asset.collectionViewImage.image)
+            filmsTableView.isHidden = false
+            filmsCollectionView.isHidden = true
+            filmsTableView.filmsInfo = getActiveFilms()
 
         case .tableView:
             activeViewStyle = .collectionView
-            button.style = .collectionView(Asset.collectionViewImage.image)
+            button.style = .tableVeiw(Asset.tabelViewImage.image)
+            filmsTableView.isHidden = true
+            filmsCollectionView.isHidden = false
+            filmsCollectionView.filmsInfo = getActiveFilms()
         }
     }
     
     @objc private func changeFilmsSegment(_ sender: UISegmentedControl!) {
         switch sender.selectedSegmentIndex {
         case 0:
-            print("Uno dos")
+            setFilmsToActiveView(films: filmsWillWatch)
         
         case 1:
-            print("tress quadro")
+            setFilmsToActiveView(films: filmsViewd)
         
         default:
             break
@@ -88,10 +152,10 @@ extension FavouriteViewController {
         let button: ViewStyleButton
         switch activeViewStyle {
         case .collectionView:
-            button = ViewStyleButton(style: .collectionView(Asset.collectionViewImage.image))
+            button = ViewStyleButton(style: .tableVeiw(Asset.tabelViewImage.image))
 
         case .tableView:
-            button = ViewStyleButton(style: .tableVeiw(Asset.tabelViewImage.image))
+            button = ViewStyleButton(style: .collectionView(Asset.collectionViewImage.image))
         }
         button.addTarget(self, action: #selector(changeViewStyle), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
@@ -99,17 +163,22 @@ extension FavouriteViewController {
     
     private func makeSegmentControll() -> UISegmentedControl {
         let controll = UISegmentedControl(items: [Text.Common.willWatch, Text.Common.viewed])
-        controll.selectedSegmentIndex = 1
+        controll.selectedSegmentIndex = 0
         controll.setTitleTextAttributes([.font: UIFont.boldSystemFont(ofSize: 15)],
                                         for: .normal)
         controll.addTarget(self, action: #selector(changeFilmsSegment), for: .valueChanged)
         return controll
     }
     
-    private func makeFilmsView() -> FilmsView {
+    private func makeFilmsCollectionView() -> FilmsCollectionView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        let view = FilmsView(collectionViewLayout: layout)
+        let view = FilmsCollectionView(collectionViewLayout: layout)
+        return view
+    }
+    
+    private func makeFilmsTableView() -> FilmsTableView {
+        let view = FilmsTableView()
         return view
     }
 }
@@ -118,24 +187,31 @@ extension FavouriteViewController {
     
     private func setConstraints() {
         setSegmentControlConstratints()
-        setFilmsViewConstraints()
+        setFilmsCollectionViewConstraints()
+        setFilmsTableViewConstraints()
     }
     
     private func setSegmentControlConstratints() {
         segmentControl.snp.makeConstraints { maker in
-            maker.centerX.equalToSuperview()
+            maker.leading.trailing.equalTo(view.layoutMarginsGuide)
             maker.top.equalTo(view.safeAreaLayoutGuide).inset(FavouriteScreenSizes.SegmentControl.topOffset)
-            maker.width.equalToSuperview().multipliedBy(FavouriteScreenSizes.SegmentControl.ratioWithSuperViewWidth)
             maker.height.equalTo(FavouriteScreenSizes.SegmentControl.height)
         }
     }
     
-    private func setFilmsViewConstraints() {
-        filmsView.snp.makeConstraints { maker in
-            maker.centerX.equalToSuperview()
+    private func setFilmsCollectionViewConstraints() {
+        filmsCollectionView.snp.makeConstraints { maker in
+            maker.leading.trailing.equalTo(view.layoutMarginsGuide)
             maker.top.equalTo(segmentControl.snp.bottom).offset(FavouriteScreenSizes.FilmsView.topOffset)
             maker.bottom.equalTo(view.safeAreaLayoutGuide)
-            maker.width.equalToSuperview().multipliedBy(FavouriteScreenSizes.FilmsView.ratioWithSuperViewWidth)
+        }
+    }
+    
+    private func setFilmsTableViewConstraints() {
+        filmsTableView.snp.makeConstraints { maker in
+            maker.leading.trailing.equalToSuperview()
+            maker.top.equalTo(segmentControl.snp.bottom).offset(FavouriteScreenSizes.FilmsView.topOffset)
+            maker.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }

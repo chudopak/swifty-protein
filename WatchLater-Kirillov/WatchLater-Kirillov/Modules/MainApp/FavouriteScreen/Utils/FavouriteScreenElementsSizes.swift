@@ -27,4 +27,8 @@ enum FavouriteScreenSizes {
         static let ratioWithSuperViewWidth: CGFloat = 0.915
         static let topOffset: CGFloat = 18
     }
+    
+    enum FilmsTableViewCell {
+        static let height: CGFloat = 22
+    }
 }
