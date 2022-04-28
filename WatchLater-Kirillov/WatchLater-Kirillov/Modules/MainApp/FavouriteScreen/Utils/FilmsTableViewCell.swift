@@ -18,6 +18,7 @@ class FilmsTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
+        accessoryType = .disclosureIndicator
         addSubview(titleLabel)
         setTitleLabelConstraints()
     }
@@ -44,8 +45,9 @@ extension FilmsTableViewCell {
     
     private func setTitleLabelConstraints() {
         titleLabel.snp.makeConstraints { maker in
-            maker.centerY.trailing.equalToSuperview()
+            maker.centerY.equalToSuperview()
             maker.leading.equalTo(layoutMarginsGuide)
+            maker.trailing.equalTo(layoutMarginsGuide).inset(FavouriteScreenSizes.FilmsTableViewCell.trailingAccessoryZoneInset)
             maker.height.equalTo(FavouriteScreenSizes.FilmsTableViewCell.height)
         }
     }

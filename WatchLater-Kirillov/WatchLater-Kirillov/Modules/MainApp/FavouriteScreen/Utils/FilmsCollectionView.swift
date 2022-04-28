@@ -14,7 +14,7 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
     
     private var filmsCollectionView: UICollectionView!
     
-    var filmsInfo = [FilmInfo]() {
+    var filmsInfo = [FilmInfoTmp]() {
         didSet {
             filmsCollectionView.reloadData()
         }
@@ -41,9 +41,10 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifier, for: indexPath) as! FilmCollectionViewCell
         cell.titleLabel.text = filmsInfo[indexPath.row].title
-        if let url = URL(string: filmsInfo[indexPath.row].image) {
-            cell.filmImageView.kf.setImage(with: url)
-        }
+        cell.ratingLabel.text = getRatingString(rating: filmsInfo[indexPath.row].rating)
+//        if let url = URL(string: filmsInfo[indexPath.row].image) {
+//            cell.filmImageView.kf.setImage(with: url)
+//        }
         return cell
     }
     
@@ -52,6 +53,14 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
         let height = width * FavouriteScreenSizes.FilmCollectionViewCell.ratioSelfWidthWithHeight
         return CGSize(width: width,
                       height: height)
+    }
+    
+    private func getRatingString(rating: Double?) -> String {
+        var str = String(rating ?? 0).prefix(3)
+        if str.suffix(1) == "." {
+            str.remove(at: str.index(before: str.endIndex))
+        }
+        return String(str)
     }
 }
 

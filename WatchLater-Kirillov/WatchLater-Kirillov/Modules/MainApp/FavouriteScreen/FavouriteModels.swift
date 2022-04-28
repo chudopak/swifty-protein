@@ -8,10 +8,17 @@
 
 import UIKit
 
-struct FilmInfo: Codable {
-    let id: String
-    let resultType: String
-    let image: String
+struct FilmsList: Codable {
+    let filmDtos: [FilmInfoTmp]?
+    let pageCount: Int?
+    let size: Int?
+}
+
+struct FilmInfoTmp: Codable {
+    let id: Int
     let title: String
-    let description: String
+    let description: String?
+    let rating: Double?
+    let posterId: String?
+    let geners: [String]?
 }

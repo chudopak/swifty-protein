@@ -2,7 +2,7 @@
 //  FavouriteViewController.swift
 //  StartProject-ios
 //
-//  Created by Stepan Kirillov on 4/21/22.
+//  Created by Stepan Kirillov on 4/21/pageSize.
 //  Copyright © 2021 TEKHNOKRATIYA. All rights reserved.
 //
 
@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 protocol FavouriteViewControllerProtocol: AnyObject {
+    func showFilms(_ films: [FilmInfoTmp]?)
 }
 
 class FavouriteViewController: BaseViewController, FavouriteViewControllerProtocol {
@@ -19,7 +20,9 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
     }
     
     private var activeViewStyle = ViewStyle.collectionView
-
+    
+    private let pageSize = 21
+    
     private lazy var searchBarButton = makeSearchBarButtonItem()
     private lazy var styleBarButton = makeStyleBarButtonItem()
     private lazy var segmentControl = makeSegmentControll()
@@ -27,29 +30,6 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
     private lazy var filmsTableView = makeFilmsTableView()
     
     private var interactor: FavouriteInteractorProtocol!
-
-    private var filmsWillWatch = [FilmInfo(id: "tt4682562",
-                                           resultType: "Title",
-                                           image: "https://imdb-api.com/images/original/MV5BZTA0NDM0ZWMtZDI0Zi00OWI5LWJlOTYtZTk5ZjAzYzIyNjQ3XkEyXkFqcGdeQXVyNDE2NjE1Njc@._V1_Ratio0.7273_AL_.jpg",
-                                           title: "Office",
-                                           description: "(2015)"),
-                                  FilmInfo(id: "tt9288848",
-                                           resultType: "Title",
-                                           image: "https://imdb-api.com/images/original/MV5BYThkYTFiYTUtNTY0NS00Y2Y0LTk3ZmItMzZjMjZjZWE3NDRiXkEyXkFqcGdeQXVyMjQ3MjU3NTU@._V1_Ratio0.7273_AL_.jpg",
-                                           title: "Pacific Rim: The Black",
-                                           description: "(2015)")
-        ]
-    private var filmsViewd = [FilmInfo(id: "tt11859542",
-                                       resultType: "Title",
-                                       image: "https://imdb-api.com/images/original/MV5BZWNiYjllNjgtY2VlOC00NDM4LTk4YzQtNGU1Zjk4NDUzN2Q4XkEyXkFqcGdeQXVyMTA2ODkwNzM5._V1_Ratio0.7273_AL_.jpg",
-                                       title: "In from the Cold",
-                                       description: "(2015)"),
-                              FilmInfo(id: "tt3921180",
-                                       resultType: "Title",
-                                       image: "https://imdb-api.com/images/original/MV5BNjVmY2M3ZTUtMDhkZC00ODk4LTkwMjktNDRjNGRjYTIxZGZiXkEyXkFqcGdeQXVyNjEwNTM2Mzc@._V1_Ratio0.7273_AL_.jpg",
-                                       title: "Scream: The TV Series",
-                                       description: "(2015)")
-    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +37,20 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
         setConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        interactor.fetchMovies(page: 1, size: pageSize, watched: false)
+        // TODO: - show loading indicator (i think)
+        filmsCollectionView.filmsInfo = [FilmInfoTmp]()
+        filmsTableView.filmsInfo = [FilmInfoTmp]()
+    }
+    
     func setupComponents(interactor: FavouriteInteractorProtocol) {
         self.interactor = interactor
+    }
+    
+    func showFilms(_ films: [FilmInfoTmp]?) {
+        setFilmsToActiveView(films: films ?? [FilmInfoTmp]())
     }
     
     private func setView() {
@@ -71,45 +63,30 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
         view.addSubview(filmsCollectionView)
         view.addSubview(filmsTableView)
         filmsTableView.isHidden = true
-        // TODO: - Put films from core data in films info
-        filmsCollectionView.filmsInfo = filmsWillWatch
-        filmsTableView.filmsInfo = filmsWillWatch
     }
     
-    private func setActiveFilms(for view: FilmsCollectionView) {
+    private func getWatched() -> Bool {
         switch segmentControl.selectedSegmentIndex {
         case 0:
-            view.filmsInfo = filmsWillWatch
-
+            return false
+            
         case 1:
-            view.filmsInfo = filmsViewd
-        
+            return true
+            
         default:
-            break
+            return false
         }
     }
     
-    private func getActiveFilms() -> [FilmInfo] {
-        switch segmentControl.selectedSegmentIndex {
-        case 0:
-            return filmsWillWatch
-
-        case 1:
-            return filmsViewd
-        
-        default:
-            return [FilmInfo]()
-        }
-    }
-    
-    private func setFilmsToActiveView(films: [FilmInfo]) {
+    private func setFilmsToActiveView(films: [FilmInfoTmp]) {
         if !filmsCollectionView.isHidden {
             filmsCollectionView.filmsInfo = films
         } else {
             filmsTableView.filmsInfo = films
         }
     }
-
+    
+    // TODO: searchFilm
     @objc private func searchFilm() {
         print("hello")
     }
@@ -122,25 +99,24 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
             button.style = .collectionView(Asset.collectionViewImage.image)
             filmsTableView.isHidden = false
             filmsCollectionView.isHidden = true
-            filmsTableView.filmsInfo = getActiveFilms()
-
+            
         case .tableView:
             activeViewStyle = .collectionView
             button.style = .tableVeiw(Asset.tabelViewImage.image)
             filmsTableView.isHidden = true
             filmsCollectionView.isHidden = false
-            filmsCollectionView.filmsInfo = getActiveFilms()
         }
+        interactor.fetchMovies(page: 1, size: pageSize, watched: getWatched())
     }
     
     @objc private func changeFilmsSegment(_ sender: UISegmentedControl!) {
         switch sender.selectedSegmentIndex {
         case 0:
-            setFilmsToActiveView(films: filmsWillWatch)
-        
+            interactor.fetchMovies(page: 1, size: pageSize, watched: false)
+            
         case 1:
-            setFilmsToActiveView(films: filmsViewd)
-        
+            interactor.fetchMovies(page: 1, size: pageSize, watched: true)
+            
         default:
             break
         }
@@ -155,14 +131,14 @@ extension FavouriteViewController {
         button.addTarget(self, action: #selector(searchFilm), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }
-
+    
     private func makeStyleBarButtonItem() -> UIBarButtonItem {
-
+        
         let button: ViewStyleButton
         switch activeViewStyle {
         case .collectionView:
             button = ViewStyleButton(style: .tableVeiw(Asset.tabelViewImage.image))
-
+            
         case .tableView:
             button = ViewStyleButton(style: .collectionView(Asset.collectionViewImage.image))
         }

@@ -13,7 +13,7 @@ class FilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     private lazy var filmsTableView = makeFilmsTableView()
     
-    var filmsInfo = [FilmInfo]() {
+    var filmsInfo = [FilmInfoTmp]() {
         didSet {
             filmsTableView.reloadData()
         }
@@ -38,7 +38,6 @@ class FilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FilmsTableViewCell.identifier, for: indexPath) as! FilmsTableViewCell
         cell.titleLabel.text = filmsInfo[indexPath.row].title
-        cell.accessoryType = .disclosureIndicator
         return cell
     }
     

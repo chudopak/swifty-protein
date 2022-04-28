@@ -9,8 +9,7 @@
 import UIKit
 
 protocol FavouritePresenterProtocol {
-    func presentWillWatchMovies()
-    func presentViewedMovies()
+    func presentMovies(films: [FilmInfoTmp]?)
 }
 
 class FavouritePresenter: FavouritePresenterProtocol {
@@ -21,9 +20,7 @@ class FavouritePresenter: FavouritePresenterProtocol {
         favouriteViewController = viewController
     }
     
-    func presentWillWatchMovies() {
-    }
-    
-    func presentViewedMovies() {
+    func presentMovies(films: [FilmInfoTmp]?) {
+        favouriteViewController.showFilms(films)
     }
 }

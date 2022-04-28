@@ -13,7 +13,9 @@ final class FavouriteConfigurator {
     func setupModule() -> FavouriteViewController {
         let viewController = FavouriteViewController()
         let presenter = FavouritePresenter(viewController: viewController)
-        let interactor = FavouriteInteractor(presenter: presenter)
+        let filmsService = FetchFilmsService(networkLayer: NetworkLayer(refreshService: RefreshTokenService()))
+        let interactor = FavouriteInteractor(presenter: presenter,
+                                             networkService: filmsService)
         viewController.setupComponents(interactor: interactor)
         return viewController
     }

@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setTabBarAppearance() {
         UITabBar.appearance().backgroundColor = Asset.Colors.tabBarBackground.color
         UITabBar.appearance().barTintColor = Asset.Colors.tabBarBackground.color
-        UITabBar.appearance().tintColor = Asset.Colors.tabBarTextColor.color
+        UITabBar.appearance().tintColor = Asset.Colors.deepBlue.color
     }
 }
 

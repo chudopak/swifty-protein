@@ -15,11 +15,13 @@ class FilmCollectionViewCell: UICollectionViewCell {
     
     lazy var filmImageView = makeFilmImageView()
     lazy var titleLabel = makeTitleLabel()
+    lazy var ratingLabel = makeRatingLabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(filmImageView)
         addSubview(titleLabel)
+        filmImageView.addSubview(ratingLabel)
         setConstraints()
     }
     
@@ -40,10 +42,25 @@ extension FilmCollectionViewCell {
     
     private func makeTitleLabel() -> UILabel {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 12)
+        label.font = .boldSystemFont(ofSize: FavouriteScreenSizes.FilmCollectionViewCell.fontSize)
         label.textAlignment = .left
         label.numberOfLines = 1
         label.text = ""
+        return label
+    }
+    
+    private func makeRatingLabel() -> UILabel {
+        let label = UILabel()
+        label.layer.borderWidth = FavouriteScreenSizes.FilmCollectionViewCell.ratingBorderWidth
+        label.layer.borderColor = Asset.Colors.deepBlue.color.cgColor
+        label.layer.cornerRadius = FavouriteScreenSizes.FilmCollectionViewCell.ratingHeight * 0.5
+        label.font = .systemFont(ofSize: FavouriteScreenSizes.FilmCollectionViewCell.fontSize)
+        label.textColor = Asset.Colors.deepBlue.color
+        label.textAlignment = .center
+        label.text = ""
+        label.numberOfLines = 1
+        label.backgroundColor = Asset.Colors.primaryBackground.color
+        label.clipsToBounds = true
         return label
     }
 }
@@ -53,6 +70,7 @@ extension FilmCollectionViewCell {
     private func setConstraints() {
         setFilmImageViewConstraints()
         setTitleLabelConstraints()
+        setRatingLabelConstraints()
     }
     
     private func setFilmImageViewConstraints() {
@@ -66,6 +84,15 @@ extension FilmCollectionViewCell {
         titleLabel.snp.makeConstraints { maker in
             maker.bottom.leading.trailing.equalToSuperview()
             maker.height.equalToSuperview().multipliedBy(FavouriteScreenSizes.FilmCollectionViewCell.ratioTitleLabelHeightWithCellHeight)
+        }
+    }
+    
+    private func setRatingLabelConstraints() {
+        ratingLabel.snp.makeConstraints { maker in
+            maker.top.equalToSuperview().inset(FavouriteScreenSizes.FilmCollectionViewCell.ratingTopOffset)
+            maker.trailing.equalToSuperview().inset(FavouriteScreenSizes.FilmCollectionViewCell.ratingRightOffset)
+            maker.height.equalTo(FavouriteScreenSizes.FilmCollectionViewCell.ratingHeight)
+            maker.width.equalTo(FavouriteScreenSizes.FilmCollectionViewCell.ratingWidth)
         }
     }
 }

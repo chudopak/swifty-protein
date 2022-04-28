@@ -17,6 +17,10 @@ enum BaseError: Error {
     case imageLoadingError
     case noResponse
     case unownedResponseCode
+    case failedToBuildRequest
+    case noData
+    case range400Response
+    case unableToDecodeData
 }
 
 extension BaseError: LocalizedError {
@@ -37,6 +41,30 @@ extension BaseError: LocalizedError {
         case .unownedResponseCode:
             return NSLocalizedString(
                 "Unowned Response Code.",
+                comment: ""
+            )
+        
+        case .failedToBuildRequest:
+            return NSLocalizedString(
+                "Failed to build request.",
+                comment: ""
+            )
+            
+        case .noData:
+            return NSLocalizedString(
+                "There is no data in response.",
+                comment: ""
+            )
+            
+        case .range400Response:
+            return NSLocalizedString(
+                "Response in 400's range.",
+                comment: ""
+            )
+            
+        case .unableToDecodeData:
+            return NSLocalizedString(
+                "Can not decode data to needed type.",
                 comment: ""
             )
         }

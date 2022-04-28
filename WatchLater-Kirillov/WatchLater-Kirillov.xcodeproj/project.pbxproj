@@ -80,6 +80,8 @@
 		7D7386DE2810621A008C00FE /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386DC2810621A008C00FE /* LoginPresenter.swift */; };
 		7D7386E0281064C3008C00FE /* LoginControllerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386DF281064C3008C00FE /* LoginControllerConfigurator.swift */; };
 		7D7386E1281064C3008C00FE /* LoginControllerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386DF281064C3008C00FE /* LoginControllerConfigurator.swift */; };
+		7D788AA72819681E0067D7B4 /* FilmsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D788AA52819681E0067D7B4 /* FilmsDataModel.xcdatamodeld */; };
+		7D788AA82819681E0067D7B4 /* FilmsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D788AA52819681E0067D7B4 /* FilmsDataModel.xcdatamodeld */; };
 		7D7EF84F280ED70800B99CA4 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF84E280ED70800B99CA4 /* LoginService.swift */; };
 		7D7EF852280EED8F00B99CA4 /* RegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF851280EED8F00B99CA4 /* RegistrationService.swift */; };
 		7D7EF854280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF853280EEF8C00B99CA4 /* RegistrationInteractor.swift */; };
@@ -116,6 +118,12 @@
 		7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731F28058F7E0094F302 /* LoginRouter.swift */; };
 		7DBC89392807065200F94B6C /* AuthorizationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC89382807065200F94B6C /* AuthorizationTextField.swift */; };
 		7DBC893A2807065200F94B6C /* AuthorizationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC89382807065200F94B6C /* AuthorizationTextField.swift */; };
+		7DC4091B281A78F30062DB08 /* FilmInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC40919281A78F30062DB08 /* FilmInfo+CoreDataClass.swift */; };
+		7DC4091C281A78F30062DB08 /* FilmInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC40919281A78F30062DB08 /* FilmInfo+CoreDataClass.swift */; };
+		7DC4091D281A78F30062DB08 /* FilmInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4091A281A78F30062DB08 /* FilmInfo+CoreDataProperties.swift */; };
+		7DC4091E281A78F30062DB08 /* FilmInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4091A281A78F30062DB08 /* FilmInfo+CoreDataProperties.swift */; };
+		7DC40920281A8B100062DB08 /* FetchFilmsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4091F281A8B100062DB08 /* FetchFilmsService.swift */; };
+		7DC40921281A8B100062DB08 /* FetchFilmsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4091F281A8B100062DB08 /* FetchFilmsService.swift */; };
 		7DE0E2472816BB4E00670DE3 /* FilmsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0E2462816BB4E00670DE3 /* FilmsCollectionView.swift */; };
 		7DE0E2482816BB4E00670DE3 /* FilmsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0E2462816BB4E00670DE3 /* FilmsCollectionView.swift */; };
 		7DE0E24A2816CE1B00670DE3 /* FavouriteScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0E2492816CE1B00670DE3 /* FavouriteScreenElementsSizes.swift */; };
@@ -183,6 +191,7 @@
 		7D7386D9281061EB008C00FE /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		7D7386DC2810621A008C00FE /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		7D7386DF281064C3008C00FE /* LoginControllerConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginControllerConfigurator.swift; sourceTree = "<group>"; };
+		7D788AA62819681E0067D7B4 /* FilmsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FilmsDataModel.xcdatamodel; sourceTree = "<group>"; };
 		7D7EF84E280ED70800B99CA4 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		7D7EF851280EED8F00B99CA4 /* RegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
 		7D7EF853280EEF8C00B99CA4 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
@@ -201,6 +210,9 @@
 		7DAE55CF2811681B0006C24A /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenElementsSizes.swift; sourceTree = "<group>"; };
 		7DBC89382807065200F94B6C /* AuthorizationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTextField.swift; sourceTree = "<group>"; };
+		7DC40919281A78F30062DB08 /* FilmInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilmInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7DC4091A281A78F30062DB08 /* FilmInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilmInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7DC4091F281A8B100062DB08 /* FetchFilmsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFilmsService.swift; sourceTree = "<group>"; };
 		7DE0E2462816BB4E00670DE3 /* FilmsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsCollectionView.swift; sourceTree = "<group>"; };
 		7DE0E2492816CE1B00670DE3 /* FavouriteScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteScreenElementsSizes.swift; sourceTree = "<group>"; };
 		7DE0E24C2816DEBC00670DE3 /* FilmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -307,8 +319,9 @@
 		306BF31025FC8F7200E9B481 /* WatchLater-Kirillov */ = {
 			isa = PBXGroup;
 			children = (
-				7D7EF84C280ED6DB00B99CA4 /* Services */,
 				7D112F8C28047ED500BB7ECC /* Delegates */,
+				7D788AA4281967BA0067D7B4 /* CoreData */,
+				7D7EF84C280ED6DB00B99CA4 /* Services */,
 				30314CDA265AAEDB00CADD41 /* Network */,
 				30314CA7265AAA8100CADD41 /* Base */,
 				30F0801A265A87E2009B2398 /* Configuration */,
@@ -517,9 +530,28 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		7D788AA4281967BA0067D7B4 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7DC40919281A78F30062DB08 /* FilmInfo+CoreDataClass.swift */,
+				7DC4091A281A78F30062DB08 /* FilmInfo+CoreDataProperties.swift */,
+				7D788AA52819681E0067D7B4 /* FilmsDataModel.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		7D788AAF281975EB0067D7B4 /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreDataService;
+			sourceTree = "<group>";
+		};
 		7D7EF84C280ED6DB00B99CA4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7DC40922281A8B150062DB08 /* FetchFilmsService */,
+				7D788AAF281975EB0067D7B4 /* CoreDataService */,
 				7DAD27582817E34B005B9D6F /* ImageDownloadingService */,
 				7D612D5B28119DEA007C7515 /* RefreshTokenService */,
 				7D612D57281182C6007C7515 /* UIWindowService */,
@@ -594,6 +626,14 @@
 				7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		7DC40922281A8B150062DB08 /* FetchFilmsService */ = {
+			isa = PBXGroup;
+			children = (
+				7DC4091F281A8B100062DB08 /* FetchFilmsService.swift */,
+			);
+			path = FetchFilmsService;
 			sourceTree = "<group>";
 		};
 		7DE0E2422816BA1300670DE3 /* Utils */ = {
@@ -925,6 +965,7 @@
 				7D612D6028119F57007C7515 /* BaseModels.swift in Sources */,
 				7D7386DD2810621A008C00FE /* LoginPresenter.swift in Sources */,
 				7D178EAD28085B11009C6280 /* RegistrationRouter.swift in Sources */,
+				7DC4091B281A78F30062DB08 /* FilmInfo+CoreDataClass.swift in Sources */,
 				7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */,
 				7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
 				7DAD276C281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */,
@@ -938,9 +979,11 @@
 				3076A0882601D421003B0EF9 /* StoryboardScenes.swift in Sources */,
 				30D2F277260148EE000134EB /* Texts.swift in Sources */,
 				3076A0892601D421003B0EF9 /* StoryboardSegues.swift in Sources */,
+				7DC4091D281A78F30062DB08 /* FilmInfo+CoreDataProperties.swift in Sources */,
 				7D9CDA3328169C6100DDEDBD /* ViewStyleButton.swift in Sources */,
 				7D612D59281182EF007C7515 /* UIWindowService.swift in Sources */,
 				30D2F274260148EE000134EB /* Asset.swift in Sources */,
+				7D788AA72819681E0067D7B4 /* FilmsDataModel.xcdatamodeld in Sources */,
 				7D7386D7281047F7008C00FE /* RequestBuilder.swift in Sources */,
 				7D178EB128087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
 				7D7EF854280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */,
@@ -948,6 +991,7 @@
 				7DAD2766281830AB005B9D6F /* FavouriteInteractor.swift in Sources */,
 				7D7386D328101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
 				7DAD27692818316D005B9D6F /* FavouritePresenter.swift in Sources */,
+				7DC40920281A8B100062DB08 /* FetchFilmsService.swift in Sources */,
 				7D2B76ED28129E020051BF9A /* BaseFunctions.swift in Sources */,
 				7DAD275A2817E365005B9D6F /* ImageDownloadingService.swift in Sources */,
 				7DBC89392807065200F94B6C /* AuthorizationTextField.swift in Sources */,
@@ -985,6 +1029,7 @@
 				7D612D6128119F57007C7515 /* BaseModels.swift in Sources */,
 				7D7386DE2810621A008C00FE /* LoginPresenter.swift in Sources */,
 				7D7EF857280EF04100B99CA4 /* LoginService.swift in Sources */,
+				7DC4091C281A78F30062DB08 /* FilmInfo+CoreDataClass.swift in Sources */,
 				7D7EF856280EF02600B99CA4 /* RegistrationService.swift in Sources */,
 				7D178EAE28085B11009C6280 /* RegistrationRouter.swift in Sources */,
 				7DAD276D281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */,
@@ -998,9 +1043,11 @@
 				7D058F19280DC0C800683C3C /* NetworkLayer.swift in Sources */,
 				7D7EF855280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */,
 				7DB7E0C82806BBAB00996926 /* LoginScreenElementsSizes.swift in Sources */,
+				7DC4091E281A78F30062DB08 /* FilmInfo+CoreDataProperties.swift in Sources */,
 				7D9CDA3428169C6100DDEDBD /* ViewStyleButton.swift in Sources */,
 				7D612D5A281182EF007C7515 /* UIWindowService.swift in Sources */,
 				7DB7E0C92806BBAB00996926 /* LoginViewController.swift in Sources */,
+				7D788AA82819681E0067D7B4 /* FilmsDataModel.xcdatamodeld in Sources */,
 				7D7386D8281047F7008C00FE /* RequestBuilder.swift in Sources */,
 				7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */,
 				7D178EB228087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
@@ -1008,6 +1055,7 @@
 				7DAD2767281830AB005B9D6F /* FavouriteInteractor.swift in Sources */,
 				7D7386D428101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
 				7DAD276A2818316D005B9D6F /* FavouritePresenter.swift in Sources */,
+				7DC40921281A8B100062DB08 /* FetchFilmsService.swift in Sources */,
 				7D2B76EE28129E020051BF9A /* BaseFunctions.swift in Sources */,
 				7DAD275B2817E365005B9D6F /* ImageDownloadingService.swift in Sources */,
 				7DBC893A2807065200F94B6C /* AuthorizationTextField.swift in Sources */,
@@ -1358,6 +1406,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7D788AA52819681E0067D7B4 /* FilmsDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7D788AA62819681E0067D7B4 /* FilmsDataModel.xcdatamodel */,
+			);
+			currentVersion = 7D788AA62819681E0067D7B4 /* FilmsDataModel.xcdatamodel */;
+			path = FilmsDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 306BF30625FC8F7200E9B481 /* Project object */;
 }
