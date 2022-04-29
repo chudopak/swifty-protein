@@ -12,10 +12,11 @@ import Alamofire
 protocol ImageDownloadingServiceProtocol {
     func download(id: String,
                   completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void)
-    func removeImageFromCache(id: String)
+    func removeImageFromCache(id: String) -> Bool
+    func removeAllImages() -> Bool
 }
 
-// TODO: - it doesn't work because of multithreading
+// TODO: - May be cash in memory images and in storage (now only in storage)
 final class ImageDownloadingService: ImageDownloadingServiceProtocol {
     
     private let networkManager: NetworkLayerProtocol
@@ -35,23 +36,37 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
     
     func download(id: String,
                   completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void) {
-        if let image = imageCache.getImageFromCache(id: id) {
-            print("GOT FROM CAHCE ID - \(id)")
-            completion(.success((id, image)))
-            return
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            if let image = self?.imageCache.getImageFromCache(id: id) {
+                completion(.success((id, image)))
+                return
+            }
+            guard var urlComponents = self?.baseURLComponents,
+                  let pathTmp = self?.path
+            else {
+                completion(.failure(BaseError.failedToBuildRequest))
+                return
+            }
+
+            let finalPath = pathTmp + id
+            urlComponents.path = finalPath
+            guard let request = self?.buildRequest(url: urlComponents.url!)
+            else {
+                completion(.failure(BaseError.failedToBuildRequest))
+                return
+            }
+            self?.fetchImage(id: id, urlRequest: request, completion: completion)
         }
-        var urlComponents = baseURLComponents
-        let finalPath = path + id
-        urlComponents.path = finalPath
-        guard let request = buildRequest(url: urlComponents.url!)
-        else {
-            completion(.failure(BaseError.failedToBuildRequest))
-            return
-        }
-        self.fetchImage(id: id, urlRequest: request, completion: completion)
     }
     
-    func removeImageFromCache(id: String) {
+    func removeImageFromCache(id: String) -> Bool {
+        let url = imageCache.imageCacheDir.appendingPathComponent(id)
+        return imageCache.deletePoster(url: url)
+    }
+    
+    // TODO: - i think it is better to delete in background
+    func removeAllImages() -> Bool {
+        return imageCache.deleteCacheDirectory()
     }
     
     private func fetchImage(id: String,
@@ -78,7 +93,10 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
                 completion(.failure(BaseError.unableToDecodeData))
                 return
             }
-            self?.imageCache.storeImage(imageId: id, image: image)
+            let savingResult = self?.imageCache.storeImage(imageId: id, image: image)
+            if savingResult == nil || !savingResult! {
+                print("Failed to save poster with id - \(id)")
+            }
             completion(.success((id, image)))
         }
     }

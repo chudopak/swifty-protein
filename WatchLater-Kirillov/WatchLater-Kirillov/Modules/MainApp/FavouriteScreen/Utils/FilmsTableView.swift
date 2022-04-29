@@ -13,14 +13,17 @@ class FilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     private lazy var filmsTableView = makeFilmsTableView()
     
+    private weak var delegate: FavouriteViewControllerDelegate!
+    
     var filmsInfo = [FilmInfoTmp]() {
         didSet {
             filmsTableView.reloadData()
         }
     }
 
-    init() {
+    init(delegate: FavouriteViewControllerDelegate) {
         super.init(frame: .zero)
+        self.delegate = delegate
         backgroundColor = .clear
         addSubview(filmsTableView)
         setTableViewConstraints()

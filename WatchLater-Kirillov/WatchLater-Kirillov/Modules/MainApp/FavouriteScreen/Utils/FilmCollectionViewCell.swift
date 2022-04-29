@@ -16,6 +16,7 @@ class FilmCollectionViewCell: UICollectionViewCell {
     lazy var filmImageView = makeFilmImageView()
     lazy var titleLabel = makeTitleLabel()
     lazy var ratingLabel = makeRatingLabel()
+    lazy var noImageLabel = makeNoImageLabel()
     
     var id = ""
     
@@ -24,6 +25,8 @@ class FilmCollectionViewCell: UICollectionViewCell {
         addSubview(filmImageView)
         addSubview(titleLabel)
         filmImageView.addSubview(ratingLabel)
+        filmImageView.addSubview(noImageLabel)
+        noImageLabel.isHidden = true
         setConstraints()
     }
     
@@ -38,7 +41,7 @@ extension FilmCollectionViewCell {
     private func makeFilmImageView() -> UIImageView {
         let imageView = UIImageView()
         imageView.isUserInteractionEnabled = true
-        imageView.backgroundColor = .brown
+        imageView.backgroundColor = Asset.Colors.disabledAuthorizationButtonBackground.color
         return imageView
     }
     
@@ -65,6 +68,16 @@ extension FilmCollectionViewCell {
         label.clipsToBounds = true
         return label
     }
+    
+    private func makeNoImageLabel() -> UILabel {
+        let label = UILabel()
+        label.textColor = Asset.Colors.disabledAuthorizationButtonText.color
+        label.textAlignment = .center
+        label.text = Text.Common.noPoster
+        label.numberOfLines = 2
+        label.clipsToBounds = true
+        return label
+    }
 }
 
 extension FilmCollectionViewCell {
@@ -73,6 +86,7 @@ extension FilmCollectionViewCell {
         setFilmImageViewConstraints()
         setTitleLabelConstraints()
         setRatingLabelConstraints()
+        setNoImageLabelConstraints()
     }
     
     private func setFilmImageViewConstraints() {
@@ -95,6 +109,12 @@ extension FilmCollectionViewCell {
             maker.trailing.equalToSuperview().inset(FavouriteScreenSizes.FilmCollectionViewCell.ratingRightOffset)
             maker.height.equalTo(FavouriteScreenSizes.FilmCollectionViewCell.ratingHeight)
             maker.width.equalTo(FavouriteScreenSizes.FilmCollectionViewCell.ratingWidth)
+        }
+    }
+    
+    private func setNoImageLabelConstraints() {
+        noImageLabel.snp.makeConstraints { maker in
+            maker.bottom.top.leading.trailing.equalToSuperview().inset(FavouriteScreenSizes.FilmCollectionViewCell.noImageLabelSideOffset)
         }
     }
 }

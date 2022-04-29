@@ -49,6 +49,8 @@ internal enum Text {
     internal static let next = Text.tr("Localizable", "Common.next")
     /// Нет
     internal static let no = Text.tr("Localizable", "Common.no")
+    /// Нет Постера
+    internal static let noPoster = Text.tr("Localizable", "Common.noPoster")
     /// Удалить
     internal static let remove = Text.tr("Localizable", "Common.remove")
     /// Обновить
@@ -68,6 +70,8 @@ internal enum Text {
     internal static let collection = Text.tr("Localizable", "TabBar.collection")
     /// Профиль
     internal static let profile = Text.tr("Localizable", "TabBar.profile")
+    /// Поиск
+    internal static let search = Text.tr("Localizable", "TabBar.search")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

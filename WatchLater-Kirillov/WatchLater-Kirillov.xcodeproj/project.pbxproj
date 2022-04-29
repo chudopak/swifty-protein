@@ -90,6 +90,12 @@
 		7D7EF857280EF04100B99CA4 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF84E280ED70800B99CA4 /* LoginService.swift */; };
 		7D7EF859280EF0DA00B99CA4 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF858280EF0DA00B99CA4 /* RegistrationPresenter.swift */; };
 		7D7EF85A280EF0DA00B99CA4 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF858280EF0DA00B99CA4 /* RegistrationPresenter.swift */; };
+		7D81BB30281C437100CC9819 /* FavouriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81BB2F281C437100CC9819 /* FavouriteRouter.swift */; };
+		7D81BB31281C437100CC9819 /* FavouriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81BB2F281C437100CC9819 /* FavouriteRouter.swift */; };
+		7D81BB34281C45DA00CC9819 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81BB33281C45DA00CC9819 /* SearchViewController.swift */; };
+		7D81BB35281C45DA00CC9819 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81BB33281C45DA00CC9819 /* SearchViewController.swift */; };
+		7D81BB37281C46A000CC9819 /* SearchScreenConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81BB36281C46A000CC9819 /* SearchScreenConfigurator.swift */; };
+		7D81BB38281C46A000CC9819 /* SearchScreenConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81BB36281C46A000CC9819 /* SearchScreenConfigurator.swift */; };
 		7D9715172805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */; };
 		7D9715182805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */; };
 		7D99731E28058E7F0094F302 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731D28058E7F0094F302 /* LoginViewController.swift */; };
@@ -196,6 +202,9 @@
 		7D7EF851280EED8F00B99CA4 /* RegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
 		7D7EF853280EEF8C00B99CA4 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
 		7D7EF858280EF0DA00B99CA4 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
+		7D81BB2F281C437100CC9819 /* FavouriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRouter.swift; sourceTree = "<group>"; };
+		7D81BB33281C45DA00CC9819 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		7D81BB36281C46A000CC9819 /* SearchScreenConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenConfigurator.swift; sourceTree = "<group>"; };
 		7D9715162805BB3B00CC31B8 /* FirstLauchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLauchChecker.swift; sourceTree = "<group>"; };
 		7D99731D28058E7F0094F302 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7D99731F28058F7E0094F302 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
@@ -429,6 +438,7 @@
 		7D0F1A0C2812F82D007570F9 /* MainApp */ = {
 			isa = PBXGroup;
 			children = (
+				7D81BB32281C456800CC9819 /* SearchScreen */,
 				7D0F1A0D2812FB47007570F9 /* MainTabBar */,
 				7D612D5328118201007C7515 /* FavouriteScreen */,
 			);
@@ -501,6 +511,7 @@
 				7DAD2765281830AB005B9D6F /* FavouriteInteractor.swift */,
 				7DAD27682818316D005B9D6F /* FavouritePresenter.swift */,
 				7DAD276B281833AD005B9D6F /* FavouriteConfigurator.swift */,
+				7D81BB2F281C437100CC9819 /* FavouriteRouter.swift */,
 			);
 			path = FavouriteScreen;
 			sourceTree = "<group>";
@@ -577,6 +588,15 @@
 				7D7EF851280EED8F00B99CA4 /* RegistrationService.swift */,
 			);
 			path = RegistrarionService;
+			sourceTree = "<group>";
+		};
+		7D81BB32281C456800CC9819 /* SearchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7D81BB33281C45DA00CC9819 /* SearchViewController.swift */,
+				7D81BB36281C46A000CC9819 /* SearchScreenConfigurator.swift */,
+			);
+			path = SearchScreen;
 			sourceTree = "<group>";
 		};
 		7D9715192805BB6200CC31B8 /* Utils */ = {
@@ -967,6 +987,7 @@
 				7D178EAD28085B11009C6280 /* RegistrationRouter.swift in Sources */,
 				7DC4091B281A78F30062DB08 /* FilmInfo+CoreDataClass.swift in Sources */,
 				7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */,
+				7D81BB30281C437100CC9819 /* FavouriteRouter.swift in Sources */,
 				7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
 				7DAD276C281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */,
 				7D178EA528084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
@@ -975,9 +996,11 @@
 				7D058F18280DC0C800683C3C /* NetworkLayer.swift in Sources */,
 				7DAD276028181592005B9D6F /* FilmsTableView.swift in Sources */,
 				7DAD275D2817E790005B9D6F /* ImageDownloadingCacheConfigProvider.swift in Sources */,
+				7D81BB34281C45DA00CC9819 /* SearchViewController.swift in Sources */,
 				30314CDC265AAEE500CADD41 /* BundleSettingsURL.swift in Sources */,
 				3076A0882601D421003B0EF9 /* StoryboardScenes.swift in Sources */,
 				30D2F277260148EE000134EB /* Texts.swift in Sources */,
+				7D81BB37281C46A000CC9819 /* SearchScreenConfigurator.swift in Sources */,
 				3076A0892601D421003B0EF9 /* StoryboardSegues.swift in Sources */,
 				7DC4091D281A78F30062DB08 /* FilmInfo+CoreDataProperties.swift in Sources */,
 				7D9CDA3328169C6100DDEDBD /* ViewStyleButton.swift in Sources */,
@@ -1031,6 +1054,7 @@
 				7D7EF857280EF04100B99CA4 /* LoginService.swift in Sources */,
 				7DC4091C281A78F30062DB08 /* FilmInfo+CoreDataClass.swift in Sources */,
 				7D7EF856280EF02600B99CA4 /* RegistrationService.swift in Sources */,
+				7D81BB31281C437100CC9819 /* FavouriteRouter.swift in Sources */,
 				7D178EAE28085B11009C6280 /* RegistrationRouter.swift in Sources */,
 				7DAD276D281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */,
 				7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */,
@@ -1039,9 +1063,11 @@
 				7D178EA628084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
 				7DAD276128181592005B9D6F /* FilmsTableView.swift in Sources */,
 				7DAD275E2817E790005B9D6F /* ImageDownloadingCacheConfigProvider.swift in Sources */,
+				7D81BB35281C45DA00CC9819 /* SearchViewController.swift in Sources */,
 				7D0ACA9928096A2B00777442 /* RegistrationModel.swift in Sources */,
 				7D058F19280DC0C800683C3C /* NetworkLayer.swift in Sources */,
 				7D7EF855280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */,
+				7D81BB38281C46A000CC9819 /* SearchScreenConfigurator.swift in Sources */,
 				7DB7E0C82806BBAB00996926 /* LoginScreenElementsSizes.swift in Sources */,
 				7DC4091E281A78F30062DB08 /* FilmInfo+CoreDataProperties.swift in Sources */,
 				7D9CDA3428169C6100DDEDBD /* ViewStyleButton.swift in Sources */,

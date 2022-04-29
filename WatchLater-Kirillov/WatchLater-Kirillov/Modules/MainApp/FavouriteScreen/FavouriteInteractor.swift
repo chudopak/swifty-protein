@@ -26,7 +26,7 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
             switch result {
             case .success(let films):
-                self?.presenter.presentMovies(films: films)
+                self?.presenter.presentMovies(films: films, watched: watched)
                 
             case .failure(let error):
                 print("Fetch Movies error - \(error.localizedDescription)")

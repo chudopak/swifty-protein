@@ -29,14 +29,12 @@ final class ImageCache {
         return documentDirectory
     }
     
-    func deleteCacheDirectory(url: URL) -> Bool {
-        do {
-            try filemanager.removeItem(at: url)
-        } catch let error {
-            print("Can not delete folder \(error.localizedDescription)")
-            return false
-        }
-        return true
+    func deleteCacheDirectory() -> Bool {
+        return deleteItem(url: imageCacheDir)
+    }
+    
+    func deletePoster(url: URL) -> Bool {
+        return deleteItem(url: url)
     }
     
     func storeImage(imageId: String, image: UIImage) -> Bool {
@@ -50,28 +48,9 @@ final class ImageCache {
         return filemanager.createFile(atPath: url.relativePath,
                                       contents: data,
                                       attributes: nil)
-        //        else {
-        //            return false
-        //        }
-        //        var dict = UserDefaults.standard.object(forKey: key) as? [String: String]
-        //        if dict == nil {
-        //            dict = [String: String]()
-        //        }
-        //        dict![imageId] = url.relativePath
-        //        UserDefaults.standard.set(dict, forKey: key)
-        //        return true
     }
     
     func getImageFromCache(id: String) -> UIImage? {
-        //        if let dict = UserDefaults.standard.object(forKey: key) as? [String: String] {
-        //            if let path = dict[id] {
-        //                if let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
-        //                    if let image = UIImage(data: data) {
-        //                        return image
-        //                    }
-        //                }
-        //            }
-        //        }
         let url = imageCacheDir.appendingPathComponent(id)
         if let data = try? Data(contentsOf: url) {
             if let image = UIImage(data: data) {
@@ -79,5 +58,15 @@ final class ImageCache {
             }
         }
         return nil
+    }
+    
+    private func deleteItem(url: URL) -> Bool {
+        do {
+            try filemanager.removeItem(at: url)
+        } catch let error {
+            print("Can not delete Item \(error.localizedDescription)")
+            return false
+        }
+        return true
     }
 }

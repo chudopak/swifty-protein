@@ -14,6 +14,8 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
     private var filmsCollectionView: UICollectionView!
     private var posterImageLoader: ImageDownloadingServiceProtocol!
     
+    private weak var delegate: FavouriteViewControllerDelegate!
+    
     var filmsInfo = [FilmInfoTmp]() {
         didSet {
             filmsCollectionView.reloadData()
@@ -21,9 +23,11 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
     }
     
     init(collectionViewLayout: UICollectionViewFlowLayout,
-         posterImageLoader: ImageDownloadingServiceProtocol) {
+         posterImageLoader: ImageDownloadingServiceProtocol,
+         delegate: FavouriteViewControllerDelegate) {
         super.init(frame: .zero)
         self.posterImageLoader = posterImageLoader
+        self.delegate = delegate
         filmsCollectionView = makeFilmsCollectionView(collectionViewLayout: collectionViewLayout)
         addSubview(filmsCollectionView)
         backgroundColor = .clear
@@ -41,9 +45,10 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifier, for: indexPath) as! FilmCollectionViewCell
+        cell.filmImageView.image = nil
+        cell.noImageLabel.isHidden = true
         cell.titleLabel.text = filmsInfo[indexPath.row].title
         cell.ratingLabel.text = getRatingString(rating: filmsInfo[indexPath.row].rating)
-        cell.filmImageView.image = nil
         if let posterID = filmsInfo[indexPath.row].posterId,
            !posterID.isEmpty {
             cell.id = posterID
@@ -56,10 +61,15 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
                         }
                     }
                     
-                case .failure(let error):
-                    print("Poster Loading Failure for id \(posterID) - \(error.localizedDescription)")
+                case .failure:
+                    cell.noImageLabel.isHidden = false
                 }
             }
+        } else {
+            cell.noImageLabel.isHidden = false
+        }
+        if indexPath.row + 10 > filmsInfo.count {
+            delegate.fetchNewFilms()
         }
         return cell
     }

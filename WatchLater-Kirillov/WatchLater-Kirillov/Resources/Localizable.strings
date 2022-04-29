@@ -13,6 +13,7 @@ Common.logout = "Выйти";
 Common.login = "Войти";
 Common.willWatch = "Буду смотреть";
 Common.viewed = "Просмотрено";
+Common.noPoster = "Нет Постера";
 
 // MARK: - Authorization
 
@@ -30,3 +31,4 @@ Authorization.somethingWentWrong = "Что-то пошло не так";
 TabBar.collection = "Коллекция";
 TabBar.add = "Добавить";
 TabBar.profile = "Профиль";
+TabBar.search = "Поиск";

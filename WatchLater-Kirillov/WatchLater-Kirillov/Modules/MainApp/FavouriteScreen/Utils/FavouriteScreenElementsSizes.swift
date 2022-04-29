@@ -27,6 +27,7 @@ enum FavouriteScreenSizes {
         static let fontSize: CGFloat = 12
         static let ratingTopOffset: CGFloat = 7
         static let ratingRightOffset: CGFloat = 4.5
+        static let noImageLabelSideOffset: CGFloat = 5
     }
     
     enum FilmsView {

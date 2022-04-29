@@ -9,12 +9,21 @@
 import UIKit
 import SnapKit
 
-protocol FavouriteViewControllerProtocol: AnyObject {
-    func showFilms(_ films: [FilmInfoTmp]?)
+struct FilmsPaging {
+    var currentPage: Int
+    var isFull: Bool
 }
 
-class FavouriteViewController: BaseViewController, FavouriteViewControllerProtocol {
-    
+protocol FavouriteViewControllerProtocol: AnyObject {
+    func showFilms(_ films: [FilmInfoTmp]?, watched: Bool)
+}
+
+protocol FavouriteViewControllerDelegate: AnyObject {
+    func fetchNewFilms()
+}
+
+class FavouriteViewController: BaseViewController, FavouriteViewControllerProtocol, FavouriteViewControllerDelegate {
+
     enum ViewStyle {
         case collectionView, tableView
     }
@@ -22,6 +31,11 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
     private var activeViewStyle = ViewStyle.collectionView
     
     private let pageSize = 24
+    private var viewedFilmsInfo = FilmsPaging(currentPage: -1, isFull: false)
+    private var willWatchFilmsInfo = FilmsPaging(currentPage: -1, isFull: false)
+    
+    private var viewedFilms = [FilmInfoTmp]()
+    private var willWatchFilms = [FilmInfoTmp]()
     
     private lazy var searchBarButton = makeSearchBarButtonItem()
     private lazy var styleBarButton = makeStyleBarButtonItem()
@@ -30,40 +44,70 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
     private lazy var filmsTableView = makeFilmsTableView()
     
     private var interactor: FavouriteInteractorProtocol!
+    private var router: FavouriteRouter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
         setConstraints()
-        print(ImageCache().imageCacheDir.absoluteString)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        interactor.fetchMovies(page: 1, size: pageSize, watched: false)
-        // TODO: - show loading indicator (i think)
-        filmsCollectionView.filmsInfo = [FilmInfoTmp]()
-        filmsTableView.filmsInfo = [FilmInfoTmp]()
+        setNavigationController()
+        fetchNewFilms()
     }
     
-    func setupComponents(interactor: FavouriteInteractorProtocol) {
+    func setupComponents(interactor: FavouriteInteractorProtocol,
+                         router: FavouriteRouter) {
         self.interactor = interactor
+        self.router = router
     }
     
-    func showFilms(_ films: [FilmInfoTmp]?) {
-        setFilmsToActiveView(films: films ?? [FilmInfoTmp]())
+    func showFilms(_ films: [FilmInfoTmp]?, watched: Bool) {
+        guard let films = films
+        else {
+            return
+        }
+        if watched {
+            if films.count < pageSize {
+                viewedFilmsInfo.isFull = true
+            }
+            viewedFilms += films
+            setFilmsToActiveView(films: viewedFilms)
+        } else {
+            if films.count < pageSize {
+                willWatchFilmsInfo.isFull = true
+            }
+            willWatchFilms += films
+            setFilmsToActiveView(films: willWatchFilms)
+        }
+    }
+    
+    func fetchNewFilms() {
+        let watched = getWatched()
+        if watched && !viewedFilmsInfo.isFull {
+            viewedFilmsInfo.currentPage += 1
+            interactor.fetchMovies(page: viewedFilmsInfo.currentPage, size: pageSize, watched: watched)
+        } else if !watched && !willWatchFilmsInfo.isFull {
+            willWatchFilmsInfo.currentPage += 1
+            interactor.fetchMovies(page: willWatchFilmsInfo.currentPage, size: pageSize, watched: watched)
+        }
     }
     
     private func setView() {
-        navigationController!.navigationBar.prefersLargeTitles = true
-        navigationItem.leftBarButtonItem = searchBarButton
-        navigationItem.rightBarButtonItem = styleBarButton
-        navigationItem.titleView = UIImageView(image: Asset.logoShort.image)
         view.backgroundColor = Asset.Colors.primaryBackground.color
         view.addSubview(segmentControl)
         view.addSubview(filmsCollectionView)
         view.addSubview(filmsTableView)
         filmsTableView.isHidden = true
+    }
+    
+    private func setNavigationController() {
+        navigationController!.navigationBar.prefersLargeTitles = true
+        navigationItem.leftBarButtonItem = searchBarButton
+        navigationItem.rightBarButtonItem = styleBarButton
+        navigationItem.titleView = UIImageView(image: Asset.logoShort.image)
     }
     
     private func getWatched() -> Bool {
@@ -80,16 +124,32 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
     }
     
     private func setFilmsToActiveView(films: [FilmInfoTmp]) {
-        if !filmsCollectionView.isHidden {
-            filmsCollectionView.filmsInfo = films
+        filmsCollectionView.filmsInfo = films
+        filmsTableView.filmsInfo = films
+    }
+    
+    private func shouldFetchFilmsStyleChanged() -> Bool {
+        let watched = getWatched()
+        if watched && viewedFilmsInfo.currentPage == -1 {
+            return true
+        } else if !watched && willWatchFilmsInfo.currentPage == -1 {
+            return true
+        }
+        return false
+    }
+    
+    private func setFilmsWithoutFetching() {
+        let watched = getWatched()
+        if watched {
+            setFilmsToActiveView(films: viewedFilms)
         } else {
-            filmsTableView.filmsInfo = films
+            setFilmsToActiveView(films: willWatchFilms)
         }
     }
     
     // TODO: searchFilm
     @objc private func searchFilm() {
-        print("hello")
+        navigationController?.pushViewController(SearchScreenConfigurator().setupModule(), animated: true)
     }
     
     @objc private func changeViewStyle() {
@@ -107,19 +167,28 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
             filmsTableView.isHidden = true
             filmsCollectionView.isHidden = false
         }
-        setFilmsToActiveView(films: [FilmInfoTmp]())
-        interactor.fetchMovies(page: 1, size: pageSize, watched: getWatched())
+        if shouldFetchFilmsStyleChanged() {
+            fetchNewFilms()
+        } else {
+            setFilmsWithoutFetching()
+        }
     }
     
     @objc private func changeFilmsSegment(_ sender: UISegmentedControl!) {
         switch sender.selectedSegmentIndex {
         case 0:
-            setFilmsToActiveView(films: [FilmInfoTmp]())
-            interactor.fetchMovies(page: 1, size: pageSize, watched: false)
+            if shouldFetchFilmsStyleChanged() {
+                fetchNewFilms()
+            } else {
+                setFilmsWithoutFetching()
+            }
             
         case 1:
-            setFilmsToActiveView(films: [FilmInfoTmp]())
-            interactor.fetchMovies(page: 1, size: pageSize, watched: true)
+            if shouldFetchFilmsStyleChanged() {
+                fetchNewFilms()
+            } else {
+                setFilmsWithoutFetching()
+            }
             
         default:
             break
@@ -162,13 +231,15 @@ extension FavouriteViewController {
     private func makeFilmsCollectionView() -> FilmsCollectionView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        let networkLayer = NetworkLayer(refreshService: RefreshTokenService())
         let view = FilmsCollectionView(collectionViewLayout: layout,
-                                       posterImageLoader: ImageDownloadingService(networkManager: NetworkLayer(refreshService: RefreshTokenService())))
+                                       posterImageLoader: ImageDownloadingService(networkManager: networkLayer),
+                                       delegate: self)
         return view
     }
     
     private func makeFilmsTableView() -> FilmsTableView {
-        let view = FilmsTableView()
+        let view = FilmsTableView(delegate: self)
         return view
     }
 }
