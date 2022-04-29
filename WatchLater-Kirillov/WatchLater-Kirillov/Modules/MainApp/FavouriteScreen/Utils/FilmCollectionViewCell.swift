@@ -17,6 +17,8 @@ class FilmCollectionViewCell: UICollectionViewCell {
     lazy var titleLabel = makeTitleLabel()
     lazy var ratingLabel = makeRatingLabel()
     
+    var id = ""
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(filmImageView)

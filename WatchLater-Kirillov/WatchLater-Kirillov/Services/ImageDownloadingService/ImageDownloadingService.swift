@@ -7,91 +7,95 @@
 //
 
 import UIKit
-import Kingfisher
+import Alamofire
 
 protocol ImageDownloadingServiceProtocol {
     func download(id: String,
-                  url: URL,
-                  completion: @escaping (Result<UIImage?, Error>) -> Void)
+                  completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void)
     func removeImageFromCache(id: String)
 }
 
 // TODO: - it doesn't work because of multithreading
 final class ImageDownloadingService: ImageDownloadingServiceProtocol {
     
-    private let cache: ImageCache
     private let networkManager: NetworkLayerProtocol
-    private let semaphoreCache = DispatchSemaphore(value: 1)
     
-    init(cacheConfig: ImageCache, networkManager: NetworkLayerProtocol) {
-        cache = cacheConfig
+    private let path = "/poster/"
+    
+    private var baseURLComponents: URLComponents
+    
+    private let imageCache = ImageCache()
+    
+    init(networkManager: NetworkLayerProtocol) {
         self.networkManager = networkManager
+        baseURLComponents = URLComponents()
+        baseURLComponents.scheme = NetworkConfiguration.sceme
+        baseURLComponents.host = NetworkConfiguration.urlString
     }
     
     func download(id: String,
-                  url: URL,
-                  completion: @escaping (Result<UIImage?, Error>) -> Void) {
-        if cache.isCached(forKey: id) {
-            cache.retrieveImage(forKey: "cacheKey") { [unowned self] result in
-                
-                switch result {
-                case .success(let value):
-                    guard let image = value.image
-                    else {
-                        self.removeImageFromCache(id: id)
-                        print("get from cache")
-                        self.fetchImage(id: id, url: url, completion: completion)
-                        return
-                    }
-                    completion(.success(image))
-
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-        } else {
-            print("downloaded")
-            self.fetchImage(id: id, url: url, completion: completion)
+                  completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void) {
+        if let image = imageCache.getImageFromCache(id: id) {
+            print("GOT FROM CAHCE ID - \(id)")
+            completion(.success((id, image)))
+            return
         }
+        var urlComponents = baseURLComponents
+        let finalPath = path + id
+        urlComponents.path = finalPath
+        guard let request = buildRequest(url: urlComponents.url!)
+        else {
+            completion(.failure(BaseError.failedToBuildRequest))
+            return
+        }
+        self.fetchImage(id: id, urlRequest: request, completion: completion)
     }
     
     func removeImageFromCache(id: String) {
-        self.semaphoreCache.wait()
-        cache.removeImage(forKey: id)
-        self.semaphoreCache.signal()
     }
     
     private func fetchImage(id: String,
-                            url: URL,
-                            completion: @escaping (Result<UIImage?, Error>) -> Void) {
-        networkManager.request(url: url) { [unowned self] data, response, error in
-            guard let responsHTTP = response as? HTTPURLResponse,
-                  (200...299).contains(responsHTTP.statusCode),
-                  error == nil,
-                  let data = data,
-                  let image = KFCrossPlatformImage(data: data)
+                            urlRequest: RequestBuilder,
+                            completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void) {
+        networkManager.request(urlRequest: urlRequest) { [weak self] data, response, error in
+            guard error == nil,
+                  let responseHTTP = response as? HTTPURLResponse,
+                  responseHTTP.statusCode == 200,
+                  let data = data
             else {
                 if let error = error {
                     completion(.failure(error))
+                } else if data == nil {
+                    completion(.failure(BaseError.noData))
                 } else {
-                    completion(.failure(BaseError.noResponse))
+                    completion(.failure(BaseError.range400Response))
                 }
                 return
             }
-            DispatchQueue.main.async {
-                self.handleImageCaching(id: id, image: image, imageData: data)
+            guard let imageDataJSON = decodeMessage(data: data, type: ImageData.self),
+                  let image = UIImage(data: imageDataJSON.data)
+            else {
+                completion(.failure(BaseError.unableToDecodeData))
+                return
             }
-            completion(.success(image))
+            self?.imageCache.storeImage(imageId: id, image: image)
+            completion(.success((id, image)))
         }
     }
     
-    private func handleImageCaching(id: String, image: KFCrossPlatformImage, imageData: Data? = nil) {
-        self.semaphoreCache.wait()
-        if let imageData = imageData {
-            cache.store(image, original: imageData, forKey: id)
-        } else {
-            cache.store(image, forKey: id)
+    private func buildRequest(url: URL) -> RequestBuilder? {
+        var urlRequest = URLRequest(url: url)
+        urlRequest.method = HTTPMethod.get
+        urlRequest.setValue(NetworkConfiguration.Headers.contentTypeJSON.value,
+                            forHTTPHeaderField: NetworkConfiguration.Headers.contentTypeJSON.field)
+        urlRequest.setValue(NetworkConfiguration.Headers.acceptJSON.value,
+                            forHTTPHeaderField: NetworkConfiguration.Headers.acceptJSON.field)
+        guard let accessToken = KeychainService.getString(key: .accessToken)
+        else {
+            return nil
         }
-        self.semaphoreCache.signal()
+        urlRequest.setValue(accessToken,
+                            forHTTPHeaderField: NetworkConfiguration.Headers.authorisation)
+        return RequestBuilder(urlRequest: urlRequest)
     }
 }

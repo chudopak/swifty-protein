@@ -21,7 +21,7 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
     
     private var activeViewStyle = ViewStyle.collectionView
     
-    private let pageSize = 21
+    private let pageSize = 24
     
     private lazy var searchBarButton = makeSearchBarButtonItem()
     private lazy var styleBarButton = makeStyleBarButtonItem()
@@ -35,6 +35,7 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
         super.viewDidLoad()
         setView()
         setConstraints()
+        print(ImageCache().imageCacheDir.absoluteString)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,15 +107,18 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
             filmsTableView.isHidden = true
             filmsCollectionView.isHidden = false
         }
+        setFilmsToActiveView(films: [FilmInfoTmp]())
         interactor.fetchMovies(page: 1, size: pageSize, watched: getWatched())
     }
     
     @objc private func changeFilmsSegment(_ sender: UISegmentedControl!) {
         switch sender.selectedSegmentIndex {
         case 0:
+            setFilmsToActiveView(films: [FilmInfoTmp]())
             interactor.fetchMovies(page: 1, size: pageSize, watched: false)
             
         case 1:
+            setFilmsToActiveView(films: [FilmInfoTmp]())
             interactor.fetchMovies(page: 1, size: pageSize, watched: true)
             
         default:
@@ -158,7 +162,8 @@ extension FavouriteViewController {
     private func makeFilmsCollectionView() -> FilmsCollectionView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        let view = FilmsCollectionView(collectionViewLayout: layout)
+        let view = FilmsCollectionView(collectionViewLayout: layout,
+                                       posterImageLoader: ImageDownloadingService(networkManager: NetworkLayer(refreshService: RefreshTokenService())))
         return view
     }
     

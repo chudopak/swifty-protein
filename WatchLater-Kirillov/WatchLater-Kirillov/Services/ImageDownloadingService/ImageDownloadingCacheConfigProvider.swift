@@ -7,27 +7,77 @@
 //
 
 import UIKit
-import Kingfisher
 
-enum ImageDownloadingCacheConfigProvider {
+final class ImageCache {
     
-    static let cacheName = "imageCache"
+    private let key = "ImageCache"
+    private let refreshTokenKey = "refreshToken"
+    private let filemanager = FileManager.default
     
-    static var cacheConfig: ImageCache {
-        if config == nil {
-            config = configureConfig()
+    var imageCacheDir: URL {
+        let documentDirectory = filemanager.urls(for: .documentDirectory,
+                                                 in: .userDomainMask)[0].appendingPathComponent("imagesCache")
+        if !filemanager.fileExists(atPath: documentDirectory.relativePath) {
+            do {
+                try filemanager.createDirectory(atPath: documentDirectory.relativePath,
+                                                withIntermediateDirectories: true,
+                                                attributes: nil)
+            } catch {
+                assertionFailure("Failed to create folder")
+            }
         }
-        return config!
+        return documentDirectory
     }
     
-    private static var config: ImageCache?
+    func deleteCacheDirectory(url: URL) -> Bool {
+        do {
+            try filemanager.removeItem(at: url)
+        } catch let error {
+            print("Can not delete folder \(error.localizedDescription)")
+            return false
+        }
+        return true
+    }
     
-    private static func configureConfig() -> ImageCache {
-        let cache = ImageCache(name: cacheName)
-        cache.memoryStorage.config.totalCostLimit = 300 * 1_024 * 1_024
-        cache.diskStorage.config.sizeLimit = 500 * 1_024 * 1_024
-        cache.memoryStorage.config.expiration = .seconds(120)
-        cache.diskStorage.config.expiration = .never
-        return cache
+    func storeImage(imageId: String, image: UIImage) -> Bool {
+        print("WE IN STORE IMAGE ID - \(imageId)")
+        let url = imageCacheDir.appendingPathComponent(imageId)
+        guard let data = image.jpegData(compressionQuality: 0.5)
+        else {
+            print("ImageCache, storeImage(imageId:image:) id(\(imageId))- Can't compress image to jpeg")
+            return false
+        }
+        return filemanager.createFile(atPath: url.relativePath,
+                                      contents: data,
+                                      attributes: nil)
+        //        else {
+        //            return false
+        //        }
+        //        var dict = UserDefaults.standard.object(forKey: key) as? [String: String]
+        //        if dict == nil {
+        //            dict = [String: String]()
+        //        }
+        //        dict![imageId] = url.relativePath
+        //        UserDefaults.standard.set(dict, forKey: key)
+        //        return true
+    }
+    
+    func getImageFromCache(id: String) -> UIImage? {
+        //        if let dict = UserDefaults.standard.object(forKey: key) as? [String: String] {
+        //            if let path = dict[id] {
+        //                if let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+        //                    if let image = UIImage(data: data) {
+        //                        return image
+        //                    }
+        //                }
+        //            }
+        //        }
+        let url = imageCacheDir.appendingPathComponent(id)
+        if let data = try? Data(contentsOf: url) {
+            if let image = UIImage(data: data) {
+                return image
+            }
+        }
+        return nil
     }
 }

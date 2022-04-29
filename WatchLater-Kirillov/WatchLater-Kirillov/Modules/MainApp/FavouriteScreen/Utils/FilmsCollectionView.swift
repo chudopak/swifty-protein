@@ -8,11 +8,11 @@
 
 import UIKit
 import SnapKit
-import Kingfisher
 
 class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private var filmsCollectionView: UICollectionView!
+    private var posterImageLoader: ImageDownloadingServiceProtocol!
     
     var filmsInfo = [FilmInfoTmp]() {
         didSet {
@@ -20,9 +20,10 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
         }
     }
     
-    init(collectionViewLayout: UICollectionViewFlowLayout) {
+    init(collectionViewLayout: UICollectionViewFlowLayout,
+         posterImageLoader: ImageDownloadingServiceProtocol) {
         super.init(frame: .zero)
-        KingfisherManager.shared.cache = ImageDownloadingCacheConfigProvider.cacheConfig
+        self.posterImageLoader = posterImageLoader
         filmsCollectionView = makeFilmsCollectionView(collectionViewLayout: collectionViewLayout)
         addSubview(filmsCollectionView)
         backgroundColor = .clear
@@ -42,9 +43,24 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifier, for: indexPath) as! FilmCollectionViewCell
         cell.titleLabel.text = filmsInfo[indexPath.row].title
         cell.ratingLabel.text = getRatingString(rating: filmsInfo[indexPath.row].rating)
-//        if let url = URL(string: filmsInfo[indexPath.row].image) {
-//            cell.filmImageView.kf.setImage(with: url)
-//        }
+        cell.filmImageView.image = nil
+        if let posterID = filmsInfo[indexPath.row].posterId,
+           !posterID.isEmpty {
+            cell.id = posterID
+            posterImageLoader.download(id: posterID) { result in
+                switch result {
+                case .success(let imageData):
+                    if cell.id == imageData.id {
+                        DispatchQueue.main.async {
+                            cell.filmImageView.image = imageData.image
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print("Poster Loading Failure for id \(posterID) - \(error.localizedDescription)")
+                }
+            }
+        }
         return cell
     }
     

@@ -13,6 +13,10 @@ struct Tokens: Codable {
     let refreshToken: String
 }
 
+struct ImageData: Codable {
+    let data: Data
+}
+
 enum BaseError: Error {
     case imageLoadingError
     case noResponse
