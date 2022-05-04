@@ -54,6 +54,8 @@
 		7D178EAE28085B11009C6280 /* RegistrationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D178EAC28085B11009C6280 /* RegistrationRouter.swift */; };
 		7D178EB128087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D178EB028087636009C6280 /* RegistrationScreenElementsSizes.swift */; };
 		7D178EB228087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D178EB028087636009C6280 /* RegistrationScreenElementsSizes.swift */; };
+		7D2B6B0B28228D6200F7D5A8 /* SearchScreenSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2B6B0A28228D6200F7D5A8 /* SearchScreenSizes.swift */; };
+		7D2B6B0C28228D6200F7D5A8 /* SearchScreenSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2B6B0A28228D6200F7D5A8 /* SearchScreenSizes.swift */; };
 		7D2B76ED28129E020051BF9A /* BaseFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2B76EC28129E020051BF9A /* BaseFunctions.swift */; };
 		7D2B76EE28129E020051BF9A /* BaseFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2B76EC28129E020051BF9A /* BaseFunctions.swift */; };
 		7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D562807197100AEBF1A /* LoginModel.swift */; };
@@ -70,6 +72,10 @@
 		7D612D6128119F57007C7515 /* BaseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D5F28119F57007C7515 /* BaseModels.swift */; };
 		7D612D632811A335007C7515 /* RefreshServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D622811A335007C7515 /* RefreshServiceModel.swift */; };
 		7D612D642811A335007C7515 /* RefreshServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D622811A335007C7515 /* RefreshServiceModel.swift */; };
+		7D6500472822ABF30079ABAC /* SearchedFilmsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6500462822ABF30079ABAC /* SearchedFilmsTableView.swift */; };
+		7D6500482822ABF30079ABAC /* SearchedFilmsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6500462822ABF30079ABAC /* SearchedFilmsTableView.swift */; };
+		7D65004A2822AD060079ABAC /* SearchFilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6500492822AD060079ABAC /* SearchFilmTableViewCell.swift */; };
+		7D65004B2822AD060079ABAC /* SearchFilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6500492822AD060079ABAC /* SearchFilmTableViewCell.swift */; };
 		7D7386D328101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386D228101F36008C00FE /* RegistrationControllerConfigurator.swift */; };
 		7D7386D428101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386D228101F36008C00FE /* RegistrationControllerConfigurator.swift */; };
 		7D7386D7281047F7008C00FE /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386D6281047F7008C00FE /* RequestBuilder.swift */; };
@@ -184,6 +190,7 @@
 		7D178EA9280859F0009C6280 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		7D178EAC28085B11009C6280 /* RegistrationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRouter.swift; sourceTree = "<group>"; };
 		7D178EB028087636009C6280 /* RegistrationScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreenElementsSizes.swift; sourceTree = "<group>"; };
+		7D2B6B0A28228D6200F7D5A8 /* SearchScreenSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenSizes.swift; sourceTree = "<group>"; };
 		7D2B76EC28129E020051BF9A /* BaseFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFunctions.swift; sourceTree = "<group>"; };
 		7D3B5D562807197100AEBF1A /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationButton.swift; sourceTree = "<group>"; };
@@ -192,6 +199,8 @@
 		7D612D5C28119E08007C7515 /* RefreshTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenService.swift; sourceTree = "<group>"; };
 		7D612D5F28119F57007C7515 /* BaseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModels.swift; sourceTree = "<group>"; };
 		7D612D622811A335007C7515 /* RefreshServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshServiceModel.swift; sourceTree = "<group>"; };
+		7D6500462822ABF30079ABAC /* SearchedFilmsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedFilmsTableView.swift; sourceTree = "<group>"; };
+		7D6500492822AD060079ABAC /* SearchFilmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilmTableViewCell.swift; sourceTree = "<group>"; };
 		7D7386D228101F36008C00FE /* RegistrationControllerConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationControllerConfigurator.swift; sourceTree = "<group>"; };
 		7D7386D6281047F7008C00FE /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		7D7386D9281061EB008C00FE /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
@@ -502,6 +511,16 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		7D2B6B0928228D3F00F7D5A8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7D2B6B0A28228D6200F7D5A8 /* SearchScreenSizes.swift */,
+				7D6500462822ABF30079ABAC /* SearchedFilmsTableView.swift */,
+				7D6500492822AD060079ABAC /* SearchFilmTableViewCell.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		7D612D5328118201007C7515 /* FavouriteScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -593,6 +612,7 @@
 		7D81BB32281C456800CC9819 /* SearchScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7D2B6B0928228D3F00F7D5A8 /* Utils */,
 				7D81BB33281C45DA00CC9819 /* SearchViewController.swift */,
 				7D81BB36281C46A000CC9819 /* SearchScreenConfigurator.swift */,
 			);
@@ -668,15 +688,6 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		8E312CDB1FD3750E52C8C9BE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				41E9A39FC78269A02822D331 /* Pods_WatchLater_Kirillov_Dev.framework */,
-				1A0EFEE3DB31E6114A79DE19 /* Pods_WatchLater_Kirillov_Prod.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		970F809B147CFE1BEEE5F075 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,7 +724,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 306BF32225FC8F7300E9B481 /* Build configuration list for PBXNativeTarget "WatchLater-Kirillov_Dev" */;
 			buildPhases = (
-				6F7A48D20E030A2B71C309A4 /* [CP] Check Pods Manifest.lock */,
+				6F7A48D20E030A2B71C309A4 /* SwiftLint */,
 				30D2F26D26014479000134EB /* Swiftgen */,
 				3076A0632601CD47003B0EF9 /* SwiftLint */,
 				306BF30A25FC8F7200E9B481 /* Sources */,
@@ -736,7 +747,6 @@
 			buildPhases = (
 				22982DBB33B40A3E23C1593B /* [CP] Check Pods Manifest.lock */,
 				30F07FEE265A8746009B2398 /* Swiftgen */,
-				30F07FEF265A8746009B2398 /* SwiftLint */,
 				30F07FF0265A8746009B2398 /* Sources */,
 				30F08009265A8746009B2398 /* Frameworks */,
 				30F0800B265A8746009B2398 /* Resources */,
@@ -850,28 +860,6 @@
 		};
 		3076A0632601CD47003B0EF9 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WatchLater-Kirillov_Prod-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3076A0632601CD47003B0EF9 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
 			);
@@ -924,7 +912,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" config run --config ./WatchLater-Kirillov/Resources/swiftgen.yml\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
 		};
-		6F7A48D20E030A2B71C309A4 /* [CP] Check Pods Manifest.lock */ = {
+		6F7A48D20E030A2B71C309A4 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
@@ -997,6 +985,7 @@
 				7DC4091B281A78F30062DB08 /* FilmInfo+CoreDataClass.swift in Sources */,
 				7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */,
 				7D81BB30281C437100CC9819 /* FavouriteRouter.swift in Sources */,
+				7D65004A2822AD060079ABAC /* SearchFilmTableViewCell.swift in Sources */,
 				7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
 				7DAD276C281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */,
 				7D178EA528084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
@@ -1023,6 +1012,7 @@
 				7DAD2766281830AB005B9D6F /* FavouriteInteractor.swift in Sources */,
 				7D7386D328101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
 				7DAD27692818316D005B9D6F /* FavouritePresenter.swift in Sources */,
+				7D6500472822ABF30079ABAC /* SearchedFilmsTableView.swift in Sources */,
 				7DC40920281A8B100062DB08 /* FetchFilmsService.swift in Sources */,
 				7D2B76ED28129E020051BF9A /* BaseFunctions.swift in Sources */,
 				7DAD275A2817E365005B9D6F /* ImageDownloadingService.swift in Sources */,
@@ -1037,6 +1027,7 @@
 				7D612D632811A335007C7515 /* RefreshServiceModel.swift in Sources */,
 				7D9715172805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */,
 				30314CCC265AADB600CADD41 /* BaseViewController.swift in Sources */,
+				7D2B6B0B28228D6200F7D5A8 /* SearchScreenSizes.swift in Sources */,
 				7D7EF859280EF0DA00B99CA4 /* RegistrationPresenter.swift in Sources */,
 				3095A8BF25FC96BC0010B54A /* ViewModelConfigurable.swift in Sources */,
 				7DE0E24A2816CE1B00670DE3 /* FavouriteScreenElementsSizes.swift in Sources */,
@@ -1064,6 +1055,7 @@
 				7DC4091C281A78F30062DB08 /* FilmInfo+CoreDataClass.swift in Sources */,
 				7D7EF856280EF02600B99CA4 /* RegistrationService.swift in Sources */,
 				7D81BB31281C437100CC9819 /* FavouriteRouter.swift in Sources */,
+				7D65004B2822AD060079ABAC /* SearchFilmTableViewCell.swift in Sources */,
 				7D178EAE28085B11009C6280 /* RegistrationRouter.swift in Sources */,
 				7DAD276D281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */,
 				7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */,
@@ -1090,6 +1082,7 @@
 				7DAD2767281830AB005B9D6F /* FavouriteInteractor.swift in Sources */,
 				7D7386D428101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
 				7DAD276A2818316D005B9D6F /* FavouritePresenter.swift in Sources */,
+				7D6500482822ABF30079ABAC /* SearchedFilmsTableView.swift in Sources */,
 				7DC40921281A8B100062DB08 /* FetchFilmsService.swift in Sources */,
 				7D2B76EE28129E020051BF9A /* BaseFunctions.swift in Sources */,
 				7DAD275B2817E365005B9D6F /* ImageDownloadingService.swift in Sources */,
@@ -1104,6 +1097,7 @@
 				7D612D642811A335007C7515 /* RefreshServiceModel.swift in Sources */,
 				7D178EAB280859F0009C6280 /* RegistrationViewController.swift in Sources */,
 				30F07FFE265A8746009B2398 /* Asset.swift in Sources */,
+				7D2B6B0C28228D6200F7D5A8 /* SearchScreenSizes.swift in Sources */,
 				7D7EF85A280EF0DA00B99CA4 /* RegistrationPresenter.swift in Sources */,
 				7D112F8B2804641200BB7ECC /* SceneDelegate.swift in Sources */,
 				7DE0E24B2816CE1B00670DE3 /* FavouriteScreenElementsSizes.swift in Sources */,

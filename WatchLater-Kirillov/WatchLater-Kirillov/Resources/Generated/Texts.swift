@@ -63,6 +63,17 @@ internal enum Text {
     internal static let yes = Text.tr("Localizable", "Common.yes")
   }
 
+  internal enum SearchScreen {
+    /// Коллекция
+    internal static let collection = Text.tr("Localizable", "SearchScreen.collection")
+    /// Введите Название
+    internal static let enterFilm = Text.tr("Localizable", "SearchScreen.enterFilm")
+    /// IMDB
+    internal static let imdb = Text.tr("Localizable", "SearchScreen.imdb")
+    /// Начните вводить название, и здесь появятся варианты фильмов
+    internal static let startTypingLabelText = Text.tr("Localizable", "SearchScreen.startTypingLabelText")
+  }
+
   internal enum TabBar {
     /// Добавить
     internal static let add = Text.tr("Localizable", "TabBar.add")

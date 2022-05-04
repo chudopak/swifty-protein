@@ -32,3 +32,10 @@ TabBar.collection = "Коллекция";
 TabBar.add = "Добавить";
 TabBar.profile = "Профиль";
 TabBar.search = "Поиск";
+
+// MARK: - SearchScreen
+
+SearchScreen.startTypingLabelText = "Начните вводить название, и здесь появятся варианты фильмов";
+SearchScreen.imdb = "IMDB";
+SearchScreen.collection = "Коллекция";
+SearchScreen.enterFilm = "Введите Название";

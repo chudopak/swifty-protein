@@ -33,6 +33,7 @@ internal enum Asset {
     internal static let registrationQuestionLabelText = ColorAsset(name: "Colors/registrationQuestionLabelText")
     internal static let activeBackground = ColorAsset(name: "Colors/activeBackground")
     internal static let deepBlue = ColorAsset(name: "Colors/deepBlue")
+    internal static let grayTextHalfTranparent = ColorAsset(name: "Colors/grayTextHalfTranparent")
     internal static let grayTransperent = ColorAsset(name: "Colors/grayTransperent")
     internal static let navigationBarBackground = ColorAsset(name: "Colors/navigationBarBackground")
     internal static let navigationBarTextColor = ColorAsset(name: "Colors/navigationBarTextColor")
@@ -50,6 +51,7 @@ internal enum Asset {
   internal static let collectionInactive = ImageAsset(name: "CollectionInactive")
   internal static let watchLaterLogoFull = ImageAsset(name: "WatchLaterLogoFull")
   internal static let logoShort = ImageAsset(name: "logoShort")
+  internal static let searchIconGray = ImageAsset(name: "searchIconGray")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
