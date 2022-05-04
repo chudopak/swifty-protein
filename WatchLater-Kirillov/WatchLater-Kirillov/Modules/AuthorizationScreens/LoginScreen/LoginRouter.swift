@@ -22,4 +22,10 @@ enum LoginRouter {
     static func removeViewController() {
         loginVC = nil
     }
+    
+    static func presentViewController(_ viewController: UIViewController) {
+        UIWindowService.replaceRootViewController(with: FavouriteThumbnailsViewController())
+        RegistrationRouter.removeViewController()
+        LoginRouter.removeViewController()
+    }
 }

@@ -7,7 +7,7 @@ PODS:
   - TKGrid (1.1)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (~> 5.4)
   - KeychainSwift
   - MemoryLeakTracker
   - SnapKit
@@ -39,6 +39,6 @@ SPEC CHECKSUMS:
   SwiftGen: a6d22010845f08fe18fbdf3a07a8e380fd22e0ea
   TKGrid: 1b1c3ec8fb1a08de1c4e56ae4bb7ea28ec697c56
 
-PODFILE CHECKSUM: 83dc317eeafc86b3ef594bafed0de1fc46fc5fbe
+PODFILE CHECKSUM: 5b9f72d5b51cce8e2218bfeb4e7c7db3c0543758
 
 COCOAPODS: 1.11.3
