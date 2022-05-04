@@ -28,8 +28,8 @@ class SplashViewController: BaseViewController {
         configureSplashScreenSizessAtLaunch()
         setConstraints()
         // TODO: - delete it later
-        KeychainService.delete(key: .accessToken)
-        KeychainService.delete(key: .refreshToken)
+//        KeychainService.delete(key: .accessToken)
+//        KeychainService.delete(key: .refreshToken)
         validateToken()
     }
     

@@ -22,7 +22,7 @@ protocol FavouriteViewControllerDelegate: AnyObject {
     func fetchNewFilms()
 }
 
-class FavouriteViewController: BaseViewController, FavouriteViewControllerProtocol, FavouriteViewControllerDelegate {
+class FavouriteViewController: BaseViewController {
 
     enum ViewStyle {
         case collectionView, tableView
@@ -62,37 +62,6 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
                          router: FavouriteRouter) {
         self.interactor = interactor
         self.router = router
-    }
-    
-    func showFilms(_ films: [FilmInfoTmp]?, watched: Bool) {
-        guard let films = films
-        else {
-            return
-        }
-        if watched {
-            if films.count < pageSize {
-                viewedFilmsInfo.isFull = true
-            }
-            viewedFilms += films
-            setFilmsToActiveView(films: viewedFilms)
-        } else {
-            if films.count < pageSize {
-                willWatchFilmsInfo.isFull = true
-            }
-            willWatchFilms += films
-            setFilmsToActiveView(films: willWatchFilms)
-        }
-    }
-    
-    func fetchNewFilms() {
-        let watched = getWatched()
-        if watched && !viewedFilmsInfo.isFull {
-            viewedFilmsInfo.currentPage += 1
-            interactor.fetchMovies(page: viewedFilmsInfo.currentPage, size: pageSize, watched: watched)
-        } else if !watched && !willWatchFilmsInfo.isFull {
-            willWatchFilmsInfo.currentPage += 1
-            interactor.fetchMovies(page: willWatchFilmsInfo.currentPage, size: pageSize, watched: watched)
-        }
     }
     
     private func setView() {
@@ -147,9 +116,8 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
         }
     }
     
-    // TODO: searchFilm
     @objc private func searchFilm() {
-        navigationController?.pushViewController(SearchScreenConfigurator().setupModule(), animated: true)
+        router.pushSearchViewController(to: navigationController!)
     }
     
     @objc private func changeViewStyle() {
@@ -196,6 +164,43 @@ class FavouriteViewController: BaseViewController, FavouriteViewControllerProtoc
     }
 }
 
+extension FavouriteViewController: FavouriteViewControllerProtocol {
+    
+    func showFilms(_ films: [FilmInfoTmp]?, watched: Bool) {
+        guard let films = films
+        else {
+            return
+        }
+        if watched {
+            if films.count < pageSize {
+                viewedFilmsInfo.isFull = true
+            }
+            viewedFilms += films
+            setFilmsToActiveView(films: viewedFilms)
+        } else {
+            if films.count < pageSize {
+                willWatchFilmsInfo.isFull = true
+            }
+            willWatchFilms += films
+            setFilmsToActiveView(films: willWatchFilms)
+        }
+    }
+}
+
+extension FavouriteViewController: FavouriteViewControllerDelegate {
+    
+    func fetchNewFilms() {
+        let watched = getWatched()
+        if watched && !viewedFilmsInfo.isFull {
+            viewedFilmsInfo.currentPage += 1
+            interactor.fetchMovies(page: viewedFilmsInfo.currentPage, size: pageSize, watched: watched)
+        } else if !watched && !willWatchFilmsInfo.isFull {
+            willWatchFilmsInfo.currentPage += 1
+            interactor.fetchMovies(page: willWatchFilmsInfo.currentPage, size: pageSize, watched: watched)
+        }
+    }
+}
+
 extension FavouriteViewController {
     
     private func makeSearchBarButtonItem() -> UIBarButtonItem {
@@ -222,8 +227,14 @@ extension FavouriteViewController {
     private func makeSegmentControll() -> UISegmentedControl {
         let controll = UISegmentedControl(items: [Text.Common.willWatch, Text.Common.viewed])
         controll.selectedSegmentIndex = 0
-        controll.setTitleTextAttributes([.font: UIFont.boldSystemFont(ofSize: 15)],
+        controll.backgroundColor = Asset.Colors.grayTransperent.color
+        controll.tintColor = .white
+        controll.setTitleTextAttributes([.font: UIFont.boldSystemFont(ofSize: 15),
+                                         .foregroundColor: UIColor.black],
                                         for: .normal)
+        controll.setTitleTextAttributes([.font: UIFont.boldSystemFont(ofSize: 15),
+                                         .foregroundColor: UIColor.black],
+                                        for: .selected)
         controll.addTarget(self, action: #selector(changeFilmsSegment), for: .valueChanged)
         return controll
     }

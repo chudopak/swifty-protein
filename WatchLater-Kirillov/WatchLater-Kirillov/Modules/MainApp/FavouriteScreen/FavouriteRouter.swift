@@ -15,4 +15,8 @@ final class FavouriteRouter {
     init(viewController: UIViewController) {
         self.viewController = viewController
     }
+    
+    func pushSearchViewController(to navigationController: UINavigationController, animated: Bool = true) {
+        navigationController.pushViewController(SearchScreenConfigurator().setupModule(), animated: animated)
+    }
 }
