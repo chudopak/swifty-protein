@@ -11,11 +11,11 @@ import SnapKit
 
 protocol LoginViewControllerProtocol: AnyObject {
     
-    func loginFailedStatee(displayMessage: String)
-    func presentThumbnailsViewController()
+    func loginFailedState(displayMessage: String)
+    func presentFavouriteViewController()
 }
 
-class LoginViewController: BaseViewController, UITextFieldDelegate, LoginViewControllerProtocol {
+class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     private lazy var watchLaterLogoImageView = makeWatchLaterLogoImageView()
     private lazy var emailTextField = makeTextField(type: .email)
@@ -54,16 +54,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, LoginViewCon
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.placeholder = ""
-    }
-    
-    func loginFailedStatee(displayMessage: String) {
-        showLoginFailedState(displayMessage: displayMessage)
-    }
-    
-    func presentThumbnailsViewController() {
-        RegistrationRouter.removeViewController()
-        LoginRouter.removeViewController()
-        UIWindowService.replaceRootViewController(with: MainTabBar())
     }
     
     private func configureView() {
@@ -170,6 +160,17 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, LoginViewCon
     
     @objc private func openRegistrationViewController() {
         RegistrationRouter.presentRegistrationViewController(navigationController: navigationController!)
+    }
+}
+
+extension LoginViewController: LoginViewControllerProtocol {
+
+    func loginFailedState(displayMessage: String) {
+        showLoginFailedState(displayMessage: displayMessage)
+    }
+    
+    func presentFavouriteViewController() {
+        LoginRouter.presentViewController(MainTabBar())
     }
 }
 

@@ -22,4 +22,14 @@ enum RegistrationRouter {
     static func removeViewController() {
         registrationVC = nil
     }
+    
+    static func presentViewController(_ viewController: UIViewController) {
+        UIWindowService.replaceRootViewController(with: viewController)
+        RegistrationRouter.removeViewController()
+        LoginRouter.removeViewController()
+    }
+    
+    static func popViewController(from navigationController: UINavigationController, animated: Bool = true) {
+        navigationController.popViewController(animated: animated)
+    }
 }

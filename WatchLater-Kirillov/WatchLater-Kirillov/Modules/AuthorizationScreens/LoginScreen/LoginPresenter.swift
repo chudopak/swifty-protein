@@ -23,16 +23,16 @@ final class LoginPresenter: LoginPresenterProtocol {
     func procedLoginResult(state: LoginResponseState) {
         switch state {
         case .success:
-            DispatchQueue.main.async { [unowned self] in
-                self.loginViewController.presentThumbnailsViewController()
+            DispatchQueue.main.async { [weak self] in
+                self?.loginViewController.presentFavouriteViewController()
             }
 
         case let .failure(displayMessage, error):
             if let error = error {
                 print("LoginPresentererror, procedLoginResult - ", error.localizedDescription)
             }
-            DispatchQueue.main.async { [unowned self] in
-                loginViewController.loginFailedStatee(displayMessage: displayMessage)
+            DispatchQueue.main.async { [weak self] in
+                self?.loginViewController.loginFailedState(displayMessage: displayMessage)
             }
         }
     }

@@ -19,16 +19,6 @@ class SplashViewController: BaseViewController {
     private var isTokenValidationFinished = false
     private var isTokenActive = false
     
-    init(service: RefreshTokenServiceProtocol) {
-        super.init(nibName: nil, bundle: nil)
-        self.refreshTokenService = service
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.primaryBackground.color
@@ -37,8 +27,9 @@ class SplashViewController: BaseViewController {
         watchLaterImageView.addSubview(eyeImageView)
         configureSplashScreenSizessAtLaunch()
         setConstraints()
-//        KeychainService.delete(key: .accessToken)
-//        KeychainService.delete(key: .refreshToken)
+        // TODO: - delete it later
+        KeychainService.delete(key: .accessToken)
+        KeychainService.delete(key: .refreshToken)
         validateToken()
     }
     
@@ -47,20 +38,25 @@ class SplashViewController: BaseViewController {
         viewAnimation()
     }
     
+    func setupComponents(refreshService: RefreshTokenServiceProtocol) {
+        self.refreshTokenService = refreshService
+    }
+    
     private func validateToken() {
-        refreshTokenService.validateToken { [unowned self] state in
+        refreshTokenService.validateToken { [weak self] state in
             switch state {
             case .success:
                 DispatchQueue.main.async {
-                    self.isTokenValidationFinished = true
-                    self.isTokenActive = true
-                    if self.isAnimationFinished {
-                        self.presentNeededScreen()
+                    self?.isTokenValidationFinished = true
+                    self?.isTokenActive = true
+                    if let isAnimationFinished = self?.isAnimationFinished,
+                       isAnimationFinished {
+                        self?.presentNeededScreen()
                     }
                 }
                 
             case .failure:
-                self.recreateToken()
+                self?.recreateToken()
             }
         }
     }
@@ -153,12 +149,13 @@ class SplashViewController: BaseViewController {
     private func animateEyePhaseThree() {
         UIView.animate(withDuration: SplashScreenAnimation.PhaseThree.duration,
                        delay: SplashScreenAnimation.PhaseThree.delay,
-                       options: .curveLinear, animations: { [unowned self] in
-                        self.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXCenter
-                       }, completion: { [unowned self] _ in
-                        self.isAnimationFinished = true
-                        if self.isTokenValidationFinished {
-                            self.presentNeededScreen()
+                       options: .curveLinear, animations: { [weak self] in
+                        self?.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXCenter
+                       }, completion: { [weak self] _ in
+                        self?.isAnimationFinished = true
+                        if self?.isTokenValidationFinished != nil
+                            && self!.isTokenValidationFinished {
+                            self?.presentNeededScreen()
                         }
                        })
     }

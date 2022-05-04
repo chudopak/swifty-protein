@@ -8,7 +8,7 @@ PODS:
   - TKGrid (1.1)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (~> 5.4)
   - KeychainSwift
   - Kingfisher
   - MemoryLeakTracker
