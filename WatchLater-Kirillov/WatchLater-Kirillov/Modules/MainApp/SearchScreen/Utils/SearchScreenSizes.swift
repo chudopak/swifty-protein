@@ -53,4 +53,9 @@ enum SearchScreenSizes {
         static let ratingTopOffset: CGFloat = 5
         static let ratingLeftOffset: CGFloat = 10
     }
+    
+    enum Spinner {
+        static let spinnerSize: CGFloat = 40
+        static let topOffset: CGFloat = 18
+    }
 }

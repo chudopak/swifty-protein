@@ -11,7 +11,6 @@ import UIKit
 protocol SearchInteractorProtocol {
     func cancelCurrentTask(expression: String,
                            completion: @escaping () -> Void)
-    func cancelAllTasks()
     func searchMoviesIMDB(expression: String)
 }
 
@@ -28,23 +27,25 @@ class SearchInteractor: SearchInteractorProtocol {
     
     func cancelCurrentTask(expression: String,
                            completion: @escaping () -> Void) {
-        searchService.cancelPreviousRequest(expression: expression, completion: completion)
-    }
-    
-    func cancelAllTasks() {
-        searchService.cancelAllTasks {
-            print("CANCELED ALL")
-        }
+        searchService.cancelPreviousRequest(expression: expression,
+                                            completion: completion)
     }
     
     func searchMoviesIMDB(expression: String) {
         searchService.searchMovies(expression: expression) { [weak self] result in
             switch result {
             case .success(let movies):
+                print(movies)
                 self?.presenter.proceedMoviesData(movies: movies)
             
             case .failure(let error):
                 print(error.localizedDescription)
+                if let error = error as? BaseError,
+                   error == .cancelled {
+                    self?.presenter.showFailedState(isSearching: true)
+                } else {
+                    self?.presenter.showFailedState(isSearching: false)
+                }
             }
         }
     }

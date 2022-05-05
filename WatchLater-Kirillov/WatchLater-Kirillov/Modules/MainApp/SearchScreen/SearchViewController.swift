@@ -10,6 +10,7 @@ import UIKit
 
 protocol SearchViewControllerProtocol: AnyObject {
     func displayMovies(movies: [MovieData])
+    func showFailedState(isSearching: Bool)
 }
 
 class SearchViewController: BaseViewController, UITextFieldDelegate {
@@ -20,8 +21,9 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
     
     private lazy var segmentControl = makeSegmentControl()
     private lazy var textField = makeTextField()
-    private lazy var startTypingLabel = makeStartTypingLabel()
+    private lazy var label = makeStartTypingLabel()
     private lazy var resultsTableView = SearchedFilmsTableView()
+    private lazy var spiner = makeSpinner()
     
     private var interactor: SearchInteractorProtocol!
     
@@ -48,9 +50,11 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
         title = NSLocalizedString(Text.TabBar.search, comment: "")
         view.addSubview(segmentControl)
         view.addSubview(textField)
-        view.addSubview(startTypingLabel)
+        view.addSubview(label)
         view.addSubview(resultsTableView)
+        view.addSubview(spiner)
         resultsTableView.isHidden = true
+        spiner.isHidden = true
     }
     
     private func setNavigationController() {
@@ -70,9 +74,24 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
         view.addGestureRecognizer(hideKeyboardGuesture)
     }
     
-    private func changeTableViewVisibility(to state: Bool) {
-        startTypingLabel.isHidden = state
-        resultsTableView.isHidden = !state
+    private func makeVisible(tableView tableViewVisibility: Bool = false,
+                             label labelVisibility: Bool = false,
+                             spinner spinnerVisibility: Bool = false,
+                             errorView errorVisibility: Bool = false) {
+        if errorVisibility {
+            label.isHidden = !errorVisibility
+            label.text = Text.Authorization.somethingWentWrong
+        } else {
+            label.isHidden = !labelVisibility
+            label.text = Text.SearchScreen.startTypingLabelText
+        }
+        resultsTableView.isHidden = !tableViewVisibility
+        spiner.isHidden = !spinnerVisibility
+        if spinnerVisibility {
+            spiner.startAnimating()
+        } else {
+            spiner.stopAnimating()
+        }
     }
     
     private func getSearchArea() -> SearchArea {
@@ -89,9 +108,13 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
         switch getSearchArea() {
         case .IMDB:
             if previousExpression != expression {
+                makeVisible(spinner: true)
                 interactor.cancelCurrentTask(expression: previousExpression) { [weak self] in
+                    DispatchQueue.main.async {
+                        self?.resultsTableView.moviesData = [MovieData]()
+                    }
                     self?.interactor.searchMoviesIMDB(expression: expression)
-                }  
+                }
             }
         
         case .local:
@@ -118,13 +141,16 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
            !text.isEmpty {
             searchMovies(expression: text)
             previousExpression = text
-            changeTableViewVisibility(to: true)
         } else {
+            makeVisible(label: true)
             if getSearchArea() == .IMDB {
-                interactor.cancelAllTasks()
+                interactor.cancelCurrentTask(expression: previousExpression) { [weak self] in
+                    DispatchQueue.main.async {
+                        self?.resultsTableView.moviesData = [MovieData]()
+                    }
+                }
             }
             previousExpression = ""
-            changeTableViewVisibility(to: false)
         }
     }
     
@@ -144,7 +170,21 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
 extension SearchViewController: SearchViewControllerProtocol {
     
     func displayMovies(movies: [MovieData]) {
+        makeVisible(tableView: true)
         resultsTableView.moviesData = movies
+    }
+    
+    func showFailedState(isSearching: Bool) {
+        if let text = textField.text,
+           !text.isEmpty {
+            if isSearching {
+                makeVisible(spinner: true)
+            } else {
+                makeVisible(errorView: true)
+            }
+        } else {
+            makeVisible(label: true)
+        }
     }
 }
 
@@ -208,6 +248,13 @@ extension SearchViewController {
         label.textColor = Asset.Colors.grayTextHalfTranparent.color
         return label
     }
+    
+    private func makeSpinner() -> UIActivityIndicatorView {
+        let spinner = UIActivityIndicatorView()
+        spinner.style = .white
+        spinner.color = .black
+        return spinner
+    }
 }
 
 extension SearchViewController {
@@ -217,6 +264,7 @@ extension SearchViewController {
         setTextFieldConstratints()
         setStartTypingLabelConstratints()
         setTableViewConstratints()
+        setSpinnerConsrtaints()
     }
     
     private func setSegmentControlConstratints() {
@@ -236,7 +284,7 @@ extension SearchViewController {
     }
     
     private func setStartTypingLabelConstratints() {
-        startTypingLabel.snp.makeConstraints { maker in
+        label.snp.makeConstraints { maker in
             maker.leading.trailing.equalTo(view.layoutMarginsGuide)
             maker.top.equalTo(textField.snp.bottom).offset(SearchScreenSizes.StartTypingLabel.topOffset)
             maker.height.equalTo(SearchScreenSizes.StartTypingLabel.height)
@@ -248,6 +296,14 @@ extension SearchViewController {
             maker.leading.trailing.equalToSuperview()
             maker.top.equalTo(textField.snp.bottom).offset(SearchScreenSizes.TextField.topOffset)
             maker.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    private func setSpinnerConsrtaints() {
+        spiner.snp.makeConstraints { maker in
+            maker.top.equalTo(textField.snp.bottom).offset(SearchScreenSizes.Spinner.topOffset)
+            maker.width.height.equalTo(SearchScreenSizes.Spinner.spinnerSize)
+            maker.centerX.equalToSuperview()
         }
     }
 }

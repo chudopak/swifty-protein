@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		260E3FD9042652DC08A6D39B /* Pods_WatchLater_Kirillov_Prod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838B2E56532D22932808A68C /* Pods_WatchLater_Kirillov_Prod.framework */; };
 		30314C9D265AA9FB00CADD41 /* WatchLater_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30314C9C265AA9FB00CADD41 /* WatchLater_Tests.swift */; };
 		30314CC8265AADB500CADD41 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30314CA8265AAA8900CADD41 /* BaseViewController.swift */; };
 		30314CCC265AADB600CADD41 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30314CA8265AAA8900CADD41 /* BaseViewController.swift */; };
@@ -35,7 +36,6 @@
 		30F0800F265A8746009B2398 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 306BF31C25FC8F7300E9B481 /* LaunchScreen.storyboard */; };
 		30F08010265A8746009B2398 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 306BF31A25FC8F7300E9B481 /* Assets.xcassets */; };
 		30F08012265A8746009B2398 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 30D2F271260148EE000134EB /* swiftgen.yml */; };
-		5A6980D7478BCF6D40406F94 /* Pods_WatchLater_Kirillov_Prod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB3BFD70283CEEDEAF8B0D0E /* Pods_WatchLater_Kirillov_Prod.framework */; };
 		7D058F18280DC0C800683C3C /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D058F17280DC0C800683C3C /* NetworkLayer.swift */; };
 		7D058F19280DC0C800683C3C /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D058F17280DC0C800683C3C /* NetworkLayer.swift */; };
 		7D0ACA9828096A2B00777442 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0ACA9728096A2B00777442 /* RegistrationModel.swift */; };
@@ -154,7 +154,7 @@
 		7DE0E24E2816DEBC00670DE3 /* FilmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0E24C2816DEBC00670DE3 /* FilmCollectionViewCell.swift */; };
 		7DE0E2502816F20900670DE3 /* FavouriteModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0E24F2816F20900670DE3 /* FavouriteModels.swift */; };
 		7DE0E2512816F20900670DE3 /* FavouriteModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0E24F2816F20900670DE3 /* FavouriteModels.swift */; };
-		F24C7D0928FB093755E54C19 /* Pods_WatchLater_Kirillov_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA09A34047D97A2689FCE483 /* Pods_WatchLater_Kirillov_Dev.framework */; };
+		B29E69EADC4E34FCA674E6BA /* Pods_WatchLater_Kirillov_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A1CDD15A2929A09D1A0B7F1 /* Pods_WatchLater_Kirillov_Dev.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,7 +168,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		179F62D1B4259344A69B1A5F /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		30314C9A265AA9FB00CADD41 /* WatchLater-Kirillov_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WatchLater-Kirillov_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30314C9C265AA9FB00CADD41 /* WatchLater_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLater_Tests.swift; sourceTree = "<group>"; };
 		30314C9E265AA9FB00CADD41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -190,7 +189,6 @@
 		30D2F273260148EE000134EB /* Texts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
 		30F08017265A8746009B2398 /* WatchLater-Kirillov_Prod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchLater-Kirillov_Prod.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30F0801D265A8831009B2398 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72619556E4599EA770FE6732 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.release.xcconfig"; sourceTree = "<group>"; };
 		7D058F17280DC0C800683C3C /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		7D0ACA9728096A2B00777442 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
 		7D0F1A0E2812FF8E007570F9 /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
@@ -250,10 +248,12 @@
 		7DE0E2492816CE1B00670DE3 /* FavouriteScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteScreenElementsSizes.swift; sourceTree = "<group>"; };
 		7DE0E24C2816DEBC00670DE3 /* FilmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCollectionViewCell.swift; sourceTree = "<group>"; };
 		7DE0E24F2816F20900670DE3 /* FavouriteModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteModels.swift; sourceTree = "<group>"; };
-		90F8954E8927D9198727EE1F /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; sourceTree = "<group>"; };
-		93E4B44C7807DA0187F99757 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.release.xcconfig"; sourceTree = "<group>"; };
-		AA09A34047D97A2689FCE483 /* Pods_WatchLater_Kirillov_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB3BFD70283CEEDEAF8B0D0E /* Pods_WatchLater_Kirillov_Prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		838B2E56532D22932808A68C /* Pods_WatchLater_Kirillov_Prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A1CDD15A2929A09D1A0B7F1 /* Pods_WatchLater_Kirillov_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BBA1E3B2A2BC023ACF9027F /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.debug.xcconfig"; sourceTree = "<group>"; };
+		9A75608637D77460A9EDB309 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.release.xcconfig"; sourceTree = "<group>"; };
+		CB0901E00E965FCD58ABDCD6 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.release.xcconfig"; sourceTree = "<group>"; };
+		EA67EC1D704A1D64691467A2 /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,7 +268,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F24C7D0928FB093755E54C19 /* Pods_WatchLater_Kirillov_Dev.framework in Frameworks */,
+				B29E69EADC4E34FCA674E6BA /* Pods_WatchLater_Kirillov_Dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,22 +276,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A6980D7478BCF6D40406F94 /* Pods_WatchLater_Kirillov_Prod.framework in Frameworks */,
+				260E3FD9042652DC08A6D39B /* Pods_WatchLater_Kirillov_Prod.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2BC12F24CFCA4F0388D033D6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				AA09A34047D97A2689FCE483 /* Pods_WatchLater_Kirillov_Dev.framework */,
-				EB3BFD70283CEEDEAF8B0D0E /* Pods_WatchLater_Kirillov_Prod.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		30314C9B265AA9FB00CADD41 /* WatchLater-Kirillov_Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,7 +327,7 @@
 				30314C9B265AA9FB00CADD41 /* WatchLater-Kirillov_Tests */,
 				306BF30F25FC8F7200E9B481 /* Products */,
 				970F809B147CFE1BEEE5F075 /* Pods */,
-				2BC12F24CFCA4F0388D033D6 /* Frameworks */,
+				B9D82C67AD019B695425D6FB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -727,12 +718,21 @@
 		970F809B147CFE1BEEE5F075 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				179F62D1B4259344A69B1A5F /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */,
-				72619556E4599EA770FE6732 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */,
-				90F8954E8927D9198727EE1F /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */,
-				93E4B44C7807DA0187F99757 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */,
+				8BBA1E3B2A2BC023ACF9027F /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */,
+				CB0901E00E965FCD58ABDCD6 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */,
+				EA67EC1D704A1D64691467A2 /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */,
+				9A75608637D77460A9EDB309 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		B9D82C67AD019B695425D6FB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8A1CDD15A2929A09D1A0B7F1 /* Pods_WatchLater_Kirillov_Dev.framework */,
+				838B2E56532D22932808A68C /* Pods_WatchLater_Kirillov_Prod.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -760,13 +760,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 306BF32225FC8F7300E9B481 /* Build configuration list for PBXNativeTarget "WatchLater-Kirillov_Dev" */;
 			buildPhases = (
+				A9842CFC3FF777B5698E4E78 /* [CP] Check Pods Manifest.lock */,
 				6F7A48D20E030A2B71C309A4 /* SwiftLint */,
 				30D2F26D26014479000134EB /* Swiftgen */,
 				3076A0632601CD47003B0EF9 /* SwiftLint */,
 				306BF30A25FC8F7200E9B481 /* Sources */,
 				306BF30B25FC8F7200E9B481 /* Frameworks */,
 				306BF30C25FC8F7200E9B481 /* Resources */,
-				D4D544B858C1311B15AA1633 /* [CP] Embed Pods Frameworks */,
+				D2FE37A9D564B74D0DD35895 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -781,12 +782,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30F08014265A8746009B2398 /* Build configuration list for PBXNativeTarget "WatchLater-Kirillov_Prod" */;
 			buildPhases = (
-				22982DBB33B40A3E23C1593B /* [CP] Check Pods Manifest.lock */,
+				6E59D1A2B2CFD31AD9450A67 /* [CP] Check Pods Manifest.lock */,
 				30F07FEE265A8746009B2398 /* Swiftgen */,
 				30F07FF0265A8746009B2398 /* Sources */,
 				30F08009265A8746009B2398 /* Frameworks */,
 				30F0800B265A8746009B2398 /* Resources */,
-				F60648B0D3584ED4E3414B2C /* [CP] Embed Pods Frameworks */,
+				2C389F48CF46A5842C2ABD99 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -872,26 +873,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		22982DBB33B40A3E23C1593B /* [CP] Check Pods Manifest.lock */ = {
+		2C389F48CF46A5842C2ABD99 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WatchLater-Kirillov_Prod-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3076A0632601CD47003B0EF9 /* SwiftLint */ = {
@@ -948,6 +944,28 @@
 			shellPath = /bin/sh;
 			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" config run --config ./WatchLater-Kirillov/Resources/swiftgen.yml\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
 		};
+		6E59D1A2B2CFD31AD9450A67 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WatchLater-Kirillov_Prod-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6F7A48D20E030A2B71C309A4 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -966,7 +984,29 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		D4D544B858C1311B15AA1633 /* [CP] Embed Pods Frameworks */ = {
+		A9842CFC3FF777B5698E4E78 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WatchLater-Kirillov_Dev-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2FE37A9D564B74D0DD35895 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -981,23 +1021,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F60648B0D3584ED4E3414B2C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WatchLater-Kirillov_Prod/Pods-WatchLater-Kirillov_Prod-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1349,7 +1372,7 @@
 		};
 		306BF32325FC8F7300E9B481 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 179F62D1B4259344A69B1A5F /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */;
+			baseConfigurationReference = 8BBA1E3B2A2BC023ACF9027F /* Pods-WatchLater-Kirillov_Dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1372,7 +1395,7 @@
 		};
 		306BF32425FC8F7300E9B481 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72619556E4599EA770FE6732 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */;
+			baseConfigurationReference = CB0901E00E965FCD58ABDCD6 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1395,7 +1418,7 @@
 		};
 		30F08015265A8746009B2398 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90F8954E8927D9198727EE1F /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */;
+			baseConfigurationReference = EA67EC1D704A1D64691467A2 /* Pods-WatchLater-Kirillov_Prod.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1419,7 +1442,7 @@
 		};
 		30F08016265A8746009B2398 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93E4B44C7807DA0187F99757 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */;
+			baseConfigurationReference = 9A75608637D77460A9EDB309 /* Pods-WatchLater-Kirillov_Prod.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

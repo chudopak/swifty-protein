@@ -10,6 +10,7 @@ import UIKit
 
 protocol SearchPresenterProtocol {
     func proceedMoviesData(movies: [MovieData])
+    func showFailedState(isSearching: Bool)
 }
 
 class SearchPresenter: SearchPresenterProtocol {
@@ -21,6 +22,14 @@ class SearchPresenter: SearchPresenterProtocol {
     }
     
     func proceedMoviesData(movies: [MovieData]) {
-        viewController.displayMovies(movies: movies)
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController.displayMovies(movies: movies)
+        }
+    }
+    
+    func showFailedState(isSearching: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController.showFailedState(isSearching: isSearching)
+        }
     }
 }

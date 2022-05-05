@@ -25,6 +25,7 @@ enum BaseError: Error {
     case noData
     case range400Response
     case unableToDecodeData
+    case cancelled
 }
 
 extension BaseError: LocalizedError {
@@ -69,6 +70,12 @@ extension BaseError: LocalizedError {
         case .unableToDecodeData:
             return NSLocalizedString(
                 "Can not decode data to needed type.",
+                comment: ""
+            )
+        
+        case .cancelled:
+            return NSLocalizedString(
+                "Cancel task.",
                 comment: ""
             )
         }

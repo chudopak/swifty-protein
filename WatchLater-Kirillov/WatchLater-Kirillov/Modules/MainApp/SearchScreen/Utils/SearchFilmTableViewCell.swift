@@ -16,6 +16,8 @@ class SearchFilmTableViewCell: UITableViewCell {
     lazy var titleLabel = makeLabel(fontSize: SearchScreenSizes.TableView.titleFontSize)
     private lazy var stackView = makeStackView(views: [titleLabel, yearLabel])
     lazy var ratingLabel = makeRatingLabel()
+    
+    var imageId = ""
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

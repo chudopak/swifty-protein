@@ -39,3 +39,10 @@ extension MoviesError: LocalizedError {
         }
     }
 }
+
+struct Rating: Codable {
+    let imDbId: String?
+    let year: String?
+    let imDb: String?
+    let errorMessage: String?
+}
