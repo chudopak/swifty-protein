@@ -8,12 +8,24 @@
 
 import UIKit
 
+protocol SearchViewControllerProtocol: AnyObject {
+    func displayMovies(movies: [MovieData])
+}
+
 class SearchViewController: BaseViewController, UITextFieldDelegate {
+    
+    enum SearchArea {
+        case IMDB, local
+    }
     
     private lazy var segmentControl = makeSegmentControl()
     private lazy var textField = makeTextField()
     private lazy var startTypingLabel = makeStartTypingLabel()
     private lazy var resultsTableView = SearchedFilmsTableView()
+    
+    private var interactor: SearchInteractorProtocol!
+    
+    private var previousExpression = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +37,10 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationController()
+    }
+    
+    func setupComponents(interactor: SearchInteractorProtocol) {
+        self.interactor = interactor
     }
     
     private func setView() {
@@ -59,6 +75,31 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
         resultsTableView.isHidden = !state
     }
     
+    private func getSearchArea() -> SearchArea {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            return SearchArea.IMDB
+        
+        default:
+            return SearchArea.local
+        }
+    }
+    
+    private func searchMovies(expression: String) {
+        switch getSearchArea() {
+        case .IMDB:
+            if previousExpression != expression {
+                interactor.cancelCurrentTask(expression: previousExpression) { [weak self] in
+                    self?.interactor.searchMoviesIMDB(expression: expression)
+                }  
+            }
+        
+        case .local:
+            // TODO: add core data
+            print("Don't forget core data \(expression)")
+        }
+    }
+    
     @objc private func changeSearchSource(_ sender: UISegmentedControl!) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -75,14 +116,35 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
     @objc private func textFieldDidChange() {
         if let text = textField.text,
            !text.isEmpty {
+            searchMovies(expression: text)
+            previousExpression = text
             changeTableViewVisibility(to: true)
         } else {
+            if getSearchArea() == .IMDB {
+                interactor.cancelAllTasks()
+            }
+            previousExpression = ""
             changeTableViewVisibility(to: false)
         }
     }
     
     @objc private func textFieldHideKeyboard() {
         textField.resignFirstResponder()
+    }
+    
+    @objc private func textFieldDonePressed() {
+        if let text = textField.text,
+           !text.isEmpty {
+            searchMovies(expression: text)
+        }
+        textField.resignFirstResponder()
+    }
+}
+
+extension SearchViewController: SearchViewControllerProtocol {
+    
+    func displayMovies(movies: [MovieData]) {
+        resultsTableView.moviesData = movies
     }
 }
 
@@ -131,7 +193,7 @@ extension SearchViewController {
         )
         textField.addTarget(
             self,
-            action: #selector(textFieldHideKeyboard),
+            action: #selector(textFieldDonePressed),
             for: .editingDidEndOnExit
         )
         return (textField)

@@ -14,7 +14,9 @@ protocol NetworkLayerProtocol {
                  completion: @escaping (Data?, URLResponse?, Error?) -> Void)
     func request(url: URL,
                  completion: @escaping (Data?, URLResponse?, Error?) -> Void)
-    func cancel(by url: URL)
+    func cancel(by url: URL,
+                completion: @escaping () -> Void)
+    func cancelAll(completion: @escaping () -> Void)
 }
 
 // TODO: - Протестировать что будет если не действителен токен (на лики тести)
@@ -73,8 +75,32 @@ final class NetworkLayer: NetworkLayerProtocol {
         }
     }
     
-    func cancel(by url: URL) {
-        session.cancelAllRequests(completingOnQueue: .main)
+    func cancel(by url: URL,
+                completion: @escaping () -> Void) {
+        AF.session.getTasksWithCompletionHandler { dataTask, uploadTask, downloadTask in
+            dataTask.forEach { task in
+                if task.originalRequest?.url?.absoluteString == url.absoluteString {
+                    task.cancel()
+                }
+            }
+            uploadTask.forEach { task in
+                if task.originalRequest?.url?.absoluteString == url.absoluteString {
+                    task.cancel()
+                }
+            }
+            downloadTask.forEach { task in
+                if task.originalRequest?.url?.absoluteString == url.absoluteString {
+                    task.cancel()
+                }
+            }
+            completion()
+        }
+    }
+    
+    func cancelAll(completion: @escaping () -> Void) {
+        AF.cancelAllRequests {
+            completion()
+        }
     }
     
     private func deleteTokensData() {

@@ -12,6 +12,11 @@ final class SearchScreenConfigurator {
     
     func setupModule() -> SearchViewController {
         let viewController = SearchViewController()
+        let presenter = SearchPresenter(viewController: viewController)
+        let searchService = SearchMovieService(networkManager: NetworkLayer(refreshService: RefreshTokenService()))
+        let interactor = SearchInteractor(presenter: presenter,
+                                          searchService: searchService)
+        viewController.setupComponents(interactor: interactor)
         return viewController
     }
 }

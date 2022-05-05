@@ -167,6 +167,7 @@ class FavouriteViewController: BaseViewController {
 extension FavouriteViewController: FavouriteViewControllerProtocol {
     
     func showFilms(_ films: [FilmInfoTmp]?, watched: Bool) {
+        // TODO: If i delete all films then will old films still be visible?
         guard let films = films
         else {
             return

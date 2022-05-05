@@ -13,6 +13,12 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
     
     private lazy var resultTableView = makeTableView()
     
+    var moviesData = [MovieData]() {
+        didSet {
+            resultTableView.reloadData()
+        }
+    }
+    
     init() {
         super.init(frame: .zero)
         backgroundColor = .clear
@@ -26,13 +32,13 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return moviesData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchFilmTableViewCell.identifier, for: indexPath) as! SearchFilmTableViewCell
-        cell.yearLabel.text = "2020"
-        cell.titleLabel.text = "Title"
+        cell.yearLabel.text = moviesData[indexPath.row].description
+        cell.titleLabel.text = moviesData[indexPath.row].title
         cell.ratingLabel.text = "9.9"
         return cell
     }

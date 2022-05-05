@@ -50,7 +50,8 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
 
             let finalPath = pathTmp + id
             urlComponents.path = finalPath
-            guard let request = self?.buildRequest(url: urlComponents.url!)
+            guard let url = urlComponents.url,
+                  let request = self?.buildRequest(url: url)
             else {
                 completion(.failure(BaseError.failedToBuildRequest))
                 return
