@@ -13,6 +13,10 @@ protocol SearchViewControllerProtocol: AnyObject {
     func showFailedState(isSearching: Bool)
 }
 
+protocol SearchViewControllerDelegate: AnyObject {
+    func presentDetailsScreen(imdbData: MovieData?, localData: FilmInfoTmp?)
+}
+
 class SearchViewController: BaseViewController, UITextFieldDelegate {
     
     private let imdbSegment = 0
@@ -25,6 +29,7 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
     private lazy var spiner = makeSpinner()
     
     private var interactor: SearchInteractorProtocol!
+    private var router: SearchRouter!
     
     private var imdbSearchText = SearchText(previous: "", current: "")
     private var localSearchText = SearchText(previous: "", current: "")
@@ -57,8 +62,10 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
         setNavigationController()
     }
     
-    func setupComponents(interactor: SearchInteractorProtocol) {
+    func setupComponents(interactor: SearchInteractorProtocol,
+                         router: SearchRouter) {
         self.interactor = interactor
+        self.router = router
     }
     
     private func setView() {
@@ -220,6 +227,13 @@ extension SearchViewController: SearchViewControllerProtocol {
     }
 }
 
+extension SearchViewController: SearchViewControllerDelegate {
+    
+    func presentDetailsScreen(imdbData: MovieData?, localData: FilmInfoTmp?) {
+        router.presentDetailsViewController(navigationController: navigationController!)
+    }
+}
+
 extension SearchViewController {
     
     private func makeSegmentControl() -> UISegmentedControl {
@@ -284,7 +298,8 @@ extension SearchViewController {
     private func makeResultsTableView() -> SearchedFilmsTableView {
         let networkLayer = NetworkLayer(refreshService: RefreshTokenService())
         let imageService = ImageDownloadingService(networkManager: networkLayer)
-        return SearchedFilmsTableView(imageDownloadingService: imageService)
+        return SearchedFilmsTableView(imageDownloadingService: imageService,
+                                      delegate: self)
     }
     
     private func makeSpinner() -> UIActivityIndicatorView {

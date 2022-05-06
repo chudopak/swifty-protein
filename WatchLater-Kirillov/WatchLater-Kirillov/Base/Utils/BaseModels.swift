@@ -81,3 +81,8 @@ extension BaseError: LocalizedError {
         }
     }
 }
+
+
+enum SearchArea {
+    case IMDB, local
+}

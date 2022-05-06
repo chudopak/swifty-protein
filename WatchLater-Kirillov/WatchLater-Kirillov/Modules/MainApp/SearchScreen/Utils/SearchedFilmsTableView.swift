@@ -14,6 +14,7 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
     
     private lazy var resultTableView = makeTableView()
     private var imageDownloadingService: ImageDownloadingServiceProtocol!
+    private weak var delegate: SearchViewControllerDelegate!
     
     var searchArea = SearchArea.IMDB
     
@@ -24,9 +25,11 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    init(imageDownloadingService: ImageDownloadingServiceProtocol) {
+    init(imageDownloadingService: ImageDownloadingServiceProtocol,
+         delegate: SearchViewControllerDelegate) {
         super.init(frame: .zero)
         self.imageDownloadingService = imageDownloadingService
+        self.delegate = delegate
         backgroundColor = .clear
         addSubview(resultTableView)
         setTableViewConstraints()
@@ -55,6 +58,17 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return SearchScreenSizes.TableView.cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch searchArea {
+        case .IMDB:
+            delegate.presentDetailsScreen(imdbData: moviesData[indexPath.row], localData: nil)
+        
+        case .local:
+            delegate.presentDetailsScreen(imdbData: nil, localData: nil)
+        }
     }
     
     private func getRatingString(rating: String) -> String {

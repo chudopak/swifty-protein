@@ -14,6 +14,7 @@ Common.login = "Войти";
 Common.willWatch = "Буду смотреть";
 Common.viewed = "Просмотрено";
 Common.noPoster = "Нет Постера";
+Common.aboutMovie = "О фильме";
 
 // MARK: - Authorization
 

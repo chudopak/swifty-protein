@@ -33,6 +33,8 @@ internal enum Text {
   }
 
   internal enum Common {
+    /// О фильме
+    internal static let aboutMovie = Text.tr("Localizable", "Common.aboutMovie")
     /// Отмена
     internal static let cancel = Text.tr("Localizable", "Common.cancel")
     /// Закрыть

@@ -49,27 +49,7 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
         cell.noImageLabel.isHidden = true
         cell.titleLabel.text = filmsInfo[indexPath.row].title
         cell.ratingLabel.text = getRatingString(rating: filmsInfo[indexPath.row].rating)
-        if let posterID = filmsInfo[indexPath.row].posterId,
-           !posterID.isEmpty {
-            cell.id = posterID
-            posterImageLoader.downloadData(id: posterID) { result in
-                switch result {
-                case .success(let imageData):
-                    if cell.id == imageData.id {
-                        DispatchQueue.main.async {
-                            cell.filmImageView.image = imageData.image
-                        }
-                    }
-                    
-                case .failure:
-                    cell.filmImageView.image = Asset.noImage.image
-//                    cell.noImageLabel.isHidden = false
-                }
-            }
-        } else {
-            cell.filmImageView.image = Asset.noImage.image
-//            cell.noImageLabel.isHidden = false
-        }
+        setPoster(index: indexPath.row, cell: cell)
         if indexPath.row + 10 > filmsInfo.count {
             delegate.fetchNewFilms()
         }
@@ -89,6 +69,30 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
             str.remove(at: str.index(before: str.endIndex))
         }
         return String(str)
+    }
+    
+    private func setPoster(index: Int, cell: FilmCollectionViewCell) {
+        if let posterID = filmsInfo[index].posterId,
+           !posterID.isEmpty {
+            cell.id = posterID
+            posterImageLoader.downloadData(id: posterID) { result in
+                switch result {
+                case .success(let imageData):
+                    if cell.id == imageData.id {
+                        DispatchQueue.main.async {
+                            cell.filmImageView.image = imageData.image
+                        }
+                    }
+                    
+                case .failure:
+//                    cell.filmImageView.image = Asset.noImage.image
+                    cell.noImageLabel.isHidden = false
+                }
+            }
+        } else {
+//            cell.filmImageView.image = Asset.noImage.image
+            cell.noImageLabel.isHidden = false
+        }
     }
 }
 

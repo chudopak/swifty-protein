@@ -16,7 +16,9 @@ final class SearchScreenConfigurator {
         let searchService = SearchMovieService(networkManager: NetworkLayer(refreshService: RefreshTokenService()))
         let interactor = SearchInteractor(presenter: presenter,
                                           searchService: searchService)
-        viewController.setupComponents(interactor: interactor)
+        let router = SearchRouter(viewController: viewController)
+        viewController.setupComponents(interactor: interactor,
+                                       router: router)
         return viewController
     }
 }

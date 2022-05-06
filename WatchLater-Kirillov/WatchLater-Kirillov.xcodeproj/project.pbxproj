@@ -119,6 +119,12 @@
 		7D99732028058F7E0094F302 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D99731F28058F7E0094F302 /* LoginRouter.swift */; };
 		7D9CDA3328169C6100DDEDBD /* ViewStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9CDA3228169C6100DDEDBD /* ViewStyleButton.swift */; };
 		7D9CDA3428169C6100DDEDBD /* ViewStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9CDA3228169C6100DDEDBD /* ViewStyleButton.swift */; };
+		7D9D6F9A28255616009DFD03 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D6F9928255616009DFD03 /* DetailsViewController.swift */; };
+		7D9D6F9B28255616009DFD03 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D6F9928255616009DFD03 /* DetailsViewController.swift */; };
+		7D9D6F9D28255ACA009DFD03 /* DetailsScreenConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D6F9C28255ACA009DFD03 /* DetailsScreenConfigurator.swift */; };
+		7D9D6F9E28255ACA009DFD03 /* DetailsScreenConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D6F9C28255ACA009DFD03 /* DetailsScreenConfigurator.swift */; };
+		7D9D6FA028255B35009DFD03 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D6F9F28255B35009DFD03 /* SearchRouter.swift */; };
+		7D9D6FA128255B35009DFD03 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D6F9F28255B35009DFD03 /* SearchRouter.swift */; };
 		7DAD275A2817E365005B9D6F /* ImageDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD27592817E365005B9D6F /* ImageDownloadingService.swift */; };
 		7DAD275B2817E365005B9D6F /* ImageDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD27592817E365005B9D6F /* ImageDownloadingService.swift */; };
 		7DAD275D2817E790005B9D6F /* ImageDownloadingCacheConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD275C2817E790005B9D6F /* ImageDownloadingCacheConfigProvider.swift */; };
@@ -235,6 +241,9 @@
 		7D99731D28058E7F0094F302 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7D99731F28058F7E0094F302 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		7D9CDA3228169C6100DDEDBD /* ViewStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStyleButton.swift; sourceTree = "<group>"; };
+		7D9D6F9928255616009DFD03 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		7D9D6F9C28255ACA009DFD03 /* DetailsScreenConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreenConfigurator.swift; sourceTree = "<group>"; };
+		7D9D6F9F28255B35009DFD03 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		7DAD27592817E365005B9D6F /* ImageDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadingService.swift; sourceTree = "<group>"; };
 		7DAD275C2817E790005B9D6F /* ImageDownloadingCacheConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadingCacheConfigProvider.swift; sourceTree = "<group>"; };
 		7DAD275F28181592005B9D6F /* FilmsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsTableView.swift; sourceTree = "<group>"; };
@@ -466,6 +475,7 @@
 		7D0F1A0C2812F82D007570F9 /* MainApp */ = {
 			isa = PBXGroup;
 			children = (
+				7D9D6F98282555E4009DFD03 /* DetailsScreen */,
 				7D81BB32281C456800CC9819 /* SearchScreen */,
 				7D0F1A0D2812FB47007570F9 /* MainTabBar */,
 				7D612D5328118201007C7515 /* FavouriteScreen */,
@@ -655,6 +665,7 @@
 				7D7F6C092823B8140043048E /* SearchInteractor.swift */,
 				7D81BB36281C46A000CC9819 /* SearchScreenConfigurator.swift */,
 				7D7F6C0D2823B97F0043048E /* SearchPresenter.swift */,
+				7D9D6F9F28255B35009DFD03 /* SearchRouter.swift */,
 			);
 			path = SearchScreen;
 			sourceTree = "<group>";
@@ -681,6 +692,15 @@
 				7D7386DF281064C3008C00FE /* LoginControllerConfigurator.swift */,
 			);
 			path = LoginScreen;
+			sourceTree = "<group>";
+		};
+		7D9D6F98282555E4009DFD03 /* DetailsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7D9D6F9928255616009DFD03 /* DetailsViewController.swift */,
+				7D9D6F9C28255ACA009DFD03 /* DetailsScreenConfigurator.swift */,
+			);
+			path = DetailsScreen;
 			sourceTree = "<group>";
 		};
 		7DAD27582817E34B005B9D6F /* ImageDownloadingService */ = {
@@ -1054,6 +1074,7 @@
 				7D178EA528084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
 				7DE0E24D2816DEBC00670DE3 /* FilmCollectionViewCell.swift in Sources */,
 				7D0ACA9828096A2B00777442 /* RegistrationModel.swift in Sources */,
+				7D9D6FA028255B35009DFD03 /* SearchRouter.swift in Sources */,
 				7D058F18280DC0C800683C3C /* NetworkLayer.swift in Sources */,
 				7DAD276028181592005B9D6F /* FilmsTableView.swift in Sources */,
 				7DD4CB0B28251E8000873001 /* SearchModels.swift in Sources */,
@@ -1081,6 +1102,7 @@
 				7D6500472822ABF30079ABAC /* SearchedFilmsTableView.swift in Sources */,
 				7DC40920281A8B100062DB08 /* FetchFilmsService.swift in Sources */,
 				7D2B76ED28129E020051BF9A /* BaseFunctions.swift in Sources */,
+				7D9D6F9A28255616009DFD03 /* DetailsViewController.swift in Sources */,
 				7DAD275A2817E365005B9D6F /* ImageDownloadingService.swift in Sources */,
 				7DBC89392807065200F94B6C /* AuthorizationTextField.swift in Sources */,
 				7D112F8A2804641200BB7ECC /* SceneDelegate.swift in Sources */,
@@ -1094,6 +1116,7 @@
 				7D9715172805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */,
 				30314CCC265AADB600CADD41 /* BaseViewController.swift in Sources */,
 				7D2B6B0B28228D6200F7D5A8 /* SearchScreenSizes.swift in Sources */,
+				7D9D6F9D28255ACA009DFD03 /* DetailsScreenConfigurator.swift in Sources */,
 				7D7F6C072823B6750043048E /* SearchMovieService.swift in Sources */,
 				7D7EF859280EF0DA00B99CA4 /* RegistrationPresenter.swift in Sources */,
 				3095A8BF25FC96BC0010B54A /* ViewModelConfigurable.swift in Sources */,
@@ -1130,6 +1153,7 @@
 				7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */,
 				7DE0E24E2816DEBC00670DE3 /* FilmCollectionViewCell.swift in Sources */,
 				7D3B5D5B280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
+				7D9D6FA128255B35009DFD03 /* SearchRouter.swift in Sources */,
 				7D178EA628084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
 				7DAD276128181592005B9D6F /* FilmsTableView.swift in Sources */,
 				7DD4CB0C28251E8000873001 /* SearchModels.swift in Sources */,
@@ -1157,6 +1181,7 @@
 				7D6500482822ABF30079ABAC /* SearchedFilmsTableView.swift in Sources */,
 				7DC40921281A8B100062DB08 /* FetchFilmsService.swift in Sources */,
 				7D2B76EE28129E020051BF9A /* BaseFunctions.swift in Sources */,
+				7D9D6F9B28255616009DFD03 /* DetailsViewController.swift in Sources */,
 				7DAD275B2817E365005B9D6F /* ImageDownloadingService.swift in Sources */,
 				7DBC893A2807065200F94B6C /* AuthorizationTextField.swift in Sources */,
 				7D9715182805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */,
@@ -1170,6 +1195,7 @@
 				7D178EAB280859F0009C6280 /* RegistrationViewController.swift in Sources */,
 				30F07FFE265A8746009B2398 /* Asset.swift in Sources */,
 				7D2B6B0C28228D6200F7D5A8 /* SearchScreenSizes.swift in Sources */,
+				7D9D6F9E28255ACA009DFD03 /* DetailsScreenConfigurator.swift in Sources */,
 				7D7F6C082823B6750043048E /* SearchMovieService.swift in Sources */,
 				7D7EF85A280EF0DA00B99CA4 /* RegistrationPresenter.swift in Sources */,
 				7D112F8B2804641200BB7ECC /* SceneDelegate.swift in Sources */,
