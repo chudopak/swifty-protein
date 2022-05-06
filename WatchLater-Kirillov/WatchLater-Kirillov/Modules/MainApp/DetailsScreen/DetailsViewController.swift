@@ -7,16 +7,23 @@
 //
 
 import UIKit
+import SnapKit
+
+protocol DetailsViewControllerProtocol: AnyObject {
+}
 
 class DetailsViewController: BaseViewController {
     
     private var movieDetails: MovieDetails!
+    private var imageDowloadingServise: ImageDownloadingServiceProtocol!
+    
+    private lazy var scrollView = makeScrollView()
+    private lazy var posterView = makePosterView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = Text.Common.aboutMovie
-        print(movieDetails)
-        view.backgroundColor = .blue
+        setView()
+        setConstraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,13 +31,25 @@ class DetailsViewController: BaseViewController {
         setNavigationController()
     }
     
-    func setupComponents(imdbData: MovieData?,
-                         localData: FilmInfoTmp?) {
+    func setupData(imdbData: MovieData?,
+                   localData: FilmInfoTmp?) {
         if let imdbData = imdbData {
             setDetailsWithIMDBData(data: imdbData)
         } else {
             setDetailsWithLocalData(data: localData!)
         }
+    }
+    
+    func setupComponents(imageDowloadingServise: ImageDownloadingServiceProtocol) {
+        self.imageDowloadingServise = imageDowloadingServise
+    }
+    
+    private func setView() {
+        title = Text.Common.aboutMovie
+        print(movieDetails)
+        view.backgroundColor = Asset.Colors.primaryBackground.color
+        view.addSubview(scrollView)
+        scrollView.addSubview(posterView)
     }
     
     private func setNavigationController() {
@@ -45,6 +64,7 @@ class DetailsViewController: BaseViewController {
     
     private func setDetailsWithIMDBData(data: MovieData) {
         let imageType = ImageLinkType.IMDB(data.image)
+        //TODO: fix "unnowned" and "0"
         let rating = getRatingString(rating: data.rating ?? "0")
         let year = data.year ?? "unnowned"
         movieDetails = MovieDetails(imageType: imageType,
@@ -68,11 +88,58 @@ class DetailsViewController: BaseViewController {
                                     isWatched: nil)
     }
     
-    func getRatingString(rating: String) -> String {
+    private func getRatingString(rating: String) -> String {
         var str = rating.prefix(3)
         if str.suffix(1) == "." {
             str.remove(at: str.index(before: str.endIndex))
         }
         return String(str)
+    }
+}
+
+extension DetailsViewController: DetailsViewControllerProtocol {
+}
+
+extension DetailsViewController {
+    
+    private func makeScrollView() -> UIScrollView {
+        let view = UIScrollView()
+        view.backgroundColor = .clear
+        return view
+    }
+    
+    private func makePosterView() -> UIImageView {
+        let view = UIImageView()
+        view.clipsToBounds = true
+        view.contentMode = .scaleAspectFill
+        view.backgroundColor = .red
+//        view.backgroundColor = Asset.Colors.grayTransperent.color
+        return view
+    }
+}
+
+extension DetailsViewController {
+    
+    private func setConstraints() {
+        setScrollViewConstraints()
+        setPosterViewConstraints()
+        scrollView.snp.makeConstraints { maker in
+            maker.bottom.equalTo(posterView).offset(10)
+        }
+    }
+    
+    private func setScrollViewConstraints() {
+        scrollView.snp.makeConstraints { maker in
+            maker.leading.trailing.bottom.top.equalToSuperview()
+        }
+    }
+    
+    private func setPosterViewConstraints() {
+        posterView.snp.makeConstraints { maker in
+            maker.top.equalToSuperview().inset(DetailsScreenSizes.Poster.topOffset)
+            maker.width.equalTo(DetailsScreenSizes.Poster.width)
+            maker.height.equalTo(DetailsScreenSizes.Poster.height)
+            maker.centerX.equalTo(scrollView.snp.centerXWithinMargins)
+        }
     }
 }

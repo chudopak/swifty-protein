@@ -8,7 +8,6 @@
 
 import UIKit
 import SnapKit
-import Kingfisher
 
 class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
@@ -20,7 +19,7 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
     
     var moviesData = [MovieData]() {
         didSet {
-            ImageCache.default.clearMemoryCache()
+            imageDownloadingService.clearKingFisherCache()
             resultTableView.reloadData()
         }
     }
@@ -62,7 +61,7 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        ImageCache.default.clearMemoryCache()
+        imageDownloadingService.clearKingFisherCache()
         switch searchArea {
         case .IMDB:
             delegate.presentDetailsScreen(imdbData: moviesData[indexPath.row], localData: nil)
@@ -76,11 +75,7 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
                                    index: Int) {
         cell.posterImageView.image = nil
         if let url = URL(string: moviesData[index].image) {
-            let prosessor = ResizingImageProcessor(
-                referenceSize: CGSize(width: SearchScreenSizes.TableView.posterImageViewWidth,
-                                      height: SearchScreenSizes.TableView.posterImageViewHeight))
-            cell.posterImageView.kf.indicatorType = .activity
-            cell.posterImageView.kf.setImage(with: url, options: [.processor(prosessor)])
+            imageDownloadingService.downloadWithKingFisher(url: url, imageView: cell.posterImageView)
         } else {
             cell.posterImageView.image = Asset.noImage.image
         }

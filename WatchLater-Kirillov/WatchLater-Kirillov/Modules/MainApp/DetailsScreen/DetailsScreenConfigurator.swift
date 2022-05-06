@@ -13,7 +13,7 @@ final class DetailsScreenConfigurator {
     func setupModule(imdbData: MovieData?,
                      localData: FilmInfoTmp?) -> DetailsViewController {
         let vc = DetailsViewController()
-        vc.setupComponents(imdbData: imdbData, localData: localData)
+        vc.setupData(imdbData: imdbData, localData: localData)
         return vc
     }
 }

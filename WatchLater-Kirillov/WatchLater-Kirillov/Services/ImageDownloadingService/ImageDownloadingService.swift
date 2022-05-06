@@ -8,14 +8,17 @@
 
 import UIKit
 import Alamofire
+import Kingfisher
 
 protocol ImageDownloadingServiceProtocol {
     func downloadData(id: String,
                       completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void)
     func downloadJPEG(urlString: String,
                       completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void)
+    func downloadWithKingFisher(url: URL, imageView: UIImageView)
     func removeImageFromCache(id: String) -> Bool
     func removeAllImages() -> Bool
+    func clearKingFisherCache()
 }
 
 // TODO: - May be cash in memory images and in storage (now only in storage)
@@ -34,6 +37,14 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
         baseURLComponents = URLComponents()
         baseURLComponents.scheme = NetworkConfiguration.sceme
         baseURLComponents.host = NetworkConfiguration.urlString
+    }
+    
+    func downloadWithKingFisher(url: URL, imageView: UIImageView) {
+        let prosessor = ResizingImageProcessor(
+            referenceSize: CGSize(width: SearchScreenSizes.TableView.posterImageViewWidth,
+                                  height: SearchScreenSizes.TableView.posterImageViewHeight))
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: url, options: [.processor(prosessor)])
     }
     
     func downloadData(id: String,
@@ -101,6 +112,10 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
     // TODO: - i think it is better to delete in background
     func removeAllImages() -> Bool {
         return imageCache.deleteCacheDirectory()
+    }
+    
+    func clearKingFisherCache() {
+        ImageCache.default.clearMemoryCache()
     }
     
     private func fetchImage(id: String,
