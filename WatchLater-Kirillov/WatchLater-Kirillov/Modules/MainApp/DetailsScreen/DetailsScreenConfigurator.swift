@@ -10,8 +10,10 @@ import UIKit
 
 final class DetailsScreenConfigurator {
     
-    func setupModule() -> DetailsViewController {
+    func setupModule(imdbData: MovieData?,
+                     localData: FilmInfoTmp?) -> DetailsViewController {
         let vc = DetailsViewController()
+        vc.setupComponents(imdbData: imdbData, localData: localData)
         return vc
     }
 }

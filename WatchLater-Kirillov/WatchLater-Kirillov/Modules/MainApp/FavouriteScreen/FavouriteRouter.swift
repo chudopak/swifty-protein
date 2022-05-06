@@ -16,7 +16,16 @@ final class FavouriteRouter {
         self.viewController = viewController
     }
     
-    func pushSearchViewController(to navigationController: UINavigationController, animated: Bool = true) {
+    func pushSearchViewController(to navigationController: UINavigationController,
+                                  animated: Bool = true) {
         navigationController.pushViewController(SearchScreenConfigurator().setupModule(), animated: animated)
+    }
+    
+    func pushDetailsViewController(to navigationController: UINavigationController,
+                                   film: FilmInfoTmp,
+                                   animated: Bool = true) {
+        navigationController.pushViewController(DetailsScreenConfigurator().setupModule(imdbData: nil,
+                                                                                        localData: film),
+                                                animated: animated)
     }
 }

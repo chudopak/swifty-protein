@@ -14,7 +14,8 @@ protocol SearchViewControllerProtocol: AnyObject {
 }
 
 protocol SearchViewControllerDelegate: AnyObject {
-    func presentDetailsScreen(imdbData: MovieData?, localData: FilmInfoTmp?)
+    func presentDetailsScreen(imdbData: MovieData?,
+                              localData: FilmInfoTmp?)
 }
 
 class SearchViewController: BaseViewController, UITextFieldDelegate {
@@ -229,8 +230,11 @@ extension SearchViewController: SearchViewControllerProtocol {
 
 extension SearchViewController: SearchViewControllerDelegate {
     
-    func presentDetailsScreen(imdbData: MovieData?, localData: FilmInfoTmp?) {
-        router.presentDetailsViewController(navigationController: navigationController!)
+    func presentDetailsScreen(imdbData: MovieData?,
+                              localData: FilmInfoTmp?) {
+        router.presentDetailsViewController(navigationController: navigationController!,
+                                            imdbData: imdbData,
+                                            localData: localData)
     }
 }
 

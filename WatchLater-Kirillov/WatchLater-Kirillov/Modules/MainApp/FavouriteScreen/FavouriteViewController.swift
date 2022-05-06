@@ -20,6 +20,7 @@ protocol FavouriteViewControllerProtocol: AnyObject {
 
 protocol FavouriteViewControllerDelegate: AnyObject {
     func fetchNewFilms()
+    func presentDetailsScreen(films: FilmInfoTmp)
 }
 
 class FavouriteViewController: BaseViewController {
@@ -199,6 +200,23 @@ extension FavouriteViewController: FavouriteViewControllerDelegate {
             willWatchFilmsInfo.currentPage += 1
             interactor.fetchMovies(page: willWatchFilmsInfo.currentPage, size: pageSize, watched: watched)
         }
+    }
+    
+    func presentDetailsScreen(films: FilmInfoTmp) {
+        router.pushDetailsViewController(to: navigationController!,
+                                         film: films)
+        clearViewData()
+    }
+    
+    private func clearViewData() {
+        viewedFilms = [FilmInfoTmp]()
+        willWatchFilms = [FilmInfoTmp]()
+        filmsCollectionView.filmsInfo = [FilmInfoTmp]()
+        filmsTableView.filmsInfo = [FilmInfoTmp]()
+        willWatchFilmsInfo.currentPage = -1
+        willWatchFilmsInfo.isFull = false
+        viewedFilmsInfo.currentPage = -1
+        viewedFilmsInfo.isFull = false
     }
 }
 

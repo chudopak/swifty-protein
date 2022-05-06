@@ -16,8 +16,11 @@ final class SearchRouter {
         self.viewController = viewController
     }
     
-    func presentDetailsViewController(navigationController: UINavigationController) {
-        let detailsViewController = DetailsScreenConfigurator().setupModule()
+    func presentDetailsViewController(navigationController: UINavigationController,
+                                      imdbData: MovieData?,
+                                      localData: FilmInfoTmp?) {
+        let detailsViewController = DetailsScreenConfigurator().setupModule(imdbData: imdbData,
+                                                                            localData: localData)
         navigationController.pushViewController(detailsViewController, animated: true)
     }
 }

@@ -62,6 +62,7 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        ImageCache.default.clearMemoryCache()
         switch searchArea {
         case .IMDB:
             delegate.presentDetailsScreen(imdbData: moviesData[indexPath.row], localData: nil)
@@ -69,14 +70,6 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
         case .local:
             delegate.presentDetailsScreen(imdbData: nil, localData: nil)
         }
-    }
-    
-    private func getRatingString(rating: String) -> String {
-        var str = rating.prefix(3)
-        if str.suffix(1) == "." {
-            str.remove(at: str.index(before: str.endIndex))
-        }
-        return String(str)
     }
     
     private func configureIMDBCell(cell: SearchFilmTableViewCell,
@@ -100,8 +93,17 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
         }
     }
     
+    // TODO: it will work with core data
     private func configureLocalCell(cell: SearchFilmTableViewCell,
                                     index: Int) {
+    }
+    
+    private func getRatingString(rating: String) -> String {
+        var str = rating.prefix(3)
+        if str.suffix(1) == "." {
+            str.remove(at: str.index(before: str.endIndex))
+        }
+        return String(str)
     }
 }
 
@@ -113,6 +115,7 @@ extension SearchedFilmsTableView {
         tableView.dataSource = self
         tableView.register(SearchFilmTableViewCell.self, forCellReuseIdentifier: SearchFilmTableViewCell.identifier)
         tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
         return tableView
     }
 }

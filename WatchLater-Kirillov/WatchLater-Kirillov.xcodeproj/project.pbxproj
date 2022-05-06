@@ -125,6 +125,8 @@
 		7D9D6F9E28255ACA009DFD03 /* DetailsScreenConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D6F9C28255ACA009DFD03 /* DetailsScreenConfigurator.swift */; };
 		7D9D6FA028255B35009DFD03 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D6F9F28255B35009DFD03 /* SearchRouter.swift */; };
 		7D9D6FA128255B35009DFD03 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D6F9F28255B35009DFD03 /* SearchRouter.swift */; };
+		7D9D6FA328256839009DFD03 /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D6FA228256839009DFD03 /* DetailsModel.swift */; };
+		7D9D6FA428256839009DFD03 /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D6FA228256839009DFD03 /* DetailsModel.swift */; };
 		7DAD275A2817E365005B9D6F /* ImageDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD27592817E365005B9D6F /* ImageDownloadingService.swift */; };
 		7DAD275B2817E365005B9D6F /* ImageDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD27592817E365005B9D6F /* ImageDownloadingService.swift */; };
 		7DAD275D2817E790005B9D6F /* ImageDownloadingCacheConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD275C2817E790005B9D6F /* ImageDownloadingCacheConfigProvider.swift */; };
@@ -244,6 +246,7 @@
 		7D9D6F9928255616009DFD03 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		7D9D6F9C28255ACA009DFD03 /* DetailsScreenConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreenConfigurator.swift; sourceTree = "<group>"; };
 		7D9D6F9F28255B35009DFD03 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
+		7D9D6FA228256839009DFD03 /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
 		7DAD27592817E365005B9D6F /* ImageDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadingService.swift; sourceTree = "<group>"; };
 		7DAD275C2817E790005B9D6F /* ImageDownloadingCacheConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadingCacheConfigProvider.swift; sourceTree = "<group>"; };
 		7DAD275F28181592005B9D6F /* FilmsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsTableView.swift; sourceTree = "<group>"; };
@@ -699,6 +702,7 @@
 			children = (
 				7D9D6F9928255616009DFD03 /* DetailsViewController.swift */,
 				7D9D6F9C28255ACA009DFD03 /* DetailsScreenConfigurator.swift */,
+				7D9D6FA228256839009DFD03 /* DetailsModel.swift */,
 			);
 			path = DetailsScreen;
 			sourceTree = "<group>";
@@ -1134,6 +1138,7 @@
 				7D99732028058F7E0094F302 /* LoginRouter.swift in Sources */,
 				7D0F1A0F2812FF8E007570F9 /* MainTabBar.swift in Sources */,
 				7D112F8F2804861700BB7ECC /* SplashViewController.swift in Sources */,
+				7D9D6FA328256839009DFD03 /* DetailsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1213,6 +1218,7 @@
 				30F08008265A8746009B2398 /* ViewModelConfigurable.swift in Sources */,
 				7D0F1A102812FF8E007570F9 /* MainTabBar.swift in Sources */,
 				7D112F902804861700BB7ECC /* SplashViewController.swift in Sources */,
+				7D9D6FA428256839009DFD03 /* DetailsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -63,6 +63,11 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
                       height: height)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        delegate.presentDetailsScreen(films: filmsInfo[indexPath.row])
+    }
+    
     private func getRatingString(rating: Double?) -> String {
         var str = String(rating ?? 0).prefix(3)
         if str.suffix(1) == "." {

@@ -82,7 +82,7 @@ extension BaseError: LocalizedError {
     }
 }
 
-
 enum SearchArea {
-    case IMDB, local
+    case IMDB
+    case local
 }

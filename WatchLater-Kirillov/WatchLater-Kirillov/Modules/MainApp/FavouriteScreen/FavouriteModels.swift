@@ -14,6 +14,7 @@ struct FilmsList: Codable {
     let size: Int?
 }
 
+// TODO: don't forget to add timestamp
 struct FilmInfoTmp: Codable {
     let id: Int
     let title: String
