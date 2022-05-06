@@ -45,8 +45,8 @@ enum IMDBNetworkConfiguration {
     }
     static let sceme = "https"
     
-    static let APIKey = "k_a336r7ma"
-    //k_gcijso2v,k_the8z464
+    static let APIKey = "k_the8z464"
+    // k_gcijso2v,k_the8z464, k_a336r7ma
     enum Headers {
         static let acceptJSON = (field: "Accept", value: "application/json")
         static let contentTypeJSON = (field: "Content-Type", value: "application/json; charset=utf-8")

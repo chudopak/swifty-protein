@@ -12,3 +12,7 @@ struct SearchText {
     var previous: String
     var current: String
 }
+
+enum SearchArea {
+    case IMDB, local
+}

@@ -15,10 +15,6 @@ protocol SearchViewControllerProtocol: AnyObject {
 
 class SearchViewController: BaseViewController, UITextFieldDelegate {
     
-    enum SearchArea {
-        case IMDB, local
-    }
-    
     private let imdbSegment = 0
     private let localSegment = 1
     

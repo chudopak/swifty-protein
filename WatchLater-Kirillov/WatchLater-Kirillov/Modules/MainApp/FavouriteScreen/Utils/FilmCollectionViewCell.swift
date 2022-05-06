@@ -42,6 +42,7 @@ extension FilmCollectionViewCell {
         let imageView = UIImageView()
         imageView.isUserInteractionEnabled = true
         imageView.backgroundColor = Asset.Colors.disabledAuthorizationButtonBackground.color
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }
     

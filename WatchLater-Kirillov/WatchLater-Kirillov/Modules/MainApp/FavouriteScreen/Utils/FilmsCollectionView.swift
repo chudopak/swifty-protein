@@ -62,11 +62,13 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
                     }
                     
                 case .failure:
-                    cell.noImageLabel.isHidden = false
+                    cell.filmImageView.image = Asset.noImage.image
+//                    cell.noImageLabel.isHidden = false
                 }
             }
         } else {
-            cell.noImageLabel.isHidden = false
+            cell.filmImageView.image = Asset.noImage.image
+//            cell.noImageLabel.isHidden = false
         }
         if indexPath.row + 10 > filmsInfo.count {
             delegate.fetchNewFilms()
