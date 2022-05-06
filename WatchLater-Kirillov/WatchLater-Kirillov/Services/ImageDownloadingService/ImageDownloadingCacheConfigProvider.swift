@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ImageCache {
+final class MoviesImageCache {
     
     private let key = "ImageCache"
     private let refreshTokenKey = "refreshToken"

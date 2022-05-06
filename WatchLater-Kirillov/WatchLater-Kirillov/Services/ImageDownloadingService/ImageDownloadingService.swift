@@ -27,7 +27,7 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
     
     private var baseURLComponents: URLComponents
     
-    private let imageCache = ImageCache()
+    private let imageCache = MoviesImageCache()
     
     init(networkManager: NetworkLayerProtocol) {
         self.networkManager = networkManager
