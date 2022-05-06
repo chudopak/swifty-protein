@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SearchViewControllerProtocol: AnyObject {
-    func displayMovies(movies: [MovieData])
+    func displayIMDBMovies(movies: [MovieData])
     func showFailedState(isSearching: Bool)
 }
 
@@ -19,15 +19,35 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
         case IMDB, local
     }
     
+    private let imdbSegment = 0
+    private let localSegment = 1
+    
     private lazy var segmentControl = makeSegmentControl()
     private lazy var textField = makeTextField()
     private lazy var label = makeStartTypingLabel()
-    private lazy var resultsTableView = SearchedFilmsTableView()
+    private lazy var resultsTableView = makeResultsTableView()
     private lazy var spiner = makeSpinner()
     
     private var interactor: SearchInteractorProtocol!
     
-    private var previousExpression = ""
+    private var imdbSearchText = SearchText(previous: "", current: "")
+    private var localSearchText = SearchText(previous: "", current: "")
+    
+    private var localSearchResult = [MovieData]() {
+        didSet {
+            if segmentControl.selectedSegmentIndex == localSegment {
+                resultsTableView.moviesData = localSearchResult
+            }
+        }
+    }
+    
+    private var imdbSearchResult = [MovieData]() {
+        didSet {
+            if segmentControl.selectedSegmentIndex == imdbSegment {
+                resultsTableView.moviesData = imdbSearchResult
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +116,7 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
     
     private func getSearchArea() -> SearchArea {
         switch segmentControl.selectedSegmentIndex {
-        case 0:
+        case imdbSegment:
             return SearchArea.IMDB
         
         default:
@@ -107,9 +127,9 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
     private func searchMovies(expression: String) {
         switch getSearchArea() {
         case .IMDB:
-            if previousExpression != expression {
+            if imdbSearchText.previous != expression {
                 makeVisible(spinner: true)
-                interactor.cancelCurrentTask(expression: previousExpression) { [weak self] in
+                interactor.cancelCurrentTask(expression: imdbSearchText.previous) { [weak self] in
                     DispatchQueue.main.async {
                         self?.resultsTableView.moviesData = [MovieData]()
                     }
@@ -125,11 +145,27 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
     
     @objc private func changeSearchSource(_ sender: UISegmentedControl!) {
         switch sender.selectedSegmentIndex {
-        case 0:
-            print("IMDB")
+        case imdbSegment:
+            localSearchText.current = textField.text ?? ""
+            textField.text = imdbSearchText.current
+            if interactor.isSearching {
+                makeVisible(spinner: true)
+            } else if !imdbSearchText.current.isEmpty {
+                makeVisible(tableView: true)
+            } else {
+                makeVisible(label: true)
+            }
+            resultsTableView.moviesData = imdbSearchResult
             
-        case 1:
-            print("Backend")
+        case localSegment:
+            imdbSearchText.current = textField.text ?? ""
+            textField.text = localSearchText.current
+            if !localSearchText.current.isEmpty {
+                makeVisible(tableView: true)
+            } else {
+                makeVisible(label: true)
+            }
+            resultsTableView.moviesData = localSearchResult
             
         default:
             break
@@ -140,17 +176,17 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
         if let text = textField.text,
            !text.isEmpty {
             searchMovies(expression: text)
-            previousExpression = text
+            imdbSearchText.previous = text
         } else {
             makeVisible(label: true)
             if getSearchArea() == .IMDB {
-                interactor.cancelCurrentTask(expression: previousExpression) { [weak self] in
+                interactor.cancelCurrentTask(expression: imdbSearchText.previous) { [weak self] in
                     DispatchQueue.main.async {
                         self?.resultsTableView.moviesData = [MovieData]()
                     }
                 }
             }
-            previousExpression = ""
+            imdbSearchText.previous = ""
         }
     }
     
@@ -169,9 +205,9 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
 
 extension SearchViewController: SearchViewControllerProtocol {
     
-    func displayMovies(movies: [MovieData]) {
+    func displayIMDBMovies(movies: [MovieData]) {
         makeVisible(tableView: true)
-        resultsTableView.moviesData = movies
+        imdbSearchResult = movies
     }
     
     func showFailedState(isSearching: Bool) {
@@ -247,6 +283,12 @@ extension SearchViewController {
         label.font = .systemFont(ofSize: SearchScreenSizes.StartTypingLabel.fontSize)
         label.textColor = Asset.Colors.grayTextHalfTranparent.color
         return label
+    }
+    
+    private func makeResultsTableView() -> SearchedFilmsTableView {
+        let networkLayer = NetworkLayer(refreshService: RefreshTokenService())
+        let imageService = ImageDownloadingService(networkManager: networkLayer)
+        return SearchedFilmsTableView(imageDownloadingService: imageService)
     }
     
     private func makeSpinner() -> UIActivityIndicatorView {

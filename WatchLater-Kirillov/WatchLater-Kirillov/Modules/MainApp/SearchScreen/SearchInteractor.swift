@@ -9,6 +9,8 @@
 import UIKit
 
 protocol SearchInteractorProtocol {
+    var isSearching: Bool { get }
+    
     func cancelCurrentTask(expression: String,
                            completion: @escaping () -> Void)
     func searchMoviesIMDB(expression: String)
@@ -18,6 +20,10 @@ class SearchInteractor: SearchInteractorProtocol {
     
     private let searchService: SearchMovieServiceProtocol
     private let presenter: SearchPresenterProtocol
+    
+    var isSearching: Bool {
+        return searchService.isSearching
+    }
     
     init(presenter: SearchPresenterProtocol,
          searchService: SearchMovieServiceProtocol) {

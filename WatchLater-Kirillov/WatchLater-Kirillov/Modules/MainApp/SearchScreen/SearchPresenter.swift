@@ -23,7 +23,7 @@ class SearchPresenter: SearchPresenterProtocol {
     
     func proceedMoviesData(movies: [MovieData]) {
         DispatchQueue.main.async { [weak self] in
-            self?.viewController.displayMovies(movies: movies)
+            self?.viewController.displayIMDBMovies(movies: movies)
         }
     }
     

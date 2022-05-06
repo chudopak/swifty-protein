@@ -10,8 +10,10 @@ import UIKit
 import Alamofire
 
 protocol ImageDownloadingServiceProtocol {
-    func download(id: String,
-                  completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void)
+    func downloadData(id: String,
+                      completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void)
+    func downloadJPEG(urlString: String,
+                      completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void)
     func removeImageFromCache(id: String) -> Bool
     func removeAllImages() -> Bool
 }
@@ -34,8 +36,8 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
         baseURLComponents.host = NetworkConfiguration.urlString
     }
     
-    func download(id: String,
-                  completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void) {
+    func downloadData(id: String,
+                      completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             if let image = self?.imageCache.getImageFromCache(id: id) {
                 completion(.success((id, image)))
@@ -57,6 +59,37 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
                 return
             }
             self?.fetchImage(id: id, urlRequest: request, completion: completion)
+        }
+    }
+    
+    func downloadJPEG(urlString: String,
+                      completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void) {
+        guard let url = URL(string: urlString)
+        else {
+            completion(.failure(BaseError.failedToBuildRequest))
+            return
+        }
+        networkManager.request(url: url) { data, response, error in
+            guard error == nil,
+                  let responseHTTP = response as? HTTPURLResponse,
+                  responseHTTP.statusCode == 200,
+                  let data = data
+            else {
+                if let error = error {
+                    completion(.failure(error))
+                } else if data == nil {
+                    completion(.failure(BaseError.noData))
+                } else {
+                    completion(.failure(BaseError.range400Response))
+                }
+                return
+            }
+            guard let image = UIImage(data: data)
+            else {
+                completion(.failure(BaseError.unableToDecodeData))
+                return
+            }
+            completion(.success((urlString, image)))
         }
     }
     

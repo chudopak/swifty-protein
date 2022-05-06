@@ -52,7 +52,7 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
         if let posterID = filmsInfo[indexPath.row].posterId,
            !posterID.isEmpty {
             cell.id = posterID
-            posterImageLoader.download(id: posterID) { result in
+            posterImageLoader.downloadData(id: posterID) { result in
                 switch result {
                 case .success(let imageData):
                     if cell.id == imageData.id {

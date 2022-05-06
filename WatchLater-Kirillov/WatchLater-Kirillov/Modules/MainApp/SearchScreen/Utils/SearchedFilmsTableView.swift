@@ -12,6 +12,7 @@ import SnapKit
 class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     private lazy var resultTableView = makeTableView()
+    private var imageDownloadingService: ImageDownloadingServiceProtocol!
     
     var moviesData = [MovieData]() {
         didSet {
@@ -19,8 +20,9 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    init() {
+    init(imageDownloadingService: ImageDownloadingServiceProtocol) {
         super.init(frame: .zero)
+        self.imageDownloadingService = imageDownloadingService
         backgroundColor = .clear
         addSubview(resultTableView)
         setTableViewConstraints()
