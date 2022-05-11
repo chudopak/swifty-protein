@@ -36,6 +36,7 @@ extension FilmsTableViewCell {
         label.font = .systemFont(ofSize: 17)
         label.textAlignment = .left
         label.numberOfLines = 1
+        label.textColor = .black
         label.text = ""
         return label
     }

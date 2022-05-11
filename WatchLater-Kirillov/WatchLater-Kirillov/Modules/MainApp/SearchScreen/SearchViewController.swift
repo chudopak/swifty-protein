@@ -251,6 +251,9 @@ extension SearchViewController {
         controll.setTitleTextAttributes([.font: UIFont.boldSystemFont(ofSize: 15),
                                          .foregroundColor: UIColor.black],
                                         for: .selected)
+        if #available(iOS 13.0, *) {
+            controll.selectedSegmentTintColor = .white
+        }
         controll.addTarget(self, action: #selector(changeSearchSource), for: .valueChanged)
         return controll
     }

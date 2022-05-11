@@ -38,9 +38,8 @@ final class MoviesImageCache {
     }
     
     func storeImage(imageId: String, image: UIImage) -> Bool {
-        print("WE IN STORE IMAGE ID - \(imageId)")
         let url = imageCacheDir.appendingPathComponent(imageId)
-        guard let data = image.jpegData(compressionQuality: 0.5)
+        guard let data = image.jpegData(compressionQuality: 1)
         else {
             print("ImageCache, storeImage(imageId:image:) id(\(imageId))- Can't compress image to jpeg")
             return false

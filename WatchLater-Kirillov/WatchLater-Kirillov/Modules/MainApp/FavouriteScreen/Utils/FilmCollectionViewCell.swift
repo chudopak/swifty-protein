@@ -50,6 +50,7 @@ extension FilmCollectionViewCell {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: FavouriteScreenSizes.FilmCollectionViewCell.fontSize)
         label.textAlignment = .left
+        label.textColor = .black
         label.numberOfLines = 1
         label.text = ""
         return label

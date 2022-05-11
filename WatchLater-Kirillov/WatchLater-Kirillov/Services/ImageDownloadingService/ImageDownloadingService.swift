@@ -80,7 +80,7 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
             completion(.failure(BaseError.failedToBuildRequest))
             return
         }
-        networkManager.request(url: url) { data, response, error in
+        networkManager.request(url: url) { [weak self] data, response, error in
             guard error == nil,
                   let responseHTTP = response as? HTTPURLResponse,
                   responseHTTP.statusCode == 200,
@@ -100,7 +100,13 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
                 completion(.failure(BaseError.unableToDecodeData))
                 return
             }
-            completion(.success((urlString, image)))
+            let newImage: UIImage
+            if let compressedImage = self?.compressImage(image: image, compressionQuality: 0.5) {
+                newImage = compressedImage
+            } else {
+                newImage = image
+            }
+            completion(.success((urlString, newImage)))
         }
     }
     
@@ -142,11 +148,16 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
                 completion(.failure(BaseError.unableToDecodeData))
                 return
             }
-            let savingResult = self?.imageCache.storeImage(imageId: id, image: image)
-            if savingResult == nil || !savingResult! {
+            let newImage: UIImage
+            if let compressedImage = self?.compressImage(image: image, compressionQuality: 0.5) {
+                newImage = compressedImage
+            } else {
+                newImage = image
+            }
+            if let savingResult = self?.imageCache.storeImage(imageId: id, image: newImage), !savingResult {
                 print("Failed to save poster with id - \(id)")
             }
-            completion(.success((id, image)))
+            completion(.success((id, newImage)))
         }
     }
     
@@ -164,5 +175,15 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
         urlRequest.setValue(accessToken,
                             forHTTPHeaderField: NetworkConfiguration.Headers.authorisation)
         return RequestBuilder(urlRequest: urlRequest)
+    }
+    
+    private func compressImage(image: UIImage,
+                               compressionQuality: CGFloat) -> UIImage? {
+        guard let data = image.jpegData(compressionQuality: compressionQuality),
+              let compressedImage = UIImage(data: data)
+        else {
+            return nil
+        }
+        return (compressedImage)
     }
 }

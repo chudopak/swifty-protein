@@ -10,15 +10,23 @@ import UIKit
 import SnapKit
 
 protocol DetailsViewControllerProtocol: AnyObject {
+    func setPoster(result: Result<UIImage, Error>)
 }
 
 class DetailsViewController: BaseViewController {
     
     private var movieDetails: MovieDetails!
-    private var imageDowloadingServise: ImageDownloadingServiceProtocol!
+    private var interactor: DetailsInteractorProtocol!
     
     private lazy var scrollView = makeScrollView()
     private lazy var posterView = makePosterView()
+    private lazy var spinner = makeActivityIndicator()
+    private lazy var noImageLabel = makeNoImageLabel()
+    private lazy var titleLabel = makeTitleLabel()
+    private lazy var ratingLabel = makeRatingLabel()
+    private lazy var yearLabel = makeYearLabel()
+    private lazy var yearRatingStackView = makeStackView(views: [yearLabel, ratingLabel],
+                                                         viewsSpacing: DetailsScreenSizes.YearRatingStackView.labelsOffset)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +37,7 @@ class DetailsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationController()
+        setViewInfo()
     }
     
     func setupData(imdbData: MovieData?,
@@ -40,8 +49,8 @@ class DetailsViewController: BaseViewController {
         }
     }
     
-    func setupComponents(imageDowloadingServise: ImageDownloadingServiceProtocol) {
-        self.imageDowloadingServise = imageDowloadingServise
+    func setupComponents(interactor: DetailsInteractorProtocol) {
+        self.interactor = interactor
     }
     
     private func setView() {
@@ -50,6 +59,10 @@ class DetailsViewController: BaseViewController {
         view.backgroundColor = Asset.Colors.primaryBackground.color
         view.addSubview(scrollView)
         scrollView.addSubview(posterView)
+        posterView.addSubview(spinner)
+        posterView.addSubview(noImageLabel)
+        scrollView.addSubview(titleLabel)
+        scrollView.addSubview(yearRatingStackView)
     }
     
     private func setNavigationController() {
@@ -62,9 +75,23 @@ class DetailsViewController: BaseViewController {
         navigationItem.titleView = UIImageView(image: Asset.logoShort.image)
     }
     
+    private func setViewInfo() {
+        setImageViewMode(loading: true)
+        switch movieDetails.imageType {
+        case .IMDB(let url):
+            interactor.loadPosterWithURL(urlString: url)
+        
+        case .local(let id):
+            interactor.loadPosterWithID(id: id)
+        }
+        titleLabel.text = movieDetails.title
+        yearLabel.text = movieDetails.year
+        ratingLabel.text = movieDetails.rating
+    }
+    
     private func setDetailsWithIMDBData(data: MovieData) {
         let imageType = ImageLinkType.IMDB(data.image)
-        //TODO: fix "unnowned" and "0"
+        // TODO: fix "unnowned" and "0"
         let rating = getRatingString(rating: data.rating ?? "0")
         let year = data.year ?? "unnowned"
         movieDetails = MovieDetails(imageType: imageType,
@@ -95,9 +122,33 @@ class DetailsViewController: BaseViewController {
         }
         return String(str)
     }
+    
+    private func setImageViewMode(loading: Bool = false,
+                                  noImage: Bool = false,
+                                  imageVisible: Bool = false) {
+        spinner.isHidden = !loading
+        noImageLabel.isHidden = !noImage
+        if loading {
+            spinner.startAnimating()
+        } else {
+            spinner.stopAnimating()
+        }
+    }
 }
 
 extension DetailsViewController: DetailsViewControllerProtocol {
+    
+    func setPoster(result: Result<UIImage, Error>) {
+        switch result {
+        case .success(let image):
+            posterView.image = image
+            setImageViewMode(imageVisible: true)
+            
+        case .failure:
+            setImageViewMode(noImage: true)
+            posterView.image = nil
+        }
+    }
 }
 
 extension DetailsViewController {
@@ -112,8 +163,85 @@ extension DetailsViewController {
         let view = UIImageView()
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
-        view.backgroundColor = .red
-//        view.backgroundColor = Asset.Colors.grayTransperent.color
+//        view.backgroundColor = .red
+        view.backgroundColor = Asset.Colors.grayTransperent.color
+        return view
+    }
+    
+    private func makeActivityIndicator() -> UIActivityIndicatorView {
+        let spinner = UIActivityIndicatorView()
+        spinner.style = .white
+        spinner.color = .black
+        return spinner
+    }
+    
+    private func makeNoImageLabel() -> UILabel {
+        let font = UIFont.systemFont(ofSize: DetailsScreenSizes.Poster.noPosterFontSize)
+        let label = makeLabel(font: font,
+                              text: Text.Common.noPoster,
+                              textColor: Asset.Colors.disabledAuthorizationButtonText.color)
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        label.backgroundColor = .clear
+        return label
+    }
+    
+    private func makeTitleLabel() -> UILabel {
+        let font = UIFont.boldSystemFont(ofSize: DetailsScreenSizes.Title.fontSize)
+        let label = makeLabel(font: font,
+                              text: "",
+                              textColor: .black)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        return label
+    }
+    
+    private func makeYearLabel() -> UILabel {
+        let font = UIFont.systemFont(ofSize: DetailsScreenSizes.Year.fontSize)
+        let label = makeLabel(font: font,
+                              text: "",
+                              textColor: .black)
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        return label
+    }
+    
+    private func makeRatingLabel() -> UILabel {
+        let font = UIFont.systemFont(ofSize: DetailsScreenSizes.Rating.fontSize)
+        let label = makeLabel(font: font,
+                              text: "",
+                              textColor: Asset.Colors.deepBlue.color)
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.layer.cornerRadius = DetailsScreenSizes.Rating.cornerRadius
+        label.layer.borderColor = Asset.Colors.deepBlue.color.cgColor
+        label.layer.borderWidth = DetailsScreenSizes.Rating.boardWidth
+        label.clipsToBounds = true
+        label.backgroundColor = .clear
+        return label
+    }
+    
+    private func makeLabel(font: UIFont,
+                           text: String,
+                           textColor: UIColor) -> UILabel {
+        let label = UILabel()
+        label.font = font
+        label.text = text
+        label.textColor = textColor
+        return label
+    }
+    
+    private func makeStackView(views: [UIView], viewsSpacing: CGFloat) -> UIStackView {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .fillEqually
+        view.spacing = viewsSpacing
+        view.translatesAutoresizingMaskIntoConstraints = false
+        for i in views {
+            view.addArrangedSubview(i)
+        }
         return view
     }
 }
@@ -123,8 +251,12 @@ extension DetailsViewController {
     private func setConstraints() {
         setScrollViewConstraints()
         setPosterViewConstraints()
+        setSpinnerConstraints()
+        setNoImageLabelConstraints()
+        setTitleLabelConstratints()
+        setYearRatingStackViewConstratints()
         scrollView.snp.makeConstraints { maker in
-            maker.bottom.equalTo(posterView).offset(10)
+            maker.bottom.equalTo(yearRatingStackView).offset(10)
         }
     }
     
@@ -140,6 +272,35 @@ extension DetailsViewController {
             maker.width.equalTo(DetailsScreenSizes.Poster.width)
             maker.height.equalTo(DetailsScreenSizes.Poster.height)
             maker.centerX.equalTo(scrollView.snp.centerXWithinMargins)
+        }
+    }
+    
+    private func setSpinnerConstraints() {
+        spinner.snp.makeConstraints { maker in
+            maker.top.bottom.trailing.leading.equalToSuperview()
+        }
+    }
+    
+    private func setNoImageLabelConstraints() {
+        noImageLabel.snp.makeConstraints { maker in
+            maker.top.bottom.trailing.leading.equalToSuperview()
+        }
+    }
+    
+    private func setTitleLabelConstratints() {
+        titleLabel.snp.makeConstraints { maker in
+            maker.top.equalTo(posterView.snp.bottom).offset(DetailsScreenSizes.Title.topOffset)
+            maker.leading.trailing.equalTo(scrollView.layoutMarginsGuide)
+            maker.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setYearRatingStackViewConstratints() {
+        yearRatingStackView.snp.makeConstraints { maker in
+            maker.top.equalTo(titleLabel.snp.bottom).offset(DetailsScreenSizes.YearRatingStackView.topOffset)
+            maker.height.equalTo(DetailsScreenSizes.YearRatingStackView.height)
+            maker.width.equalTo(DetailsScreenSizes.YearRatingStackView.width)
+            maker.centerX.equalToSuperview()
         }
     }
 }

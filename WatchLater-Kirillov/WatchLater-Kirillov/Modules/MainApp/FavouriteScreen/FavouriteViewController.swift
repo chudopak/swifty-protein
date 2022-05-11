@@ -56,7 +56,11 @@ class FavouriteViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationController()
-        fetchNewFilms()
+        if !getWatched() && willWatchFilms.isEmpty {
+            fetchNewFilms()
+        } else if getWatched() && viewedFilms.isEmpty {
+            fetchNewFilms()
+        }
     }
     
     func setupComponents(interactor: FavouriteInteractorProtocol,
@@ -168,22 +172,23 @@ class FavouriteViewController: BaseViewController {
 extension FavouriteViewController: FavouriteViewControllerProtocol {
     
     func showFilms(_ films: [FilmInfoTmp]?, watched: Bool) {
-        // TODO: If i delete all films then will old films still be visible?
-        guard let films = films
-        else {
-            return
+        let unwrappedfilms: [FilmInfoTmp]
+        if films != nil {
+            unwrappedfilms = films!
+        } else {
+            unwrappedfilms = [FilmInfoTmp]()
         }
         if watched {
-            if films.count < pageSize {
+            if unwrappedfilms.count < pageSize {
                 viewedFilmsInfo.isFull = true
             }
-            viewedFilms += films
+            viewedFilms += unwrappedfilms
             setFilmsToActiveView(films: viewedFilms)
         } else {
-            if films.count < pageSize {
+            if unwrappedfilms.count < pageSize {
                 willWatchFilmsInfo.isFull = true
             }
-            willWatchFilms += films
+            willWatchFilms += unwrappedfilms
             setFilmsToActiveView(films: willWatchFilms)
         }
     }
@@ -205,7 +210,6 @@ extension FavouriteViewController: FavouriteViewControllerDelegate {
     func presentDetailsScreen(films: FilmInfoTmp) {
         router.pushDetailsViewController(to: navigationController!,
                                          film: films)
-        clearViewData()
     }
     
     private func clearViewData() {
@@ -254,6 +258,9 @@ extension FavouriteViewController {
         controll.setTitleTextAttributes([.font: UIFont.boldSystemFont(ofSize: 15),
                                          .foregroundColor: UIColor.black],
                                         for: .selected)
+        if #available(iOS 13.0, *) {
+            controll.selectedSegmentTintColor = .white
+        }
         controll.addTarget(self, action: #selector(changeFilmsSegment), for: .valueChanged)
         return controll
     }

@@ -90,12 +90,10 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
                     }
                     
                 case .failure:
-//                    cell.filmImageView.image = Asset.noImage.image
                     cell.noImageLabel.isHidden = false
                 }
             }
         } else {
-//            cell.filmImageView.image = Asset.noImage.image
             cell.noImageLabel.isHidden = false
         }
     }
