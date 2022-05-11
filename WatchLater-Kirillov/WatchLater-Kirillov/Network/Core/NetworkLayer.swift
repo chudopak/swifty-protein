@@ -33,7 +33,7 @@ final class NetworkLayer: NetworkLayerProtocol {
     
     func request(urlRequest: URLRequestBuilder,
                  completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        AF.request(urlRequest).response { [weak self] data in
+        session.request(urlRequest).response { [weak self] data in
             if let response = data.response, response.statusCode == 401 {
                 self?.refreshService.refresh { result in
                     switch result {
@@ -55,7 +55,7 @@ final class NetworkLayer: NetworkLayerProtocol {
     
     func request(url: URL,
                  completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        AF.request(url).response { [weak self] data in
+        session.request(url).response { [weak self] data in
             if let response = data.response, response.statusCode == 401 {
                 self?.refreshService.refresh { result in
                     switch result {
@@ -77,7 +77,7 @@ final class NetworkLayer: NetworkLayerProtocol {
     
     func cancel(by url: URL,
                 completion: @escaping () -> Void) {
-        AF.session.getTasksWithCompletionHandler { dataTask, uploadTask, downloadTask in
+        session.session.getTasksWithCompletionHandler { dataTask, uploadTask, downloadTask in
             dataTask.forEach { task in
                 if task.originalRequest?.url?.absoluteString == url.absoluteString {
                     task.cancel()
@@ -98,7 +98,7 @@ final class NetworkLayer: NetworkLayerProtocol {
     }
     
     func cancelAll(completion: @escaping () -> Void) {
-        AF.cancelAllRequests {
+        session.cancelAllRequests {
             completion()
         }
     }

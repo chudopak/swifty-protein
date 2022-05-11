@@ -23,10 +23,6 @@ class SearchMovieService: SearchMovieServiceProtocol {
     private let searchPath = "/API/SearchMovie/\(IMDBNetworkConfiguration.APIKey)/"
     private let ratingPath = "/API/Ratings/\(IMDBNetworkConfiguration.APIKey)/"
     
-    let groupMovies = DispatchGroup()
-    private var moviesIds: [String]?
-    private let moviesIdsLock = NSLock()
-    
     let ratingGroup = DispatchGroup()
     private var ratings: [String: Rating]?
     private let ratingsLock = NSLock()
@@ -34,7 +30,7 @@ class SearchMovieService: SearchMovieServiceProtocol {
     private var isSearchingMovies = false
     
     var isSearching: Bool {
-        if isSearchingMovies || moviesIds != nil {
+        if isSearchingMovies {
             return true
         } else {
             return false
@@ -54,33 +50,8 @@ class SearchMovieService: SearchMovieServiceProtocol {
     
     func cancelPreviousRequest(expression: String,
                                completion: @escaping () -> Void) {
-        if let ids = moviesIds {
-            print("Cancel moviewss !!!!!!!!!!!!!!!!")
-            for id in ids {
-                if let request = buildRequest(expression: id, path: self.ratingPath),
-                   let url = request.urlRequest.url {
-                    groupMovies.enter()
-                    networkManager.cancel(by: url) { [weak self] in
-                        self?.groupMovies.leave()
-                    }
-                }
-            }
-            groupMovies.notify(queue: DispatchQueue.main) { [weak self] in
-                print("WE in group notify")
-                self?.moviesIdsLock.lock()
-                self?.moviesIds = nil
-                self?.moviesIdsLock.unlock()
-                completion()
-            }
-        } else {
-            guard let request = buildRequest(expression: expression, path: searchPath),
-                  let url = request.urlRequest.url
-            else {
-                print("SearchMovieService,cancelPreviousRequest - Can't build request")
-                completion()
-                return
-            }
-            networkManager.cancel(by: url, completion: completion)
+        networkManager.cancelAll {
+            completion()
         }
     }
     
@@ -107,9 +78,8 @@ class SearchMovieService: SearchMovieServiceProtocol {
                   let data = data
             else {
                 if let error = error {
-                    if let baseError = error as? AFError,
-                       let errorCode = baseError.underlyingError as? URLError,
-                       errorCode.code == .cancelled {
+                    if let isCancelled = self?.isRequestExplisitlyCancelled(error: error),
+                       isCancelled {
                         completion(.failure(BaseError.cancelled))
                     } else {
                         completion(.failure(error))
@@ -124,6 +94,19 @@ class SearchMovieService: SearchMovieServiceProtocol {
             self?.handleMoviesData(data: data,
                                    completion: completion)
         }
+    }
+    
+    private func isRequestExplisitlyCancelled(error: Error) -> Bool {
+        if let baseError = error as? AFError {
+            if baseError.isExplicitlyCancelledError {
+                return true
+            } else if let errorCode = baseError.underlyingError as? URLError,
+                      errorCode.code == .cancelled {
+                return true
+            }
+            return false
+        }
+        return false
     }
     
     private func handleMoviesData(data: Data,
@@ -149,7 +132,6 @@ class SearchMovieService: SearchMovieServiceProtocol {
     
     private func fetchRating(movies: [MovieData],
                              completion: @escaping (Result<[MovieData], Error>) -> Void) {
-        fillMoviesIds(movies: movies)
         for movie in movies {
             if let request = buildRequest(expression: movie.id, path: self.ratingPath) {
                 ratingGroup.enter()
@@ -181,16 +163,6 @@ class SearchMovieService: SearchMovieServiceProtocol {
         }
     }
     
-    private func fillMoviesIds(movies: [MovieData]) {
-        moviesIdsLock.lock()
-        moviesIds = [String]()
-        moviesIds!.reserveCapacity(movies.count)
-        for i in 0..<movies.count {
-            moviesIds!.append(movies[i].id)
-        }
-        moviesIdsLock.unlock()
-    }
-    
     private func handleRatingValidation(rating: Rating) {
         if rating.imDbId != nil {
             ratingsLock.lock()
@@ -205,9 +177,6 @@ class SearchMovieService: SearchMovieServiceProtocol {
     private func notifyCompletion(movies: [MovieData],
                                   completion: @escaping (Result<[MovieData], Error>) -> Void) {
         print("We in NOTIFY")
-        moviesIdsLock.lock()
-        moviesIds = nil
-        moviesIdsLock.unlock()
         if let ratings = ratings {
             var moviesData = movies
             for i in 0..<moviesData.count {

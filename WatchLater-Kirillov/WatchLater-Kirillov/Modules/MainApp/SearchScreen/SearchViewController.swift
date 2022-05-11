@@ -134,7 +134,7 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
             if imdbSearchText.previous != expression {
                 makeVisible(spinner: true)
                 interactor.cancelCurrentTask(expression: imdbSearchText.previous) { [weak self] in
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
                         self?.resultsTableView.moviesData = [MovieData]()
                     }
                     self?.interactor.searchMoviesIMDB(expression: expression)
