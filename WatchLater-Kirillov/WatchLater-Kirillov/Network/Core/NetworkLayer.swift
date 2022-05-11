@@ -19,7 +19,6 @@ protocol NetworkLayerProtocol {
     func cancelAll(completion: @escaping () -> Void)
 }
 
-// TODO: - Протестировать что будет если не действителен токен (на лики тести)
 final class NetworkLayer: NetworkLayerProtocol {
     
     private let session: Session

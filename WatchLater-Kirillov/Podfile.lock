@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.6.1)
+  - Alamofire (5.5.0)
   - KeychainSwift (20.0.0)
   - Kingfisher (6.2.1)
   - MemoryLeakTracker (1.0.0)
@@ -35,7 +35,7 @@ CHECKOUT OPTIONS:
     :git: "git@git.technokratos.com:ios/tkgrid.git"
 
 SPEC CHECKSUMS:
-  Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   KeychainSwift: 0ce6a4d13f7228054d1a71bb1b500448fb2ab837
   Kingfisher: e71c6fac2aebb1262888cabc2cb13d313362a48f
   MemoryLeakTracker: 4b722e83297e09fe4af64002ec3e3ccaa9a555d1

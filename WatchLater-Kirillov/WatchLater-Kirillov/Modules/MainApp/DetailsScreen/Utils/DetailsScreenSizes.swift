@@ -40,4 +40,15 @@ enum DetailsScreenSizes {
         static let labelsOffset: CGFloat = 5
         static let topOffset: CGFloat = 2
     }
+    
+    enum ButtonsStack {
+        static let height: CGFloat = 28
+        static let width: CGFloat = 266
+        static let labelsOffset: CGFloat = 10
+        static let topOffset: CGFloat = 16
+    }
+    
+    enum WillWatchButton {
+        static let width: CGFloat = 131
+    }
 }

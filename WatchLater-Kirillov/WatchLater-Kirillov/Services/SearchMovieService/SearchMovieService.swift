@@ -62,8 +62,6 @@ class SearchMovieService: SearchMovieServiceProtocol {
             completion(.failure(BaseError.failedToBuildRequest))
             return
         }
-        // TODO: Remove this print
-        print(request.urlRequest.url!)
         makeRequest(request: request,
                     completion: completion)
     }
