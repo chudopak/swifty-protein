@@ -19,13 +19,10 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
     private let testPath = "/users/profile"
     private let refreshPath = "/auth/token"
     
-    private let networklayer: NetworkLayerProtocol
-    
     private var validateRequest: RequestBuilder!
     private var refreshRequest: RequestBuilder!
     
-    init(networkLayer: NetworkLayerProtocol, httpBody: Data? = nil) {
-        self.networklayer = networkLayer
+    init(httpBody: Data? = nil) {
         self.validateRequest = buildTestRequest()
         self.refreshRequest = buildRefreshRequest()
     }
@@ -44,11 +41,11 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
         } catch {
             completion(.failure)
         }
-        networklayer.request(urlRequest: refreshRequest) { [weak self] data, response, error in
-            guard let responsHTTP = response as? HTTPURLResponse,
-                  error == nil
+        AF.request(refreshRequest).response { [weak self] data in
+            guard let responsHTTP = data.response,
+                  data.error == nil
             else {
-                if let error = error {
+                if let error = data.error {
                     print("RefreshTokenService in refreshRequest - ", error.localizedDescription)
                     completion(.failure)
                 } else {
@@ -56,7 +53,7 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
                 }
                 return
             }
-            self!.handleRefreshRequest(data: data,
+            self!.handleRefreshRequest(data: data.data,
                                        statusCode: responsHTTP.statusCode,
                                        completion: completion)
         }
@@ -70,11 +67,11 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
         }
         validateRequest.urlRequest.setValue(tokens.accessToken,
                                             forHTTPHeaderField: NetworkConfiguration.Headers.authorisation)
-        networklayer.request(urlRequest: validateRequest) { [weak self] data, response, error in
-            guard let responsHTTP = response as? HTTPURLResponse,
-                  error == nil
+        AF.request(validateRequest).response { [weak self] data in
+            guard let responsHTTP = data.response,
+                  data.error == nil
             else {
-                if let error = error {
+                if let error = data.error {
                     print("RefreshTokenService in validate token - ", error.localizedDescription)
                     completion(.failure)
                 } else {

@@ -19,8 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setBarsAppearance()
         guard #available(iOS 13.0, *) else {
             self.window = UIWindow(frame: UIScreen.main.bounds)
-            let splashVC = SplashViewController()
-            splashVC.setupComponents(refreshService: RefreshTokenService(networkLayer: NetworkLayer()))
+            let splashVC = SplashConfigurator().setupController()
             self.window!.rootViewController = splashVC
             self.window!.makeKeyAndVisible()
             return true
