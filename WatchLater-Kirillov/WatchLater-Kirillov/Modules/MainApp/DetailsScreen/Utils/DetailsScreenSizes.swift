@@ -86,5 +86,6 @@ enum DetailsScreenSizes {
         static let labelFontSize: CGFloat = 15
         static let labelBoardWidth: CGFloat = 2
         static let maxCharsInLabel = 25
+        static let labelSpace: CGFloat = 10
     }
 }

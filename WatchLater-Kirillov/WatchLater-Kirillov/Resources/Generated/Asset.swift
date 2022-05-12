@@ -41,7 +41,9 @@ internal enum Asset {
     internal static let tabBarBackground = ColorAsset(name: "Colors/tabBarBackground")
     internal static let textColor = ColorAsset(name: "Colors/textColor")
   }
+  internal static let arrow = ImageAsset(name: "arrow")
   internal static let collectionViewImage = ImageAsset(name: "collectionViewImage")
+  internal static let editFilmInfo = ImageAsset(name: "editFilmInfo")
   internal static let searchIcon = ImageAsset(name: "searchIcon")
   internal static let tabelViewImage = ImageAsset(name: "tabelViewImage")
   internal static let agonaLogo = ImageAsset(name: "AgonaLogo")

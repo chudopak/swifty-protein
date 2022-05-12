@@ -17,8 +17,11 @@ final class DetailsScreenConfigurator {
         let imageService = ImageDownloadingService(networkManager: NetworkLayer(refreshService: RefreshTokenService()))
         let interactor = DetailsInteractor(presenter: presenter,
                                            imageDownloadingService: imageService)
-        vc.setupData(imdbData: imdbData, localData: localData)
-        vc.setupComponents(interactor: interactor)
+        let router = DetailsRouter(viewController: vc)
+        vc.setupData(imdbData: imdbData,
+                     localData: localData)
+        vc.setupComponents(interactor: interactor,
+                           router: router)
         return vc
     }
 }

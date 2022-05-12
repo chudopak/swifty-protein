@@ -53,6 +53,14 @@
 		7D178EAE28085B11009C6280 /* RegistrationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D178EAC28085B11009C6280 /* RegistrationRouter.swift */; };
 		7D178EB128087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D178EB028087636009C6280 /* RegistrationScreenElementsSizes.swift */; };
 		7D178EB228087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D178EB028087636009C6280 /* RegistrationScreenElementsSizes.swift */; };
+		7D1C3424282D62AD0093FA68 /* EditMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C3423282D62AD0093FA68 /* EditMovieViewController.swift */; };
+		7D1C3425282D62AD0093FA68 /* EditMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C3423282D62AD0093FA68 /* EditMovieViewController.swift */; };
+		7D1C3427282D63780093FA68 /* EditMovieConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C3426282D63780093FA68 /* EditMovieConfigurator.swift */; };
+		7D1C3428282D63780093FA68 /* EditMovieConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C3426282D63780093FA68 /* EditMovieConfigurator.swift */; };
+		7D1C342A282D63D70093FA68 /* EditMovieRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C3429282D63D70093FA68 /* EditMovieRouter.swift */; };
+		7D1C342B282D63D70093FA68 /* EditMovieRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C3429282D63D70093FA68 /* EditMovieRouter.swift */; };
+		7D1C342D282D661E0093FA68 /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C342C282D661E0093FA68 /* DetailsRouter.swift */; };
+		7D1C342E282D661E0093FA68 /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C342C282D661E0093FA68 /* DetailsRouter.swift */; };
 		7D2B6B0B28228D6200F7D5A8 /* SearchScreenSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2B6B0A28228D6200F7D5A8 /* SearchScreenSizes.swift */; };
 		7D2B6B0C28228D6200F7D5A8 /* SearchScreenSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2B6B0A28228D6200F7D5A8 /* SearchScreenSizes.swift */; };
 		7D2B76ED28129E020051BF9A /* BaseFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2B76EC28129E020051BF9A /* BaseFunctions.swift */; };
@@ -224,6 +232,10 @@
 		7D178EA9280859F0009C6280 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		7D178EAC28085B11009C6280 /* RegistrationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRouter.swift; sourceTree = "<group>"; };
 		7D178EB028087636009C6280 /* RegistrationScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreenElementsSizes.swift; sourceTree = "<group>"; };
+		7D1C3423282D62AD0093FA68 /* EditMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMovieViewController.swift; sourceTree = "<group>"; };
+		7D1C3426282D63780093FA68 /* EditMovieConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMovieConfigurator.swift; sourceTree = "<group>"; };
+		7D1C3429282D63D70093FA68 /* EditMovieRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMovieRouter.swift; sourceTree = "<group>"; };
+		7D1C342C282D661E0093FA68 /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
 		7D2B6B0A28228D6200F7D5A8 /* SearchScreenSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenSizes.swift; sourceTree = "<group>"; };
 		7D2B76EC28129E020051BF9A /* BaseFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFunctions.swift; sourceTree = "<group>"; };
 		7D3B5D562807197100AEBF1A /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -490,6 +502,7 @@
 		7D0F1A0C2812F82D007570F9 /* MainApp */ = {
 			isa = PBXGroup;
 			children = (
+				7D1C3422282D61CB0093FA68 /* EditMovieScreen */,
 				7D9D6F98282555E4009DFD03 /* DetailsScreen */,
 				7D81BB32281C456800CC9819 /* SearchScreen */,
 				7D0F1A0D2812FB47007570F9 /* MainTabBar */,
@@ -557,6 +570,16 @@
 				7D178EB028087636009C6280 /* RegistrationScreenElementsSizes.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		7D1C3422282D61CB0093FA68 /* EditMovieScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7D1C3423282D62AD0093FA68 /* EditMovieViewController.swift */,
+				7D1C3426282D63780093FA68 /* EditMovieConfigurator.swift */,
+				7D1C3429282D63D70093FA68 /* EditMovieRouter.swift */,
+			);
+			path = EditMovieScreen;
 			sourceTree = "<group>";
 		};
 		7D2B6B0928228D3F00F7D5A8 /* Utils */ = {
@@ -722,6 +745,7 @@
 				7D9D6FA228256839009DFD03 /* DetailsModel.swift */,
 				7D9D6FA92825892C009DFD03 /* DetailsInteractor.swift */,
 				7D9D6FAC28258981009DFD03 /* DetailsPresenter.swift */,
+				7D1C342C282D661E0093FA68 /* DetailsRouter.swift */,
 			);
 			path = DetailsScreen;
 			sourceTree = "<group>";
@@ -1115,6 +1139,7 @@
 				7D178EA528084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
 				7DE0E24D2816DEBC00670DE3 /* FilmCollectionViewCell.swift in Sources */,
 				7D0ACA9828096A2B00777442 /* RegistrationModel.swift in Sources */,
+				7D1C342D282D661E0093FA68 /* DetailsRouter.swift in Sources */,
 				7D9D6FA028255B35009DFD03 /* SearchRouter.swift in Sources */,
 				7D058F18280DC0C800683C3C /* NetworkLayer.swift in Sources */,
 				7DAD276028181592005B9D6F /* FilmsTableView.swift in Sources */,
@@ -1143,6 +1168,7 @@
 				7D7386D328101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
 				7DAD27692818316D005B9D6F /* FavouritePresenter.swift in Sources */,
 				7D6500472822ABF30079ABAC /* SearchedFilmsTableView.swift in Sources */,
+				7D1C342A282D63D70093FA68 /* EditMovieRouter.swift in Sources */,
 				7DC40920281A8B100062DB08 /* FetchFilmsService.swift in Sources */,
 				7D2B76ED28129E020051BF9A /* BaseFunctions.swift in Sources */,
 				7D9D6F9A28255616009DFD03 /* DetailsViewController.swift in Sources */,
@@ -1173,6 +1199,7 @@
 				7D612D5D28119E08007C7515 /* RefreshTokenService.swift in Sources */,
 				7DA878A3282C20AA004E537F /* SplashRouter.swift in Sources */,
 				7D612D5528118246007C7515 /* FavouriteViewController.swift in Sources */,
+				7D1C3427282D63780093FA68 /* EditMovieConfigurator.swift in Sources */,
 				7D7F6C0E2823B97F0043048E /* SearchPresenter.swift in Sources */,
 				7DB7E0C52806B56D00996926 /* LoginScreenElementsSizes.swift in Sources */,
 				7D7EF84F280ED70800B99CA4 /* LoginService.swift in Sources */,
@@ -1180,6 +1207,7 @@
 				7D7F6C112823BF540043048E /* SearchMovieModels.swift in Sources */,
 				7D99732028058F7E0094F302 /* LoginRouter.swift in Sources */,
 				7D0F1A0F2812FF8E007570F9 /* MainTabBar.swift in Sources */,
+				7D1C3424282D62AD0093FA68 /* EditMovieViewController.swift in Sources */,
 				7D112F8F2804861700BB7ECC /* SplashViewController.swift in Sources */,
 				7D9D6FA328256839009DFD03 /* DetailsModel.swift in Sources */,
 			);
@@ -1202,6 +1230,7 @@
 				7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */,
 				7DE0E24E2816DEBC00670DE3 /* FilmCollectionViewCell.swift in Sources */,
 				7D3B5D5B280725DE00AEBF1A /* BaseBorderButton.swift in Sources */,
+				7D1C342E282D661E0093FA68 /* DetailsRouter.swift in Sources */,
 				7D9D6FA128255B35009DFD03 /* SearchRouter.swift in Sources */,
 				7D178EA628084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
 				7DAD276128181592005B9D6F /* FilmsTableView.swift in Sources */,
@@ -1230,6 +1259,7 @@
 				7D7386D428101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
 				7DAD276A2818316D005B9D6F /* FavouritePresenter.swift in Sources */,
 				7D6500482822ABF30079ABAC /* SearchedFilmsTableView.swift in Sources */,
+				7D1C342B282D63D70093FA68 /* EditMovieRouter.swift in Sources */,
 				7DC40921281A8B100062DB08 /* FetchFilmsService.swift in Sources */,
 				7D2B76EE28129E020051BF9A /* BaseFunctions.swift in Sources */,
 				7D9D6F9B28255616009DFD03 /* DetailsViewController.swift in Sources */,
@@ -1260,6 +1290,7 @@
 				7D612D5E28119E08007C7515 /* RefreshTokenService.swift in Sources */,
 				7DA878A4282C20AA004E537F /* SplashRouter.swift in Sources */,
 				7D612D5628118246007C7515 /* FavouriteViewController.swift in Sources */,
+				7D1C3428282D63780093FA68 /* EditMovieConfigurator.swift in Sources */,
 				7D7F6C0F2823B97F0043048E /* SearchPresenter.swift in Sources */,
 				30F08000265A8746009B2398 /* AppDelegate.swift in Sources */,
 				30314CC8265AADB500CADD41 /* BaseViewController.swift in Sources */,
@@ -1267,6 +1298,7 @@
 				7D7F6C122823BF540043048E /* SearchMovieModels.swift in Sources */,
 				30F08008265A8746009B2398 /* ViewModelConfigurable.swift in Sources */,
 				7D0F1A102812FF8E007570F9 /* MainTabBar.swift in Sources */,
+				7D1C3425282D62AD0093FA68 /* EditMovieViewController.swift in Sources */,
 				7D112F902804861700BB7ECC /* SplashViewController.swift in Sources */,
 				7D9D6FA428256839009DFD03 /* DetailsModel.swift in Sources */,
 			);

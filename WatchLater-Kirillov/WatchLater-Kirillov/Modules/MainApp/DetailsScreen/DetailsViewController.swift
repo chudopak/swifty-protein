@@ -13,10 +13,15 @@ protocol DetailsViewControllerProtocol: AnyObject {
     func setPoster(result: Result<UIImage, Error>)
 }
 
+protocol DetailsViewControllerDelegate: AnyObject {
+    func setMovieDetailsAfterEditing(movieDetails: MovieDetails)
+}
+
 class DetailsViewController: BaseViewController {
     
     private var movieDetails: MovieDetails!
     private var interactor: DetailsInteractorProtocol!
+    private var router: DetailsRouter!
     
     private lazy var scrollView = makeScrollView()
     private lazy var posterView = makePosterView()
@@ -37,10 +42,11 @@ class DetailsViewController: BaseViewController {
         viewsSpacing: DetailsScreenSizes.ButtonsStack.buttonsOffset
     )
     private lazy var textView = makeTextView()
+    private lazy var editScreenButton = makeEditScreenButtonItem()
+    
     private lazy var genresStackViews = [UIStackView]()
     
     private var genres: [String]?
-//        = ["LALALA", "Trailer", "Horor", "bla", "asdfasdfasfasdfasfasfd", "asasdfasdfasdfasdasdfasfddfasdfasfasdfasdfasdfasdfa", "Loves", "Opera"]
     private var scrollViewButtonConstraint: ConstraintMakerEditable?
     
     override func viewDidLoad() {
@@ -64,13 +70,14 @@ class DetailsViewController: BaseViewController {
         }
     }
     
-    func setupComponents(interactor: DetailsInteractorProtocol) {
+    func setupComponents(interactor: DetailsInteractorProtocol,
+                         router: DetailsRouter) {
         self.interactor = interactor
+        self.router = router
     }
     
     private func setView() {
         title = Text.Common.aboutMovie
-        print(movieDetails)
         view.backgroundColor = Asset.Colors.primaryBackground.color
         view.addSubview(scrollView)
         scrollView.addSubview(posterView)
@@ -87,6 +94,7 @@ class DetailsViewController: BaseViewController {
         if let isWatched = movieDetails.isWatched {
             buttonsStack.isHidden = false
             addFilmButton.isHidden = true
+            navigationItem.rightBarButtonItem = editScreenButton
             if isWatched {
                 willWatchButton.isEnabled = true
                 viewedButton.isEnabled = false
@@ -106,6 +114,7 @@ class DetailsViewController: BaseViewController {
             style: .plain,
             target: self,
             action: nil)
+        
         navigationController!.navigationBar.prefersLargeTitles = true
         navigationItem.titleView = UIImageView(image: Asset.logoShort.image)
     }
@@ -127,7 +136,9 @@ class DetailsViewController: BaseViewController {
             maker.height.equalTo(getTextViewHeight())
         }
         textView.text = movieDetails.description
+        print(genres, movieDetails.genres)
         if !isOldAndNewGenresEqual() {
+            genres = movieDetails.genres
             removeGenresStackViews()
             createGenresStackViews()
         }
@@ -135,7 +146,6 @@ class DetailsViewController: BaseViewController {
     }
     
     private func createGenresStackViews() {
-        genres = movieDetails.genres
         guard let newGenres = genres
         else {
             return
@@ -145,24 +155,25 @@ class DetailsViewController: BaseViewController {
         var labels = [UILabel]()
         labels.reserveCapacity(5)
         while i < newGenres.count {
-            print(newGenres[i])
             let label = createGenreLabel(genreTitle: newGenres[i])
             if currentStackViewWidth + label.bounds.size.width < DetailsScreenSizes.Genres.maxWidth {
-                currentStackViewWidth += label.bounds.size.width + 10
+                currentStackViewWidth += label.bounds.size.width + DetailsScreenSizes.Genres.labelSpace
                 labels.append(label)
             } else {
-                let stack = makeStackView(views: labels, viewsSpacing: 10)
+                let stack = makeStackView(views: labels,
+                                          viewsSpacing: DetailsScreenSizes.Genres.labelSpace)
                 scrollView.addSubview(stack)
                 currentStackViewWidth = 0
                 genresStackViews.append(stack)
                 labels.removeAll()
-                currentStackViewWidth += label.bounds.size.width + 10
+                currentStackViewWidth += label.bounds.size.width + DetailsScreenSizes.Genres.labelSpace
                 labels.append(label)
             }
             i += 1
         }
         if !labels.isEmpty {
-            let stack = makeStackView(views: labels, viewsSpacing: 10)
+            let stack = makeStackView(views: labels,
+                                      viewsSpacing: DetailsScreenSizes.Genres.labelSpace)
             scrollView.addSubview(stack)
             genresStackViews.append(stack)
         }
@@ -188,8 +199,10 @@ class DetailsViewController: BaseViewController {
     private func removeGenresStackViews() {
         for stack in genresStackViews {
             for view in stack.arrangedSubviews {
+                view.removeFromSuperview()
                 view.snp.removeConstraints()
             }
+            stack.snp.removeConstraints()
         }
         genresStackViews = [UIStackView]()
     }
@@ -198,7 +211,7 @@ class DetailsViewController: BaseViewController {
         let imageType = ImageLinkType.IMDB(data.image)
         // TODO: fix "unnowned" and "0"
         let rating = getPrefix(string: data.rating ?? "0", prefixValue: 3)
-        let year = data.year ?? "unnowned"
+        let year = data.year ?? "1970"
         movieDetails = MovieDetails(imageType: imageType,
                                     rating: rating,
                                     year: year,
@@ -211,9 +224,10 @@ class DetailsViewController: BaseViewController {
     private func setDetailsWithLocalData(data: FilmInfoTmp) {
         let imageType = ImageLinkType.local(data.posterId ?? "-1")
         let rating = getPrefix(string: String(data.rating ?? 0), prefixValue: 3)
+        let year = getPrefix(string: data.timestamp ?? "1970", prefixValue: 4)
         movieDetails = MovieDetails(imageType: imageType,
                                     rating: rating,
-                                    year: "year",
+                                    year: year,
                                     description: data.description ?? "",
                                     genres: data.genres,
                                     title: data.title,
@@ -255,18 +269,24 @@ class DetailsViewController: BaseViewController {
         // TODO: add film to local API
         addFilmButton.isHidden = true
         buttonsStack.isHidden = false
+        navigationItem.rightBarButtonItem = editScreenButton
     }
     
-    @objc private func makrAsWatched() {
+    @objc private func markAsWatched() {
         // TODO: add film to local API as Viewed
         willWatchButton.isEnabled = true
         viewedButton.isEnabled = false
     }
     
-    @objc private func makrAsUnwatched() {
+    @objc private func markAsUnwatched() {
         // TODO: mark as unwatched
         willWatchButton.isEnabled = false
         viewedButton.isEnabled = true
+    }
+    
+    @objc private func presentEditMovieScreen() {
+        router.presentEditViewController(navigationController: navigationController!,
+                                         movieDetails: movieDetails)
     }
 }
 
@@ -285,11 +305,19 @@ extension DetailsViewController: DetailsViewControllerProtocol {
     }
 }
 
+extension DetailsViewController: DetailsViewControllerDelegate {
+
+    func setMovieDetailsAfterEditing(movieDetails: MovieDetails) {
+        self.movieDetails = movieDetails
+    }
+}
+
 extension DetailsViewController {
     
     private func makeScrollView() -> UIScrollView {
         let view = UIScrollView()
         view.backgroundColor = .clear
+        view.isScrollEnabled = true
         return view
     }
     
@@ -357,12 +385,14 @@ extension DetailsViewController {
     }
     
     private func makeAddFilmButton() -> BaseBorderButton {
-        let colorSet = BaseBorderButton.ColorSet(enabledText: .black,
-                                                 enabledBackground: .clear,
-                                                 enabledBorder: .black,
-                                                 disabledText: Asset.Colors.grayTransperent.color,
-                                                 disabledBackground: .clear,
-                                                 disabledBorder: Asset.Colors.grayTransperent.color)
+        let colorSet = BaseBorderButton.ColorSet(
+            enabledText: .black,
+            enabledBackground: .clear,
+            enabledBorder: .black,
+            disabledText: Asset.Colors.grayTransperent.color,
+            disabledBackground: .clear,
+            disabledBorder: Asset.Colors.grayTransperent.color
+        )
         let button = BaseBorderButton(colorSet: colorSet,
                                       text: "+ " + Text.Common.willWatch,
                                       fontSize: DetailsScreenSizes.buttonsFontSize)
@@ -374,47 +404,51 @@ extension DetailsViewController {
     }
     
     private func makeWillWatchButton() -> BaseBorderButton {
-        let colorSet = BaseBorderButton.ColorSet(enabledText: Asset.Colors.grayTransperent.color,
-                                                 enabledBackground: .clear,
-                                                 enabledBorder: Asset.Colors.grayTransperent.color,
-                                                 disabledText: Asset.Colors.deepBlue.color,
-                                                 disabledBackground: .clear,
-                                                 disabledBorder: Asset.Colors.deepBlue.color)
+        let colorSet = BaseBorderButton.ColorSet(
+            enabledText: Asset.Colors.grayTextHalfTranparent.color,
+            enabledBackground: .clear,
+            enabledBorder: Asset.Colors.grayTextHalfTranparent.color,
+            disabledText: Asset.Colors.deepBlue.color,
+            disabledBackground: .clear,
+            disabledBorder: Asset.Colors.deepBlue.color
+        )
         let button = BaseBorderButton(colorSet: colorSet,
                                       text: Text.Common.willWatch,
                                       fontSize: DetailsScreenSizes.buttonsFontSize)
         button.isEnabled = false
         button.layer.cornerRadius = DetailsScreenSizes.buttonsCornerRadius
         button.layer.borderWidth = DetailsScreenSizes.buttonsBorderWidth
-        button.addTarget(self, action: #selector(makrAsUnwatched), for: .touchUpInside)
+        button.addTarget(self, action: #selector(markAsUnwatched), for: .touchUpInside)
         return button
     }
     
     private func makeViewedButton() -> BaseBorderButton {
-        let colorSet = BaseBorderButton.ColorSet(enabledText: Asset.Colors.grayTransperent.color,
-                                                 enabledBackground: .clear,
-                                                 enabledBorder: Asset.Colors.grayTransperent.color,
-                                                 disabledText: Asset.Colors.deepBlue.color,
-                                                 disabledBackground: .clear,
-                                                 disabledBorder: Asset.Colors.deepBlue.color)
+        let colorSet = BaseBorderButton.ColorSet(
+            enabledText: Asset.Colors.grayTextHalfTranparent.color,
+            enabledBackground: .clear,
+            enabledBorder: Asset.Colors.grayTextHalfTranparent.color,
+            disabledText: Asset.Colors.deepBlue.color,
+            disabledBackground: .clear,
+            disabledBorder: Asset.Colors.deepBlue.color
+        )
         let button = BaseBorderButton(colorSet: colorSet,
                                       text: Text.Common.viewed,
                                       fontSize: DetailsScreenSizes.buttonsFontSize)
         button.isEnabled = true
         button.layer.cornerRadius = DetailsScreenSizes.buttonsCornerRadius
         button.layer.borderWidth = DetailsScreenSizes.buttonsBorderWidth
-        button.addTarget(self, action: #selector(makrAsWatched), for: .touchUpInside)
+        button.addTarget(self, action: #selector(markAsWatched), for: .touchUpInside)
         return button
     }
     
-    private func makeTextView() -> UITextView {
-        let textView = UITextView()
+    private func makeTextView() -> UILabel {
+        let textView = UILabel()
         textView.text = ""
         textView.font = .systemFont(ofSize: DetailsScreenSizes.TextView.fontSize)
         textView.textColor = .black
         textView.textAlignment = .center
         textView.backgroundColor = .clear
-        textView.isScrollEnabled = false
+        textView.numberOfLines = 0
         return textView
     }
     
@@ -461,12 +495,18 @@ extension DetailsViewController {
         }
         return view
     }
+    
+    private func makeEditScreenButtonItem() -> UIBarButtonItem {
+        let button = UIButton()
+        button.setImage(Asset.editFilmInfo.image, for: .normal)
+        button.addTarget(self, action: #selector(presentEditMovieScreen), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }
 }
 
 extension DetailsViewController {
     
     private func setConstraints() {
-        setScrollViewConstraints()
         setPosterViewConstraints()
         setSpinnerConstraints()
         setNoImageLabelConstraints()
@@ -479,7 +519,7 @@ extension DetailsViewController {
     
     private func setScrollViewConstraints() {
         scrollView.snp.makeConstraints { maker in
-            maker.leading.trailing.bottom.top.equalToSuperview()
+            maker.leading.trailing.top.bottom.equalToSuperview()
         }
     }
     
@@ -583,11 +623,13 @@ extension DetailsViewController {
     
     private func setScrollViewButtonConstraint() {
         if let lastStack = genresStackViews.last {
-            scrollView.snp.makeConstraints { maker in
+            scrollView.snp.remakeConstraints { maker in
+                maker.leading.trailing.top.bottom.equalTo(view.safeAreaLayoutGuide)
                 maker.bottom.equalTo(lastStack).offset(DetailsScreenSizes.scrollViewButtonOffset)
             }
         } else {
-            scrollView.snp.makeConstraints { maker in
+            scrollView.snp.remakeConstraints { maker in
+                maker.leading.trailing.top.bottom.equalTo(view.safeAreaLayoutGuide)
                 maker.bottom.equalTo(textView).offset(DetailsScreenSizes.scrollViewButtonOffset)
             }
         }

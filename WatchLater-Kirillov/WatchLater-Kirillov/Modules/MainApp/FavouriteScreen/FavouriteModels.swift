@@ -23,4 +23,5 @@ struct FilmInfoTmp: Codable {
     let posterId: String?
     let genres: [String]?
     var isWatched: Bool?
+    let timestamp: String?
 }
