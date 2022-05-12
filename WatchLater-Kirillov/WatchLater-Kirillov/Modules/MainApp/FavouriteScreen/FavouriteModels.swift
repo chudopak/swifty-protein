@@ -21,6 +21,6 @@ struct FilmInfoTmp: Codable {
     let description: String?
     let rating: Double?
     let posterId: String?
-    let geners: [String]?
+    let genres: [String]?
     var isWatched: Bool?
 }

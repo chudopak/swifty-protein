@@ -14,6 +14,8 @@ enum DetailsScreenSizes {
     static let buttonsBorderWidth: CGFloat = 2
     static let buttonsCornerRadius: CGFloat = 14
     
+    static let scrollViewButtonOffset: CGFloat = 10
+    
     enum Poster {
         static let width: CGFloat = 128
         static let height: CGFloat = 200
@@ -30,12 +32,14 @@ enum DetailsScreenSizes {
     
     enum Year {
         static let fontSize: CGFloat = 16
+        static let width: CGFloat = 42
     }
     
     enum Rating {
         static let fontSize: CGFloat = 14
         static let boardWidth: CGFloat = 2
         static let cornerRadius: CGFloat = 11.5
+        static let width: CGFloat = 36
     }
     
     enum YearRatingStackView {
@@ -56,6 +60,10 @@ enum DetailsScreenSizes {
         static let width: CGFloat = 131
     }
     
+    enum ViewedButton {
+        static let width: CGFloat = 125
+    }
+    
     enum AddFilmButton {
         static let width: CGFloat = 151
         static let height: CGFloat = 28
@@ -68,5 +76,15 @@ enum DetailsScreenSizes {
         static let fontSize: CGFloat = 16
         static let sideOffset: CGFloat = 16
         static let width: CGFloat = 292
+    }
+    
+    enum Genres {
+        static let maxWidth: CGFloat = UIScreen.main.bounds.size.width - 20
+        static let stackHeight: CGFloat = 28
+        static let stackTopOffset: CGFloat = 16
+        static let labelCornerRadius: CGFloat = 14
+        static let labelFontSize: CGFloat = 15
+        static let labelBoardWidth: CGFloat = 2
+        static let maxCharsInLabel = 25
     }
 }

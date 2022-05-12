@@ -16,3 +16,12 @@ func decodeMessage<T: Codable>(data: Data?, type: T.Type) -> T? {
     }
     return decoded
 }
+
+func optionalsAreEqual<T: Comparable>(firstVal: T?, secondVal: T?) -> Bool {
+
+    if let firstVal = firstVal, let secondVal = secondVal {
+        return firstVal == secondVal
+    } else {
+        return firstVal == nil && secondVal == nil
+   }
+}

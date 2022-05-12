@@ -37,6 +37,11 @@ class DetailsViewController: BaseViewController {
         viewsSpacing: DetailsScreenSizes.ButtonsStack.buttonsOffset
     )
     private lazy var textView = makeTextView()
+    private lazy var genresStackViews = [UIStackView]()
+    
+    private var genres: [String]?
+//        = ["LALALA", "Trailer", "Horor", "bla", "asdfasdfasfasdfasfasfd", "asasdfasdfasdfasdasdfasfddfasdfasfasdfasdfasdfasdfa", "Loves", "Opera"]
+    private var scrollViewButtonConstraint: ConstraintMakerEditable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,12 +127,77 @@ class DetailsViewController: BaseViewController {
             maker.height.equalTo(getTextViewHeight())
         }
         textView.text = movieDetails.description
+        if !isOldAndNewGenresEqual() {
+            removeGenresStackViews()
+            createGenresStackViews()
+        }
+        setScrollViewButtonConstraint()
+    }
+    
+    private func createGenresStackViews() {
+        genres = movieDetails.genres
+        guard let newGenres = genres
+        else {
+            return
+        }
+        var i = 0
+        var currentStackViewWidth: CGFloat = 0
+        var labels = [UILabel]()
+        labels.reserveCapacity(5)
+        while i < newGenres.count {
+            print(newGenres[i])
+            let label = createGenreLabel(genreTitle: newGenres[i])
+            if currentStackViewWidth + label.bounds.size.width < DetailsScreenSizes.Genres.maxWidth {
+                currentStackViewWidth += label.bounds.size.width + 10
+                labels.append(label)
+            } else {
+                let stack = makeStackView(views: labels, viewsSpacing: 10)
+                scrollView.addSubview(stack)
+                currentStackViewWidth = 0
+                genresStackViews.append(stack)
+                labels.removeAll()
+                currentStackViewWidth += label.bounds.size.width + 10
+                labels.append(label)
+            }
+            i += 1
+        }
+        if !labels.isEmpty {
+            let stack = makeStackView(views: labels, viewsSpacing: 10)
+            scrollView.addSubview(stack)
+            genresStackViews.append(stack)
+        }
+        setStackConstraints()
+    }
+    
+    private func isOldAndNewGenresEqual() -> Bool {
+        if genres == nil && movieDetails.genres == nil {
+            return true
+        }
+        guard let oldGenres = genres,
+              let newGenres = movieDetails.genres,
+              newGenres.count == oldGenres.count
+        else {
+            return false
+        }
+        for i in 0..<oldGenres.count where oldGenres[i] != newGenres[i] {
+            return false
+        }
+        return true
+    }
+    
+    private func removeGenresStackViews() {
+        for stack in genresStackViews {
+            for view in stack.arrangedSubviews {
+                view.snp.removeConstraints()
+            }
+        }
+        genresStackViews = [UIStackView]()
     }
     
     private func setDetailsWithIMDBData(data: MovieData) {
         let imageType = ImageLinkType.IMDB(data.image)
         // TODO: fix "unnowned" and "0"
-        let rating = getRatingString(rating: data.rating ?? "0")
+        let rating = getPrefix(string: data.rating ?? "0", prefixValue: 3)
         let year = data.year ?? "unnowned"
         movieDetails = MovieDetails(imageType: imageType,
                                     rating: rating,
@@ -140,18 +210,18 @@ class DetailsViewController: BaseViewController {
     
     private func setDetailsWithLocalData(data: FilmInfoTmp) {
         let imageType = ImageLinkType.local(data.posterId ?? "-1")
-        let rating = getRatingString(rating: String(data.rating ?? 0))
+        let rating = getPrefix(string: String(data.rating ?? 0), prefixValue: 3)
         movieDetails = MovieDetails(imageType: imageType,
                                     rating: rating,
                                     year: "year",
                                     description: data.description ?? "",
-                                    genres: data.geners,
+                                    genres: data.genres,
                                     title: data.title,
                                     isWatched: data.isWatched)
     }
     
-    private func getRatingString(rating: String) -> String {
-        var str = rating.prefix(3)
+    private func getPrefix(string: String, prefixValue: Int) -> String {
+        var str = string.prefix(prefixValue)
         if str.suffix(1) == "." {
             str.remove(at: str.index(before: str.endIndex))
         }
@@ -185,8 +255,6 @@ class DetailsViewController: BaseViewController {
         // TODO: add film to local API
         addFilmButton.isHidden = true
         buttonsStack.isHidden = false
-//        print("Year rating - \(yearLabel.frame.size.width)  \(ratingLabel.frame.size.width)")
-//        print("Buttons - \(willWatchButton.frame.size.width) \(viewedButton.frame.size.width)")
     }
     
     @objc private func makrAsWatched() {
@@ -350,6 +418,29 @@ extension DetailsViewController {
         return textView
     }
     
+    private func createGenreLabel(genreTitle: String) -> UILabel {
+        let label = UILabel(frame: CGRect(x: 0,
+                                          y: 0,
+                                          width: CGFloat.greatestFiniteMagnitude,
+                                          height: DetailsScreenSizes.Genres.stackHeight))
+        label.font = .boldSystemFont(ofSize: DetailsScreenSizes.Genres.labelFontSize)
+        label.layer.borderWidth = DetailsScreenSizes.Genres.labelBoardWidth
+        label.textColor = .black
+        label.layer.cornerRadius = DetailsScreenSizes.Genres.labelCornerRadius
+        label.textAlignment = .center
+        if genreTitle.count > DetailsScreenSizes.Genres.maxCharsInLabel {
+            var text = getPrefix(string: genreTitle,
+                                 prefixValue: DetailsScreenSizes.Genres.maxCharsInLabel - 3)
+            text += "..."
+            label.text = text
+        } else {
+            label.text = genreTitle
+        }
+        label.sizeToFit()
+        label.bounds.size.width += 2 * DetailsScreenSizes.Genres.labelCornerRadius
+        return label
+    }
+    
     private func makeLabel(font: UIFont,
                            text: String,
                            textColor: UIColor) -> UILabel {
@@ -384,9 +475,6 @@ extension DetailsViewController {
         setAddFilmButtonConstratints()
         setButtonsStackConstratints()
         setTextViewConstraints()
-        scrollView.snp.makeConstraints { maker in
-            maker.bottom.equalTo(textView).offset(10)
-        }
     }
     
     private func setScrollViewConstraints() {
@@ -426,10 +514,10 @@ extension DetailsViewController {
     
     private func setYearRatingStackViewConstratints() {
         yearLabel.snp.makeConstraints { maker in
-            maker.width.equalTo(42)
+            maker.width.equalTo(DetailsScreenSizes.Year.width)
         }
         ratingLabel.snp.makeConstraints { maker in
-            maker.width.equalTo(36)
+            maker.width.equalTo(DetailsScreenSizes.Rating.width)
         }
         yearRatingStackView.snp.makeConstraints { maker in
             maker.top.equalTo(titleLabel.snp.bottom).offset(DetailsScreenSizes.YearRatingStackView.topOffset)
@@ -452,7 +540,7 @@ extension DetailsViewController {
             maker.width.equalTo(DetailsScreenSizes.WillWatchButton.width)
         }
         viewedButton.snp.makeConstraints { maker in
-            maker.width.equalTo(125)
+            maker.width.equalTo(DetailsScreenSizes.ViewedButton.width)
         }
         buttonsStack.snp.makeConstraints { maker in
             maker.top.equalTo(yearRatingStackView.snp.bottom).offset(DetailsScreenSizes.ButtonsStack.topOffset)
@@ -467,7 +555,41 @@ extension DetailsViewController {
             maker.height.equalTo(DetailsScreenSizes.TextView.startHeight)
             maker.width.equalTo(DetailsScreenSizes.TextView.width)
             maker.centerX.equalToSuperview()
-//            maker.leading.trailing.equalTo(scrollView.layoutMarginsGuide).inset(DetailsScreenSizes.TextView.sideOffset)
+        }
+    }
+    
+    private func setStackConstraints() {
+        for i in 0..<genresStackViews.count {
+            for label in genresStackViews[i].arrangedSubviews {
+                label.snp.makeConstraints { maker in
+                    maker.width.equalTo(label.bounds.size.width)
+                }
+            }
+            if i != 0 {
+                genresStackViews[i].snp.makeConstraints { maker in
+                    maker.top.equalTo(genresStackViews[i - 1].snp.bottom).offset(DetailsScreenSizes.Genres.stackTopOffset)
+                    maker.height.equalTo(DetailsScreenSizes.Genres.stackHeight)
+                    maker.centerX.equalToSuperview()
+                }
+            } else {
+                genresStackViews[i].snp.makeConstraints { maker in
+                    maker.top.equalTo(textView.snp.bottom).offset(DetailsScreenSizes.Genres.stackTopOffset)
+                    maker.height.equalTo(DetailsScreenSizes.Genres.stackHeight)
+                    maker.centerX.equalToSuperview()
+                }
+            }
+        }
+    }
+    
+    private func setScrollViewButtonConstraint() {
+        if let lastStack = genresStackViews.last {
+            scrollView.snp.makeConstraints { maker in
+                maker.bottom.equalTo(lastStack).offset(DetailsScreenSizes.scrollViewButtonOffset)
+            }
+        } else {
+            scrollView.snp.makeConstraints { maker in
+                maker.bottom.equalTo(textView).offset(DetailsScreenSizes.scrollViewButtonOffset)
+            }
         }
     }
 }
