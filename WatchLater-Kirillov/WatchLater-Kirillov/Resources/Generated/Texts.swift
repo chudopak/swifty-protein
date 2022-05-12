@@ -20,6 +20,8 @@ internal enum Text {
     internal static let registration = Text.tr("Localizable", "Authorization.registration")
     /// Еще не зарегистрированы?
     internal static let registrationQuestion = Text.tr("Localizable", "Authorization.registrationQuestion")
+    /// Что-то пошло не так
+    internal static let somethingWentWrong = Text.tr("Localizable", "Authorization.somethingWentWrong")
     internal enum Placeholder {
       /// Адрес электронной почты
       internal static let email = Text.tr("Localizable", "Authorization.placeholder.email")
@@ -53,11 +55,6 @@ internal enum Text {
     internal static let update = Text.tr("Localizable", "Common.update")
     /// Да
     internal static let yes = Text.tr("Localizable", "Common.yes")
-  }
-
-  internal enum Test {
-    /// Test 123
-    internal static let test = Text.tr("Localizable", "Test.test")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

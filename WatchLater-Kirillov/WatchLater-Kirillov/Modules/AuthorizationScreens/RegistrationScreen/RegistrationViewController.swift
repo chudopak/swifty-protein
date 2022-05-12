@@ -8,7 +8,13 @@
 
 import UIKit
 
-class RegistrationViewController: BaseViewController, UITextFieldDelegate {
+protocol RegistrationViewControllerProtocol: AnyObject {
+    func registrationFailedState(displayMessage: String)
+    func presentThumbnailsViewController()
+    func presentLoginViewControllerWithLoginAlert()
+}
+
+class RegistrationViewController: BaseViewController, UITextFieldDelegate, RegistrationViewControllerProtocol {
     
     private lazy var logoImageView = makeLogoImageView()
     private lazy var emailTextField = makeTextField(type: .email)
@@ -29,6 +35,8 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
             && !repeatPasswordTextField.text!.isEmpty
     }
     
+    private var interactor: RegistrationInteractorProtocol!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -41,8 +49,28 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         navigationController?.navigationBar.isHidden = false
     }
     
+    func setupComponents(interactor: RegistrationInteractorProtocol) {
+        self.interactor = interactor
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.placeholder = ""
+    }
+    
+    func registrationFailedState(displayMessage: String) {
+        changeLoadingState(isVisible: false)
+        showRegistrationFailedState(message: displayMessage)
+    }
+    
+    func presentThumbnailsViewController() {
+        changeLoadingState(isVisible: false)
+        RegistrationRouter.presentViewController(FavouriteThumbnailsViewController())
+    }
+    
+    func presentLoginViewControllerWithLoginAlert() {
+        changeLoadingState(isVisible: false)
+        // We can present some alert here to notify the user about succes registration
+        RegistrationRouter.popViewController(from: navigationController!)
     }
     
     private func configureView() {
@@ -63,7 +91,7 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
         spinner.isHidden = true
     }
     
-    private func getAuthorizatioinData() -> RegistrationData? {
+    private func getRegistrationData() -> RegistrationData? {
         guard isFieldsSet
         else {
             return nil
@@ -82,26 +110,28 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     
     private func validateRegistrationDataForRequest() {
         if isPasswordsMatch(),
-           let loginData = getAuthorizatioinData() {
-            processRegistration()
-            print(loginData)
+           let registrationData = getRegistrationData() {
+            processRegistration(with: registrationData)
+            print(registrationData)
         } else {
             showRegistrationFailedState(message: Text.Authorization.passwordsNotMatch)
         }
     }
     
-    private func processRegistration() {
-        // TODO: - Do request
-        registerButton.isHidden = true
-        spinner.startAnimating()
-        spinner.isHidden = false
-        DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + 1) { [weak self] in
-            DispatchQueue.main.async {
-                self?.spinner.stopAnimating()
-                self?.spinner.isHidden = true
-                self?.registerButton.isHidden = false
-            }
+    private func processRegistration(with data: RegistrationData) {
+        hideKeyboard()
+        changeLoadingState(isVisible: true)
+        interactor.register(data: data)
+    }
+    
+    private func changeLoadingState(isVisible state: Bool) {
+        registerButton.isHidden = state
+        if state {
+            spinner.startAnimating()
+        } else {
+            spinner.stopAnimating()
         }
+        spinner.isHidden = !state
     }
     
     private func showRegistrationFailedState(message: String) {
@@ -225,7 +255,6 @@ extension RegistrationViewController {
         let label = UILabel()
         label.textColor = Asset.Colors.loginFailedText.color
         label.font = UIFont.systemFont(ofSize: RegistrationScreenSizes.RegistrationFailedLabel.fontSize)
-        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         return label
     }

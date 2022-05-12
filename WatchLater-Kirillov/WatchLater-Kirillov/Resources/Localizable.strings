@@ -13,6 +13,7 @@ Common.logout = "Выйти";
 Common.login = "Войти";
 
 // MARK: - Authorization
+
 Authorization.placeholder.email = "Адрес электронной почты";
 Authorization.placeholder.password = "Пароль";
 Authorization.placeholder.repeatPassword = "Повторите пароль";
@@ -20,7 +21,4 @@ Authorization.registrationQuestion = "Еще не зарегистрирован
 Authorization.registration = "Регистрация";
 Authorization.failed = "Неверные логин или пароль";
 Authorization.passwordsNotMatch = "Пароли не совпадают";
-
-// MARK: - Test
-
-Test.test = "Test 123";
+Authorization.somethingWentWrong = "Что-то пошло не так";

@@ -8,11 +8,22 @@
 import UIKit
 import SnapKit
 
+protocol SplashViewControllerProtocol: AnyObject {
+    func handleTokenValidating(result: RefreshResult)
+    func handleTokenRefreeshing(result: RefreshResult)
+}
+
 class SplashViewController: BaseViewController {
     
     private lazy var watchLaterImageView = makeWatchLaterImageView()
     private lazy var eyeImageView = makeEyeImageView()
     private lazy var agonaImageView = makeAgonaImageView()
+    
+    private var interactor: SplashInteractorProtocol!
+    private var router: SplashRouter!
+    private var isAnimationFinished = false
+    private var isTokenValidationFinished = false
+    private var isTokenActive = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +33,28 @@ class SplashViewController: BaseViewController {
         watchLaterImageView.addSubview(eyeImageView)
         configureSplashScreenSizessAtLaunch()
         setConstraints()
+//        KeychainService.delete(key: .accessToken)
+//        KeychainService.delete(key: .refreshToken)
+        interactor.validateToken()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewAnimation()
+    }
+    
+    func setupComponents(interactor: SplashInteractorProtocol,
+                         router: SplashRouter) {
+        self.interactor = interactor
+        self.router = router
+    }
+    
+    private func presentNeededScreen() {
+        if isTokenActive {
+            router.presentMainTabBar()
+        } else {
+            router.presentLoginViewController()
+        }
     }
     
     private func configureSplashScreenSizessAtLaunch() {
@@ -90,15 +118,53 @@ class SplashViewController: BaseViewController {
                        options: .curveLinear, animations: { [weak self] in
                         self?.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXCenter
                        }, completion: { [weak self] _ in
-                        let loginVC = LoginRouter.makeLoginViewController()
-                        let navigationController = UINavigationController(rootViewController: loginVC)
-                        navigationController.modalPresentationStyle = .fullScreen
-                        self?.present(navigationController, animated: true, completion: nil)
+                        self?.isAnimationFinished = true
+                        if self?.isTokenValidationFinished != nil
+                            && self!.isTokenValidationFinished {
+                            self?.presentNeededScreen()
+                        }
                        })
     }
 }
 
+extension SplashViewController: SplashViewControllerProtocol {
+    func handleTokenValidating(result: RefreshResult) {
+        switch result {
+        case .success:
+            DispatchQueue.main.async { [weak self] in
+                self?.isTokenValidationFinished = true
+                self?.isTokenActive = true
+                if let isAnimationFinished = self?.isAnimationFinished,
+                   isAnimationFinished {
+                    self?.presentNeededScreen()
+                }
+            }
+            
+        case .failure:
+            interactor.recreateToken()
+        }
+    }
+    
+    func handleTokenRefreeshing(result: RefreshResult) {
+        switch result {
+        case .success:
+            isTokenActive = true
+            
+        case .failure:
+            break
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.isTokenValidationFinished = true
+            if let isAnimationFinished = self?.isAnimationFinished,
+               isAnimationFinished {
+                self?.presentNeededScreen()
+            }
+        }
+    }
+}
+
 // MARK: Extension for element creation
+
 extension SplashViewController {
     
     private func makeWatchLaterImageView() -> UIImageView {
@@ -126,7 +192,9 @@ extension SplashViewController {
         return (imageView)
     }
 }
+
 // MARK: Constraints
+
 extension SplashViewController {
     
     private func setConstraints() {

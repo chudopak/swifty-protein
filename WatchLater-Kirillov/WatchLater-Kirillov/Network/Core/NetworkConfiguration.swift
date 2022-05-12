@@ -18,20 +18,36 @@ enum NetworkConfiguration {
         var address: String {
             switch self {
             case .prod:
-                return "https://prod"
+                return "watchlater.cloud.technokratos.com"
                 
             case .dev:
-                return "http://dev"
+                return "watchlater.cloud.technokratos.com"
             }
         }
     }
 
     static var url: URL {
         #if PROD
-        guard let url = URL(string: Environment.prod.address) else { fatalError() }
+        guard let url = URL(string: Environment.prod.address) else { fatalError("Base URL was not created for prod configuration in NetworkConfiguration.swift") }
         return url
         #else
-        return BundleSettingsURL(defaultURLString: Environment.dev.address).url
+        guard let url = URL(string: Environment.dev.address) else { fatalError("Base URL was not created for dev configuration in NetworkConfiguration.swift") }
+        return BundleSettingsURL(defaultURL: url).url
         #endif
+    }
+    
+    static var urlString: String {
+        #if PROD
+        return Environment.prod.address
+        #else
+        return Environment.dev.address
+        #endif
+    }
+    static let sceme = "https"
+    
+    enum Headers {
+        static let acceptJSON = (field: "Accept", value: "application/json")
+        static let contentTypeJSON = (field: "Content-Type", value: "application/json; charset=utf-8")
+        static let authorisation = "Authorization"
     }
 }

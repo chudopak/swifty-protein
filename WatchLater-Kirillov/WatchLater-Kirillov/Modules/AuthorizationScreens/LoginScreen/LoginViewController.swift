@@ -9,6 +9,12 @@
 import UIKit
 import SnapKit
 
+protocol LoginViewControllerProtocol: AnyObject {
+    
+    func loginFailedStatee(displayMessage: String)
+    func presentThumbnailsViewController()
+}
+
 class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     private lazy var watchLaterLogoImageView = makeWatchLaterLogoImageView()
@@ -27,6 +33,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     private var isLoginFaieldSateActive = false
     
+    private var interactor: LoginInteractorProtocol!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -38,6 +46,10 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    func setupComponents(interactor: LoginInteractorProtocol) {
+        self.interactor = interactor
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -66,13 +78,14 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         else {
             return nil
         }
-        return LoginData(password: passwordTextField.text!,
-                         email: emailTextField.text!)
+        return LoginData(email: emailTextField.text!,
+                         password: passwordTextField.text!)
     }
     
-    private func showLoginFailedState() {
+    private func showLoginFailedState(displayMessage: String) {
         isLoginFaieldSateActive = true
         loginFailedLabel.isHidden = false
+        loginFailedLabel.text = displayMessage
         emailTextField.textColor = Asset.Colors.loginFailedText.color
         passwordTextField.textColor = Asset.Colors.loginFailedText.color
     }
@@ -88,7 +101,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                                           nextToBeField: AuthorizationTextField) {
         _ = active.resignFirstResponder()
         if let loginData = getLoginData() {
-            // TODO: - Do request
+            loginButton.isEnabled = false
+            interactor.login(data: loginData)
             print(loginData)
         } else if active.text != nil
                     && !active.text!.isEmpty {
@@ -125,9 +139,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     @objc private func loginButtonTaped() {
         hideKeyboard()
         if let loginData = getLoginData() {
-            // TODO: - Do request
-            // showLoginFailedState - here for test login failed state
-            showLoginFailedState()
+            loginButton.isEnabled = false
+            interactor.login(data: loginData)
             print(loginData)
         }
     }
@@ -150,7 +163,19 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
 }
 
+extension LoginViewController: LoginViewControllerProtocol {
+
+    func loginFailedStatee(displayMessage: String) {
+        showLoginFailedState(displayMessage: displayMessage)
+    }
+    
+    func presentThumbnailsViewController() {
+        LoginRouter.presentViewController(FavouriteThumbnailsViewController())
+    }
+}
+
 // MARK: Extension for element creation
+
 extension LoginViewController {
     
     private func makeWatchLaterLogoImageView() -> UIImageView {
@@ -161,34 +186,34 @@ extension LoginViewController {
     
     private func makeTextField(type: TextFieldType) -> AuthorizationTextField {
         let inset = UIEdgeInsets(
-                top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
-                left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
-                bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
-                right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset
-            )
+            top: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
+            left: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset,
+            bottom: LoginScreenSizes.AuthorizationTextField.textRectangleTopOffset,
+            right: LoginScreenSizes.AuthorizationTextField.textRectangleSideOffset
+        )
         let textField = AuthorizationTextField(type: type,
                                                inset: inset)
         textField.delegate = self
         textField.addTarget(
-                    self,
-                    action: #selector(textFieldDidChange),
-                    for: .editingChanged
-                )
+            self,
+            action: #selector(textFieldDidChange),
+            for: .editingChanged
+        )
         switch type {
         case .email:
             textField.addTarget(
-                        self,
-                        action: #selector(emailTextFieldDonePressed),
-                        for: .editingDidEndOnExit
-                    )
-        
+                self,
+                action: #selector(emailTextFieldDonePressed),
+                for: .editingDidEndOnExit
+            )
+            
         case .password:
             textField.addTarget(
-                        self,
-                        action: #selector(passwordTextFieldDonePressed),
-                        for: .editingDidEndOnExit
-                    )
-
+                self,
+                action: #selector(passwordTextFieldDonePressed),
+                for: .editingDidEndOnExit
+            )
+            
         default:
             break
         }
@@ -197,12 +222,12 @@ extension LoginViewController {
     
     private func makeLoginButton() -> AuthorizationButton {
         let colorSet = AuthorizationButton.ColorSet(
-                                enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
-                                enabledBackground: .clear,
-                                enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
-                                disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
-                                disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
-                                disabledBorder: .clear)
+            enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
+            enabledBackground: .clear,
+            enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
+            disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
+            disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
+            disabledBorder: .clear)
         let button = AuthorizationButton(colorSet: colorSet,
                                          text: Text.Common.login,
                                          fontSize: LoginScreenSizes.AuthorizationButton.fontSize)
@@ -216,31 +241,31 @@ extension LoginViewController {
         let buttonText = Text.Authorization.registrationQuestion + " " + Text.Authorization.registration
         let questionRange = (buttonText as NSString).range(of: Text.Authorization.registrationQuestion)
         let registrationRange = (buttonText as NSString).range(of: Text.Authorization.registration)
-
+        
         let mutableButtonText = NSMutableAttributedString(string: buttonText)
         mutableButtonText.addAttribute(
-                            .foregroundColor,
-                            value: Asset.Colors.registrationQuestionLabelText.color,
-                            range: questionRange
-                        )
+            .foregroundColor,
+            value: Asset.Colors.registrationQuestionLabelText.color,
+            range: questionRange
+        )
         mutableButtonText.addAttribute(
-                            .foregroundColor,
-                            value: Asset.Colors.enabledAuthorizationButtonText.color,
-                            range: registrationRange
-                        )
+            .foregroundColor,
+            value: Asset.Colors.enabledAuthorizationButtonText.color,
+            range: registrationRange
+        )
         
         let mutableButtonTextHighlited = NSMutableAttributedString(string: buttonText)
         mutableButtonTextHighlited.addAttribute(
-                                        .foregroundColor,
-                                        value: Asset.Colors.registrationQuestionLabelText.color,
-                                        range: questionRange
-                                    )
+            .foregroundColor,
+            value: Asset.Colors.registrationQuestionLabelText.color,
+            range: questionRange
+        )
         mutableButtonTextHighlited.addAttribute(
-                        .foregroundColor,
-                        value: Asset.Colors.enabledAuthorizationButtonText.color.withAlphaComponent(0.6),
-                        range: registrationRange
-                    )
-
+            .foregroundColor,
+            value: Asset.Colors.enabledAuthorizationButtonText.color.withAlphaComponent(0.6),
+            range: registrationRange
+        )
+        
         let button = UIButton()
         button.setAttributedTitle(mutableButtonText,
                                   for: .normal)
@@ -266,6 +291,7 @@ extension LoginViewController {
 }
 
 // MARK: Constraints
+
 extension LoginViewController {
     
     private func setConstraints() {
