@@ -164,7 +164,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
 }
 
 extension LoginViewController: LoginViewControllerProtocol {
-
+    
     func loginFailedState(displayMessage: String) {
         showLoginFailedState(displayMessage: displayMessage)
     }
@@ -220,17 +220,17 @@ extension LoginViewController {
         return textField
     }
     
-    private func makeLoginButton() -> AuthorizationButton {
-        let colorSet = AuthorizationButton.ColorSet(
+    private func makeLoginButton() -> BaseBorderButton {
+        let colorSet = BaseBorderButton.ColorSet(
             enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
             enabledBackground: .clear,
             enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
             disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
             disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
             disabledBorder: .clear)
-        let button = AuthorizationButton(colorSet: colorSet,
-                                         text: Text.Common.login,
-                                         fontSize: LoginScreenSizes.AuthorizationButton.fontSize)
+        let button = BaseBorderButton(colorSet: colorSet,
+                                      text: Text.Common.login,
+                                      fontSize: LoginScreenSizes.AuthorizationButton.fontSize)
         button.addTarget(self,
                          action: #selector(loginButtonTaped),
                          for: .touchUpInside)

@@ -259,17 +259,17 @@ extension RegistrationViewController {
         return label
     }
     
-    private func makeRegisterButton() -> AuthorizationButton {
-        let colorSet = AuthorizationButton.ColorSet(
+    private func makeRegisterButton() -> BaseBorderButton {
+        let colorSet = BaseBorderButton.ColorSet(
             enabledText: Asset.Colors.enabledAuthorizationButtonText.color,
             enabledBackground: .clear,
             enabledBorder: Asset.Colors.enabledAuthorizationButtonBorderLine.color,
             disabledText: Asset.Colors.disabledAuthorizationButtonText.color,
             disabledBackground: Asset.Colors.disabledAuthorizationButtonBackground.color,
             disabledBorder: .clear)
-        let button = AuthorizationButton(colorSet: colorSet,
-                                         text: Text.Authorization.registration,
-                                         fontSize: RegistrationScreenSizes.RegisterButton.fontSize)
+        let button = BaseBorderButton(colorSet: colorSet,
+                                      text: Text.Authorization.registration,
+                                      fontSize: RegistrationScreenSizes.RegisterButton.fontSize)
         button.addTarget(self,
                          action: #selector(registerButtonTapped),
                          for: .touchUpInside)

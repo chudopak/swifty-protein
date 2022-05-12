@@ -25,8 +25,18 @@ class DetailsViewController: BaseViewController {
     private lazy var titleLabel = makeTitleLabel()
     private lazy var ratingLabel = makeRatingLabel()
     private lazy var yearLabel = makeYearLabel()
-    private lazy var yearRatingStackView = makeStackView(views: [yearLabel, ratingLabel],
-                                                         viewsSpacing: DetailsScreenSizes.YearRatingStackView.labelsOffset)
+    private lazy var yearRatingStackView = makeStackView(
+        views: [yearLabel, ratingLabel],
+        viewsSpacing: DetailsScreenSizes.YearRatingStackView.labelsOffset
+    )
+    private lazy var addFilmButton = makeAddFilmButton()
+    private lazy var willWatchButton = makeWillWatchButton()
+    private lazy var viewedButton = makeViewedButton()
+    private lazy var buttonsStack = makeStackView(
+        views: [willWatchButton, viewedButton],
+        viewsSpacing: DetailsScreenSizes.ButtonsStack.buttonsOffset
+    )
+    private lazy var textView = makeTextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +73,26 @@ class DetailsViewController: BaseViewController {
         posterView.addSubview(noImageLabel)
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(yearRatingStackView)
+        scrollView.addSubview(addFilmButton)
+        scrollView.addSubview(buttonsStack)
+        scrollView.addSubview(textView)
+    }
+    
+    private func setButtons() {
+        if let isWatched = movieDetails.isWatched {
+            buttonsStack.isHidden = false
+            addFilmButton.isHidden = true
+            if isWatched {
+                willWatchButton.isEnabled = true
+                viewedButton.isEnabled = false
+            } else {
+                willWatchButton.isEnabled = false
+                viewedButton.isEnabled = true
+            }
+        } else {
+            buttonsStack.isHidden = true
+            addFilmButton.isHidden = false
+        }
     }
     
     private func setNavigationController() {
@@ -87,6 +117,11 @@ class DetailsViewController: BaseViewController {
         titleLabel.text = movieDetails.title
         yearLabel.text = movieDetails.year
         ratingLabel.text = movieDetails.rating
+        setButtons()
+        textView.snp.updateConstraints { maker in
+            maker.height.equalTo(getTextViewHeight())
+        }
+        textView.text = movieDetails.description
     }
     
     private func setDetailsWithIMDBData(data: MovieData) {
@@ -112,7 +147,7 @@ class DetailsViewController: BaseViewController {
                                     description: data.description ?? "",
                                     genres: data.geners,
                                     title: data.title,
-                                    isWatched: nil)
+                                    isWatched: data.isWatched)
     }
     
     private func getRatingString(rating: String) -> String {
@@ -133,6 +168,37 @@ class DetailsViewController: BaseViewController {
         } else {
             spinner.stopAnimating()
         }
+    }
+    
+    private func getTextViewHeight() -> CGFloat {
+        let textView = UITextView(frame: CGRect(x: 0,
+                                                y: 0,
+                                                width: DetailsScreenSizes.TextView.width,
+                                                height: CGFloat.greatestFiniteMagnitude))
+        textView.text = movieDetails.description
+        textView.font = .systemFont(ofSize: DetailsScreenSizes.TextView.fontSize)
+        textView.sizeToFit()
+        return (textView.frame.height)
+    }
+    
+    @objc private func addFilmToAPI() {
+        // TODO: add film to local API
+        addFilmButton.isHidden = true
+        buttonsStack.isHidden = false
+//        print("Year rating - \(yearLabel.frame.size.width)  \(ratingLabel.frame.size.width)")
+//        print("Buttons - \(willWatchButton.frame.size.width) \(viewedButton.frame.size.width)")
+    }
+    
+    @objc private func makrAsWatched() {
+        // TODO: add film to local API as Viewed
+        willWatchButton.isEnabled = true
+        viewedButton.isEnabled = false
+    }
+    
+    @objc private func makrAsUnwatched() {
+        // TODO: mark as unwatched
+        willWatchButton.isEnabled = false
+        viewedButton.isEnabled = true
     }
 }
 
@@ -163,7 +229,6 @@ extension DetailsViewController {
         let view = UIImageView()
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
-//        view.backgroundColor = .red
         view.backgroundColor = Asset.Colors.grayTransperent.color
         return view
     }
@@ -223,6 +288,68 @@ extension DetailsViewController {
         return label
     }
     
+    private func makeAddFilmButton() -> BaseBorderButton {
+        let colorSet = BaseBorderButton.ColorSet(enabledText: .black,
+                                                 enabledBackground: .clear,
+                                                 enabledBorder: .black,
+                                                 disabledText: Asset.Colors.grayTransperent.color,
+                                                 disabledBackground: .clear,
+                                                 disabledBorder: Asset.Colors.grayTransperent.color)
+        let button = BaseBorderButton(colorSet: colorSet,
+                                      text: "+ " + Text.Common.willWatch,
+                                      fontSize: DetailsScreenSizes.buttonsFontSize)
+        button.layer.cornerRadius = DetailsScreenSizes.buttonsCornerRadius
+        button.layer.borderWidth = DetailsScreenSizes.buttonsBorderWidth
+        button.isEnabled = true
+        button.addTarget(self, action: #selector(addFilmToAPI), for: .touchUpInside)
+        return button
+    }
+    
+    private func makeWillWatchButton() -> BaseBorderButton {
+        let colorSet = BaseBorderButton.ColorSet(enabledText: Asset.Colors.grayTransperent.color,
+                                                 enabledBackground: .clear,
+                                                 enabledBorder: Asset.Colors.grayTransperent.color,
+                                                 disabledText: Asset.Colors.deepBlue.color,
+                                                 disabledBackground: .clear,
+                                                 disabledBorder: Asset.Colors.deepBlue.color)
+        let button = BaseBorderButton(colorSet: colorSet,
+                                      text: Text.Common.willWatch,
+                                      fontSize: DetailsScreenSizes.buttonsFontSize)
+        button.isEnabled = false
+        button.layer.cornerRadius = DetailsScreenSizes.buttonsCornerRadius
+        button.layer.borderWidth = DetailsScreenSizes.buttonsBorderWidth
+        button.addTarget(self, action: #selector(makrAsUnwatched), for: .touchUpInside)
+        return button
+    }
+    
+    private func makeViewedButton() -> BaseBorderButton {
+        let colorSet = BaseBorderButton.ColorSet(enabledText: Asset.Colors.grayTransperent.color,
+                                                 enabledBackground: .clear,
+                                                 enabledBorder: Asset.Colors.grayTransperent.color,
+                                                 disabledText: Asset.Colors.deepBlue.color,
+                                                 disabledBackground: .clear,
+                                                 disabledBorder: Asset.Colors.deepBlue.color)
+        let button = BaseBorderButton(colorSet: colorSet,
+                                      text: Text.Common.viewed,
+                                      fontSize: DetailsScreenSizes.buttonsFontSize)
+        button.isEnabled = true
+        button.layer.cornerRadius = DetailsScreenSizes.buttonsCornerRadius
+        button.layer.borderWidth = DetailsScreenSizes.buttonsBorderWidth
+        button.addTarget(self, action: #selector(makrAsWatched), for: .touchUpInside)
+        return button
+    }
+    
+    private func makeTextView() -> UITextView {
+        let textView = UITextView()
+        textView.text = ""
+        textView.font = .systemFont(ofSize: DetailsScreenSizes.TextView.fontSize)
+        textView.textColor = .black
+        textView.textAlignment = .center
+        textView.backgroundColor = .clear
+        textView.isScrollEnabled = false
+        return textView
+    }
+    
     private func makeLabel(font: UIFont,
                            text: String,
                            textColor: UIColor) -> UILabel {
@@ -236,7 +363,6 @@ extension DetailsViewController {
     private func makeStackView(views: [UIView], viewsSpacing: CGFloat) -> UIStackView {
         let view = UIStackView()
         view.axis = .horizontal
-        view.distribution = .fillEqually
         view.spacing = viewsSpacing
         view.translatesAutoresizingMaskIntoConstraints = false
         for i in views {
@@ -255,8 +381,11 @@ extension DetailsViewController {
         setNoImageLabelConstraints()
         setTitleLabelConstratints()
         setYearRatingStackViewConstratints()
+        setAddFilmButtonConstratints()
+        setButtonsStackConstratints()
+        setTextViewConstraints()
         scrollView.snp.makeConstraints { maker in
-            maker.bottom.equalTo(yearRatingStackView).offset(10)
+            maker.bottom.equalTo(textView).offset(10)
         }
     }
     
@@ -296,11 +425,49 @@ extension DetailsViewController {
     }
     
     private func setYearRatingStackViewConstratints() {
+        yearLabel.snp.makeConstraints { maker in
+            maker.width.equalTo(42)
+        }
+        ratingLabel.snp.makeConstraints { maker in
+            maker.width.equalTo(36)
+        }
         yearRatingStackView.snp.makeConstraints { maker in
             maker.top.equalTo(titleLabel.snp.bottom).offset(DetailsScreenSizes.YearRatingStackView.topOffset)
             maker.height.equalTo(DetailsScreenSizes.YearRatingStackView.height)
-            maker.width.equalTo(DetailsScreenSizes.YearRatingStackView.width)
             maker.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setAddFilmButtonConstratints() {
+        addFilmButton.snp.makeConstraints { maker in
+            maker.top.equalTo(yearRatingStackView.snp.bottom).offset(DetailsScreenSizes.AddFilmButton.topOffset)
+            maker.height.equalTo(DetailsScreenSizes.AddFilmButton.height)
+            maker.width.equalTo(DetailsScreenSizes.AddFilmButton.width)
+            maker.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setButtonsStackConstratints() {
+        willWatchButton.snp.makeConstraints { maker in
+            maker.width.equalTo(DetailsScreenSizes.WillWatchButton.width)
+        }
+        viewedButton.snp.makeConstraints { maker in
+            maker.width.equalTo(125)
+        }
+        buttonsStack.snp.makeConstraints { maker in
+            maker.top.equalTo(yearRatingStackView.snp.bottom).offset(DetailsScreenSizes.ButtonsStack.topOffset)
+            maker.height.equalTo(DetailsScreenSizes.ButtonsStack.height)
+            maker.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setTextViewConstraints() {
+        textView.snp.makeConstraints { maker in
+            maker.top.equalTo(buttonsStack.snp.bottom).offset(DetailsScreenSizes.TextView.topOffset)
+            maker.height.equalTo(DetailsScreenSizes.TextView.startHeight)
+            maker.width.equalTo(DetailsScreenSizes.TextView.width)
+            maker.centerX.equalToSuperview()
+//            maker.leading.trailing.equalTo(scrollView.layoutMarginsGuide).inset(DetailsScreenSizes.TextView.sideOffset)
         }
     }
 }

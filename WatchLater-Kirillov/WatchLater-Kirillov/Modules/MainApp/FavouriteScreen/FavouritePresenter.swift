@@ -21,6 +21,14 @@ class FavouritePresenter: FavouritePresenterProtocol {
     }
     
     func presentMovies(films: [FilmInfoTmp]?, watched: Bool) {
+        guard var films = films
+        else {
+            favouriteViewController.showFilms(films, watched: watched)
+            return
+        }
+        for i in 0..<films.count {
+            films[i].isWatched = watched
+        }
         favouriteViewController.showFilms(films, watched: watched)
     }
 }

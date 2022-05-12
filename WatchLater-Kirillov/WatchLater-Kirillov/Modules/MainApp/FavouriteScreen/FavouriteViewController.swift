@@ -56,6 +56,7 @@ class FavouriteViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationController()
+        // TODO: Сделай проврку изменилось ли что-то в API и обнови если да
         if !getWatched() && willWatchFilms.isEmpty {
             fetchNewFilms()
         } else if getWatched() && viewedFilms.isEmpty {
@@ -147,24 +148,11 @@ class FavouriteViewController: BaseViewController {
         }
     }
     
-    @objc private func changeFilmsSegment(_ sender: UISegmentedControl!) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            if shouldFetchFilmsStyleChanged() {
-                fetchNewFilms()
-            } else {
-                setFilmsWithoutFetching()
-            }
-            
-        case 1:
-            if shouldFetchFilmsStyleChanged() {
-                fetchNewFilms()
-            } else {
-                setFilmsWithoutFetching()
-            }
-            
-        default:
-            break
+    @objc private func changeFilmsSegment() {
+        if shouldFetchFilmsStyleChanged() {
+            fetchNewFilms()
+        } else {
+            setFilmsWithoutFetching()
         }
     }
 }

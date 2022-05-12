@@ -1,5 +1,5 @@
 //
-//  AuthorizationButton.swift
+//  BaseBorderButton.swift
 //  StartProject-ios
 //
 //  Created by Stepan Kirillov on 4/13/22.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AuthorizationButton: UIButton {
+class BaseBorderButton: UIButton {
     
     struct ColorSet {
         let enabledText: UIColor
@@ -43,7 +43,7 @@ class AuthorizationButton: UIButton {
         }
     }
     
-    init(colorSet: AuthorizationButton.ColorSet, text: String, fontSize: CGFloat) {
+    init(colorSet: BaseBorderButton.ColorSet, text: String, fontSize: CGFloat) {
         super.init(frame: .zero)
         self.colorSet = colorSet
         isEnabled = false

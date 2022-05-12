@@ -59,8 +59,8 @@
 		7D2B76EE28129E020051BF9A /* BaseFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2B76EC28129E020051BF9A /* BaseFunctions.swift */; };
 		7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D562807197100AEBF1A /* LoginModel.swift */; };
 		7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D562807197100AEBF1A /* LoginModel.swift */; };
-		7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */; };
-		7D3B5D5B280725DE00AEBF1A /* AuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */; };
+		7D3B5D5A280725DE00AEBF1A /* BaseBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D59280725DE00AEBF1A /* BaseBorderButton.swift */; };
+		7D3B5D5B280725DE00AEBF1A /* BaseBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B5D59280725DE00AEBF1A /* BaseBorderButton.swift */; };
 		7D612D5528118246007C7515 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D5428118246007C7515 /* FavouriteViewController.swift */; };
 		7D612D5628118246007C7515 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D5428118246007C7515 /* FavouriteViewController.swift */; };
 		7D612D59281182EF007C7515 /* UIWindowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D58281182EF007C7515 /* UIWindowService.swift */; };
@@ -227,7 +227,7 @@
 		7D2B6B0A28228D6200F7D5A8 /* SearchScreenSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenSizes.swift; sourceTree = "<group>"; };
 		7D2B76EC28129E020051BF9A /* BaseFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFunctions.swift; sourceTree = "<group>"; };
 		7D3B5D562807197100AEBF1A /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
-		7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationButton.swift; sourceTree = "<group>"; };
+		7D3B5D59280725DE00AEBF1A /* BaseBorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBorderButton.swift; sourceTree = "<group>"; };
 		7D612D5428118246007C7515 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		7D612D58281182EF007C7515 /* UIWindowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowService.swift; sourceTree = "<group>"; };
 		7D612D5C28119E08007C7515 /* RefreshTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenService.swift; sourceTree = "<group>"; };
@@ -436,7 +436,7 @@
 		30D2F26426014275000134EB /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				7D3B5D59280725DE00AEBF1A /* AuthorizationButton.swift */,
+				7D3B5D59280725DE00AEBF1A /* BaseBorderButton.swift */,
 				7D9CDA3228169C6100DDEDBD /* ViewStyleButton.swift */,
 			);
 			path = Button;
@@ -717,8 +717,8 @@
 			isa = PBXGroup;
 			children = (
 				7D9D6FA52825830C009DFD03 /* Utils */,
-				7D9D6F9928255616009DFD03 /* DetailsViewController.swift */,
 				7D9D6F9C28255ACA009DFD03 /* DetailsScreenConfigurator.swift */,
+				7D9D6F9928255616009DFD03 /* DetailsViewController.swift */,
 				7D9D6FA228256839009DFD03 /* DetailsModel.swift */,
 				7D9D6FA92825892C009DFD03 /* DetailsInteractor.swift */,
 				7D9D6FAC28258981009DFD03 /* DetailsPresenter.swift */,
@@ -1109,7 +1109,7 @@
 				7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */,
 				7D81BB30281C437100CC9819 /* FavouriteRouter.swift in Sources */,
 				7D65004A2822AD060079ABAC /* SearchFilmTableViewCell.swift in Sources */,
-				7D3B5D5A280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
+				7D3B5D5A280725DE00AEBF1A /* BaseBorderButton.swift in Sources */,
 				7DAD276C281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */,
 				7D9D6FA72825831D009DFD03 /* DetailsScreenSizes.swift in Sources */,
 				7D178EA528084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
@@ -1201,7 +1201,7 @@
 				7D9D6FA82825831D009DFD03 /* DetailsScreenSizes.swift in Sources */,
 				7D3B5D582807197100AEBF1A /* LoginModel.swift in Sources */,
 				7DE0E24E2816DEBC00670DE3 /* FilmCollectionViewCell.swift in Sources */,
-				7D3B5D5B280725DE00AEBF1A /* AuthorizationButton.swift in Sources */,
+				7D3B5D5B280725DE00AEBF1A /* BaseBorderButton.swift in Sources */,
 				7D9D6FA128255B35009DFD03 /* SearchRouter.swift in Sources */,
 				7D178EA628084DDD009C6280 /* SplashScreenSizes.swift in Sources */,
 				7DAD276128181592005B9D6F /* FilmsTableView.swift in Sources */,
