@@ -10,6 +10,7 @@ import UIKit
 
 protocol FavouritePresenterProtocol {
     func presentMovies(films: [FilmInfoTmp]?, watched: Bool)
+    func compareMoviesWithCurrent(films: [FilmInfoTmp]?, watched: Bool)
 }
 
 class FavouritePresenter: FavouritePresenterProtocol {
@@ -23,12 +24,24 @@ class FavouritePresenter: FavouritePresenterProtocol {
     func presentMovies(films: [FilmInfoTmp]?, watched: Bool) {
         guard var films = films
         else {
-            favouriteViewController.showFilms(films, watched: watched)
+            favouriteViewController.showFilms(nil, watched: watched)
             return
         }
         for i in 0..<films.count {
             films[i].isWatched = watched
         }
         favouriteViewController.showFilms(films, watched: watched)
+    }
+    
+    func compareMoviesWithCurrent(films: [FilmInfoTmp]?, watched: Bool) {
+        guard var films = films
+        else {
+            favouriteViewController.checkMoviesForChanges(nil, watched: watched)
+            return
+        }
+        for i in 0..<films.count {
+            films[i].isWatched = watched
+        }
+        favouriteViewController.checkMoviesForChanges(films, watched: watched)
     }
 }

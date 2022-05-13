@@ -21,4 +21,5 @@ struct MovieDetails {
     let genres: [String]?
     let title: String
     var isWatched: Bool?
+    let id: Int
 }

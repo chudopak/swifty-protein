@@ -11,6 +11,8 @@ import SnapKit
 
 protocol DetailsViewControllerProtocol: AnyObject {
     func setPoster(result: Result<UIImage, Error>)
+    func showFailedMoviewChangingStatusState()
+    func changeMovieWatchStatus()
 }
 
 protocol DetailsViewControllerDelegate: AnyObject {
@@ -136,8 +138,7 @@ class DetailsViewController: BaseViewController {
             maker.height.equalTo(getTextViewHeight())
         }
         textView.text = movieDetails.description
-        print(genres, movieDetails.genres)
-        if !isOldAndNewGenresEqual() {
+        if !optionalsAreEqual(firstVal: genres, secondVal: movieDetails.genres) {
             genres = movieDetails.genres
             removeGenresStackViews()
             createGenresStackViews()
@@ -180,22 +181,6 @@ class DetailsViewController: BaseViewController {
         setStackConstraints()
     }
     
-    private func isOldAndNewGenresEqual() -> Bool {
-        if genres == nil && movieDetails.genres == nil {
-            return true
-        }
-        guard let oldGenres = genres,
-              let newGenres = movieDetails.genres,
-              newGenres.count == oldGenres.count
-        else {
-            return false
-        }
-        for i in 0..<oldGenres.count where oldGenres[i] != newGenres[i] {
-            return false
-        }
-        return true
-    }
-    
     private func removeGenresStackViews() {
         for stack in genresStackViews {
             for view in stack.arrangedSubviews {
@@ -218,7 +203,8 @@ class DetailsViewController: BaseViewController {
                                     description: data.description,
                                     genres: nil,
                                     title: data.title,
-                                    isWatched: nil)
+                                    isWatched: nil,
+                                    id: -1)
     }
     
     private func setDetailsWithLocalData(data: FilmInfoTmp) {
@@ -231,7 +217,8 @@ class DetailsViewController: BaseViewController {
                                     description: data.description ?? "",
                                     genres: data.genres,
                                     title: data.title,
-                                    isWatched: data.isWatched)
+                                    isWatched: data.isWatched,
+                                    id: data.id)
     }
     
     private func getPrefix(string: String, prefixValue: Int) -> String {
@@ -265,7 +252,7 @@ class DetailsViewController: BaseViewController {
         return (textView.frame.height)
     }
     
-    @objc private func addFilmToAPI() {
+    @objc private func addFilmToCollection() {
         // TODO: add film to local API
         addFilmButton.isHidden = true
         buttonsStack.isHidden = false
@@ -274,14 +261,12 @@ class DetailsViewController: BaseViewController {
     
     @objc private func markAsWatched() {
         // TODO: add film to local API as Viewed
-        willWatchButton.isEnabled = true
-        viewedButton.isEnabled = false
+        interactor.changeFilmWatchStatus(id: movieDetails.id)
     }
     
     @objc private func markAsUnwatched() {
         // TODO: mark as unwatched
-        willWatchButton.isEnabled = false
-        viewedButton.isEnabled = true
+        interactor.changeFilmWatchStatus(id: movieDetails.id)
     }
     
     @objc private func presentEditMovieScreen() {
@@ -301,6 +286,25 @@ extension DetailsViewController: DetailsViewControllerProtocol {
         case .failure:
             setImageViewMode(noImage: true)
             posterView.image = nil
+        }
+    }
+    
+    func showFailedMoviewChangingStatusState() {
+        print("DetailsViewController, showFailedMoviewChangingStatusState - Called failed state")
+    }
+    
+    func changeMovieWatchStatus() {
+        guard let status = movieDetails.isWatched
+        else {
+            return
+        }
+        movieDetails.isWatched = !status
+        if !status {
+            willWatchButton.isEnabled = true
+            viewedButton.isEnabled = false
+        } else {
+            willWatchButton.isEnabled = false
+            viewedButton.isEnabled = true
         }
     }
 }
@@ -399,7 +403,7 @@ extension DetailsViewController {
         button.layer.cornerRadius = DetailsScreenSizes.buttonsCornerRadius
         button.layer.borderWidth = DetailsScreenSizes.buttonsBorderWidth
         button.isEnabled = true
-        button.addTarget(self, action: #selector(addFilmToAPI), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addFilmToCollection), for: .touchUpInside)
         return button
     }
     

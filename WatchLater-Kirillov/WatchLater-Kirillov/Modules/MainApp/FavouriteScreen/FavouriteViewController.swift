@@ -16,9 +16,13 @@ struct FilmsPaging {
 
 protocol FavouriteViewControllerProtocol: AnyObject {
     func showFilms(_ films: [FilmInfoTmp]?, watched: Bool)
+    func checkMoviesForChanges(_ films: [FilmInfoTmp]?, watched: Bool)
 }
 
 protocol FavouriteViewControllerDelegate: AnyObject {
+    
+    var isPaginating: Bool { get }
+    
     func fetchNewFilms()
     func presentDetailsScreen(films: FilmInfoTmp)
 }
@@ -47,6 +51,8 @@ class FavouriteViewController: BaseViewController {
     private var interactor: FavouriteInteractorProtocol!
     private var router: FavouriteRouter!
     
+    private var isFetchingNewMovies = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
@@ -61,6 +67,8 @@ class FavouriteViewController: BaseViewController {
             fetchNewFilms()
         } else if getWatched() && viewedFilms.isEmpty {
             fetchNewFilms()
+        } else {
+            fetchMoviesForCheckingChanges()
         }
     }
     
@@ -160,6 +168,7 @@ class FavouriteViewController: BaseViewController {
 extension FavouriteViewController: FavouriteViewControllerProtocol {
     
     func showFilms(_ films: [FilmInfoTmp]?, watched: Bool) {
+        isFetchingNewMovies = false
         let unwrappedfilms: [FilmInfoTmp]
         if films != nil {
             unwrappedfilms = films!
@@ -180,18 +189,50 @@ extension FavouriteViewController: FavouriteViewControllerProtocol {
             setFilmsToActiveView(films: willWatchFilms)
         }
     }
+    
+    func checkMoviesForChanges(_ films: [FilmInfoTmp]?, watched: Bool) {
+        guard let unwrappedfilms = films,
+              !unwrappedfilms.isEmpty
+        else {
+            return
+        }
+        if watched
+            && !optionalsAreEqual(firstVal: viewedFilms, secondVal: unwrappedfilms) {
+            viewedFilmsInfo.isFull = false
+            viewedFilms = unwrappedfilms
+        } else if !watched
+                    && !optionalsAreEqual(firstVal: willWatchFilms, secondVal: unwrappedfilms) {
+            willWatchFilmsInfo.isFull = false
+            willWatchFilms = unwrappedfilms
+        }
+    }
 }
 
 extension FavouriteViewController: FavouriteViewControllerDelegate {
     
+    var isPaginating: Bool {
+        return isFetchingNewMovies
+    }
+    
     func fetchNewFilms() {
         let watched = getWatched()
         if watched && !viewedFilmsInfo.isFull {
+            isFetchingNewMovies = true
             viewedFilmsInfo.currentPage += 1
             interactor.fetchMovies(page: viewedFilmsInfo.currentPage, size: pageSize, watched: watched)
         } else if !watched && !willWatchFilmsInfo.isFull {
+            isFetchingNewMovies = true
             willWatchFilmsInfo.currentPage += 1
             interactor.fetchMovies(page: willWatchFilmsInfo.currentPage, size: pageSize, watched: watched)
+        }
+    }
+    
+    func fetchMoviesForCheckingChanges() {
+        let watched = getWatched()
+        if watched {
+            interactor.checkChanges(page: 0, size: viewedFilms.count, watched: watched)
+        } else if !watched {
+            interactor.checkChanges(page: 0, size: willWatchFilms.count, watched: watched)
         }
     }
     

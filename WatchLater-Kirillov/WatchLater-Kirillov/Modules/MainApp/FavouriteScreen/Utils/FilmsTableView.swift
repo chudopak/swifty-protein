@@ -41,6 +41,10 @@ class FilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FilmsTableViewCell.identifier, for: indexPath) as! FilmsTableViewCell
         cell.titleLabel.text = filmsInfo[indexPath.row].title
+        if indexPath.row + 10 > filmsInfo.count
+            && !delegate.isPaginating {
+            delegate.fetchNewFilms()
+        }
         return cell
     }
     

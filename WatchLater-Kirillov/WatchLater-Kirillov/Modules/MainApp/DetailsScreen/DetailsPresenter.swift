@@ -10,6 +10,7 @@ import UIKit
 
 protocol DetailsPresenterProtocol {
     func sendPosterToView(result: Result<UIImage, Error>)
+    func sendFilmsWatchStatus(status: Bool)
 }
 
 final class DetailsPresenter: DetailsPresenterProtocol {
@@ -23,6 +24,16 @@ final class DetailsPresenter: DetailsPresenterProtocol {
     func sendPosterToView(result: Result<UIImage, Error>) {
         DispatchQueue.main.async { [weak self] in
             self?.viewController.setPoster(result: result)
+        }
+    }
+    
+    func sendFilmsWatchStatus(status: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            if status {
+                self?.viewController.changeMovieWatchStatus()
+            } else {
+                self?.viewController.showFailedMoviewChangingStatusState()
+            }
         }
     }
 }

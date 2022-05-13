@@ -9,16 +9,23 @@
 import UIKit
 import Alamofire
 
+struct Status: Codable {
+    let status: Bool
+}
+
 protocol FetchFilmsServiceProtocol {
     func fetchFilms(page: Int,
                     size: Int,
                     watched: Bool,
                     completion: @escaping (Result<[FilmInfoTmp]?, Error>) -> Void)
+    func changeFilmWatchStatus(id: Int,
+                               completion: @escaping (Result<Bool, Error>) -> Void)
 }
 
 class FetchFilmsService: FetchFilmsServiceProtocol {
     
-    private let path = "/users/films"
+    private let userFilmsPath = "/users/films"
+    private let filmsPath = "/films"
     
     private var baseURLComponents: URLComponents
     private let networkLayer: NetworkLayerProtocol
@@ -28,7 +35,6 @@ class FetchFilmsService: FetchFilmsServiceProtocol {
         baseURLComponents = URLComponents()
         baseURLComponents.scheme = NetworkConfiguration.sceme
         baseURLComponents.host = NetworkConfiguration.urlString
-        baseURLComponents.path = path
     }
     
     func fetchFilms(page: Int,
@@ -41,8 +47,10 @@ class FetchFilmsService: FetchFilmsServiceProtocol {
             URLQueryItem(name: "watched", value: watched ? "true" : "false")
         ]
         var urlComponents = baseURLComponents
+        urlComponents.path = userFilmsPath
         urlComponents.queryItems = queryItems
-        guard let request = buildRequest(url: urlComponents.url!)
+        guard let request = buildRequest(url: urlComponents.url!,
+                                         method: HTTPMethod.get)
         else {
             completion(.failure(BaseError.failedToBuildRequest))
             return
@@ -67,6 +75,40 @@ class FetchFilmsService: FetchFilmsServiceProtocol {
         }
     }
     
+    func postFilmData() {
+    }
+    
+    func changeFilmWatchStatus(id: Int,
+                               completion: @escaping (Result<Bool, Error>) -> Void) {
+        var urlComponents = baseURLComponents
+        urlComponents.path = userFilmsPath + "/\(id)"
+        guard let request = buildRequest(url: urlComponents.url!,
+                                         method: HTTPMethod.put)
+        else {
+            completion(.failure(BaseError.failedToBuildRequest))
+            return
+        }
+        networkLayer.request(urlRequest: request) { data, response, error in
+            guard error == nil,
+                  let responsHTTP = response as? HTTPURLResponse,
+                  responsHTTP.statusCode == 200
+            else {
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.failure(BaseError.range400Response))
+                }
+                return
+            }
+            guard let filmsInfo = decodeMessage(data: data, type: Status.self)
+            else {
+                completion(.success(true))
+                return
+            }
+            completion(.success(filmsInfo.status))
+        }
+    }
+    
     private func handleResponse(data: Data,
                                 status: Int,
                                 completion: @escaping (Result<[FilmInfoTmp]?, Error>) -> Void) {
@@ -84,9 +126,9 @@ class FetchFilmsService: FetchFilmsServiceProtocol {
         }
     }
     
-    private func buildRequest(url: URL) -> RequestBuilder? {
+    private func buildRequest(url: URL, method: HTTPMethod) -> RequestBuilder? {
         var urlRequest = URLRequest(url: url)
-        urlRequest.method = HTTPMethod.get
+        urlRequest.method = method
         urlRequest.setValue(NetworkConfiguration.Headers.contentTypeJSON.value,
                             forHTTPHeaderField: NetworkConfiguration.Headers.contentTypeJSON.field)
         urlRequest.setValue(NetworkConfiguration.Headers.acceptJSON.value,

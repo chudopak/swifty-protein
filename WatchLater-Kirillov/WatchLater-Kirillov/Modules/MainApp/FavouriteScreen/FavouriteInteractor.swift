@@ -10,6 +10,7 @@ import UIKit
 
 protocol FavouriteInteractorProtocol {
     func fetchMovies(page: Int, size: Int, watched: Bool)
+    func checkChanges(page: Int, size: Int, watched: Bool)
 }
 
 class FavouriteInteractor: FavouriteInteractorProtocol {
@@ -30,6 +31,18 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
                 
             case .failure(let error):
                 print("Fetch Movies error - \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func checkChanges(page: Int, size: Int, watched: Bool) {
+        networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
+            switch result {
+            case .success(let films):
+                self?.presenter.compareMoviesWithCurrent(films: films, watched: watched)
+                
+            case .failure(let error):
+                print("Compare Movies error - \(error.localizedDescription)")
             }
         }
     }

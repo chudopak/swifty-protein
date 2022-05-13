@@ -11,17 +11,21 @@ import UIKit
 protocol DetailsInteractorProtocol {
     func loadPosterWithURL(urlString: String)
     func loadPosterWithID(id: String)
+    func changeFilmWatchStatus(id: Int)
 }
 
 final class DetailsInteractor: DetailsInteractorProtocol {
     
     private let presenter: DetailsPresenterProtocol
     private let imageDownloadingService: ImageDownloadingServiceProtocol
+    private let filmsService: FetchFilmsServiceProtocol
     
     init(presenter: DetailsPresenterProtocol,
-         imageDownloadingService: ImageDownloadingServiceProtocol) {
+         imageDownloadingService: ImageDownloadingServiceProtocol,
+         filmsService: FetchFilmsServiceProtocol) {
         self.presenter = presenter
         self.imageDownloadingService = imageDownloadingService
+        self.filmsService = filmsService
     }
     
     func loadPosterWithURL(urlString: String) {
@@ -33,6 +37,19 @@ final class DetailsInteractor: DetailsInteractorProtocol {
     func loadPosterWithID(id: String) {
         imageDownloadingService.downloadData(id: id) { [weak self] result in
             self?.handleResult(result: result)
+        }
+    }
+    
+    func changeFilmWatchStatus(id: Int) {
+        filmsService.changeFilmWatchStatus(id: id) { [weak self] result in
+            switch result {
+            case .success(let status):
+                self?.presenter.sendFilmsWatchStatus(status: status)
+
+            case .failure(let error):
+                print("DetailsInteractor, changeFilmWatchStatus - ", error.localizedDescription)
+                self?.presenter.sendFilmsWatchStatus(status: false)
+            }
         }
     }
     

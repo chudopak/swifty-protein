@@ -25,3 +25,19 @@ func optionalsAreEqual<T: Comparable>(firstVal: T?, secondVal: T?) -> Bool {
         return firstVal == nil && secondVal == nil
    }
 }
+
+func optionalsAreEqual<T: Equatable>(firstVal: [T]?, secondVal: [T]?) -> Bool {
+    if firstVal == nil && secondVal == nil {
+        return true
+    }
+    guard let oldGenres = firstVal,
+          let newGenres = secondVal,
+          newGenres.count == oldGenres.count
+    else {
+        return false
+    }
+    for i in 0..<oldGenres.count where !(oldGenres[i] == newGenres[i]) {
+        return false
+    }
+    return true
+}

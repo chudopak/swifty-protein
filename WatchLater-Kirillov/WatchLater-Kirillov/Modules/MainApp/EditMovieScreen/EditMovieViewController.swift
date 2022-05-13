@@ -44,7 +44,7 @@ class EditMovieViewController: BaseViewController {
     }
     
     @objc private func sendMovieDetailsToDetailsScreen() {
-        let details = MovieDetails(imageType: movieDetails.imageType, rating: movieDetails.rating, year: movieDetails.year, description: "BALALALA", genres: nil, title: movieDetails.title, isWatched: movieDetails.isWatched)
+        let details = MovieDetails(imageType: movieDetails.imageType, rating: movieDetails.rating, year: movieDetails.year, description: "BALALALA", genres: nil, title: movieDetails.title, isWatched: movieDetails.isWatched, id: movieDetails.id)
         router.sendMovieDetailsToDetailsScreen(movieDetails: details,
                                                navigationController: navigationController!)
     }
