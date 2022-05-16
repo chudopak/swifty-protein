@@ -22,7 +22,7 @@ final class FavouriteRouter {
     }
     
     func pushDetailsViewController(to navigationController: UINavigationController,
-                                   film: FilmInfoTmp,
+                                   film: FilmData,
                                    animated: Bool = true) {
         navigationController.pushViewController(DetailsScreenConfigurator().setupModule(imdbData: nil,
                                                                                         localData: film),

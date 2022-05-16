@@ -41,3 +41,11 @@ func optionalsAreEqual<T: Equatable>(firstVal: [T]?, secondVal: [T]?) -> Bool {
     }
     return true
 }
+
+func getPrefix(string: String, prefixValue: Int) -> String {
+    var str = string.prefix(prefixValue)
+    if str.suffix(1) == "." {
+        str.remove(at: str.index(before: str.endIndex))
+    }
+    return String(str)
+}

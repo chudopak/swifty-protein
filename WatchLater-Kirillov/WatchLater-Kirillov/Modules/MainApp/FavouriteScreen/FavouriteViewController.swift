@@ -9,14 +9,10 @@
 import UIKit
 import SnapKit
 
-struct FilmsPaging {
-    var currentPage: Int
-    var isFull: Bool
-}
-
 protocol FavouriteViewControllerProtocol: AnyObject {
-    func showFilms(_ films: [FilmInfoTmp]?, watched: Bool)
-    func checkMoviesForChanges(_ films: [FilmInfoTmp]?, watched: Bool)
+    func showFilms(_ films: [FilmData], watched: Bool)
+    func checkMoviesForChanges(_ films: [FilmData], watched: Bool)
+    func replacePageWithBackendFilms(_ films: [FilmData], watched: Bool)
 }
 
 protocol FavouriteViewControllerDelegate: AnyObject {
@@ -24,7 +20,7 @@ protocol FavouriteViewControllerDelegate: AnyObject {
     var isPaginating: Bool { get }
     
     func fetchNewFilms()
-    func presentDetailsScreen(films: FilmInfoTmp)
+    func presentDetailsScreen(films: FilmData)
 }
 
 class FavouriteViewController: BaseViewController {
@@ -36,11 +32,15 @@ class FavouriteViewController: BaseViewController {
     private var activeViewStyle = ViewStyle.collectionView
     
     private let pageSize = 24
-    private var viewedFilmsInfo = FilmsPaging(currentPage: -1, isFull: false)
-    private var willWatchFilmsInfo = FilmsPaging(currentPage: -1, isFull: false)
+    private var viewedFilmsInfo = FilmsPaging(currentPage: -1,
+                                              isFull: false,
+                                              lastPageSize: 0)
+    private var willWatchFilmsInfo = FilmsPaging(currentPage: -1,
+                                                 isFull: false,
+                                                 lastPageSize: 0)
     
-    private var viewedFilms = [FilmInfoTmp]()
-    private var willWatchFilms = [FilmInfoTmp]()
+    private var viewedFilms = [FilmData]()
+    private var willWatchFilms = [FilmData]()
     
     private lazy var searchBarButton = makeSearchBarButtonItem()
     private lazy var styleBarButton = makeStyleBarButtonItem()
@@ -67,8 +67,6 @@ class FavouriteViewController: BaseViewController {
             fetchNewFilms()
         } else if getWatched() && viewedFilms.isEmpty {
             fetchNewFilms()
-        } else {
-            fetchMoviesForCheckingChanges()
         }
     }
     
@@ -106,7 +104,7 @@ class FavouriteViewController: BaseViewController {
         }
     }
     
-    private func setFilmsToActiveView(films: [FilmInfoTmp]) {
+    private func setFilmsToActiveView(films: [FilmData]) {
         filmsCollectionView.filmsInfo = films
         filmsTableView.filmsInfo = films
     }
@@ -167,44 +165,69 @@ class FavouriteViewController: BaseViewController {
 
 extension FavouriteViewController: FavouriteViewControllerProtocol {
     
-    func showFilms(_ films: [FilmInfoTmp]?, watched: Bool) {
+    func showFilms(_ films: [FilmData], watched: Bool) {
         isFetchingNewMovies = false
-        let unwrappedfilms: [FilmInfoTmp]
-        if films != nil {
-            unwrappedfilms = films!
-        } else {
-            unwrappedfilms = [FilmInfoTmp]()
-        }
         if watched {
-            if unwrappedfilms.count < pageSize {
+            if films.count < pageSize {
                 viewedFilmsInfo.isFull = true
             }
-            viewedFilms += unwrappedfilms
+            viewedFilmsInfo.lastPageSize = films.count
+            viewedFilms += films
             setFilmsToActiveView(films: viewedFilms)
         } else {
-            if unwrappedfilms.count < pageSize {
+            if films.count < pageSize {
                 willWatchFilmsInfo.isFull = true
             }
-            willWatchFilms += unwrappedfilms
+            willWatchFilmsInfo.lastPageSize = films.count
+            willWatchFilms += films
             setFilmsToActiveView(films: willWatchFilms)
         }
     }
     
-    func checkMoviesForChanges(_ films: [FilmInfoTmp]?, watched: Bool) {
-        guard let unwrappedfilms = films,
-              !unwrappedfilms.isEmpty
-        else {
-            return
-        }
+    func checkMoviesForChanges(_ films: [FilmData], watched: Bool) {
         if watched
-            && !optionalsAreEqual(firstVal: viewedFilms, secondVal: unwrappedfilms) {
+            && !optionalsAreEqual(firstVal: viewedFilms, secondVal: films) {
             viewedFilmsInfo.isFull = false
-            viewedFilms = unwrappedfilms
+            viewedFilms = films
+            viewedFilmsInfo.lastPageSize = films.count
         } else if !watched
-                    && !optionalsAreEqual(firstVal: willWatchFilms, secondVal: unwrappedfilms) {
+                    && !optionalsAreEqual(firstVal: willWatchFilms, secondVal: films) {
             willWatchFilmsInfo.isFull = false
-            willWatchFilms = unwrappedfilms
+            willWatchFilms = films
+            willWatchFilmsInfo.lastPageSize = films.count
         }
+    }
+    
+    func replacePageWithBackendFilms(_ films: [FilmData], watched: Bool) {
+        if watched {
+            if films.count == pageSize {
+                viewedFilmsInfo.isFull = false
+            }
+            let range = viewedFilms.count - viewedFilmsInfo.lastPageSize..<viewedFilms.count
+            viewedFilms.removeSubrange(range)
+            viewedFilms += films
+            viewedFilmsInfo.lastPageSize = films.count
+            setFilmsToActiveView(films: viewedFilms)
+        } else {
+            if films.count == pageSize {
+                willWatchFilmsInfo.isFull = false
+            }
+            let range = willWatchFilms.count - willWatchFilmsInfo.lastPageSize..<willWatchFilms.count
+            willWatchFilms.removeSubrange(range)
+            willWatchFilms += films
+            willWatchFilmsInfo.lastPageSize = films.count
+            setFilmsToActiveView(films: willWatchFilms)
+        }
+    }
+    
+    private func getLastPageRange(films: [FilmData]) -> Range<Int> {
+        let startRange: Int
+        if films.isEmpty || films.count % pageSize != 0 {
+            startRange = films.count - films.count % pageSize
+        } else {
+            startRange = films.count - pageSize
+        }
+        return startRange..<films.count
     }
 }
 
@@ -236,20 +259,9 @@ extension FavouriteViewController: FavouriteViewControllerDelegate {
         }
     }
     
-    func presentDetailsScreen(films: FilmInfoTmp) {
+    func presentDetailsScreen(films: FilmData) {
         router.pushDetailsViewController(to: navigationController!,
                                          film: films)
-    }
-    
-    private func clearViewData() {
-        viewedFilms = [FilmInfoTmp]()
-        willWatchFilms = [FilmInfoTmp]()
-        filmsCollectionView.filmsInfo = [FilmInfoTmp]()
-        filmsTableView.filmsInfo = [FilmInfoTmp]()
-        willWatchFilmsInfo.currentPage = -1
-        willWatchFilmsInfo.isFull = false
-        viewedFilmsInfo.currentPage = -1
-        viewedFilmsInfo.isFull = false
     }
 }
 

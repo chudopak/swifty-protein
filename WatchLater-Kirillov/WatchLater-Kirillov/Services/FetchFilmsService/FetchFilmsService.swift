@@ -17,7 +17,7 @@ protocol FetchFilmsServiceProtocol {
     func fetchFilms(page: Int,
                     size: Int,
                     watched: Bool,
-                    completion: @escaping (Result<[FilmInfoTmp]?, Error>) -> Void)
+                    completion: @escaping (Result<[FilmData]?, Error>) -> Void)
     func changeFilmWatchStatus(id: Int,
                                completion: @escaping (Result<Bool, Error>) -> Void)
 }
@@ -40,7 +40,7 @@ class FetchFilmsService: FetchFilmsServiceProtocol {
     func fetchFilms(page: Int,
                     size: Int,
                     watched: Bool,
-                    completion: @escaping (Result<[FilmInfoTmp]?, Error>) -> Void) {
+                    completion: @escaping (Result<[FilmData]?, Error>) -> Void) {
         let queryItems = [
             URLQueryItem(name: "page", value: String(page)),
             URLQueryItem(name: "size", value: String(size)),
@@ -111,7 +111,7 @@ class FetchFilmsService: FetchFilmsServiceProtocol {
     
     private func handleResponse(data: Data,
                                 status: Int,
-                                completion: @escaping (Result<[FilmInfoTmp]?, Error>) -> Void) {
+                                completion: @escaping (Result<[FilmData]?, Error>) -> Void) {
         switch status {
         case 200:
             guard let filmsInfo = decodeMessage(data: data, type: FilmsList.self)

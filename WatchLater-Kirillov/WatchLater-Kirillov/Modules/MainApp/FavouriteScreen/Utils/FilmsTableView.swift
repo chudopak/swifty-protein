@@ -15,7 +15,7 @@ class FilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     private weak var delegate: FavouriteViewControllerDelegate!
     
-    var filmsInfo = [FilmInfoTmp]() {
+    var filmsInfo = [FilmData]() {
         didSet {
             filmsTableView.reloadData()
         }

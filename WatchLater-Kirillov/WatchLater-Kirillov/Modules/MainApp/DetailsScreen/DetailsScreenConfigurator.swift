@@ -11,7 +11,7 @@ import UIKit
 final class DetailsScreenConfigurator {
     
     func setupModule(imdbData: MovieData?,
-                     localData: FilmInfoTmp?) -> DetailsViewController {
+                     localData: FilmData?) -> DetailsViewController {
         let vc = DetailsViewController()
         let presenter = DetailsPresenter(viewController: vc)
         let imageService = ImageDownloadingService(networkManager: NetworkLayer(refreshService: RefreshTokenService()))

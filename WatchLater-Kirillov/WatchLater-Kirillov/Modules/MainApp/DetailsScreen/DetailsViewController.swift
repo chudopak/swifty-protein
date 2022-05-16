@@ -64,7 +64,7 @@ class DetailsViewController: BaseViewController {
     }
     
     func setupData(imdbData: MovieData?,
-                   localData: FilmInfoTmp?) {
+                   localData: FilmData?) {
         if let imdbData = imdbData {
             setDetailsWithIMDBData(data: imdbData)
         } else {
@@ -207,7 +207,7 @@ class DetailsViewController: BaseViewController {
                                     id: -1)
     }
     
-    private func setDetailsWithLocalData(data: FilmInfoTmp) {
+    private func setDetailsWithLocalData(data: FilmData) {
         let imageType = ImageLinkType.local(data.posterId ?? "-1")
         let rating = getPrefix(string: String(data.rating ?? 0), prefixValue: 3)
         let year = getPrefix(string: data.timestamp ?? "1970", prefixValue: 4)

@@ -16,7 +16,7 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
     
     private weak var delegate: FavouriteViewControllerDelegate!
     
-    var filmsInfo = [FilmInfoTmp]() {
+    var filmsInfo = [FilmData]() {
         didSet {
             filmsCollectionView.reloadData()
         }

@@ -14,8 +14,10 @@ final class FavouriteConfigurator {
         let viewController = FavouriteViewController()
         let presenter = FavouritePresenter(viewController: viewController)
         let filmsService = FetchFilmsService(networkLayer: NetworkLayer(refreshService: RefreshTokenService()))
+        let coreData = CoreDataService()
         let interactor = FavouriteInteractor(presenter: presenter,
-                                             networkService: filmsService)
+                                             networkService: filmsService,
+                                             coreDataService: coreData)
         let router = FavouriteRouter(viewController: viewController)
         viewController.setupComponents(interactor: interactor,
                                        router: router)

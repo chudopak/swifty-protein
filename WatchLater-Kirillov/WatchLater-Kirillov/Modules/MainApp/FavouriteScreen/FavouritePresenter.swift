@@ -9,8 +9,9 @@
 import UIKit
 
 protocol FavouritePresenterProtocol {
-    func presentMovies(films: [FilmInfoTmp]?, watched: Bool)
-    func compareMoviesWithCurrent(films: [FilmInfoTmp]?, watched: Bool)
+    func presentMovies(films: [FilmData]?, watched: Bool)
+    func compareMoviesWithCurrent(films: [FilmData]?, watched: Bool)
+    func replaceLastPage(films: [FilmData]?, watched: Bool)
 }
 
 class FavouritePresenter: FavouritePresenterProtocol {
@@ -21,27 +22,33 @@ class FavouritePresenter: FavouritePresenterProtocol {
         favouriteViewController = viewController
     }
     
-    func presentMovies(films: [FilmInfoTmp]?, watched: Bool) {
-        guard var films = films
+    func presentMovies(films: [FilmData]?, watched: Bool) {
+        guard let films = films
         else {
-            favouriteViewController.showFilms(nil, watched: watched)
             return
         }
-        for i in 0..<films.count {
-            films[i].isWatched = watched
+        DispatchQueue.main.async { [weak self] in
+            self?.favouriteViewController.showFilms(films, watched: watched)
         }
-        favouriteViewController.showFilms(films, watched: watched)
     }
     
-    func compareMoviesWithCurrent(films: [FilmInfoTmp]?, watched: Bool) {
-        guard var films = films
+    func compareMoviesWithCurrent(films: [FilmData]?, watched: Bool) {
+        guard let films = films
         else {
-            favouriteViewController.checkMoviesForChanges(nil, watched: watched)
             return
         }
-        for i in 0..<films.count {
-            films[i].isWatched = watched
+        DispatchQueue.main.async { [weak self] in
+            self?.favouriteViewController.checkMoviesForChanges(films, watched: watched)
         }
-        favouriteViewController.checkMoviesForChanges(films, watched: watched)
+    }
+    
+    func replaceLastPage(films: [FilmData]?, watched: Bool) {
+        guard let films = films
+        else {
+            return
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.favouriteViewController.replacePageWithBackendFilms(films, watched: watched)
+        }
     }
 }
