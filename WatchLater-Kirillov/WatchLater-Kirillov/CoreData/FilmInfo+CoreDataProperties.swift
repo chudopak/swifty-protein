@@ -15,11 +15,13 @@ extension FilmInfo {
         return NSFetchRequest<FilmInfo>(entityName: "FilmInfo")
     }
 
-    @NSManaged public var id: String
+    @NSManaged public var id: Int
     @NSManaged public var posterID: String?
     @NSManaged public var rating: String
     @NSManaged public var title: String
-    @NSManaged public var titleDescription: String?
+    @NSManaged public var titleDescription: String
     @NSManaged public var year: String
     @NSManaged public var genres: [String]?
+    @NSManaged public var isWatched: Bool
+    @NSManaged public var timestamp: String
 }
