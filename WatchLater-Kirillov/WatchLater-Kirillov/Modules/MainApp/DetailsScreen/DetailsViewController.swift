@@ -23,6 +23,7 @@ protocol DetailsViewControllerDelegate: AnyObject {
 class DetailsViewController: BaseViewController {
     
     private var movieDetails: MovieDetails!
+    private var movieDetailsBeforeEditing: MovieDetails!
     private var interactor: DetailsInteractorProtocol!
     private var router: DetailsRouter!
     
@@ -48,6 +49,7 @@ class DetailsViewController: BaseViewController {
     private lazy var editScreenButton = makeEditScreenButtonItem()
     
     private lazy var genresStackViews = [UIStackView]()
+    private lazy var backBarButton = makeBackButtonItem()
     
     private var genres: [String]?
     private var scrollViewButtonConstraint: ConstraintMakerEditable?
@@ -112,12 +114,7 @@ class DetailsViewController: BaseViewController {
     }
     
     private func setNavigationController() {
-        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(
-            title: "",
-            style: .plain,
-            target: self,
-            action: nil)
-        
+        navigationItem.leftBarButtonItem = backBarButton
         navigationController!.navigationBar.prefersLargeTitles = true
         navigationItem.titleView = UIImageView(image: Asset.logoShort.image)
     }
@@ -206,6 +203,7 @@ class DetailsViewController: BaseViewController {
                                     title: data.title,
                                     isWatched: nil,
                                     id: -1)
+        movieDetailsBeforeEditing = movieDetails
     }
     
     private func setDetailsWithLocalData(data: FilmData) {
@@ -220,6 +218,8 @@ class DetailsViewController: BaseViewController {
                                     title: data.title,
                                     isWatched: data.isWatched,
                                     id: data.id)
+        movieDetailsBeforeEditing = movieDetails
+        
     }
     
     private func getPrefix(string: String, prefixValue: Int) -> String {
@@ -271,6 +271,31 @@ class DetailsViewController: BaseViewController {
     @objc private func presentEditMovieScreen() {
         router.presentEditViewController(navigationController: navigationController!,
                                          movieDetails: movieDetails)
+    }
+    
+    @objc private func presentPreviousScreen() {
+        if movieDetailsBeforeEditing != movieDetails {
+            let image: String?
+            switch movieDetails.imageType {
+            case .IMDB(let imdb):
+                image = imdb
+                
+            case .local(let local):
+                image = local == "-1" ? nil : local
+            }
+            let data = FilmData(
+                id: movieDetails.id,
+                title: movieDetails.title,
+                description: movieDetails.description,
+                rating: Double(movieDetails.rating),
+                posterId: image,
+                genres: movieDetails.genres,
+                isWatched: movieDetails.isWatched,
+                timestamp: movieDetails.year
+            )
+            router.sendMovieInfoToPreviousScreen(state: .cangedWatchStatus(data))
+        }
+        router.presentPreviousViewController(navigationController: navigationController!)
     }
 }
 
@@ -508,6 +533,13 @@ extension DetailsViewController {
         let button = UIButton()
         button.setImage(Asset.editFilmInfo.image, for: .normal)
         button.addTarget(self, action: #selector(presentEditMovieScreen), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }
+    
+    private func makeBackButtonItem() -> UIBarButtonItem {
+        let button = UIButton()
+        button.setImage(Asset.arrow.image, for: .normal)
+        button.addTarget(self, action: #selector(presentPreviousScreen), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }
 }

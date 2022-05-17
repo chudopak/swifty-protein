@@ -29,4 +29,8 @@ final class DetailsRouter {
     func sendMovieInfoToPreviousScreen(state: EditedFilmInfo) {
         previousScreenRouter.routFilmData(data: state)
     }
+    
+    func presentPreviousViewController(navigationController: UINavigationController) {
+        navigationController.popViewController(animated: true)
+    }
 }

@@ -11,6 +11,7 @@ import UIKit
 protocol FavouriteInteractorProtocol {
     func fetchMovies(page: Int, size: Int, watched: Bool)
     func checkChanges(page: Int, size: Int, watched: Bool)
+    func fetchMoviesForFillingPage(page: Int, size: Int, watched: Bool)
 }
 
 class FavouriteInteractor: FavouriteInteractorProtocol {
@@ -43,10 +44,32 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         }
     }
     
+    func fetchMoviesForFillingPage(page: Int, size: Int, watched: Bool) {
+        let filmsInfo = fetchNewPageFromCoreData(page: page,
+                                                 size: size,
+                                                 watched: watched)
+        let filmsData = convertCoreDataFilmsStructToFilmData(films: filmsInfo)
+        presenter.addOneMovieToLastPage(film: filmsData, watched: watched)
+        networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
+            switch result {
+            case .success(let films):
+                let filmsMarked = self?.setWatchStatusToFetchedFilms(films: films, watched: watched)
+                if !optionalsAreEqual(firstVal: filmsMarked, secondVal: filmsData) {
+                    print("lLLALALAL not equeal lLLALALAL")
+                    self?.presenter.replaceLastMovie(film: filmsMarked, watched: watched)
+                    self?.actualiseFilmsInCoreData(filmsBack: filmsMarked, filmsLocal: filmsInfo)
+                }
+                
+            case .failure(let error):
+                print("Fetch Movies error - \(error.localizedDescription)")
+            }
+        }
+    }
+    
     func fetchMovies(page: Int,
                      size: Int,
                      watched: Bool) {
-        //NSManageObjectContext нельзя использовать сраазуже в нескольких потоках, это не безопасно
+        // NSManageObjectContext нельзя использовать сраазуже в нескольких потоках, это не безопасно
         let filmsInfo = fetchNewPageFromCoreData(page: page,
                                                  size: size,
                                                  watched: watched)
@@ -68,6 +91,7 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         }
     }
     
+    // Перенеси в кор дату этот метод 
     private func fetchNewPageFromCoreData(page: Int, size: Int, watched: Bool) -> [FilmInfo] {
         let predicate = NSPredicate(
             format: "%K = \(watched)",

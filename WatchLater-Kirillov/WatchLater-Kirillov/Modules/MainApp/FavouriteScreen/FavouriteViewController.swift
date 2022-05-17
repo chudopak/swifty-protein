@@ -13,6 +13,8 @@ protocol FavouriteViewControllerProtocol: AnyObject {
     func showFilms(_ films: [FilmData], watched: Bool)
     func checkMoviesForChanges(_ films: [FilmData], watched: Bool)
     func replacePageWithBackendFilms(_ films: [FilmData], watched: Bool)
+    func appendOneFilm(_ film: FilmData, toList watched: Bool)
+    func replaceLastFilm(_ film: FilmData, watched: Bool)
 }
 
 protocol FavouriteViewControllerDelegate: AnyObject {
@@ -74,12 +76,6 @@ class FavouriteViewController: BaseViewController {
                          router: FavouriteRouter) {
         self.interactor = interactor
         self.router = router
-    }
-    
-    func handleDeletedFilm(id: Int) {
-    }
-    
-    func cangeFilmInfo(filmData: FilmData) {
     }
     
     private func setView() {
@@ -226,6 +222,24 @@ extension FavouriteViewController: FavouriteViewControllerProtocol {
         }
     }
     
+    func replaceLastFilm(_ film: FilmData, watched: Bool) {
+        if watched {
+            viewedFilms.removeLast()
+            viewedFilms.append(film)
+        } else {
+            willWatchFilms.removeLast()
+            willWatchFilms.append(film)
+        }
+    }
+    
+    func appendOneFilm(_ film: FilmData, toList watched: Bool) {
+        if watched {
+            viewedFilms.append(film)
+        } else {
+            willWatchFilms.append(film)
+        }
+    }
+    
     private func getLastPageRange(films: [FilmData]) -> Range<Int> {
         let startRange: Int
         if films.isEmpty || films.count % pageSize != 0 {
@@ -268,6 +282,118 @@ extension FavouriteViewController: FavouriteViewControllerDelegate {
     func presentDetailsScreen(films: FilmData) {
         router.pushDetailsViewController(to: navigationController!,
                                          film: films)
+    }
+}
+
+extension FavouriteViewController {
+    
+    func handleDeletedFilm(id: Int) {
+    }
+    
+    func cangeFilmInfo(filmData: FilmData) {
+        guard let result = findFilmInLists(id: filmData.id)
+        else {
+            return
+        }
+        if let isWatched = filmData.isWatched,
+           (isWatched && result.isWatched) || (!isWatched && !result.isWatched) {
+            if isWatched && viewedFilms[result.position].id == filmData.id {
+                viewedFilms[result.position] = filmData
+            } else if !isWatched && willWatchFilms[result.position].id == filmData.id {
+                willWatchFilms[result.position] = filmData
+            }
+        } else if let isWatched = filmData.isWatched {
+            replaceFilmInFilmLists(filmData: filmData,
+                                   oldFilm: result,
+                                   isWatchedNewVersion: isWatched)
+        }
+    }
+    
+    private func findFilmInLists(id: Int) -> (position: Int, isWatched: Bool)? {
+        for i in 0..<willWatchFilms.count where willWatchFilms[i].id == id {
+            return (position: i, isWatched: false)
+        }
+        for i in 0..<viewedFilms.count where viewedFilms[i].id == id {
+            return (position: i, isWatched: true)
+        }
+        return nil
+    }
+    
+    private func replaceFilmInFilmLists(filmData: FilmData,
+                                        oldFilm: (position: Int, isWatched: Bool),
+                                        isWatchedNewVersion: Bool) {
+        eraseElement(at: oldFilm.position, isWatched: oldFilm.isWatched)
+        fetchOneFilm(for: oldFilm.isWatched)
+        if isWatchedNewVersion
+            && addFilmToList(filmList: &viewedFilms,
+                             filmData: filmData,
+                             isFull: viewedFilmsInfo.isFull)
+            && !viewedFilmsInfo.isFull {
+            viewedFilms.removeLast()
+        } else if !isWatchedNewVersion
+                    && addFilmToList(filmList: &willWatchFilms,
+                                     filmData: filmData,
+                                     isFull: willWatchFilmsInfo.isFull)
+                    && !willWatchFilmsInfo.isFull {
+            willWatchFilms.removeLast()
+        }
+        setFilmsWithoutFetching()
+    }
+    
+    private func eraseElement(at position: Int, isWatched: Bool) {
+        if isWatched {
+            viewedFilms.remove(at: position)
+        } else {
+            willWatchFilms.remove(at: position)
+        }
+    }
+    
+    private func fetchOneFilm(for isWatched: Bool) {
+        if isWatched && !viewedFilmsInfo.isFull {
+            let page = (viewedFilmsInfo.currentPage + 1) * pageSize - 1
+            interactor.fetchMoviesForFillingPage(page: page,
+                                                 size: 1,
+                                                 watched: isWatched)
+        } else if !isWatched && !willWatchFilmsInfo.isFull {
+            let page = (willWatchFilmsInfo.currentPage + 1) * pageSize - 1
+            interactor.fetchMoviesForFillingPage(page: page,
+                                                 size: 1,
+                                                 watched: isWatched)
+        }
+    }
+    
+    private func addFilmToList(filmList: inout [FilmData],
+                               filmData: FilmData,
+                               isFull: Bool) -> Bool {
+        if isFull {
+            insertFilm(filmList: &filmList, filmData: filmData)
+            return true
+        }
+        if filmList.count == .zero {
+            return false
+        }
+        var i = 0
+        while i < filmList.count && filmData.id > filmList[i].id {
+            i += 1
+        }
+        if i == filmList.count {
+            return false
+        }
+        filmList.insert(filmData, at: i)
+        return true
+    }
+    
+    private func insertFilm(filmList: inout [FilmData],
+                            filmData: FilmData) {
+        var i = 0
+        while i < filmList.count && filmData.id > filmList[i].id {
+            i += 1
+        }
+        if i < filmList.count && filmData.id == filmList[i].id {
+            filmList[i] = filmData
+        } else {
+            filmList.insert(filmData, at: i)
+        }
     }
 }
 

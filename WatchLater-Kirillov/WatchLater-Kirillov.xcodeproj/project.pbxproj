@@ -750,8 +750,8 @@
 				7D9D6FA52825830C009DFD03 /* Utils */,
 				7D9D6F9C28255ACA009DFD03 /* DetailsScreenConfigurator.swift */,
 				7D9D6F9928255616009DFD03 /* DetailsViewController.swift */,
-				7D9D6FA228256839009DFD03 /* DetailsModel.swift */,
 				7D9D6FA92825892C009DFD03 /* DetailsInteractor.swift */,
+				7D9D6FA228256839009DFD03 /* DetailsModel.swift */,
 				7D9D6FAC28258981009DFD03 /* DetailsPresenter.swift */,
 				7D1C342C282D661E0093FA68 /* DetailsRouter.swift */,
 			);

@@ -12,6 +12,8 @@ protocol FavouritePresenterProtocol {
     func presentMovies(films: [FilmData]?, watched: Bool)
     func compareMoviesWithCurrent(films: [FilmData]?, watched: Bool)
     func replaceLastPage(films: [FilmData]?, watched: Bool)
+    func replaceLastMovie(film: [FilmData]?, watched: Bool)
+    func addOneMovieToLastPage(film: [FilmData]?, watched: Bool)
 }
 
 class FavouritePresenter: FavouritePresenterProtocol {
@@ -49,6 +51,28 @@ class FavouritePresenter: FavouritePresenterProtocol {
         }
         DispatchQueue.main.async { [weak self] in
             self?.favouriteViewController.replacePageWithBackendFilms(films, watched: watched)
+        }
+    }
+    
+    func replaceLastMovie(film: [FilmData]?, watched: Bool) {
+        guard let films = film,
+              let movie = films.first
+        else {
+            return
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.favouriteViewController.replaceLastFilm(movie, watched: watched)
+        }
+    }
+    
+    func addOneMovieToLastPage(film: [FilmData]?, watched: Bool) {
+        guard let films = film,
+              let movie = films.first
+        else {
+            return
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.favouriteViewController.appendOneFilm(movie, toList: watched)
         }
     }
 }

@@ -14,7 +14,6 @@ struct FilmsList: Codable {
     let size: Int?
 }
 
-// TODO: don't forget to add timestamp
 struct FilmData: Codable, Equatable {
     let id: Int
     let title: String
