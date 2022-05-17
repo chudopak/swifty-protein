@@ -46,6 +46,7 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
     func fetchMovies(page: Int,
                      size: Int,
                      watched: Bool) {
+        //NSManageObjectContext нельзя использовать сраазуже в нескольких потоках, это не безопасно
         let filmsInfo = fetchNewPageFromCoreData(page: page,
                                                  size: size,
                                                  watched: watched)

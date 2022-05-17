@@ -11,7 +11,8 @@ import SnapKit
 
 protocol DetailsViewControllerProtocol: AnyObject {
     func setPoster(result: Result<UIImage, Error>)
-    func showFailedMoviewChangingStatusState()
+    func showFailedMoviewChangingStatusStateLocal()
+    func showFailedMoviewChangingStatusStateBackend()
     func changeMovieWatchStatus()
 }
 
@@ -260,12 +261,10 @@ class DetailsViewController: BaseViewController {
     }
     
     @objc private func markAsWatched() {
-        // TODO: add film to local API as Viewed
         interactor.changeFilmWatchStatus(id: movieDetails.id)
     }
     
     @objc private func markAsUnwatched() {
-        // TODO: mark as unwatched
         interactor.changeFilmWatchStatus(id: movieDetails.id)
     }
     
@@ -289,8 +288,13 @@ extension DetailsViewController: DetailsViewControllerProtocol {
         }
     }
     
-    func showFailedMoviewChangingStatusState() {
+    func showFailedMoviewChangingStatusStateLocal() {
         print("DetailsViewController, showFailedMoviewChangingStatusState - Called failed state")
+    }
+    
+    func showFailedMoviewChangingStatusStateBackend() {
+        // TODO: Show smth to user if failed
+        changeMovieWatchStatus()
     }
     
     func changeMovieWatchStatus() {

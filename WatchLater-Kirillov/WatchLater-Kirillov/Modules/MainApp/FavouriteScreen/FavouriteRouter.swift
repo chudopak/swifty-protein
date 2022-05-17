@@ -8,24 +8,46 @@
 
 import UIKit
 
-final class FavouriteRouter {
+protocol FilmDataRouterProtocol {
+    func routFilmData(data: EditedFilmInfo)
+}
+
+final class FavouriteRouter: FilmDataRouterProtocol {
     
-    private weak var viewController: UIViewController!
+    private weak var viewController: FavouriteViewController!
     
-    init(viewController: UIViewController) {
+    init(viewController: FavouriteViewController) {
         self.viewController = viewController
     }
     
     func pushSearchViewController(to navigationController: UINavigationController,
                                   animated: Bool = true) {
-        navigationController.pushViewController(SearchScreenConfigurator().setupModule(), animated: animated)
+        navigationController.pushViewController(
+            SearchScreenConfigurator().setupModule(),
+            animated: animated
+        )
     }
     
     func pushDetailsViewController(to navigationController: UINavigationController,
                                    film: FilmData,
                                    animated: Bool = true) {
-        navigationController.pushViewController(DetailsScreenConfigurator().setupModule(imdbData: nil,
-                                                                                        localData: film),
-                                                animated: animated)
+        navigationController.pushViewController(
+            DetailsScreenConfigurator().setupModule(
+                    imdbData: nil,
+                    localData: film,
+                    previousScreenRouter: self
+            ),
+            animated: animated
+        )
+    }
+    
+    func routFilmData(data: EditedFilmInfo) {
+        switch data {
+        case .cangedWatchStatus(let data):
+            viewController.cangeFilmInfo(filmData: data)
+            
+        case .deleted(let id):
+            viewController.handleDeletedFilm(id: id)
+        }
     }
 }

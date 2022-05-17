@@ -41,16 +41,40 @@ final class DetailsInteractor: DetailsInteractorProtocol {
     }
     
     func changeFilmWatchStatus(id: Int) {
-        filmsService.changeFilmWatchStatus(id: id) { [weak self] result in
+        let isChanged = changeObjectInCoreData(id: id)
+        presenter.sendFilmsWatchStatus(status: isChanged)
+        filmsService.changeFilmWatchStatus(id: id) { [weak self, isChanged] result in
             switch result {
-            case .success(let status):
-                self?.presenter.sendFilmsWatchStatus(status: status)
-
             case .failure(let error):
                 print("DetailsInteractor, changeFilmWatchStatus - ", error.localizedDescription)
-                self?.presenter.sendFilmsWatchStatus(status: false)
+                self?.presenter.sendFailedToChangeStatusInBackend(isLocalChanged: isChanged)
+            
+            default:
+                break
             }
         }
+    }
+    
+    private func changeObjectInCoreData(id: Int) -> Bool {
+        let predicate = NSPredicate(
+            format: "%K = \(id)",
+            #keyPath(FilmInfo.id)
+        )
+        let fetchData = GetModel(
+            predicate: predicate,
+            sortDescriptors: [],
+            fetchLimit: 1,
+            fetchOffset: .zero
+        )
+        guard let objects = CoreDataService.shared.get(type: FilmInfo.self,
+                                                       fetchRequestData: fetchData),
+              let object = objects.first
+        else {
+            return false
+        }
+        object.isWatched = !object.isWatched
+        CoreDataService.shared.saveContext()
+        return true
     }
     
     private func handleResult(result: Result<(id: String, image: UIImage), Error>) {

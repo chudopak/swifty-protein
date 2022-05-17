@@ -8,8 +8,8 @@
 
 import UIKit
 
-final class SearchRouter {
-    
+final class SearchRouter: FilmDataRouterProtocol {
+ 
     private weak var viewController: SearchViewController!
     
     init(viewController: SearchViewController) {
@@ -19,8 +19,15 @@ final class SearchRouter {
     func presentDetailsViewController(navigationController: UINavigationController,
                                       imdbData: MovieData?,
                                       localData: FilmData?) {
-        let detailsViewController = DetailsScreenConfigurator().setupModule(imdbData: imdbData,
-                                                                            localData: localData)
+        let detailsViewController = DetailsScreenConfigurator().setupModule(
+            imdbData: imdbData,
+            localData: localData,
+            previousScreenRouter: self
+        )
         navigationController.pushViewController(detailsViewController, animated: true)
+    }
+    
+    func routFilmData(data: EditedFilmInfo) {
+        // There is Nothing ToDO for now but maybe i can send that this film was added to core data
     }
 }

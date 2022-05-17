@@ -11,7 +11,8 @@ import UIKit
 final class DetailsScreenConfigurator {
     
     func setupModule(imdbData: MovieData?,
-                     localData: FilmData?) -> DetailsViewController {
+                     localData: FilmData?,
+                     previousScreenRouter: FilmDataRouterProtocol) -> DetailsViewController {
         let vc = DetailsViewController()
         let presenter = DetailsPresenter(viewController: vc)
         let imageService = ImageDownloadingService(networkManager: NetworkLayer(refreshService: RefreshTokenService()))
@@ -19,7 +20,8 @@ final class DetailsScreenConfigurator {
         let interactor = DetailsInteractor(presenter: presenter,
                                            imageDownloadingService: imageService,
                                            filmsService: filmsService)
-        let router = DetailsRouter(viewController: vc)
+        let router = DetailsRouter(viewController: vc,
+                                   previousScreenRouter: previousScreenRouter)
         vc.setupData(imdbData: imdbData,
                      localData: localData)
         vc.setupComponents(interactor: interactor,

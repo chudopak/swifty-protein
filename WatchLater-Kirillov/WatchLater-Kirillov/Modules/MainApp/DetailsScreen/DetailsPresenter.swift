@@ -11,6 +11,7 @@ import UIKit
 protocol DetailsPresenterProtocol {
     func sendPosterToView(result: Result<UIImage, Error>)
     func sendFilmsWatchStatus(status: Bool)
+    func sendFailedToChangeStatusInBackend(isLocalChanged: Bool)
 }
 
 final class DetailsPresenter: DetailsPresenterProtocol {
@@ -32,7 +33,15 @@ final class DetailsPresenter: DetailsPresenterProtocol {
             if status {
                 self?.viewController.changeMovieWatchStatus()
             } else {
-                self?.viewController.showFailedMoviewChangingStatusState()
+                self?.viewController.showFailedMoviewChangingStatusStateLocal()
+            }
+        }
+    }
+    
+    func sendFailedToChangeStatusInBackend(isLocalChanged: Bool) {
+        if isLocalChanged {
+            DispatchQueue.main.async { [weak self] in
+                self?.viewController.showFailedMoviewChangingStatusStateBackend()
             }
         }
     }

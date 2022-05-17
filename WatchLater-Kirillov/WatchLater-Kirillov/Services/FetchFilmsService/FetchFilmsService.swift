@@ -102,10 +102,14 @@ class FetchFilmsService: FetchFilmsServiceProtocol {
             }
             guard let filmsInfo = decodeMessage(data: data, type: Status.self)
             else {
-                completion(.success(true))
+                completion(.failure(BaseError.unableToDecodeData))
                 return
             }
-            completion(.success(filmsInfo.status))
+            if filmsInfo.status {
+                completion(.success(filmsInfo.status))
+            } else {
+                completion(.failure(BaseError.badResult))
+            }
         }
     }
     

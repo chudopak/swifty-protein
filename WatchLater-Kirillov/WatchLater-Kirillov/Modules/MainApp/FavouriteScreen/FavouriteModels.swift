@@ -33,8 +33,10 @@ struct FilmData: Codable, Equatable {
         }
         let lYear = getPrefix(string: lhs.timestamp ?? "1970", prefixValue: 4)
         let rYear = getPrefix(string: rhs.timestamp ?? "1970", prefixValue: 4)
+        let lRating = getPrefix(string: String(lhs.rating ?? 0), prefixValue: 3)
+        let rRating = getPrefix(string: String(rhs.rating ?? 0), prefixValue: 3)
         guard optionalsAreEqual(firstVal: lhs.description, secondVal: rhs.description)
-                && optionalsAreEqual(firstVal: lhs.rating, secondVal: rhs.rating)
+                && lRating == rRating
                 && optionalsAreEqual(firstVal: lhs.posterId, secondVal: rhs.posterId)
                 && optionalsAreEqual(firstVal: lhs.genres, secondVal: rhs.genres)
                 && lYear == rYear
@@ -55,4 +57,9 @@ struct FilmsPaging {
     var currentPage: Int
     var isFull: Bool
     var lastPageSize: Int
+}
+
+enum EditedFilmInfo {
+    case deleted(Int)
+    case cangedWatchStatus(FilmData)
 }

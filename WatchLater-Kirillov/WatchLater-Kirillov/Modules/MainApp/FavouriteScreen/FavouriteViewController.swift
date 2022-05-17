@@ -76,6 +76,12 @@ class FavouriteViewController: BaseViewController {
         self.router = router
     }
     
+    func handleDeletedFilm(id: Int) {
+    }
+    
+    func cangeFilmInfo(filmData: FilmData) {
+    }
+    
     private func setView() {
         view.backgroundColor = Asset.Colors.primaryBackground.color
         view.addSubview(segmentControl)
