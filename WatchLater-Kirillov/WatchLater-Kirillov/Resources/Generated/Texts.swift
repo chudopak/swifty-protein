@@ -32,6 +32,25 @@ internal enum Text {
     }
   }
 
+  internal enum BaseError {
+    /// Cancel task.
+    internal static let cancelled = Text.tr("Localizable", "BaseError.cancelled")
+    /// Failed to build request.
+    internal static let failedToBuildRequest = Text.tr("Localizable", "BaseError.failedToBuildRequest")
+    /// Can not download image.
+    internal static let imageLoadingError = Text.tr("Localizable", "BaseError.imageLoadingError")
+    /// There is no data in response.
+    internal static let noData = Text.tr("Localizable", "BaseError.noData")
+    /// No response provided in request.
+    internal static let noResponse = Text.tr("Localizable", "BaseError.noResponse")
+    /// Response in 400's range.
+    internal static let range400Response = Text.tr("Localizable", "BaseError.range400Response")
+    /// Can not decode data to needed type.
+    internal static let unableToDecodeData = Text.tr("Localizable", "BaseError.unableToDecodeData")
+    /// Unowned Response Code.
+    internal static let unownedResponseCode = Text.tr("Localizable", "BaseError.unownedResponseCode")
+  }
+
   internal enum Common {
     /// О фильме
     internal static let aboutMovie = Text.tr("Localizable", "Common.aboutMovie")
@@ -63,6 +82,13 @@ internal enum Text {
     internal static let willWatch = Text.tr("Localizable", "Common.willWatch")
     /// Да
     internal static let yes = Text.tr("Localizable", "Common.yes")
+  }
+
+  internal enum Fillings {
+    /// -
+    internal static let noData = Text.tr("Localizable", "Fillings.noData")
+    /// unowned
+    internal static let `unowned` = Text.tr("Localizable", "Fillings.unowned")
   }
 
   internal enum SearchScreen {

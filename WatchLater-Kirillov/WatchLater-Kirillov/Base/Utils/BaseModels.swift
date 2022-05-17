@@ -34,49 +34,49 @@ extension BaseError: LocalizedError {
         switch self {
         case .imageLoadingError:
             return NSLocalizedString(
-                "Can not download image.",
+                Text.BaseError.imageLoadingError,
                 comment: ""
             )
         
         case .noResponse:
             return NSLocalizedString(
-                "No response provided in request.",
+                Text.BaseError.noResponse,
                 comment: ""
             )
             
         case .unownedResponseCode:
             return NSLocalizedString(
-                "Unowned Response Code.",
+                Text.BaseError.unownedResponseCode,
                 comment: ""
             )
         
         case .failedToBuildRequest:
             return NSLocalizedString(
-                "Failed to build request.",
+                Text.BaseError.failedToBuildRequest,
                 comment: ""
             )
             
         case .noData:
             return NSLocalizedString(
-                "There is no data in response.",
+                Text.BaseError.noData,
                 comment: ""
             )
             
         case .range400Response:
             return NSLocalizedString(
-                "Response in 400's range.",
+                Text.BaseError.range400Response,
                 comment: ""
             )
             
         case .unableToDecodeData:
             return NSLocalizedString(
-                "Can not decode data to needed type.",
+                Text.BaseError.unableToDecodeData,
                 comment: ""
             )
         
         case .cancelled:
             return NSLocalizedString(
-                "Cancel task.",
+                Text.BaseError.cancelled,
                 comment: ""
             )
             

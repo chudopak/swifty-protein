@@ -193,8 +193,8 @@ class DetailsViewController: BaseViewController {
     private func setDetailsWithIMDBData(data: MovieData) {
         let imageType = ImageLinkType.IMDB(data.image)
         // TODO: fix "unnowned" and "0"
-        let rating = getPrefix(string: data.rating ?? "0", prefixValue: 3)
-        let year = data.year ?? "1970"
+        let rating = getPrefix(string: data.rating ?? Text.Fillings.noData, prefixValue: 3)
+        let year = data.year ?? Text.Fillings.noData
         movieDetails = MovieDetails(imageType: imageType,
                                     rating: rating,
                                     year: year,
@@ -206,14 +206,14 @@ class DetailsViewController: BaseViewController {
         movieDetailsBeforeEditing = movieDetails
     }
     
-    private func setDetailsWithLocalData(data: FilmData) {
-        let imageType = ImageLinkType.local(data.posterId ?? "-1")
+    private func setDetailsWithLocalData(data: FilmInfoTmp) {
+        let imageType = ImageLinkType.local(data.posterId ?? Text.Fillings.noData)
         let rating = getPrefix(string: String(data.rating ?? 0), prefixValue: 3)
-        let year = getPrefix(string: data.timestamp ?? "1970", prefixValue: 4)
+        let year = getPrefix(string: data.timestamp ?? Text.Fillings.noData, prefixValue: 4)
         movieDetails = MovieDetails(imageType: imageType,
                                     rating: rating,
                                     year: year,
-                                    description: data.description ?? "",
+                                    description: data.description ?? Text.Fillings.noData,
                                     genres: data.genres,
                                     title: data.title,
                                     isWatched: data.isWatched,

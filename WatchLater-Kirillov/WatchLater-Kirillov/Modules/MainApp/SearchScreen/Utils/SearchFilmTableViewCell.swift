@@ -48,9 +48,7 @@ extension SearchFilmTableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: fontSize)
         label.textAlignment = .left
-        label.numberOfLines = 1
         label.textColor = Asset.Colors.textColor.color
-        label.text = ""
         return label
     }
     
@@ -58,7 +56,7 @@ extension SearchFilmTableViewCell {
         let view = UIStackView()
         view.axis = .vertical
         view.distribution = .fillEqually
-        view.spacing = 5
+        view.spacing = SearchScreenSizes.StackView.elementsSpace
         view.translatesAutoresizingMaskIntoConstraints = false
         for i in views {
             view.addArrangedSubview(i)
@@ -74,8 +72,6 @@ extension SearchFilmTableViewCell {
         label.font = .systemFont(ofSize: SearchScreenSizes.TableView.fontSize)
         label.textColor = Asset.Colors.deepBlue.color
         label.textAlignment = .center
-        label.text = ""
-        label.numberOfLines = 1
         label.backgroundColor = Asset.Colors.primaryBackground.color
         label.clipsToBounds = true
         return label
