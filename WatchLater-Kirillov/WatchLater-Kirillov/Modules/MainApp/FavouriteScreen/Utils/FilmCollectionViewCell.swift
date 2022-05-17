@@ -51,8 +51,6 @@ extension FilmCollectionViewCell {
         label.font = .boldSystemFont(ofSize: FavouriteScreenSizes.FilmCollectionViewCell.fontSize)
         label.textAlignment = .left
         label.textColor = .black
-        label.numberOfLines = 1
-        label.text = ""
         return label
     }
     
@@ -64,8 +62,6 @@ extension FilmCollectionViewCell {
         label.font = .systemFont(ofSize: FavouriteScreenSizes.FilmCollectionViewCell.fontSize)
         label.textColor = Asset.Colors.deepBlue.color
         label.textAlignment = .center
-        label.text = ""
-        label.numberOfLines = 1
         label.backgroundColor = Asset.Colors.primaryBackground.color
         label.clipsToBounds = true
         return label

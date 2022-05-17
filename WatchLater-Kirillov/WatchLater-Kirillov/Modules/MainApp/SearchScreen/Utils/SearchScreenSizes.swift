@@ -58,4 +58,8 @@ enum SearchScreenSizes {
         static let spinnerSize: CGFloat = 40
         static let topOffset: CGFloat = 18
     }
+    
+    enum StackView {
+        static let elementsSpace: CGFloat = 5
+    }
 }

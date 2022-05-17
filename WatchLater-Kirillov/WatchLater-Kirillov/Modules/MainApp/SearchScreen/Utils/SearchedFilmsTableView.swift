@@ -79,12 +79,12 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
         } else {
             cell.posterImageView.image = Asset.noImage.image
         }
-        cell.yearLabel.text = moviesData[index].year ?? "unowned"
+        cell.yearLabel.text = moviesData[index].year ?? Text.Fillings.unowned
         cell.titleLabel.text = moviesData[index].title
         if let rating = moviesData[index].rating {
             cell.ratingLabel.text = getRatingString(rating: rating)
         } else {
-            cell.ratingLabel.text = "0"
+            cell.ratingLabel.text = Text.Fillings.noData
         }
     }
     
