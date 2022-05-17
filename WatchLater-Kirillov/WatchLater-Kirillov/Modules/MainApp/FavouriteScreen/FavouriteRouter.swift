@@ -8,11 +8,7 @@
 
 import UIKit
 
-protocol FilmDataRouterProtocol {
-    func routFilmData(data: EditedFilmInfo)
-}
-
-final class FavouriteRouter: FilmDataRouterProtocol {
+final class FavouriteRouter {
     
     private weak var viewController: FavouriteViewController!
     
@@ -30,24 +26,15 @@ final class FavouriteRouter: FilmDataRouterProtocol {
     
     func pushDetailsViewController(to navigationController: UINavigationController,
                                    film: FilmData,
+                                   favouriteVCDelegate: FilmInfoChangedInformerDelegate,
                                    animated: Bool = true) {
         navigationController.pushViewController(
             DetailsScreenConfigurator().setupModule(
                     imdbData: nil,
                     localData: film,
-                    previousScreenRouter: self
+                    previousViewController: favouriteVCDelegate
             ),
             animated: animated
         )
-    }
-    
-    func routFilmData(data: EditedFilmInfo) {
-        switch data {
-        case .cangedWatchStatus(let data):
-            viewController.cangeFilmInfo(filmData: data)
-            
-        case .deleted(let id):
-            viewController.handleDeletedFilm(id: id)
-        }
     }
 }

@@ -234,7 +234,16 @@ extension SearchViewController: SearchViewControllerDelegate {
                               localData: FilmData?) {
         router.presentDetailsViewController(navigationController: navigationController!,
                                             imdbData: imdbData,
-                                            localData: localData)
+                                            localData: localData,
+                                            screenVCDelegate: self)
+    }
+}
+
+extension SearchViewController: FilmInfoChangedInformerDelegate {
+    func handleDeletedFilm(id: Int) {
+    }
+    
+    func cangeFilmInfo(filmData: FilmData) {
     }
 }
 

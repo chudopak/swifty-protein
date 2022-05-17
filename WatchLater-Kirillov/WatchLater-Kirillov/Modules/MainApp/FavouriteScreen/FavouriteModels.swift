@@ -55,7 +55,6 @@ struct FilmData: Codable, Equatable {
 struct FilmsPaging {
     var currentPage: Int
     var isFull: Bool
-    var lastPageSize: Int
 }
 
 enum EditedFilmInfo {
