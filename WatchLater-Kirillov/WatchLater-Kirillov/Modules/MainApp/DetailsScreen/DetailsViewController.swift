@@ -206,7 +206,7 @@ class DetailsViewController: BaseViewController {
         movieDetailsBeforeEditing = movieDetails
     }
     
-    private func setDetailsWithLocalData(data: FilmInfoTmp) {
+    private func setDetailsWithLocalData(data: FilmData) {
         let imageType = ImageLinkType.local(data.posterId ?? Text.Fillings.noData)
         let rating = getPrefix(string: String(data.rating ?? 0), prefixValue: 3)
         let year = getPrefix(string: data.timestamp ?? Text.Fillings.noData, prefixValue: 4)
@@ -219,7 +219,6 @@ class DetailsViewController: BaseViewController {
                                     isWatched: data.isWatched,
                                     id: data.id)
         movieDetailsBeforeEditing = movieDetails
-        
     }
     
     private func getPrefix(string: String, prefixValue: Int) -> String {

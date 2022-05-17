@@ -45,9 +45,9 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
     }
     
     func fetchMoviesForFillingPage(page: Int, size: Int, watched: Bool) {
-        let filmsInfo = fetchNewPageFromCoreData(page: page,
-                                                 size: size,
-                                                 watched: watched)
+        let filmsInfo = FilmInfo.fetchPageFromCoreData(page: page,
+                                                       size: size,
+                                                       watched: watched)
         let filmsData = convertCoreDataFilmsStructToFilmData(films: filmsInfo)
         presenter.addOneMovieToLastPage(film: filmsData, watched: watched)
         networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
@@ -70,9 +70,9 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
                      size: Int,
                      watched: Bool) {
         // NSManageObjectContext нельзя использовать сраазуже в нескольких потоках, это не безопасно
-        let filmsInfo = fetchNewPageFromCoreData(page: page,
-                                                 size: size,
-                                                 watched: watched)
+        let filmsInfo = FilmInfo.fetchPageFromCoreData(page: page,
+                                                       size: size,
+                                                       watched: watched)
         let filmsData = convertCoreDataFilmsStructToFilmData(films: filmsInfo)
         presenter.presentMovies(films: filmsData, watched: watched)
         networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
@@ -89,24 +89,6 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
                 print("Fetch Movies error - \(error.localizedDescription)")
             }
         }
-    }
-    
-    // Перенеси в кор дату этот метод 
-    private func fetchNewPageFromCoreData(page: Int, size: Int, watched: Bool) -> [FilmInfo] {
-        let predicate = NSPredicate(
-            format: "%K = \(watched)",
-            #keyPath(FilmInfo.isWatched)
-        )
-        let sort = NSSortDescriptor(key: "id", ascending: true)
-        let fetchData = GetModel(predicate: predicate,
-                                 sortDescriptors: [sort],
-                                 fetchLimit: size,
-                                 fetchOffset: page * size)
-        if let films = coreDataService.get(type: FilmInfo.self,
-                                           fetchRequestData: fetchData) {
-            return films
-        }
-        return [FilmInfo]()
     }
     
     private func convertCoreDataFilmsStructToFilmData(films: [FilmInfo]) -> [FilmData] {
@@ -180,17 +162,17 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
     
     private func setFilmInfo(film: FilmInfo, back: FilmData) {
         film.id = back.id
-        film.titleDescription = back.description ?? ""
+        film.titleDescription = back.description ?? Text.Fillings.noData
         film.posterID = back.posterId
         film.rating = getPrefix(string: String(back.rating ?? 0), prefixValue: 3)
-        film.year = getPrefix(string: back.timestamp ?? "1970", prefixValue: 4)
+        film.year = getPrefix(string: back.timestamp ?? Text.Fillings.noData, prefixValue: 4)
         film.genres = back.genres
         film.title = back.title
         film.isWatched = back.isWatched ?? false
     }
     
     private func compareFilms(back: FilmData, local: FilmInfo) -> Bool {
-        let backYear = getPrefix(string: back.timestamp ?? "1970", prefixValue: 4)
+        let backYear = getPrefix(string: back.timestamp ?? Text.Fillings.noData, prefixValue: 4)
         let backRating = getPrefix(string: String(back.rating ?? 0), prefixValue: 3)
         guard let backDescripiton = back.description,
               local.titleDescription == backDescripiton,
