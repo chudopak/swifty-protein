@@ -356,17 +356,7 @@ extension FavouriteViewController: FilmInfoChangedInformerDelegate {
     }
     
     private func fetchOneFilm(for isWatched: Bool) {
-        if isWatched && !viewedFilmsInfo.isFull {
-            let page = (viewedFilmsInfo.currentPage + 1) * pageSize - 1
-            interactor.fetchMoviesForFillingPage(page: page,
-                                                 size: 1,
-                                                 watched: isWatched)
-        } else if !isWatched && !willWatchFilmsInfo.isFull {
-            let page = (willWatchFilmsInfo.currentPage + 1) * pageSize - 1
-            interactor.fetchMoviesForFillingPage(page: page,
-                                                 size: 1,
-                                                 watched: isWatched)
-        }
+        interactor.fetchMoviesForFillingPage(watched: isWatched)
     }
     
     private func addFilmToList(filmList: inout [FilmData],

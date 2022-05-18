@@ -11,7 +11,7 @@ import UIKit
 protocol FavouriteInteractorProtocol {
     func fetchNewPage(watched: Bool)
     func checkChanges(page: Int, size: Int, watched: Bool)
-    func fetchMoviesForFillingPage(page: Int, size: Int, watched: Bool)
+    func fetchMoviesForFillingPage(watched: Bool)
 }
 
 class FavouriteInteractor: FavouriteInteractorProtocol {
@@ -47,19 +47,23 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         }
     }
     
-    func fetchMoviesForFillingPage(page: Int, size: Int, watched: Bool) {
+    func fetchMoviesForFillingPage(watched: Bool) {
+        if isMovieSegmentFull(watched: watched) {
+            return
+        }
+        let page = getPageForOneFilm(watched: watched)
         let filmsInfo = FilmInfo.fetchPageFromCoreData(page: page,
-                                                       size: size,
+                                                       size: 1,
                                                        watched: watched)
         let filmsData = convertCoreDataFilmsStructToFilmData(films: filmsInfo)
         presenter.addOneMovieToLastPage(film: filmsData, watched: watched)
-        networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
+        networkService.fetchFilms(page: page, size: 1, watched: watched) { [weak self] result in
             switch result {
             case .success(let films):
                 let filmsMarked = self?.setWatchStatusToFetchedFilms(films: films, watched: watched)
                 if !optionalsAreEqual(firstVal: filmsMarked, secondVal: filmsData) {
                     print("lLLALALAL not equeal lLLALALAL")
-                    self?.presenter.replaceMovie(film: filmsMarked, watched: watched, at: size * page)
+                    self?.presenter.replaceMovie(film: filmsMarked, watched: watched, at: page)
                     self?.actualiseFilmsInCoreData(filmsBack: filmsMarked, filmsLocal: filmsInfo)
                 }
                 
@@ -225,6 +229,14 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
             return viewedFilmsInfo.isFull
         } else {
             return willWatchFilmsInfo.isFull
+        }
+    }
+    
+    private func getPageForOneFilm(watched: Bool) -> Int {
+        if watched {
+            return (viewedFilmsInfo.currentPage + 1) * pageSize - 1
+        } else {
+            return (willWatchFilmsInfo.currentPage + 1) * pageSize - 1
         }
     }
 }
