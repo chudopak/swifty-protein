@@ -15,6 +15,7 @@ protocol FavouriteViewControllerProtocol: AnyObject {
     func replacePageWithBackendFilms(_ films: [FilmData], watched: Bool, startReplacePosition: Int)
     func appendOneFilm(_ film: FilmData, toList watched: Bool)
     func replaceFilm(_ film: FilmData, watched: Bool, at postion: Int)
+    func setFilmsListOccupancy(watched: Bool, isFull: Bool)
 }
 
 protocol FavouriteViewControllerDelegate: AnyObject {
@@ -59,6 +60,8 @@ class FavouriteViewController: BaseViewController {
     
     private var isFetchingNewMovies = false
     private var isFirstLaunch = true
+    private var isWillWatchFilmsFull = false
+    private var isViewedFillmFull = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -236,6 +239,14 @@ extension FavouriteViewController: FavouriteViewControllerProtocol {
         }
     }
     
+    func setFilmsListOccupancy(watched: Bool, isFull: Bool) {
+        if watched {
+            isViewedFillmFull = isFull
+        } else {
+            isWillWatchFilmsFull = isFull
+        }
+    }
+    
     private func getLastPageRange(films: [FilmData]) -> Range<Int> {
         let startRange: Int
         if films.isEmpty || films.count % pageSize != 0 {
@@ -334,14 +345,14 @@ extension FavouriteViewController: FilmInfoChangedInformerDelegate {
         if isWatchedNewVersion
             && addFilmToList(filmList: &viewedFilms,
                              filmData: filmData,
-                             isFull: viewedFilmsInfo.isFull)
-            && !viewedFilmsInfo.isFull {
+                             isFull: isViewedFillmFull)
+            && !isViewedFillmFull {
             viewedFilms.removeLast()
         } else if !isWatchedNewVersion
                     && addFilmToList(filmList: &willWatchFilms,
                                      filmData: filmData,
-                                     isFull: willWatchFilmsInfo.isFull)
-                    && !willWatchFilmsInfo.isFull {
+                                     isFull: isWillWatchFilmsFull)
+                    && !isWillWatchFilmsFull {
             willWatchFilms.removeLast()
         }
         setFilmsToActiveSegment()

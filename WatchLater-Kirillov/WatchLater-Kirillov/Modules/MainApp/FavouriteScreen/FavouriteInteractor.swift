@@ -49,6 +49,7 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
     
     func fetchMoviesForFillingPage(watched: Bool) {
         if isMovieSegmentFull(watched: watched) {
+            presenter.setFilmsListOccupancy(watched: watched, isFull: true)
             return
         }
         let page = getPageForOneFilm(watched: watched)
@@ -88,6 +89,7 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         if filmsData.count < size {
             setMovieSegmentIsFull(value: true, watched: watched)
         }
+        presenter.setFilmsListOccupancy(watched: watched, isFull: isMovieSegmentFull(watched: watched))
         presenter.presentMovies(films: filmsData, watched: watched)
         networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
             switch result {
@@ -97,6 +99,7 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
                     print("not equeal lLLALALAL")
                     if let unwrappedFilms = filmsMarked, unwrappedFilms.count == size {
                         self?.setMovieSegmentIsFull(value: false, watched: watched)
+                        self?.presenter.setFilmsListOccupancy(watched: watched, isFull: false)
                     }
 
                     let startReplacePosition = size * page
