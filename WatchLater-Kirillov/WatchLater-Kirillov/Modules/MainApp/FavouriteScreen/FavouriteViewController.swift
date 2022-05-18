@@ -158,15 +158,15 @@ extension FavouriteViewController: FavouriteViewControllerProtocol {
     func showFilms(_ films: [FilmData], watched: Bool) {
         // условия перенес
         if watched {
-            if films.count < pageSize {
-                viewedFilmsInfo.isFull = true
-            }
+//            if films.count < pageSize {
+//                viewedFilmsInfo.isFull = true
+//            }
             viewedFilms += films
             setFilmsToActiveView(films: viewedFilms)
         } else {
-            if films.count < pageSize {
-                willWatchFilmsInfo.isFull = true
-            }
+//            if films.count < pageSize {
+//                willWatchFilmsInfo.isFull = true
+//            }
             willWatchFilms += films
             setFilmsToActiveView(films: willWatchFilms)
         }
@@ -189,12 +189,9 @@ extension FavouriteViewController: FavouriteViewControllerProtocol {
                                      startReplacePosition: Int) {
         // условия перенес в интерактор
         if watched {
-            if films.count == pageSize {
-                viewedFilmsInfo.isFull = false
-            }
-            if startReplacePosition >= viewedFilms.count {
-                return
-            }
+//            if films.count == pageSize {
+//                viewedFilmsInfo.isFull = false
+//            }
             guard let range = getRange(startReplacePosition: startReplacePosition,
                                        updatedFilmsSize: films.count,
                                        oldFilmsSize: viewedFilms.count)
@@ -205,9 +202,9 @@ extension FavouriteViewController: FavouriteViewControllerProtocol {
             viewedFilms += films
             setFilmsToActiveView(films: viewedFilms)
         } else {
-            if films.count == pageSize {
-                willWatchFilmsInfo.isFull = false
-            }
+//            if films.count == pageSize {
+//                willWatchFilmsInfo.isFull = false
+//            }
             guard let range = getRange(startReplacePosition: startReplacePosition,
                                        updatedFilmsSize: films.count,
                                        oldFilmsSize: willWatchFilms.count)
@@ -252,7 +249,7 @@ extension FavouriteViewController: FavouriteViewControllerProtocol {
     private func getRange(startReplacePosition: Int,
                           updatedFilmsSize: Int,
                           oldFilmsSize: Int) -> Range<Int>? {
-        if startReplacePosition >= oldFilmsSize {
+        if startReplacePosition > oldFilmsSize {
             return nil
         }
         let finish: Int
@@ -291,13 +288,7 @@ extension FavouriteViewController: FavouriteViewControllerDelegate {
     }
     
     private func fetchFilmsForActiveSegment(watched: Bool) {
-        if watched && !viewedFilmsInfo.isFull {
-            viewedFilmsInfo.currentPage += 1
-            interactor.fetchNewPage(page: viewedFilmsInfo.currentPage, size: pageSize, watched: watched)
-        } else if !watched && !willWatchFilmsInfo.isFull {
-            willWatchFilmsInfo.currentPage += 1
-            interactor.fetchNewPage(page: willWatchFilmsInfo.currentPage, size: pageSize, watched: watched)
-        }
+        interactor.fetchNewPage(watched: watched)
     }
 }
 

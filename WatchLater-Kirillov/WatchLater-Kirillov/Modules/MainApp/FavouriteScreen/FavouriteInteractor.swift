@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FavouriteInteractorProtocol {
-    func fetchNewPage(page: Int, size: Int, watched: Bool)
+    func fetchNewPage(watched: Bool)
     func checkChanges(page: Int, size: Int, watched: Bool)
     func fetchMoviesForFillingPage(page: Int, size: Int, watched: Bool)
 }
@@ -18,7 +18,6 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
     
     private let presenter: FavouritePresenterProtocol
     private let networkService: FetchFilmsServiceProtocol
-    private let coreDataService: CoreDataService
     
     private let pageSize = 24
     private var viewedFilmsInfo = FilmsPaging(currentPage: -1,
@@ -27,11 +26,9 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
                                                  isFull: false)
     
     init(presenter: FavouritePresenterProtocol,
-         networkService: FetchFilmsServiceProtocol,
-         coreDataService: CoreDataService) {
+         networkService: FetchFilmsServiceProtocol) {
         self.presenter = presenter
         self.networkService = networkService
-        self.coreDataService = coreDataService
     }
     
     // TODO: - replace it or delete (not using this right now)
@@ -72,22 +69,21 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         }
     }
     
-    func fetchNewPage(page: Int,
-                      size: Int,
-                      watched: Bool) {
+    func fetchNewPage(watched: Bool) {
+        // TODO: разбей на функции
         // NSManageObjectContext нельзя использовать сраазуже в нескольких потоках, это не безопасно
-//        if isMovieSegmentFull(watched: watched) {
-//            return
-//        }
-//        let page = getPageForMovieSegment(watched: watched)
-//        let size = pageSize
+        if isMovieSegmentFull(watched: watched) {
+            return
+        }
+        let page = getPageForMovieSegment(watched: watched)
+        let size = pageSize
         let filmsInfo = FilmInfo.fetchPageFromCoreData(page: page,
                                                        size: size,
                                                        watched: watched)
         let filmsData = convertCoreDataFilmsStructToFilmData(films: filmsInfo)
-//        if filmsData.count < size {
-//            setMovieSegmentIsFull(value: true, watched: watched)
-//        }
+        if filmsData.count < size {
+            setMovieSegmentIsFull(value: true, watched: watched)
+        }
         presenter.presentMovies(films: filmsData, watched: watched)
         networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
             switch result {
@@ -95,9 +91,9 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
                 let filmsMarked = self?.setWatchStatusToFetchedFilms(films: films, watched: watched)
                 if !optionalsAreEqual(firstVal: filmsMarked, secondVal: filmsData) {
                     print("not equeal lLLALALAL")
-//                    if let unwrappedFilms = filmsMarked, unwrappedFilms.count == size {
-//                        self?.setMovieSegmentIsFull(value: false, watched: watched)
-//                    }
+                    if let unwrappedFilms = filmsMarked, unwrappedFilms.count == size {
+                        self?.setMovieSegmentIsFull(value: false, watched: watched)
+                    }
 
                     let startReplacePosition = size * page
                     self?.presenter.replaceLastPage(films: filmsMarked,
@@ -144,14 +140,16 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         guard let back = filmsBack,
               !back.isEmpty
         else {
-            coreDataService.deleteObjects(objects: filmsLocal) { [weak self] in
-                self?.coreDataService.saveContext()
+            CoreDataService.shared.deleteObjects(objects: filmsLocal) {
+                DispatchQueue.main.async {
+                    CoreDataService.shared.saveContext()
+                }
             }
             return
         }
         changeNotEqualFilmsInfo(back: back, filmsLocal: filmsLocal)
         changeCoreDataObjectsAmount(back: back, filmsLocal: filmsLocal)
-        coreDataService.saveContext()
+        CoreDataService.shared.saveContext()
     }
     
     private func changeNotEqualFilmsInfo(back: [FilmData], filmsLocal: [FilmInfo]) {
@@ -165,10 +163,10 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         let smallSize = back.count < filmsLocal.count ? back.count : filmsLocal.count
         if smallSize < filmsLocal.count {
             let filmsForDeletion = Array(filmsLocal[smallSize..<filmsLocal.count])
-            coreDataService.deleteObjects(objects: filmsForDeletion) {}
+            CoreDataService.shared.deleteObjects(objects: filmsForDeletion) {}
         } else {
             for i in smallSize..<back.count {
-                coreDataService.save(
+                CoreDataService.shared.save(
                     with: FilmInfo.self,
                     predicate: nil
                 ) { [weak self, i] object, managedObjectContext in
