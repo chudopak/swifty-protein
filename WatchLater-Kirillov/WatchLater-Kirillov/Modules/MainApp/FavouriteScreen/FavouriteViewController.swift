@@ -64,6 +64,7 @@ class FavouriteViewController: BaseViewController {
         super.viewDidLoad()
         setView()
         setConstraints()
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,16 +116,6 @@ class FavouriteViewController: BaseViewController {
         filmsTableView.filmsInfo = films
     }
     
-    private func shouldFetchFilmsStyleChanged() -> Bool {
-        let watched = getWatched()
-        if watched && viewedFilmsInfo.currentPage == -1 {
-            return true
-        } else if !watched && willWatchFilmsInfo.currentPage == -1 {
-            return true
-        }
-        return false
-    }
-    
     private func setFilmsToActiveSegment() {
         let watched = getWatched()
         if watched {
@@ -165,6 +156,7 @@ class FavouriteViewController: BaseViewController {
 extension FavouriteViewController: FavouriteViewControllerProtocol {
     
     func showFilms(_ films: [FilmData], watched: Bool) {
+        // условия перенес
         if watched {
             if films.count < pageSize {
                 viewedFilmsInfo.isFull = true
@@ -195,6 +187,7 @@ extension FavouriteViewController: FavouriteViewControllerProtocol {
     func replacePageWithBackendFilms(_ films: [FilmData],
                                      watched: Bool,
                                      startReplacePosition: Int) {
+        // условия перенес в интерактор
         if watched {
             if films.count == pageSize {
                 viewedFilmsInfo.isFull = false

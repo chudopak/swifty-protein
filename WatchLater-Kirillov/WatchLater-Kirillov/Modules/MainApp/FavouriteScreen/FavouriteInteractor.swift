@@ -56,7 +56,7 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
                                                        watched: watched)
         let filmsData = convertCoreDataFilmsStructToFilmData(films: filmsInfo)
         presenter.addOneMovieToLastPage(film: filmsData, watched: watched)
-        networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self, size, page] result in
+        networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
             switch result {
             case .success(let films):
                 let filmsMarked = self?.setWatchStatusToFetchedFilms(films: films, watched: watched)
@@ -76,17 +76,29 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
                       size: Int,
                       watched: Bool) {
         // NSManageObjectContext нельзя использовать сраазуже в нескольких потоках, это не безопасно
+//        if isMovieSegmentFull(watched: watched) {
+//            return
+//        }
+//        let page = getPageForMovieSegment(watched: watched)
+//        let size = pageSize
         let filmsInfo = FilmInfo.fetchPageFromCoreData(page: page,
                                                        size: size,
                                                        watched: watched)
         let filmsData = convertCoreDataFilmsStructToFilmData(films: filmsInfo)
+//        if filmsData.count < size {
+//            setMovieSegmentIsFull(value: true, watched: watched)
+//        }
         presenter.presentMovies(films: filmsData, watched: watched)
-        networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self, size, page] result in
+        networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
             switch result {
             case .success(let films):
                 let filmsMarked = self?.setWatchStatusToFetchedFilms(films: films, watched: watched)
                 if !optionalsAreEqual(firstVal: filmsMarked, secondVal: filmsData) {
                     print("not equeal lLLALALAL")
+//                    if let unwrappedFilms = filmsMarked, unwrappedFilms.count == size {
+//                        self?.setMovieSegmentIsFull(value: false, watched: watched)
+//                    }
+
                     let startReplacePosition = size * page
                     self?.presenter.replaceLastPage(films: filmsMarked,
                                                     watched: watched,
@@ -190,5 +202,31 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
             return false
         }
         return true
+    }
+    
+    private func getPageForMovieSegment(watched: Bool) -> Int {
+        if watched {
+            viewedFilmsInfo.currentPage += 1
+            return viewedFilmsInfo.currentPage
+        } else {
+            willWatchFilmsInfo.currentPage += 1
+            return willWatchFilmsInfo.currentPage
+        }
+    }
+    
+    private func setMovieSegmentIsFull(value: Bool, watched: Bool) {
+        if watched {
+            viewedFilmsInfo.isFull = value
+        } else {
+            willWatchFilmsInfo.isFull = value
+        }
+    }
+    
+    private func isMovieSegmentFull(watched: Bool) -> Bool {
+        if watched {
+            return viewedFilmsInfo.isFull
+        } else {
+            return willWatchFilmsInfo.isFull
+        }
     }
 }
