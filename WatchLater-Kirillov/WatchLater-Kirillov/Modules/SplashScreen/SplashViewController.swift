@@ -33,6 +33,7 @@ class SplashViewController: BaseViewController {
         watchLaterImageView.addSubview(eyeImageView)
         configureSplashScreenSizessAtLaunch()
         setConstraints()
+        // TODO: - delete it later
 //        KeychainService.delete(key: .accessToken)
 //        KeychainService.delete(key: .refreshToken)
         interactor.validateToken()

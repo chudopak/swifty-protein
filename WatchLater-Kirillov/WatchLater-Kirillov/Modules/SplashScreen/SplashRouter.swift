@@ -23,9 +23,7 @@ final class SplashRouter {
     }
     
     func presentMainTabBar() {
-        let tmp = FavouriteThumbnailsViewController()
-        let navigationController = UINavigationController(rootViewController: tmp)
-        navigationController.modalPresentationStyle = .fullScreen
-        UIWindowService.replaceRootViewController(with: navigationController)
+        let tapBar = MainTabBar()
+        UIWindowService.replaceRootViewController(with: tapBar)
     }
 }

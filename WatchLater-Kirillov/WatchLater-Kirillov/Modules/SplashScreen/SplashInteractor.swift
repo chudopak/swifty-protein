@@ -34,5 +34,4 @@ final class SplashInteractor: SplashInteractorProtocol {
             self?.presenter.proceedTokenRecreationState(result: state)
         }
     }
-      
 }

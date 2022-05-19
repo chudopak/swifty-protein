@@ -24,7 +24,7 @@ final class LoginPresenter: LoginPresenterProtocol {
         switch state {
         case .success:
             DispatchQueue.main.async { [weak self] in
-                self?.loginViewController.presentThumbnailsViewController()
+                self?.loginViewController.presentFavouriteViewController()
             }
 
         case let .failure(displayMessage, error):
@@ -32,7 +32,7 @@ final class LoginPresenter: LoginPresenterProtocol {
                 print("LoginPresentererror, procedLoginResult - ", error.localizedDescription)
             }
             DispatchQueue.main.async { [weak self] in
-                self?.loginViewController.loginFailedStatee(displayMessage: displayMessage)
+                self?.loginViewController.loginFailedState(displayMessage: displayMessage)
             }
         }
     }

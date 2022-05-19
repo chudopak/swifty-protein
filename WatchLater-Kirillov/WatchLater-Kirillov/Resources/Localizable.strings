@@ -11,6 +11,10 @@ Common.remove = "Удалить";
 Common.update = "Обновить";
 Common.logout = "Выйти";
 Common.login = "Войти";
+Common.willWatch = "Буду смотреть";
+Common.viewed = "Просмотрено";
+Common.noPoster = "Нет Постера";
+Common.aboutMovie = "О фильме";
 
 // MARK: - Authorization
 
@@ -22,3 +26,33 @@ Authorization.registration = "Регистрация";
 Authorization.failed = "Неверные логин или пароль";
 Authorization.passwordsNotMatch = "Пароли не совпадают";
 Authorization.somethingWentWrong = "Что-то пошло не так";
+
+// MARK: - TabBar titles
+
+TabBar.collection = "Коллекция";
+TabBar.add = "Добавить";
+TabBar.profile = "Профиль";
+TabBar.search = "Поиск";
+
+// MARK: - SearchScreen
+
+SearchScreen.startTypingLabelText = "Начните вводить название, и здесь появятся варианты фильмов";
+SearchScreen.imdb = "IMDB";
+SearchScreen.collection = "Коллекция";
+SearchScreen.enterFilm = "Введите Название";
+
+// MARK: - No data labels fillings
+
+Fillings.noData = "-";
+Fillings.unowned = "unowned";
+
+// MARK: - Base Error Descriptions
+
+BaseError.imageLoadingError = "Can not download image.";
+BaseError.noResponse = "No response provided in request.";
+BaseError.unownedResponseCode = "Unowned Response Code.";
+BaseError.failedToBuildRequest = "Failed to build request.";
+BaseError.noData = "There is no data in response.";
+BaseError.range400Response = "Response in 400's range.";
+BaseError.unableToDecodeData = "Can not decode data to needed type.";
+BaseError.cancelled = "Cancel task.";
