@@ -9,11 +9,22 @@
 import UIKit
 
 protocol FavouriteInteractorProtocol {
+    var isViewedFillmFull: Bool { get }
+    var isWillWatchFillmFull: Bool { get }
+    
     func fetchNewPage(watched: Bool)
     func fetchMoviesForFillingPage(watched: Bool)
 }
 
 class FavouriteInteractor: FavouriteInteractorProtocol {
+    
+    var isViewedFillmFull: Bool {
+        return viewedFilmsInfo.isFull
+    }
+    
+    var isWillWatchFillmFull: Bool {
+        return willWatchFilmsInfo.isFull
+    }
     
     private let presenter: FavouritePresenterProtocol
     private let networkService: FetchFilmsServiceProtocol
@@ -32,48 +43,78 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
 
     func fetchMoviesForFillingPage(watched: Bool) {
         if isMovieSegmentFull(watched: watched) {
-            presenter.setFilmsListOccupancy(watched: watched, isFull: true)
+            presenter.notifyThatFilmsListIsFull(watched: watched, isFull: true)
             return
         }
         let page = getPageForOneFilm(watched: watched)
-        let filmsInfo = FilmInfo.fetchPageFromCoreData(page: page,
-                                                       size: 1,
-                                                       watched: watched)
-        let filmsData = convertCoreDataFilmsStructToFilmData(films: filmsInfo)
-        presenter.addOneMovieToLastPage(film: filmsData, watched: watched)
-        networkService.fetchFilms(page: page, size: 1, watched: watched) { [weak self] result in
+        FilmInfo.fetchPageFromCoreData(
+            page: page,
+            size: 1,
+            watched: watched
+        ) { [weak self] result in
             switch result {
-            case .success(let films):
-                let filmsMarked = self?.setWatchStatusToFetchedFilms(films: films, watched: watched)
-                if !optionalsAreEqual(firstVal: filmsMarked, secondVal: filmsData) {
-                    print("lLLALALAL not equeal lLLALALAL")
-                    self?.presenter.replaceMovie(film: filmsMarked, watched: watched, at: page)
-                    self?.actualiseFilmsInCoreData(filmsBack: filmsMarked, filmsLocal: filmsInfo)
-                }
-                
+            case .success(let filmsInfo):
+                self?.handleResultOfFetchingOneFilmFromCoreData(
+                    filmsInfo: filmsInfo,
+                    page: page,
+                    size: 1,
+                    watched: watched
+                )
+
             case .failure(let error):
-                print("Fetch Movies error - \(error.localizedDescription)")
+                print("FavouriteInteractor, fetchNewPage - \(error)")
+                self?.handleResultOfFetchingOneFilmFromCoreData(
+                    filmsInfo: [FilmInfo](),
+                    page: page,
+                    size: 1,
+                    watched: watched
+                )
             }
         }
     }
     
     func fetchNewPage(watched: Bool) {
-        // TODO: разбей на функции
         // NSManageObjectContext нельзя использовать сраазуже в нескольких потоках, это не безопасно
         if isMovieSegmentFull(watched: watched) {
+            presenter.notifyThatFilmsListIsFull(watched: watched, isFull: true)
             return
         }
         let page = getPageForMovieSegment(watched: watched)
         let size = pageSize
-        // TODO: мне кажется лучше запустить фетчинг в многопоточке когда все закончится вернуть
-        let filmsInfo = FilmInfo.fetchPageFromCoreData(page: page,
-                                                       size: size,
-                                                       watched: watched)
+        FilmInfo.fetchPageFromCoreData(
+            page: page,
+            size: size,
+            watched: watched
+        ) { [weak self] result in
+            switch result {
+            case .success(let filmsInfo):
+                self?.handleFilmsData(
+                    filmsInfo: filmsInfo,
+                    page: page,
+                    size: size,
+                    watched: watched
+                )
+
+            case .failure(let error):
+                print("FavouriteInteractor, fetchNewPage - \(error)")
+                self?.handleFilmsData(
+                    filmsInfo: [FilmInfo](),
+                    page: page,
+                    size: size,
+                    watched: watched
+                )
+            }
+        }
+    }
+    
+    private func handleFilmsData(filmsInfo: [FilmInfo],
+                                 page: Int,
+                                 size: Int,
+                                 watched: Bool) {
         let filmsData = convertCoreDataFilmsStructToFilmData(films: filmsInfo)
         if filmsData.count < size {
             setMovieSegmentIsFull(value: true, watched: watched)
         }
-        presenter.setFilmsListOccupancy(watched: watched, isFull: isMovieSegmentFull(watched: watched))
         presenter.presentMovies(films: filmsData, watched: watched)
         networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
             switch result {
@@ -83,12 +124,35 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
                     print("not equeal lLLALALAL")
                     if let unwrappedFilms = filmsMarked, unwrappedFilms.count == size {
                         self?.setMovieSegmentIsFull(value: false, watched: watched)
-                        self?.presenter.setFilmsListOccupancy(watched: watched, isFull: false)
                     }
                     let startReplacePosition = size * page
                     self?.presenter.replaceLastPage(films: filmsMarked,
                                                     watched: watched,
                                                     startReplacePosition: startReplacePosition)
+                    self?.actualiseFilmsInCoreData(filmsBack: filmsMarked, filmsLocal: filmsInfo)
+                }
+                
+            case .failure(let error):
+                print("Fetch Movies error - \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func handleResultOfFetchingOneFilmFromCoreData(
+        filmsInfo: [FilmInfo],
+        page: Int,
+        size: Int,
+        watched: Bool
+    ) {
+        let filmsData = convertCoreDataFilmsStructToFilmData(films: filmsInfo)
+        presenter.addOneMovieToLastPage(film: filmsData, watched: watched)
+        networkService.fetchFilms(page: page, size: 1, watched: watched) { [weak self] result in
+            switch result {
+            case .success(let films):
+                let filmsMarked = self?.setWatchStatusToFetchedFilms(films: films, watched: watched)
+                if !optionalsAreEqual(firstVal: filmsMarked, secondVal: filmsData) {
+                    print("lLLALALAL not equeal lLLALALAL")
+                    self?.presenter.replaceMovie(film: filmsMarked, watched: watched, at: page)
                     self?.actualiseFilmsInCoreData(filmsBack: filmsMarked, filmsLocal: filmsInfo)
                 }
                 
@@ -130,7 +194,6 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         guard let back = filmsBack,
               !back.isEmpty
         else {
-            // TODO: Здесь удаляешь данные асинхронно, наверное может что-то пойти не так тип может сразу запуститься несколько потоков и что тогда будет? Как решается этот вопрос
             CoreDataService.shared.deleteObjects(objects: filmsLocal) {
                 CoreDataService.shared.saveContext()
             }
@@ -154,14 +217,15 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
             let filmsForDeletion = Array(filmsLocal[smallSize..<filmsLocal.count])
             CoreDataService.shared.deleteObjects(objects: filmsForDeletion) {}
         } else {
-            // TODO: Better to craete method that will save array of films and Save it asyncroniously
-            for i in smallSize..<back.count {
-                CoreDataService.shared.save(
-                    with: FilmInfo.self,
-                    predicate: nil
-                ) { [weak self, i] object, managedObjectContext in
-                    self?.setFilmInfo(film: object, back: back[i])
+            CoreDataService.shared.save(
+                with: FilmInfo.self,
+                predicate: nil,
+                amount: back.count - smallSize
+            ) { [weak self] objects, managedObjectContext in
+                for i in smallSize..<back.count {
+                    self?.setFilmInfo(film: objects[i], back: back[i + smallSize])
                 }
+                CoreDataService.shared.saveContext()
             }
         }
     }

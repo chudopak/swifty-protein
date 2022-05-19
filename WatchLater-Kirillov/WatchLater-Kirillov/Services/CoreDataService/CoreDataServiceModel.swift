@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct GetModel {
+struct FetchRequestData {
     let predicate: NSPredicate?
     let sortDescriptors: [NSSortDescriptor]?
     let fetchLimit: Int

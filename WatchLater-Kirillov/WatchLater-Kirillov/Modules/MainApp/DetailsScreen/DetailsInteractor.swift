@@ -41,40 +41,50 @@ final class DetailsInteractor: DetailsInteractorProtocol {
     }
     
     func changeFilmWatchStatus(id: Int) {
-        let isChanged = changeObjectInCoreData(id: id)
-        presenter.sendFilmsWatchStatus(status: isChanged)
-        filmsService.changeFilmWatchStatus(id: id) { [weak self, isChanged] result in
-            switch result {
-            case .failure(let error):
-                print("DetailsInteractor, changeFilmWatchStatus - ", error.localizedDescription)
-                self?.presenter.sendFailedToChangeStatusInBackend(isLocalChanged: isChanged)
-            
-            default:
-                break
+        changeObjectInCoreData(id: id) { [weak self] isChanged in
+            self?.presenter.sendFilmsWatchStatus(status: isChanged)
+            self?.filmsService.changeFilmWatchStatus(id: id) { [weak self, isChanged] result in
+                switch result {
+                case .failure(let error):
+                    print("DetailsInteractor, changeFilmWatchStatus - ", error.localizedDescription)
+                    self?.presenter.sendFailedToChangeStatusInBackend(isLocalChanged: isChanged)
+                    
+                default:
+                    break
+                }
             }
         }
     }
     
-    private func changeObjectInCoreData(id: Int) -> Bool {
+    private func changeObjectInCoreData(id: Int, completion: @escaping (Bool) -> Void) {
         let predicate = NSPredicate(
             format: "%K = \(id)",
             #keyPath(FilmInfo.id)
         )
-        let fetchData = GetModel(
+        let fetchData = FetchRequestData(
             predicate: predicate,
             sortDescriptors: [],
             fetchLimit: 1,
             fetchOffset: .zero
         )
-        guard let objects = CoreDataService.shared.get(type: FilmInfo.self,
-                                                       fetchRequestData: fetchData),
-              let object = objects.first
-        else {
-            return false
+        CoreDataService.shared.get(
+                type: FilmInfo.self,
+                fetchRequestData: fetchData
+        ) { result in
+            switch result {
+            case .success(let object):
+                if let obj = object.first {
+                    obj.isWatched = !obj.isWatched
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            
+            case .failure:
+                completion(false)
+            }
+            CoreDataService.shared.saveContext()
         }
-        object.isWatched = !object.isWatched
-        CoreDataService.shared.saveContext()
-        return true
     }
     
     private func handleResult(result: Result<(id: String, image: UIImage), Error>) {

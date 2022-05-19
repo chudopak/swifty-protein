@@ -11,20 +11,25 @@ import CoreData
 
 @objc(FilmInfo)
 public class FilmInfo: NSManagedObject {
-    static func fetchPageFromCoreData(page: Int, size: Int, watched: Bool) -> [FilmInfo] {
+    static func fetchPageFromCoreData(
+        page: Int,
+        size: Int,
+        watched: Bool,
+        completion: @escaping (Result<[FilmInfo], Error>) -> Void
+    ) {
         let predicate = NSPredicate(
             format: "%K = \(watched)",
             #keyPath(FilmInfo.isWatched)
         )
         let sort = NSSortDescriptor(key: "id", ascending: true)
-        let fetchData = GetModel(predicate: predicate,
-                                 sortDescriptors: [sort],
-                                 fetchLimit: size,
-                                 fetchOffset: page * size)
-        if let films = CoreDataService.shared.get(type: FilmInfo.self,
-                                                  fetchRequestData: fetchData) {
-            return films
-        }
-        return [FilmInfo]()
+        let fetchData = FetchRequestData(predicate: predicate,
+                                         sortDescriptors: [sort],
+                                         fetchLimit: size,
+                                         fetchOffset: page * size)
+        CoreDataService.shared.get(
+            type: FilmInfo.self,
+            fetchRequestData: fetchData,
+            completion: completion
+        )
     }
 }
