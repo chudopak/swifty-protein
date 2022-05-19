@@ -222,7 +222,7 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
                 predicate: nil,
                 amount: back.count - smallSize
             ) { [weak self] objects, managedObjectContext in
-                for i in smallSize..<back.count {
+                for i in 0..<back.count - smallSize {
                     self?.setFilmInfo(film: objects[i], back: back[i + smallSize])
                 }
                 CoreDataService.shared.saveContext()

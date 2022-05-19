@@ -602,8 +602,8 @@
 			isa = PBXGroup;
 			children = (
 				7DE0E2422816BA1300670DE3 /* Utils */,
-				7D612D5428118246007C7515 /* FavouriteViewController.swift */,
 				7DE0E24F2816F20900670DE3 /* FavouriteModels.swift */,
+				7D612D5428118246007C7515 /* FavouriteViewController.swift */,
 				7DAD2765281830AB005B9D6F /* FavouriteInteractor.swift */,
 				7DAD27682818316D005B9D6F /* FavouritePresenter.swift */,
 				7DAD276B281833AD005B9D6F /* FavouriteConfigurator.swift */,
