@@ -10,7 +10,6 @@ import UIKit
 
 protocol FavouriteInteractorProtocol {
     func fetchNewPage(watched: Bool)
-    func checkChanges(page: Int, size: Int, watched: Bool)
     func fetchMoviesForFillingPage(watched: Bool)
 }
 
@@ -30,23 +29,7 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         self.presenter = presenter
         self.networkService = networkService
     }
-    
-    // TODO: - replace it or delete (not using this right now)
-    func checkChanges(page: Int,
-                      size: Int,
-                      watched: Bool) {
-        networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
-            switch result {
-            case .success(let films):
-                let filmsMarked = self?.setWatchStatusToFetchedFilms(films: films, watched: watched)
-                self?.presenter.compareMoviesWithCurrent(films: filmsMarked, watched: watched)
-                
-            case .failure(let error):
-                print("Compare Movies error - \(error.localizedDescription)")
-            }
-        }
-    }
-    
+
     func fetchMoviesForFillingPage(watched: Bool) {
         if isMovieSegmentFull(watched: watched) {
             presenter.setFilmsListOccupancy(watched: watched, isFull: true)
@@ -82,6 +65,7 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         }
         let page = getPageForMovieSegment(watched: watched)
         let size = pageSize
+        // TODO: мне кажется лучше запустить фетчинг в многопоточке когда все закончится вернуть
         let filmsInfo = FilmInfo.fetchPageFromCoreData(page: page,
                                                        size: size,
                                                        watched: watched)
@@ -101,7 +85,6 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
                         self?.setMovieSegmentIsFull(value: false, watched: watched)
                         self?.presenter.setFilmsListOccupancy(watched: watched, isFull: false)
                     }
-
                     let startReplacePosition = size * page
                     self?.presenter.replaceLastPage(films: filmsMarked,
                                                     watched: watched,
@@ -147,10 +130,9 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         guard let back = filmsBack,
               !back.isEmpty
         else {
+            // TODO: Здесь удаляешь данные асинхронно, наверное может что-то пойти не так тип может сразу запуститься несколько потоков и что тогда будет? Как решается этот вопрос
             CoreDataService.shared.deleteObjects(objects: filmsLocal) {
-                DispatchQueue.main.async {
-                    CoreDataService.shared.saveContext()
-                }
+                CoreDataService.shared.saveContext()
             }
             return
         }
@@ -172,6 +154,7 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
             let filmsForDeletion = Array(filmsLocal[smallSize..<filmsLocal.count])
             CoreDataService.shared.deleteObjects(objects: filmsForDeletion) {}
         } else {
+            // TODO: Better to craete method that will save array of films and Save it asyncroniously
             for i in smallSize..<back.count {
                 CoreDataService.shared.save(
                     with: FilmInfo.self,

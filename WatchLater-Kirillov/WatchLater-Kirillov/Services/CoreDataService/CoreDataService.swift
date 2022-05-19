@@ -28,13 +28,16 @@ final class CoreDataService {
     private(set) lazy var managedObjectContext = persistentContainer.newBackgroundContext()
     
     func saveContext() {
-        managedObjectContext.performAndWait {
-            if managedObjectContext.hasChanges {
-                do {
-                    try managedObjectContext.save()
-                } catch {
-                    let nserror = error as NSError
-                    assertionFailure("Unresolved error \(nserror), \(nserror.userInfo)")
+        DispatchQueue.main.async { [weak self] in
+            self?.managedObjectContext.performAndWait {
+                if let hasChanged = self?.managedObjectContext.hasChanges,
+                   hasChanged {
+                    do {
+                        try  self?.managedObjectContext.save()
+                    } catch {
+                        let nserror = error as NSError
+                        assertionFailure("Unresolved error \(nserror), \(nserror.userInfo)")
+                    }
                 }
             }
         }
@@ -51,6 +54,8 @@ final class CoreDataService {
             request.fetchOffset = fetchRequestData.fetchOffset
         }
         request.sortDescriptors = fetchRequestData.sortDescriptors
+        // TODO: You doesn't controll queue for manage object context
+        
         do {
             return try managedObjectContext.fetch(request)
         } catch {
@@ -60,7 +65,7 @@ final class CoreDataService {
         }
     }
     
-    func delete<T>(
+    func deleteAll<T>(
         with _: T.Type,
         predicate: NSPredicate?,
         completion: @escaping (Bool) -> Void
@@ -68,26 +73,30 @@ final class CoreDataService {
         let fetchRequest = T.fetchRequest()
         fetchRequest.predicate = predicate
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        persistentContainer.performBackgroundTask { context in
-            do {
-                try context.execute(deleteRequest)
-                try context.save()
-                completion(true)
-            } catch {
-                let nserror = error as NSError
-                assertionFailure("Unresolved error \(nserror), \(nserror.userInfo)")
-                completion(false)
+        DispatchQueue.main.async { [weak self] in
+            self?.persistentContainer.performBackgroundTask { context in
+                do {
+                    try context.execute(deleteRequest)
+                    try context.save()
+                    completion(true)
+                } catch {
+                    let nserror = error as NSError
+                    assertionFailure("Unresolved error \(nserror), \(nserror.userInfo)")
+                    completion(false)
+                }
             }
         }
     }
     
     func deleteObjects(objects: [NSManagedObject],
                        completion: @escaping () -> Void) {
-        persistentContainer.performBackgroundTask { context in
-            for object in objects {
-                context.delete(object)
+        DispatchQueue.main.async { [weak self] in
+            self?.persistentContainer.performBackgroundTask { context in
+                for object in objects {
+                    context.delete(object)
+                }
+                completion()
             }
-            completion()
         }
     }
     

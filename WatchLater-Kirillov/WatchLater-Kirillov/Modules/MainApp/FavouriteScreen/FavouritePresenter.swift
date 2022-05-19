@@ -10,7 +10,6 @@ import UIKit
 
 protocol FavouritePresenterProtocol {
     func presentMovies(films: [FilmData]?, watched: Bool)
-    func compareMoviesWithCurrent(films: [FilmData]?, watched: Bool)
     func replaceLastPage(films: [FilmData]?, watched: Bool, startReplacePosition: Int)
     func replaceMovie(film: [FilmData]?, watched: Bool, at position: Int)
     func addOneMovieToLastPage(film: [FilmData]?, watched: Bool)
@@ -32,16 +31,6 @@ class FavouritePresenter: FavouritePresenterProtocol {
         }
         DispatchQueue.main.async { [weak self] in
             self?.favouriteViewController.showFilms(films, watched: watched)
-        }
-    }
-    
-    func compareMoviesWithCurrent(films: [FilmData]?, watched: Bool) {
-        guard let films = films
-        else {
-            return
-        }
-        DispatchQueue.main.async { [weak self] in
-            self?.favouriteViewController.checkMoviesForChanges(films, watched: watched)
         }
     }
     
