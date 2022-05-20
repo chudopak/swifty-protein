@@ -83,6 +83,18 @@
 		7D6500482822ABF30079ABAC /* SearchedFilmsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6500462822ABF30079ABAC /* SearchedFilmsTableView.swift */; };
 		7D65004A2822AD060079ABAC /* SearchFilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6500492822AD060079ABAC /* SearchFilmTableViewCell.swift */; };
 		7D65004B2822AD060079ABAC /* SearchFilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6500492822AD060079ABAC /* SearchFilmTableViewCell.swift */; };
+		7D6DAEEF2837B02500AD28D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAEEE2837B02500AD28D6 /* ProfileViewController.swift */; };
+		7D6DAEF02837B02500AD28D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAEEE2837B02500AD28D6 /* ProfileViewController.swift */; };
+		7D6DAEF32837B36500AD28D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAEF22837B36500AD28D6 /* EditProfileViewController.swift */; };
+		7D6DAEF42837B36500AD28D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAEF22837B36500AD28D6 /* EditProfileViewController.swift */; };
+		7D6DAEF62837B3BC00AD28D6 /* EditProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAEF52837B3BC00AD28D6 /* EditProfileConfigurator.swift */; };
+		7D6DAEF72837B3BC00AD28D6 /* EditProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAEF52837B3BC00AD28D6 /* EditProfileConfigurator.swift */; };
+		7D6DAEFA2837B80E00AD28D6 /* ProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAEF92837B80E00AD28D6 /* ProfileConfigurator.swift */; };
+		7D6DAEFB2837B80E00AD28D6 /* ProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAEF92837B80E00AD28D6 /* ProfileConfigurator.swift */; };
+		7D6DAEFD2837BCA800AD28D6 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAEFC2837BCA800AD28D6 /* ProfileRouter.swift */; };
+		7D6DAEFE2837BCA800AD28D6 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAEFC2837BCA800AD28D6 /* ProfileRouter.swift */; };
+		7D6DAF012837C5E500AD28D6 /* EditProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAF002837C5E500AD28D6 /* EditProfileRouter.swift */; };
+		7D6DAF022837C5E500AD28D6 /* EditProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAF002837C5E500AD28D6 /* EditProfileRouter.swift */; };
 		7D7386D328101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386D228101F36008C00FE /* RegistrationControllerConfigurator.swift */; };
 		7D7386D428101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386D228101F36008C00FE /* RegistrationControllerConfigurator.swift */; };
 		7D7386D7281047F7008C00FE /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386D6281047F7008C00FE /* RequestBuilder.swift */; };
@@ -251,6 +263,12 @@
 		7D612D622811A335007C7515 /* RefreshServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshServiceModel.swift; sourceTree = "<group>"; };
 		7D6500462822ABF30079ABAC /* SearchedFilmsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedFilmsTableView.swift; sourceTree = "<group>"; };
 		7D6500492822AD060079ABAC /* SearchFilmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilmTableViewCell.swift; sourceTree = "<group>"; };
+		7D6DAEEE2837B02500AD28D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7D6DAEF22837B36500AD28D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		7D6DAEF52837B3BC00AD28D6 /* EditProfileConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileConfigurator.swift; sourceTree = "<group>"; };
+		7D6DAEF92837B80E00AD28D6 /* ProfileConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileConfigurator.swift; sourceTree = "<group>"; };
+		7D6DAEFC2837BCA800AD28D6 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		7D6DAF002837C5E500AD28D6 /* EditProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileRouter.swift; sourceTree = "<group>"; };
 		7D7386D228101F36008C00FE /* RegistrationControllerConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationControllerConfigurator.swift; sourceTree = "<group>"; };
 		7D7386D6281047F7008C00FE /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		7D7386D9281061EB008C00FE /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
@@ -508,6 +526,8 @@
 		7D0F1A0C2812F82D007570F9 /* MainApp */ = {
 			isa = PBXGroup;
 			children = (
+				7D6DAEF12837B2CB00AD28D6 /* EditProfileScreen */,
+				7D6DAEED2837AAD900AD28D6 /* ProfileScreen */,
 				7D1C3422282D61CB0093FA68 /* EditMovieScreen */,
 				7D9D6F98282555E4009DFD03 /* DetailsScreen */,
 				7D81BB32281C456800CC9819 /* SearchScreen */,
@@ -627,6 +647,26 @@
 				7D612D622811A335007C7515 /* RefreshServiceModel.swift */,
 			);
 			path = RefreshTokenService;
+			sourceTree = "<group>";
+		};
+		7D6DAEED2837AAD900AD28D6 /* ProfileScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7D6DAEEE2837B02500AD28D6 /* ProfileViewController.swift */,
+				7D6DAEF92837B80E00AD28D6 /* ProfileConfigurator.swift */,
+				7D6DAEFC2837BCA800AD28D6 /* ProfileRouter.swift */,
+			);
+			path = ProfileScreen;
+			sourceTree = "<group>";
+		};
+		7D6DAEF12837B2CB00AD28D6 /* EditProfileScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7D6DAEF22837B36500AD28D6 /* EditProfileViewController.swift */,
+				7D6DAEF52837B3BC00AD28D6 /* EditProfileConfigurator.swift */,
+				7D6DAF002837C5E500AD28D6 /* EditProfileRouter.swift */,
+			);
+			path = EditProfileScreen;
 			sourceTree = "<group>";
 		};
 		7D7386D5281047B9008C00FE /* Utils */ = {
@@ -1134,6 +1174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D6DAEF32837B36500AD28D6 /* EditProfileViewController.swift in Sources */,
 				7D612D6028119F57007C7515 /* BaseModels.swift in Sources */,
 				7D7386DD2810621A008C00FE /* LoginPresenter.swift in Sources */,
 				7D178EAD28085B11009C6280 /* RegistrationRouter.swift in Sources */,
@@ -1160,6 +1201,7 @@
 				7DA878A5282C20AA004E537F /* SplashInteractor.swift in Sources */,
 				7D7F6C0A2823B8140043048E /* SearchInteractor.swift in Sources */,
 				30D2F277260148EE000134EB /* Texts.swift in Sources */,
+				7D6DAEFD2837BCA800AD28D6 /* ProfileRouter.swift in Sources */,
 				7D81BB37281C46A000CC9819 /* SearchScreenConfigurator.swift in Sources */,
 				7D7F6C032823B37F0043048E /* IMDB-NetworkConfiguration.swift in Sources */,
 				7D9D6FAA2825892C009DFD03 /* DetailsInteractor.swift in Sources */,
@@ -1170,12 +1212,14 @@
 				30D2F274260148EE000134EB /* Asset.swift in Sources */,
 				7D788AA72819681E0067D7B4 /* FilmsDataModel.xcdatamodeld in Sources */,
 				7D7386D7281047F7008C00FE /* RequestBuilder.swift in Sources */,
+				7D6DAEF62837B3BC00AD28D6 /* EditProfileConfigurator.swift in Sources */,
 				7D178EB128087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
 				7D7EF854280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */,
 				7DAD276328181730005B9D6F /* FilmsTableViewCell.swift in Sources */,
 				7DAD2766281830AB005B9D6F /* FavouriteInteractor.swift in Sources */,
 				7D7386D328101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
 				7DAD27692818316D005B9D6F /* FavouritePresenter.swift in Sources */,
+				7D6DAEEF2837B02500AD28D6 /* ProfileViewController.swift in Sources */,
 				7D6500472822ABF30079ABAC /* SearchedFilmsTableView.swift in Sources */,
 				7D1C342A282D63D70093FA68 /* EditMovieRouter.swift in Sources */,
 				7DC40920281A8B100062DB08 /* FetchFilmsService.swift in Sources */,
@@ -1183,6 +1227,7 @@
 				7D9D6F9A28255616009DFD03 /* DetailsViewController.swift in Sources */,
 				7DAD275A2817E365005B9D6F /* ImageDownloadingService.swift in Sources */,
 				7DBC89392807065200F94B6C /* AuthorizationTextField.swift in Sources */,
+				7D6DAEFA2837B80E00AD28D6 /* ProfileConfigurator.swift in Sources */,
 				7DA878A1282C20AA004E537F /* SplashConfigurator.swift in Sources */,
 				7D112F8A2804641200BB7ECC /* SceneDelegate.swift in Sources */,
 				7DE0E2472816BB4E00670DE3 /* FilmsCollectionView.swift in Sources */,
@@ -1199,6 +1244,7 @@
 				7D2B6B0B28228D6200F7D5A8 /* SearchScreenSizes.swift in Sources */,
 				7D9D6F9D28255ACA009DFD03 /* DetailsScreenConfigurator.swift in Sources */,
 				7D7F6C072823B6750043048E /* SearchMovieService.swift in Sources */,
+				7D6DAF012837C5E500AD28D6 /* EditProfileRouter.swift in Sources */,
 				7D7EF859280EF0DA00B99CA4 /* RegistrationPresenter.swift in Sources */,
 				3095A8BF25FC96BC0010B54A /* ViewModelConfigurable.swift in Sources */,
 				7DE0E24A2816CE1B00670DE3 /* FavouriteScreenElementsSizes.swift in Sources */,
@@ -1227,6 +1273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D6DAEF42837B36500AD28D6 /* EditProfileViewController.swift in Sources */,
 				7D612D6128119F57007C7515 /* BaseModels.swift in Sources */,
 				7D7386DE2810621A008C00FE /* LoginPresenter.swift in Sources */,
 				7D7EF857280EF04100B99CA4 /* LoginService.swift in Sources */,
@@ -1253,6 +1300,7 @@
 				7DA878A6282C20AA004E537F /* SplashInteractor.swift in Sources */,
 				7D7F6C0B2823B8140043048E /* SearchInteractor.swift in Sources */,
 				7D7EF855280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */,
+				7D6DAEFE2837BCA800AD28D6 /* ProfileRouter.swift in Sources */,
 				7D81BB38281C46A000CC9819 /* SearchScreenConfigurator.swift in Sources */,
 				7D7F6C042823B37F0043048E /* IMDB-NetworkConfiguration.swift in Sources */,
 				7D9D6FAB2825892C009DFD03 /* DetailsInteractor.swift in Sources */,
@@ -1263,12 +1311,14 @@
 				7DB7E0C92806BBAB00996926 /* LoginViewController.swift in Sources */,
 				7D788AA82819681E0067D7B4 /* FilmsDataModel.xcdatamodeld in Sources */,
 				7D7386D8281047F7008C00FE /* RequestBuilder.swift in Sources */,
+				7D6DAEF72837B3BC00AD28D6 /* EditProfileConfigurator.swift in Sources */,
 				7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */,
 				7D178EB228087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
 				7DAD276428181730005B9D6F /* FilmsTableViewCell.swift in Sources */,
 				7DAD2767281830AB005B9D6F /* FavouriteInteractor.swift in Sources */,
 				7D7386D428101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
 				7DAD276A2818316D005B9D6F /* FavouritePresenter.swift in Sources */,
+				7D6DAEF02837B02500AD28D6 /* ProfileViewController.swift in Sources */,
 				7D6500482822ABF30079ABAC /* SearchedFilmsTableView.swift in Sources */,
 				7D1C342B282D63D70093FA68 /* EditMovieRouter.swift in Sources */,
 				7DC40921281A8B100062DB08 /* FetchFilmsService.swift in Sources */,
@@ -1276,6 +1326,7 @@
 				7D9D6F9B28255616009DFD03 /* DetailsViewController.swift in Sources */,
 				7DAD275B2817E365005B9D6F /* ImageDownloadingService.swift in Sources */,
 				7DBC893A2807065200F94B6C /* AuthorizationTextField.swift in Sources */,
+				7D6DAEFB2837B80E00AD28D6 /* ProfileConfigurator.swift in Sources */,
 				7DA878A2282C20AA004E537F /* SplashConfigurator.swift in Sources */,
 				7D9715182805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */,
 				7DE0E2482816BB4E00670DE3 /* FilmsCollectionView.swift in Sources */,
@@ -1292,6 +1343,7 @@
 				7D2B6B0C28228D6200F7D5A8 /* SearchScreenSizes.swift in Sources */,
 				7D9D6F9E28255ACA009DFD03 /* DetailsScreenConfigurator.swift in Sources */,
 				7D7F6C082823B6750043048E /* SearchMovieService.swift in Sources */,
+				7D6DAF022837C5E500AD28D6 /* EditProfileRouter.swift in Sources */,
 				7D7EF85A280EF0DA00B99CA4 /* RegistrationPresenter.swift in Sources */,
 				7D112F8B2804641200BB7ECC /* SceneDelegate.swift in Sources */,
 				7DE0E24B2816CE1B00670DE3 /* FavouriteScreenElementsSizes.swift in Sources */,
