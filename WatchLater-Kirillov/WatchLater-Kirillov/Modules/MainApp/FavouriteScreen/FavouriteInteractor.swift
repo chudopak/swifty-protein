@@ -117,23 +117,25 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         }
         presenter.presentMovies(films: filmsData, watched: watched)
         networkService.fetchFilms(page: page, size: size, watched: watched) { [weak self] result in
-            switch result {
-            case .success(let films):
-                let filmsMarked = self?.setWatchStatusToFetchedFilms(films: films, watched: watched)
-                if !optionalsAreEqual(firstVal: filmsMarked, secondVal: filmsData) {
-                    print("not equeal lLLALALAL")
-                    if let unwrappedFilms = filmsMarked, unwrappedFilms.count == size {
-                        self?.setMovieSegmentIsFull(value: false, watched: watched)
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                switch result {
+                case .success(let films):
+                    let filmsMarked = self?.setWatchStatusToFetchedFilms(films: films, watched: watched)
+                    if !optionalsAreEqual(firstVal: filmsMarked, secondVal: filmsData) {
+                        print("not equeal lLLALALAL")
+                        if let unwrappedFilms = filmsMarked, unwrappedFilms.count == size {
+                            self?.setMovieSegmentIsFull(value: false, watched: watched)
+                        }
+                        let startReplacePosition = size * page
+                        self?.presenter.replaceLastPage(films: filmsMarked,
+                                                        watched: watched,
+                                                        startReplacePosition: startReplacePosition)
+                        self?.actualiseFilmsInCoreData(filmsBack: filmsMarked, filmsLocal: filmsInfo)
                     }
-                    let startReplacePosition = size * page
-                    self?.presenter.replaceLastPage(films: filmsMarked,
-                                                    watched: watched,
-                                                    startReplacePosition: startReplacePosition)
-                    self?.actualiseFilmsInCoreData(filmsBack: filmsMarked, filmsLocal: filmsInfo)
+                    
+                case .failure(let error):
+                    print("Fetch Movies error - \(error.localizedDescription)")
                 }
-                
-            case .failure(let error):
-                print("Fetch Movies error - \(error.localizedDescription)")
             }
         }
     }
@@ -147,17 +149,19 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         let filmsData = convertCoreDataFilmsStructToFilmData(films: filmsInfo)
         presenter.addOneMovieToLastPage(film: filmsData, watched: watched)
         networkService.fetchFilms(page: page, size: 1, watched: watched) { [weak self] result in
-            switch result {
-            case .success(let films):
-                let filmsMarked = self?.setWatchStatusToFetchedFilms(films: films, watched: watched)
-                if !optionalsAreEqual(firstVal: filmsMarked, secondVal: filmsData) {
-                    print("lLLALALAL not equeal lLLALALAL")
-                    self?.presenter.replaceMovie(film: filmsMarked, watched: watched, at: page)
-                    self?.actualiseFilmsInCoreData(filmsBack: filmsMarked, filmsLocal: filmsInfo)
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                switch result {
+                case .success(let films):
+                    let filmsMarked = self?.setWatchStatusToFetchedFilms(films: films, watched: watched)
+                    if !optionalsAreEqual(firstVal: filmsMarked, secondVal: filmsData) {
+                        print("lLLALALAL not equeal lLLALALAL")
+                        self?.presenter.replaceMovie(film: filmsMarked, watched: watched, at: page)
+                        self?.actualiseFilmsInCoreData(filmsBack: filmsMarked, filmsLocal: filmsInfo)
+                    }
+                    
+                case .failure(let error):
+                    print("Fetch Movies error - \(error.localizedDescription)")
                 }
-                
-            case .failure(let error):
-                print("Fetch Movies error - \(error.localizedDescription)")
             }
         }
     }
@@ -231,29 +235,35 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
     }
     
     private func setFilmInfo(film: FilmInfo, back: FilmData) {
-        film.id = back.id
-        film.titleDescription = back.description ?? Text.Fillings.noData
-        film.posterID = back.posterId
-        film.rating = getPrefix(string: String(back.rating ?? 0), prefixValue: 3)
-        film.year = getPrefix(string: back.timestamp ?? Text.Fillings.noData, prefixValue: 4)
-        film.genres = back.genres
-        film.title = back.title
-        film.isWatched = back.isWatched ?? false
+        CoreDataService.shared.managedObjectContext.performAndWait {
+            film.id = back.id
+            film.titleDescription = back.description ?? Text.Fillings.noData
+            film.posterID = back.posterId
+            film.rating = getPrefix(string: String(back.rating ?? 0), prefixValue: 3)
+            film.year = getPrefix(string: back.timestamp ?? Text.Fillings.noData, prefixValue: 4)
+            film.genres = back.genres
+            film.title = back.title
+            film.isWatched = back.isWatched ?? false
+        }
     }
     
     private func compareFilms(back: FilmData, local: FilmInfo) -> Bool {
         let backYear = getPrefix(string: back.timestamp ?? Text.Fillings.noData, prefixValue: 4)
         let backRating = getPrefix(string: String(back.rating ?? 0), prefixValue: 3)
-        guard let backDescripiton = back.description,
-              local.titleDescription == backDescripiton,
-              optionalsAreEqual(firstVal: back.posterId, secondVal: local.posterID),
-              optionalsAreEqual(firstVal: back.genres, secondVal: local.genres),
-              backYear == local.year,
-              backRating == local.rating
-        else {
-            return false
+        var result = false
+        CoreDataService.shared.managedObjectContext.performAndWait {
+            guard let backDescripiton = back.description,
+                  local.titleDescription == backDescripiton,
+                  optionalsAreEqual(firstVal: back.posterId, secondVal: local.posterID),
+                  optionalsAreEqual(firstVal: back.genres, secondVal: local.genres),
+                  backYear == local.year,
+                  backRating == local.rating
+            else {
+                return
+            }
+            result = true
         }
-        return true
+        return result
     }
     
     private func getPageForMovieSegment(watched: Bool) -> Int {
