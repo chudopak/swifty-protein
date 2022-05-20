@@ -95,6 +95,14 @@
 		7D6DAEFE2837BCA800AD28D6 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAEFC2837BCA800AD28D6 /* ProfileRouter.swift */; };
 		7D6DAF012837C5E500AD28D6 /* EditProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAF002837C5E500AD28D6 /* EditProfileRouter.swift */; };
 		7D6DAF022837C5E500AD28D6 /* EditProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAF002837C5E500AD28D6 /* EditProfileRouter.swift */; };
+		7D6DAF052837D3C900AD28D6 /* ProfileInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAF032837D3C900AD28D6 /* ProfileInfo+CoreDataClass.swift */; };
+		7D6DAF062837D3C900AD28D6 /* ProfileInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAF032837D3C900AD28D6 /* ProfileInfo+CoreDataClass.swift */; };
+		7D6DAF072837D3C900AD28D6 /* ProfileInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAF042837D3C900AD28D6 /* ProfileInfo+CoreDataProperties.swift */; };
+		7D6DAF082837D3C900AD28D6 /* ProfileInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAF042837D3C900AD28D6 /* ProfileInfo+CoreDataProperties.swift */; };
+		7D6DAF0A2837D53100AD28D6 /* ProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAF092837D53100AD28D6 /* ProfileModels.swift */; };
+		7D6DAF0B2837D53100AD28D6 /* ProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAF092837D53100AD28D6 /* ProfileModels.swift */; };
+		7D6DAF0E2837DA7000AD28D6 /* EditProfileScreenSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAF0D2837DA7000AD28D6 /* EditProfileScreenSizes.swift */; };
+		7D6DAF0F2837DA7000AD28D6 /* EditProfileScreenSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6DAF0D2837DA7000AD28D6 /* EditProfileScreenSizes.swift */; };
 		7D7386D328101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386D228101F36008C00FE /* RegistrationControllerConfigurator.swift */; };
 		7D7386D428101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386D228101F36008C00FE /* RegistrationControllerConfigurator.swift */; };
 		7D7386D7281047F7008C00FE /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386D6281047F7008C00FE /* RequestBuilder.swift */; };
@@ -269,6 +277,10 @@
 		7D6DAEF92837B80E00AD28D6 /* ProfileConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileConfigurator.swift; sourceTree = "<group>"; };
 		7D6DAEFC2837BCA800AD28D6 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		7D6DAF002837C5E500AD28D6 /* EditProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileRouter.swift; sourceTree = "<group>"; };
+		7D6DAF032837D3C900AD28D6 /* ProfileInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7D6DAF042837D3C900AD28D6 /* ProfileInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7D6DAF092837D53100AD28D6 /* ProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModels.swift; sourceTree = "<group>"; };
+		7D6DAF0D2837DA7000AD28D6 /* EditProfileScreenSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileScreenSizes.swift; sourceTree = "<group>"; };
 		7D7386D228101F36008C00FE /* RegistrationControllerConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationControllerConfigurator.swift; sourceTree = "<group>"; };
 		7D7386D6281047F7008C00FE /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		7D7386D9281061EB008C00FE /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
@@ -655,6 +667,7 @@
 				7D6DAEEE2837B02500AD28D6 /* ProfileViewController.swift */,
 				7D6DAEF92837B80E00AD28D6 /* ProfileConfigurator.swift */,
 				7D6DAEFC2837BCA800AD28D6 /* ProfileRouter.swift */,
+				7D6DAF092837D53100AD28D6 /* ProfileModels.swift */,
 			);
 			path = ProfileScreen;
 			sourceTree = "<group>";
@@ -662,11 +675,20 @@
 		7D6DAEF12837B2CB00AD28D6 /* EditProfileScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7D6DAF0C2837DA5500AD28D6 /* Utils */,
 				7D6DAEF22837B36500AD28D6 /* EditProfileViewController.swift */,
 				7D6DAEF52837B3BC00AD28D6 /* EditProfileConfigurator.swift */,
 				7D6DAF002837C5E500AD28D6 /* EditProfileRouter.swift */,
 			);
 			path = EditProfileScreen;
+			sourceTree = "<group>";
+		};
+		7D6DAF0C2837DA5500AD28D6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7D6DAF0D2837DA7000AD28D6 /* EditProfileScreenSizes.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		7D7386D5281047B9008C00FE /* Utils */ = {
@@ -680,6 +702,8 @@
 		7D788AA4281967BA0067D7B4 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				7D6DAF032837D3C900AD28D6 /* ProfileInfo+CoreDataClass.swift */,
+				7D6DAF042837D3C900AD28D6 /* ProfileInfo+CoreDataProperties.swift */,
 				7DC40919281A78F30062DB08 /* FilmInfo+CoreDataClass.swift */,
 				7DC4091A281A78F30062DB08 /* FilmInfo+CoreDataProperties.swift */,
 				7D788AA52819681E0067D7B4 /* FilmsDataModel.xcdatamodeld */,
@@ -1181,6 +1205,7 @@
 				7DC4091B281A78F30062DB08 /* FilmInfo+CoreDataClass.swift in Sources */,
 				7D3B5D572807197100AEBF1A /* LoginModel.swift in Sources */,
 				7D81BB30281C437100CC9819 /* FavouriteRouter.swift in Sources */,
+				7D6DAF072837D3C900AD28D6 /* ProfileInfo+CoreDataProperties.swift in Sources */,
 				7D65004A2822AD060079ABAC /* SearchFilmTableViewCell.swift in Sources */,
 				7D3B5D5A280725DE00AEBF1A /* BaseBorderButton.swift in Sources */,
 				7DAD276C281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */,
@@ -1258,11 +1283,14 @@
 				7D1C3427282D63780093FA68 /* EditMovieConfigurator.swift in Sources */,
 				7D7F6C0E2823B97F0043048E /* SearchPresenter.swift in Sources */,
 				7DB7E0C52806B56D00996926 /* LoginScreenElementsSizes.swift in Sources */,
+				7D6DAF052837D3C900AD28D6 /* ProfileInfo+CoreDataClass.swift in Sources */,
 				7D7EF84F280ED70800B99CA4 /* LoginService.swift in Sources */,
 				7D7386DA281061EB008C00FE /* LoginInteractor.swift in Sources */,
+				7D6DAF0A2837D53100AD28D6 /* ProfileModels.swift in Sources */,
 				7D7F6C112823BF540043048E /* SearchMovieModels.swift in Sources */,
 				7D99732028058F7E0094F302 /* LoginRouter.swift in Sources */,
 				7D0F1A0F2812FF8E007570F9 /* MainTabBar.swift in Sources */,
+				7D6DAF0E2837DA7000AD28D6 /* EditProfileScreenSizes.swift in Sources */,
 				7D1C3424282D62AD0093FA68 /* EditMovieViewController.swift in Sources */,
 				7D112F8F2804861700BB7ECC /* SplashViewController.swift in Sources */,
 				7D9D6FA328256839009DFD03 /* DetailsModel.swift in Sources */,
@@ -1280,6 +1308,7 @@
 				7DC4091C281A78F30062DB08 /* FilmInfo+CoreDataClass.swift in Sources */,
 				7D7EF856280EF02600B99CA4 /* RegistrationService.swift in Sources */,
 				7D81BB31281C437100CC9819 /* FavouriteRouter.swift in Sources */,
+				7D6DAF082837D3C900AD28D6 /* ProfileInfo+CoreDataProperties.swift in Sources */,
 				7D65004B2822AD060079ABAC /* SearchFilmTableViewCell.swift in Sources */,
 				7D178EAE28085B11009C6280 /* RegistrationRouter.swift in Sources */,
 				7DAD276D281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */,
@@ -1357,11 +1386,14 @@
 				7D1C3428282D63780093FA68 /* EditMovieConfigurator.swift in Sources */,
 				7D7F6C0F2823B97F0043048E /* SearchPresenter.swift in Sources */,
 				30F08000265A8746009B2398 /* AppDelegate.swift in Sources */,
+				7D6DAF062837D3C900AD28D6 /* ProfileInfo+CoreDataClass.swift in Sources */,
 				30314CC8265AADB500CADD41 /* BaseViewController.swift in Sources */,
 				7D7386DB281061EB008C00FE /* LoginInteractor.swift in Sources */,
+				7D6DAF0B2837D53100AD28D6 /* ProfileModels.swift in Sources */,
 				7D7F6C122823BF540043048E /* SearchMovieModels.swift in Sources */,
 				30F08008265A8746009B2398 /* ViewModelConfigurable.swift in Sources */,
 				7D0F1A102812FF8E007570F9 /* MainTabBar.swift in Sources */,
+				7D6DAF0F2837DA7000AD28D6 /* EditProfileScreenSizes.swift in Sources */,
 				7D1C3425282D62AD0093FA68 /* EditMovieViewController.swift in Sources */,
 				7D112F902804861700BB7ECC /* SplashViewController.swift in Sources */,
 				7D9D6FA428256839009DFD03 /* DetailsModel.swift in Sources */,

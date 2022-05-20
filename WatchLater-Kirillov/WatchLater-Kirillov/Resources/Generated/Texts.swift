@@ -76,6 +76,8 @@ internal enum Text {
     internal static let remove = Text.tr("Localizable", "Common.remove")
     /// Обновить
     internal static let update = Text.tr("Localizable", "Common.update")
+    /// Загрузить фото
+    internal static let uploadPhoto = Text.tr("Localizable", "Common.uploadPhoto")
     /// Просмотрено
     internal static let viewed = Text.tr("Localizable", "Common.viewed")
     /// Буду смотреть

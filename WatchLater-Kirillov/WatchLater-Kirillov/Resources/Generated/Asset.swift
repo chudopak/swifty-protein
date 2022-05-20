@@ -57,6 +57,7 @@ internal enum Asset {
   internal static let logoShort = ImageAsset(name: "logoShort")
   internal static let noImage = ImageAsset(name: "noImage")
   internal static let searchIconGray = ImageAsset(name: "searchIconGray")
+  internal static let uploadSymbol = ImageAsset(name: "uploadSymbol")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

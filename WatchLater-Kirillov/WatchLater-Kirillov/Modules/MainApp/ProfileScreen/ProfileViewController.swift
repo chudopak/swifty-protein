@@ -20,6 +20,7 @@ class ProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
+        FirstLaunchChecker.isFirstProfileLaunch = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

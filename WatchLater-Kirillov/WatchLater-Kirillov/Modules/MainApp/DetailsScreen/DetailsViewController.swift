@@ -359,7 +359,7 @@ extension DetailsViewController {
     private func makePosterView() -> UIImageView {
         let view = UIImageView()
         view.clipsToBounds = true
-        view.contentMode = .scaleAspectFill
+        view.contentMode = .scaleToFill
         view.backgroundColor = Asset.Colors.grayTransperent.color
         return view
     }
