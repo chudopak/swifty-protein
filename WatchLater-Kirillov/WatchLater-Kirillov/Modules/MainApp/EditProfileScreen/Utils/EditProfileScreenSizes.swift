@@ -26,4 +26,30 @@ enum EditProfileScreenSize {
         static let imageTopOffset: CGFloat = 25
         static let labelBottomOffset: CGFloat = 25
     }
+    
+    enum ProfileImage {
+        static let buttonWidth: CGFloat = 20
+        static let buttonHeight: CGFloat = 20
+        static let buttonTopOffset: CGFloat = 7
+        static let buttonRightOffset: CGFloat = 8
+        static let borderWidth: CGFloat = 2
+        
+        static let imageSideOffset: CGFloat = 70
+        static let imageWidth: CGFloat = 160
+        static let imageHeight: CGFloat = 135
+        static let imageTopOffset: CGFloat = 56
+    }
+    
+    enum TextField {
+        
+        private static let ratioSideOffsetWithScreenWidth: CGFloat = 0.042
+        
+        static let height: CGFloat = 60
+        static let topOffset: CGFloat = 57
+        static let bottomBoarderLineHeight: CGFloat = 0.5
+        static var textRectangleTopOffset: CGFloat = 19
+        static var textRectangleSideOffset: CGFloat {
+            return UIScreen.main.bounds.size.width * ratioSideOffsetWithScreenWidth
+        }
+    }
 }

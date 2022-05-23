@@ -16,6 +16,11 @@ Common.viewed = "Просмотрено";
 Common.noPoster = "Нет Постера";
 Common.aboutMovie = "О фильме";
 Common.uploadPhoto = "Загрузить фото";
+Common.name = "Имя";
+Common.aboutYourself = "О себе";
+Common.favoriteGenres = "Любимые жанры";
+Common.library = "Библиотека";
+Common.takeAPicture = "Сделать фото";
 
 // MARK: - Authorization
 

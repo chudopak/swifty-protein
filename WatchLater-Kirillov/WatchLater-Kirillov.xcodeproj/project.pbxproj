@@ -115,6 +115,12 @@
 		7D7386E1281064C3008C00FE /* LoginControllerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7386DF281064C3008C00FE /* LoginControllerConfigurator.swift */; };
 		7D788AA72819681E0067D7B4 /* FilmsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D788AA52819681E0067D7B4 /* FilmsDataModel.xcdatamodeld */; };
 		7D788AA82819681E0067D7B4 /* FilmsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D788AA52819681E0067D7B4 /* FilmsDataModel.xcdatamodeld */; };
+		7D7C3F85283B7D8700D6770C /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F84283B7D8700D6770C /* BaseTextField.swift */; };
+		7D7C3F86283B7D8700D6770C /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F84283B7D8700D6770C /* BaseTextField.swift */; };
+		7D7C3F88283B98ED00D6770C /* EditProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F87283B98ED00D6770C /* EditProfileInteractor.swift */; };
+		7D7C3F89283B98ED00D6770C /* EditProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F87283B98ED00D6770C /* EditProfileInteractor.swift */; };
+		7D7C3F8B283B992700D6770C /* EditProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F8A283B992700D6770C /* EditProfilePresenter.swift */; };
+		7D7C3F8C283B992700D6770C /* EditProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F8A283B992700D6770C /* EditProfilePresenter.swift */; };
 		7D7EF84F280ED70800B99CA4 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF84E280ED70800B99CA4 /* LoginService.swift */; };
 		7D7EF852280EED8F00B99CA4 /* RegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF851280EED8F00B99CA4 /* RegistrationService.swift */; };
 		7D7EF854280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF853280EEF8C00B99CA4 /* RegistrationInteractor.swift */; };
@@ -287,6 +293,9 @@
 		7D7386DC2810621A008C00FE /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		7D7386DF281064C3008C00FE /* LoginControllerConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginControllerConfigurator.swift; sourceTree = "<group>"; };
 		7D788AA62819681E0067D7B4 /* FilmsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FilmsDataModel.xcdatamodel; sourceTree = "<group>"; };
+		7D7C3F84283B7D8700D6770C /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
+		7D7C3F87283B98ED00D6770C /* EditProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileInteractor.swift; sourceTree = "<group>"; };
+		7D7C3F8A283B992700D6770C /* EditProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePresenter.swift; sourceTree = "<group>"; };
 		7D7EF84E280ED70800B99CA4 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		7D7EF851280EED8F00B99CA4 /* RegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
 		7D7EF853280EEF8C00B99CA4 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
@@ -505,6 +514,7 @@
 			isa = PBXGroup;
 			children = (
 				7DBC89382807065200F94B6C /* AuthorizationTextField.swift */,
+				7D7C3F84283B7D8700D6770C /* BaseTextField.swift */,
 			);
 			path = TextField;
 			sourceTree = "<group>";
@@ -679,6 +689,8 @@
 				7D6DAEF22837B36500AD28D6 /* EditProfileViewController.swift */,
 				7D6DAEF52837B3BC00AD28D6 /* EditProfileConfigurator.swift */,
 				7D6DAF002837C5E500AD28D6 /* EditProfileRouter.swift */,
+				7D7C3F87283B98ED00D6770C /* EditProfileInteractor.swift */,
+				7D7C3F8A283B992700D6770C /* EditProfilePresenter.swift */,
 			);
 			path = EditProfileScreen;
 			sourceTree = "<group>";
@@ -1264,6 +1276,7 @@
 				306BF31225FC8F7200E9B481 /* AppDelegate.swift in Sources */,
 				7D178EAA280859F0009C6280 /* RegistrationViewController.swift in Sources */,
 				7D612D632811A335007C7515 /* RefreshServiceModel.swift in Sources */,
+				7D7C3F85283B7D8700D6770C /* BaseTextField.swift in Sources */,
 				7D9715172805BB3B00CC31B8 /* FirstLauchChecker.swift in Sources */,
 				30314CCC265AADB600CADD41 /* BaseViewController.swift in Sources */,
 				7D2B6B0B28228D6200F7D5A8 /* SearchScreenSizes.swift in Sources */,
@@ -1279,6 +1292,8 @@
 				7D612D5D28119E08007C7515 /* RefreshTokenService.swift in Sources */,
 				7DDC8A2C283249BE0029813E /* CoreDataServiceModel.swift in Sources */,
 				7DA878A3282C20AA004E537F /* SplashRouter.swift in Sources */,
+				7D7C3F88283B98ED00D6770C /* EditProfileInteractor.swift in Sources */,
+				7D7C3F8B283B992700D6770C /* EditProfilePresenter.swift in Sources */,
 				7D612D5528118246007C7515 /* FavouriteViewController.swift in Sources */,
 				7D1C3427282D63780093FA68 /* EditMovieConfigurator.swift in Sources */,
 				7D7F6C0E2823B97F0043048E /* SearchPresenter.swift in Sources */,
@@ -1367,6 +1382,7 @@
 				30F07FF7265A8746009B2398 /* Texts.swift in Sources */,
 				30F07FF8265A8746009B2398 /* StoryboardSegues.swift in Sources */,
 				7D612D642811A335007C7515 /* RefreshServiceModel.swift in Sources */,
+				7D7C3F86283B7D8700D6770C /* BaseTextField.swift in Sources */,
 				7D178EAB280859F0009C6280 /* RegistrationViewController.swift in Sources */,
 				30F07FFE265A8746009B2398 /* Asset.swift in Sources */,
 				7D2B6B0C28228D6200F7D5A8 /* SearchScreenSizes.swift in Sources */,
@@ -1382,6 +1398,8 @@
 				7D612D5E28119E08007C7515 /* RefreshTokenService.swift in Sources */,
 				7DDC8A2D283249BE0029813E /* CoreDataServiceModel.swift in Sources */,
 				7DA878A4282C20AA004E537F /* SplashRouter.swift in Sources */,
+				7D7C3F89283B98ED00D6770C /* EditProfileInteractor.swift in Sources */,
+				7D7C3F8C283B992700D6770C /* EditProfilePresenter.swift in Sources */,
 				7D612D5628118246007C7515 /* FavouriteViewController.swift in Sources */,
 				7D1C3428282D63780093FA68 /* EditMovieConfigurator.swift in Sources */,
 				7D7F6C0F2823B97F0043048E /* SearchPresenter.swift in Sources */,

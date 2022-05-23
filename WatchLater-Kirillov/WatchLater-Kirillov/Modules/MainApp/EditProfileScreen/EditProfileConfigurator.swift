@@ -13,7 +13,12 @@ final class EditProfileConfigurator {
     func setupModule() -> EditProfileViewController {
         let vc = EditProfileViewController()
         let router = EditProfileRouter(viewController: vc)
-        vc.setupComponents(router: router)
+        let presenter = EditProfilePresenter(viewController: vc)
+        let networkService = NetworkLayer(refreshService: RefreshTokenService())
+        let imageService = ImageDownloadingService(networkManager: networkService)
+        let interactor = EditProfileInteractor(presenter: presenter,
+                                               imageDownloadingService: imageService)
+        vc.setupComponents(router: router, interactor: interactor)
         return vc
     }
 }

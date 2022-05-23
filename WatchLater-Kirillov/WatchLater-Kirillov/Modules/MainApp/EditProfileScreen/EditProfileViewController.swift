@@ -8,9 +8,16 @@
 
 import UIKit
 
+protocol EditProfileViewControllerProtocol: AnyObject {
+    func setUserProfile(info: UserInfo?)
+    func setUserProfilePicture(image: UIImage)
+}
+
 class EditProfileViewController: BaseViewController {
     
+    private var userProfileInfo: UserInfo?
     private var router: EditProfileRouter!
+    private var interactor: EditProfileInteractorProtocol!
     
     private lazy var saveChangesButton = makeSaveChangesButtonItem()
     private lazy var backBarButton = makeBackButtonItem()
@@ -21,11 +28,20 @@ class EditProfileViewController: BaseViewController {
     private lazy var uploadPhotoLabel = makeUploadPhotoLabel()
     private lazy var uploadImageView = makeUploadImageView()
     private lazy var profileImageView = makeProfileImageView()
+    private lazy var deleteProfileImageButton = makeDeleteProfileImageButton()
+    private lazy var nameTextField = makeNameTextField()
+    private lazy var aboutTextField = makeAboutTextField()
+    private lazy var favoriteGenresTextField = makeFavoriteGenresTextField()
+    
+    private var isKeyboardUp = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
+        setGestures()
         setConstraints()
+        setKeyBoboardObservers()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,8 +49,10 @@ class EditProfileViewController: BaseViewController {
         setNavigationController()
     }
     
-    func setupComponents(router: EditProfileRouter) {
+    func setupComponents(router: EditProfileRouter,
+                         interactor: EditProfileInteractorProtocol) {
         self.router = router
+        self.interactor = interactor
     }
     
     private func setView() {
@@ -45,13 +63,44 @@ class EditProfileViewController: BaseViewController {
         scrollView.addSubview(uploadPhotoButton)
         uploadPhotoButton.addSubview(uploadPhotoLabel)
         uploadPhotoButton.addSubview(uploadImageView)
+        scrollView.addSubview(profileImageView)
+        profileImageView.addSubview(deleteProfileImageButton)
+        makeVisible(uploadButton: true)
+        scrollView.addSubview(nameTextField)
+        scrollView.addSubview(aboutTextField)
+        scrollView.addSubview(favoriteGenresTextField)
     }
     
     private func setNavigationController() {
         navigationItem.leftBarButtonItem = backBarButton
-        navigationItem.rightBarButtonItem = saveChangesButton
+//        navigationItem.rightBarButtonItem = saveChangesButton
         navigationController!.navigationBar.prefersLargeTitles = true
         navigationItem.titleView = UIImageView(image: Asset.logoShort.image)
+    }
+    
+    private func setGestures() {
+        let hideKeyboardGuesture = UITapGestureRecognizer(target: self,
+                                                          action: #selector(hideKeyboard))
+        hideKeyboardGuesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(hideKeyboardGuesture)
+    }
+    
+    private func makeVisible(profileImageView imageView: Bool = false,
+                             uploadButton: Bool = false) {
+        profileImageView.isHidden = !imageView
+        uploadPhotoButton.isHidden = !uploadButton
+        uploadImageView.isHidden = !uploadButton
+        uploadPhotoLabel.isHidden = !uploadButton
+    }
+    
+    @objc private func hideKeyboard() {
+        if nameTextField.isEditing {
+            nameTextField.resignFirstResponder()
+        } else if aboutTextField.isEditing {
+            aboutTextField.resignFirstResponder()
+        } else if favoriteGenresTextField.isEditing {
+            favoriteGenresTextField.resignFirstResponder()
+        }
     }
     
     @objc private func saveChanges() {
@@ -65,6 +114,59 @@ class EditProfileViewController: BaseViewController {
     @objc private func uploadProfileImage() {
         print("Uploading Changes")
         pickPhoto()
+    }
+    
+    @objc private func clearImage() {
+        profileImageView.image = nil
+        makeVisible(uploadButton: true)
+    }
+    
+    @objc private func nameDoneButtonPressed() {
+        nameTextField.resignFirstResponder()
+        if aboutTextField.text == nil
+            || aboutTextField.text!.isEmpty {
+            aboutTextField.becomeFirstResponder()
+        }
+    }
+    
+    @objc private func aboutDoneButtonPressed() {
+        aboutTextField.resignFirstResponder()
+        if favoriteGenresTextField.text == nil
+            || favoriteGenresTextField.text!.isEmpty {
+            favoriteGenresTextField.becomeFirstResponder()
+        }
+    }
+    
+    @objc private func favoriteGenresDoneButtonPressed() {
+        favoriteGenresTextField.resignFirstResponder()
+        if nameTextField.text == nil
+            || nameTextField.text!.isEmpty {
+            nameTextField.becomeFirstResponder()
+        }
+    }
+}
+
+extension EditProfileViewController {
+    
+    private func setKeyBoboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if !isKeyboardUp {
+                setScrollViewKeyboardUpConstraint(keyboardHeight: keyboardSize.height)
+                isKeyboardUp = true
+            }
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        if isKeyboardUp {
+            setScrollViewConstraint()
+            isKeyboardUp = false
+        }
     }
 }
 
@@ -92,6 +194,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
     ) {
         profileImageView.image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+        makeVisible(profileImageView: true)
         dismiss(animated: true, completion: nil)
     }
     
@@ -108,25 +211,61 @@ extension EditProfileViewController: UIImagePickerControllerDelegate,
     }
     
     func showPhotoMenu() {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        // TODO: Don't forget add localisable strings
+        let alert = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
         alert.view.tintColor = Asset.Colors.deepBlue.color
-
-        let actCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
+        let actCancel = UIAlertAction(
+            title: Text.Common.cancel,
+            style: .cancel,
+            handler: nil
+        )
         alert.addAction(actCancel)
         
-        let actPhoto = UIAlertAction(title: "Take Photo", style: .default, handler: { _ in
+        let actPhoto = UIAlertAction(
+            title: Text.Common.takeAPicture,
+            style: .default
+        ) { _ in
             self.takeNewPhoto()
-        })
-        
+        }
         alert.addAction(actPhoto)
-        
-        let actLibrary = UIAlertAction(title: "Chose From Library", style: .default, handler: { _ in
+        let actLibrary = UIAlertAction(
+            title: Text.Common.library,
+            style: .default
+        ) { _ in
             self.choosePhotoFromLibrary()
-        })
+        }
         
         alert.addAction(actLibrary)
         present(alert, animated: true, completion: nil)
+    }
+}
+
+extension EditProfileViewController: EditProfileViewControllerProtocol {
+
+    func setUserProfile(info: UserInfo?) {
+        userProfileInfo = info
+        if let userInfo = userProfileInfo {
+            nameTextField.text = userInfo.name
+            aboutTextField.text = userInfo.description
+            var genres: String = ""
+            for i in 0..<userInfo.genres.count {
+                if i == userInfo.genres.count - 1 {
+                    genres += userInfo.genres[i]
+                } else {
+                    genres += userInfo.genres[i] + ","
+                }
+            }
+            favoriteGenresTextField.text = genres
+        }
+    }
+    
+    func setUserProfilePicture(image: UIImage) {
+        profileImageView.image = image
+        makeVisible(profileImageView: true)
     }
 }
 
@@ -187,8 +326,76 @@ extension EditProfileViewController {
     private func makeProfileImageView() -> UIImageView {
         let imageView = UIImageView()
         imageView.isUserInteractionEnabled = true
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
+        imageView.backgroundColor = .red
         return imageView
+    }
+    
+    private func makeDeleteProfileImageButton() -> BaseBorderButton {
+        let colorSet = BaseBorderButton.ColorSet(
+            enabledText: .white,
+            enabledBackground: Asset.Colors.deepBlue.color,
+            enabledBorder: .white,
+            disabledText: .white,
+            disabledBackground: Asset.Colors.deepBlue.color,
+            disabledBorder: .white
+        )
+        let button = BaseBorderButton(
+            colorSet: colorSet,
+            text: "",
+            fontSize: DetailsScreenSizes.buttonsFontSize
+        )
+        button.isEnabled = true
+        button.layer.cornerRadius = EditProfileScreenSize.ProfileImage.buttonHeight / 2
+        button.layer.borderWidth = EditProfileScreenSize.ProfileImage.borderWidth
+        button.setImage(Asset.xMark.image, for: .normal)
+        button.addTarget(self, action: #selector(clearImage), for: .touchUpInside)
+        return button
+    }
+    
+    private func makeNameTextField() -> BaseTextField {
+        let textField = makeTextField(placeholder: Text.Common.name)
+        textField.addTarget(self, action: #selector(nameDoneButtonPressed), for: .editingDidEndOnExit)
+        return textField
+    }
+    
+    private func makeAboutTextField() -> BaseTextField {
+        let textField = makeTextField(placeholder: Text.Common.aboutYourself)
+        textField.addTarget(self, action: #selector(aboutDoneButtonPressed), for: .editingDidEndOnExit)
+        return textField
+    }
+    
+    private func makeFavoriteGenresTextField() -> BaseTextField {
+        let textField = makeTextField(placeholder: Text.Common.favoriteGenres)
+        textField.addTarget(self, action: #selector(favoriteGenresDoneButtonPressed), for: .editingDidEndOnExit)
+        return textField
+    }
+    
+    private func makeTextField(placeholder: String) -> BaseTextField {
+        let inset = UIEdgeInsets(
+            top: EditProfileScreenSize.TextField.textRectangleTopOffset,
+            left: EditProfileScreenSize.TextField.textRectangleSideOffset,
+            bottom: EditProfileScreenSize.TextField.textRectangleTopOffset,
+            right: EditProfileScreenSize.TextField.textRectangleSideOffset
+        )
+        let textField = BaseTextField(inset: inset)
+        textField.textAlignment = .left
+        textField.autocapitalizationType = .words
+        textField.textColor = Asset.Colors.loginTextColor.color
+        textField.autocorrectionType = .no
+        textField.returnKeyType = .done
+        textField.keyboardType = .default
+        textField.textContentType = .none
+        textField.addBottomBoarder(
+            color: Asset.Colors.textFieldBoarderColor.color,
+            height: EditProfileScreenSize.TextField.bottomBoarderLineHeight,
+            sideOffset: EditProfileScreenSize.TextField.textRectangleSideOffset
+        )
+        textField.attributedPlaceholder = NSAttributedString(
+            string: placeholder,
+            attributes: [NSAttributedString.Key.foregroundColor: Asset.Colors.loginPlaceholderTextColor.color]
+        )
+        return textField
     }
 }
 
@@ -200,8 +407,13 @@ extension EditProfileViewController {
         setUploadButtonConstraints()
         setUploadPhotoLabelConstraints()
         setUploadImageViewConstraints()
+        setProfileImageViewConstraitns()
+        setDeleteImageButtonConstraints()
+        setNameTextFieldConstraints()
+        setAboutTextFieldConstraints()
+        setFavoriteGenresTextFieldConstraints()
         scrollView.snp.makeConstraints { maker in
-            maker.bottom.equalTo(uploadPhotoButton)
+            maker.bottom.equalTo(favoriteGenresTextField)
                         .offset(EditProfileScreenSize.scrollViewButtonOffset)
         }
     }
@@ -218,7 +430,15 @@ extension EditProfileViewController {
         scrollView.snp.remakeConstraints { maker in
             maker.top.equalTo(emptyView.snp.bottom)
             maker.bottom.equalTo(view.safeAreaLayoutGuide)
-            maker.leading.trailing.equalTo(view.layoutMarginsGuide)
+            maker.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    private func setScrollViewKeyboardUpConstraint(keyboardHeight: CGFloat) {
+        scrollView.snp.remakeConstraints { maker in
+            maker.top.equalTo(emptyView.snp.bottom)
+            maker.bottom.equalTo(view).inset(keyboardHeight)
+            maker.leading.trailing.equalToSuperview()
         }
     }
     
@@ -245,6 +465,48 @@ extension EditProfileViewController {
             maker.centerX.equalToSuperview()
             maker.height.equalTo(EditProfileScreenSize.UploadPhotoButton.uploadImageHeight)
             maker.width.equalTo(EditProfileScreenSize.UploadPhotoButton.uploadImageWidth)
+        }
+    }
+    
+    private func setProfileImageViewConstraitns() {
+        profileImageView.snp.makeConstraints { maker in
+            maker.width.equalTo(EditProfileScreenSize.ProfileImage.imageWidth)
+            maker.height.equalTo(EditProfileScreenSize.ProfileImage.imageHeight)
+            maker.centerX.equalToSuperview()
+            maker.top.equalToSuperview().inset(EditProfileScreenSize.ProfileImage.imageTopOffset)
+        }
+    }
+    
+    private func setDeleteImageButtonConstraints() {
+        deleteProfileImageButton.snp.makeConstraints { maker in
+            maker.width.equalTo(EditProfileScreenSize.ProfileImage.buttonWidth)
+            maker.height.equalTo(EditProfileScreenSize.ProfileImage.buttonHeight)
+            maker.top.equalToSuperview().inset(EditProfileScreenSize.ProfileImage.buttonTopOffset)
+            maker.trailing.equalToSuperview().inset(EditProfileScreenSize.ProfileImage.buttonRightOffset)
+        }
+    }
+    
+    private func setNameTextFieldConstraints() {
+        nameTextField.snp.makeConstraints { maker in
+            maker.leading.trailing.equalTo(view)
+            maker.height.equalTo(EditProfileScreenSize.TextField.height)
+            maker.top.equalTo(uploadPhotoButton.snp.bottom).offset(EditProfileScreenSize.TextField.topOffset)
+        }
+    }
+    
+    private func setAboutTextFieldConstraints() {
+        aboutTextField.snp.makeConstraints { maker in
+            maker.leading.trailing.equalTo(view)
+            maker.height.equalTo(EditProfileScreenSize.TextField.height)
+            maker.top.equalTo(nameTextField.snp.bottom)
+        }
+    }
+    
+    private func setFavoriteGenresTextFieldConstraints() {
+        favoriteGenresTextField.snp.makeConstraints { maker in
+            maker.leading.trailing.equalTo(view)
+            maker.height.equalTo(EditProfileScreenSize.TextField.height)
+            maker.top.equalTo(aboutTextField.snp.bottom)
         }
     }
 }

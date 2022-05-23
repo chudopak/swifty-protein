@@ -54,6 +54,8 @@ internal enum Text {
   internal enum Common {
     /// О фильме
     internal static let aboutMovie = Text.tr("Localizable", "Common.aboutMovie")
+    /// О себе
+    internal static let aboutYourself = Text.tr("Localizable", "Common.aboutYourself")
     /// Отмена
     internal static let cancel = Text.tr("Localizable", "Common.cancel")
     /// Закрыть
@@ -62,10 +64,16 @@ internal enum Text {
     internal static let dave = Text.tr("Localizable", "Common.dave")
     /// Готово
     internal static let done = Text.tr("Localizable", "Common.done")
+    /// Любимые жанры
+    internal static let favoriteGenres = Text.tr("Localizable", "Common.favoriteGenres")
+    /// Библиотека
+    internal static let library = Text.tr("Localizable", "Common.library")
     /// Войти
     internal static let login = Text.tr("Localizable", "Common.login")
     /// Выйти
     internal static let logout = Text.tr("Localizable", "Common.logout")
+    /// Имя
+    internal static let name = Text.tr("Localizable", "Common.name")
     /// Далее
     internal static let next = Text.tr("Localizable", "Common.next")
     /// Нет
@@ -74,6 +82,8 @@ internal enum Text {
     internal static let noPoster = Text.tr("Localizable", "Common.noPoster")
     /// Удалить
     internal static let remove = Text.tr("Localizable", "Common.remove")
+    /// Сделать фото
+    internal static let takeAPicture = Text.tr("Localizable", "Common.takeAPicture")
     /// Обновить
     internal static let update = Text.tr("Localizable", "Common.update")
     /// Загрузить фото
