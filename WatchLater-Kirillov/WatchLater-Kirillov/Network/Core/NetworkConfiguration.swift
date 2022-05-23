@@ -49,5 +49,7 @@ enum NetworkConfiguration {
         static let acceptJSON = (field: "Accept", value: "application/json")
         static let contentTypeJSON = (field: "Content-Type", value: "application/json; charset=utf-8")
         static let authorisation = "Authorization"
+        static let multipartData = (field: "Content-Type", value: "multipart/form-data")
+        static let acceptEverything = (field: "accept", value: "*/*")
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 
 protocol EditProfilePresenterProtocol {
+    func successfulDataUpload(userInfo: UserInfo?)
 }
 
 final class EditProfilePresenter: EditProfilePresenterProtocol {
@@ -19,4 +20,9 @@ final class EditProfilePresenter: EditProfilePresenterProtocol {
         self.viewController = viewController
     }
     
+    func successfulDataUpload(userInfo: UserInfo?) {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController.successfulUploadData(info: userInfo)
+        }
+    }
 }

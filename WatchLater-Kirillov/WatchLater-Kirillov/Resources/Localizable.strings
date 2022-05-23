@@ -21,6 +21,7 @@ Common.aboutYourself = "О себе";
 Common.favoriteGenres = "Любимые жанры";
 Common.library = "Библиотека";
 Common.takeAPicture = "Сделать фото";
+Common.noImage = "Фото отсутствует";
 
 // MARK: - Authorization
 

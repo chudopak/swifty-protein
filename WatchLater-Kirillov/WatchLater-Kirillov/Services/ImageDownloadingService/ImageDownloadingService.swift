@@ -21,12 +21,19 @@ protocol ImageDownloadingServiceProtocol {
     func clearKingFisherCache()
 }
 
+protocol ProfileImageloadingProtocol {
+    func uploadImage(data: Data,
+                     completion: @escaping (Result<String, Error>) -> Void)
+}
+
 // TODO: - May be cash in memory images and in storage (now only in storage)
 final class ImageDownloadingService: ImageDownloadingServiceProtocol {
     
     private let networkManager: NetworkLayerProtocol
     
     private let path = "/poster/"
+    private let profileImageUploadPath = "/users/photo"
+    private let profileImageDownloadPath = "/users/profile/photo"
     
     private var baseURLComponents: URLComponents
     
@@ -185,5 +192,75 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
             return nil
         }
         return (compressedImage)
+    }
+}
+
+// TODO: post image doesn't work
+extension ImageDownloadingService: ProfileImageloadingProtocol {
+
+    func uploadImage(data: Data,
+                     completion: @escaping (Result<String, Error>) -> Void) {
+        let urlComponents = baseURLComponents
+        baseURLComponents.path = profileImageUploadPath
+
+        guard let url = urlComponents.url,
+              let request = buildRequestMultipartData(url: url, imageData: data)
+        else {
+            completion(.failure(BaseError.failedToBuildRequest))
+            return
+        }
+        fetchImage(urlRequest: request, completion: completion)
+    }
+    
+    private func fetchImage(urlRequest: RequestBuilder,
+                            completion: @escaping (Result<String, Error>) -> Void) {
+        networkManager.request(urlRequest: urlRequest) { data, response, error in
+            guard error == nil,
+                  let responseHTTP = response as? HTTPURLResponse,
+                  responseHTTP.statusCode == 200,
+                  let data = data
+            else {
+                if let error = error {
+                    completion(.failure(error))
+                } else if data == nil {
+                    completion(.failure(BaseError.noData))
+                } else {
+                    let responseHTTP = response as! HTTPURLResponse
+                    print(responseHTTP.statusCode)
+                    completion(.failure(BaseError.range400Response))
+                }
+                return
+            }
+            guard let posterIDOptional = decodeMessage(data: data, type: UserInfoBackground.self),
+                  let posterId = posterIDOptional.photoId
+            else {
+                completion(.failure(BaseError.unableToDecodeData))
+                return
+            }
+            completion(.success(posterId))
+        }
+    }
+    
+    private func buildRequestMultipartData(url: URL, imageData: Data) -> RequestBuilder? {
+        guard let accessToken = KeychainService.getString(key: .accessToken)
+        else {
+            return nil
+        }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.method = HTTPMethod.post
+        urlRequest.setValue(NetworkConfiguration.Headers.acceptEverything.value,
+                            forHTTPHeaderField: NetworkConfiguration.Headers.acceptEverything.field)
+        urlRequest.setValue(accessToken,
+                            forHTTPHeaderField: NetworkConfiguration.Headers.authorisation)
+        urlRequest.setValue(NetworkConfiguration.Headers.multipartData.value,
+                            forHTTPHeaderField: NetworkConfiguration.Headers.multipartData.field)
+        var dataBody = Data()
+        guard let contentType = "image=@eric-cartman.jpeg;type=image/jpeg".data(using: .utf8)
+        else {
+            return nil
+        }
+        dataBody.append(contentType)
+        dataBody.append(imageData)
+        return RequestBuilder(urlRequest: urlRequest)
     }
 }

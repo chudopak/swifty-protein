@@ -15,10 +15,11 @@
         <attribute name="genres" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="photoData" optional="YES" attributeType="Binary"/>
         <attribute name="photoId" attributeType="String"/>
     </entity>
     <elements>
         <element name="FilmInfo" positionX="-102.2213134765625" positionY="-18" width="167.2213134765625" height="163"/>
-        <element name="ProfileInfo" positionX="-81" positionY="45" width="128" height="104"/>
+        <element name="ProfileInfo" positionX="-81" positionY="45" width="128" height="119"/>
     </elements>
 </model>

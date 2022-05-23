@@ -9,13 +9,14 @@
 import UIKit
 
 protocol EditProfileViewControllerProtocol: AnyObject {
-    func setUserProfile(info: UserInfo?)
+    func successfulUploadData(info: UserInfo?)
     func setUserProfilePicture(image: UIImage)
 }
 
 class EditProfileViewController: BaseViewController {
     
     private var userProfileInfo: UserInfo?
+    
     private var router: EditProfileRouter!
     private var interactor: EditProfileInteractorProtocol!
     
@@ -41,12 +42,16 @@ class EditProfileViewController: BaseViewController {
         setGestures()
         setConstraints()
         setKeyBoboardObservers()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationController()
+        setUserInfo()
+    }
+    
+    func setUserInfo(info: UserInfo?) {
+        userProfileInfo = info
     }
     
     func setupComponents(router: EditProfileRouter,
@@ -85,12 +90,58 @@ class EditProfileViewController: BaseViewController {
         view.addGestureRecognizer(hideKeyboardGuesture)
     }
     
+    private func setUserInfo() {
+        nameTextField.text = userProfileInfo?.name
+        aboutTextField.text = userProfileInfo?.description
+        favoriteGenresTextField.text = convertGenresToString(genres: userProfileInfo?.genres ?? [String]())
+        guard let data = userProfileInfo?.photoData,
+              let image = UIImage(data: data)
+        else {
+            return
+        }
+        profileImageView.image = image
+        makeVisible(profileImageView: true)
+    }
+    
     private func makeVisible(profileImageView imageView: Bool = false,
                              uploadButton: Bool = false) {
         profileImageView.isHidden = !imageView
         uploadPhotoButton.isHidden = !uploadButton
         uploadImageView.isHidden = !uploadButton
         uploadPhotoLabel.isHidden = !uploadButton
+        showSaveButton()
+    }
+    
+    private func showSaveButton() {
+        if navigationItem.rightBarButtonItem == nil {
+            navigationItem.rightBarButtonItem = saveChangesButton
+        }
+    }
+    
+    private func getUserInfo() -> UserInfo {
+        let name = nameTextField.text ?? ""
+        let about = aboutTextField.text ?? ""
+        let genres = (favoriteGenresTextField.text ?? "").components(separatedBy: ",")
+        var trimmedGenres = [String]()
+        trimmedGenres.reserveCapacity(genres.count)
+        for genre in genres {
+            trimmedGenres.append(genre.trimmingCharacters(in: .whitespaces))
+        }
+        print(trimmedGenres)
+        let info = UserInfo(id: 0, name: name, description: about, genres: trimmedGenres, photoId: "", photoData: profileImageView.image?.jpegData(compressionQuality: 1))
+        return info
+    }
+    
+    private func convertGenresToString(genres: [String]) -> String {
+        var genresStr: String = ""
+        for i in 0..<genres.count {
+            if i == genres.count - 1 {
+                genresStr += genres[i]
+            } else {
+                genresStr += genres[i] + ", "
+            }
+        }
+        return genresStr
     }
     
     @objc private func hideKeyboard() {
@@ -105,10 +156,13 @@ class EditProfileViewController: BaseViewController {
     
     @objc private func saveChanges() {
         print("Saving Changes")
+        interactor.saveAllChanges(userInfo: getUserInfo())
     }
     
     @objc private func getBackToPreviousScreen() {
-        router.getBackToPreviousScreen(navigationController: navigationController!)
+        if userProfileInfo != nil {
+            router.getBackToPreviousScreen(navigationController: navigationController!)
+        }
     }
     
     @objc private func uploadProfileImage() {
@@ -143,6 +197,10 @@ class EditProfileViewController: BaseViewController {
             || nameTextField.text!.isEmpty {
             nameTextField.becomeFirstResponder()
         }
+    }
+    
+    @objc private func textFieldDidChange() {
+        showSaveButton()
     }
 }
 
@@ -195,6 +253,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate,
     ) {
         profileImageView.image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
         makeVisible(profileImageView: true)
+        showSaveButton()
         dismiss(animated: true, completion: nil)
     }
     
@@ -246,20 +305,12 @@ extension EditProfileViewController: UIImagePickerControllerDelegate,
 
 extension EditProfileViewController: EditProfileViewControllerProtocol {
 
-    func setUserProfile(info: UserInfo?) {
+    func successfulUploadData(info: UserInfo?) {
         userProfileInfo = info
         if let userInfo = userProfileInfo {
             nameTextField.text = userInfo.name
             aboutTextField.text = userInfo.description
-            var genres: String = ""
-            for i in 0..<userInfo.genres.count {
-                if i == userInfo.genres.count - 1 {
-                    genres += userInfo.genres[i]
-                } else {
-                    genres += userInfo.genres[i] + ","
-                }
-            }
-            favoriteGenresTextField.text = genres
+            favoriteGenresTextField.text = convertGenresToString(genres: userInfo.genres)
         }
     }
     
@@ -275,6 +326,7 @@ extension EditProfileViewController {
         let button = UIButton()
         button.setTitle(Text.Common.dave, for: .normal)
         button.setTitleColor(Asset.Colors.deepBlue.color, for: .normal)
+        button.setTitleColor(Asset.Colors.deepBlueHalfTransparent.color, for: .highlighted)
         button.addTarget(self, action: #selector(saveChanges), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }
@@ -356,18 +408,21 @@ extension EditProfileViewController {
     private func makeNameTextField() -> BaseTextField {
         let textField = makeTextField(placeholder: Text.Common.name)
         textField.addTarget(self, action: #selector(nameDoneButtonPressed), for: .editingDidEndOnExit)
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
     }
     
     private func makeAboutTextField() -> BaseTextField {
         let textField = makeTextField(placeholder: Text.Common.aboutYourself)
         textField.addTarget(self, action: #selector(aboutDoneButtonPressed), for: .editingDidEndOnExit)
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
     }
     
     private func makeFavoriteGenresTextField() -> BaseTextField {
         let textField = makeTextField(placeholder: Text.Common.favoriteGenres)
         textField.addTarget(self, action: #selector(favoriteGenresDoneButtonPressed), for: .editingDidEndOnExit)
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
     }
     

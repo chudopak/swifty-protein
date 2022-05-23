@@ -13,7 +13,10 @@ final class ProfileConfigurator {
     func setupModule() -> ProfileViewController {
         let vc = ProfileViewController()
         let router = ProfileRouter(viewController: vc)
-        vc.setupComponents(router: router)
+        let presenter = ProfilePresenter(viewController: vc)
+        let interactor = ProfileInteractor(presenter: presenter)
+        vc.setupComponents(router: router,
+                           interactor: interactor)
         return vc
     }
 }

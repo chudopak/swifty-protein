@@ -13,19 +13,22 @@ struct UserInfo {
     let name: String
     let description: String
     let genres: [String]
-    let photoId: String
+    var photoId: String
+    var photoData: Data?
     
     init(id: Int,
          name: String,
          description: String,
          genres: [String],
-         photoId: String
+         photoId: String,
+         photoData: Data?
     ) {
         self.id = id
         self.name = name
         self.genres = genres
         self.photoId = photoId
         self.description = description
+        self.photoData = photoData
     }
     
     init(pofileCoreDataInfo: ProfileInfo) {
@@ -34,9 +37,15 @@ struct UserInfo {
         self.genres = pofileCoreDataInfo.genres
         self.photoId = pofileCoreDataInfo.photoId
         self.description = pofileCoreDataInfo.aboutMe
+        self.photoData = pofileCoreDataInfo.photoData
     }
 }
 
 struct UserInfoBackground: Codable {
     let photoId: String?
+}
+
+struct ProfileImageData: Codable {
+    let id: String
+    let image: ImageData
 }

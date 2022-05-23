@@ -20,4 +20,5 @@ extension ProfileInfo {
     @NSManaged public var genres: [String]
     @NSManaged public var photoId: String
     @NSManaged public var id: Int64
+    @NSManaged public var photoData: Data?
 }

@@ -16,8 +16,8 @@ final class ProfileRouter {
         self.viewController = viewController
     }
     
-    func presentEditProfileScreen(navigationController: UINavigationController) {
-        let editProfileVC = EditProfileConfigurator().setupModule()
+    func presentEditProfileScreen(navigationController: UINavigationController, userInfo: UserInfo?) {
+        let editProfileVC = EditProfileConfigurator().setupModule(userInfo: userInfo)
         navigationController.pushViewController(editProfileVC, animated: true)
     }
 }

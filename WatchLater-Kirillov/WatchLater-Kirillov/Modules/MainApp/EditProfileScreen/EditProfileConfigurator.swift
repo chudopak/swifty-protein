@@ -10,14 +10,15 @@ import UIKit
 
 final class EditProfileConfigurator {
     
-    func setupModule() -> EditProfileViewController {
+    func setupModule(userInfo: UserInfo?) -> EditProfileViewController {
         let vc = EditProfileViewController()
         let router = EditProfileRouter(viewController: vc)
         let presenter = EditProfilePresenter(viewController: vc)
         let networkService = NetworkLayer(refreshService: RefreshTokenService())
         let imageService = ImageDownloadingService(networkManager: networkService)
         let interactor = EditProfileInteractor(presenter: presenter,
-                                               imageDownloadingService: imageService)
+                                               imageService: imageService)
+        vc.setUserInfo(info: userInfo)
         vc.setupComponents(router: router, interactor: interactor)
         return vc
     }

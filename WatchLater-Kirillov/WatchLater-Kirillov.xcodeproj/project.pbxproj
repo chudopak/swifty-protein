@@ -121,6 +121,12 @@
 		7D7C3F89283B98ED00D6770C /* EditProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F87283B98ED00D6770C /* EditProfileInteractor.swift */; };
 		7D7C3F8B283B992700D6770C /* EditProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F8A283B992700D6770C /* EditProfilePresenter.swift */; };
 		7D7C3F8C283B992700D6770C /* EditProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F8A283B992700D6770C /* EditProfilePresenter.swift */; };
+		7D7C3F8E283BCFFC00D6770C /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F8D283BCFFC00D6770C /* ProfileInteractor.swift */; };
+		7D7C3F8F283BCFFC00D6770C /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F8D283BCFFC00D6770C /* ProfileInteractor.swift */; };
+		7D7C3F92283BD03F00D6770C /* ProfileScreenSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F91283BD03F00D6770C /* ProfileScreenSizes.swift */; };
+		7D7C3F93283BD03F00D6770C /* ProfileScreenSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F91283BD03F00D6770C /* ProfileScreenSizes.swift */; };
+		7D7C3F95283BD65E00D6770C /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F94283BD65E00D6770C /* ProfilePresenter.swift */; };
+		7D7C3F96283BD65E00D6770C /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C3F94283BD65E00D6770C /* ProfilePresenter.swift */; };
 		7D7EF84F280ED70800B99CA4 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF84E280ED70800B99CA4 /* LoginService.swift */; };
 		7D7EF852280EED8F00B99CA4 /* RegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF851280EED8F00B99CA4 /* RegistrationService.swift */; };
 		7D7EF854280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EF853280EEF8C00B99CA4 /* RegistrationInteractor.swift */; };
@@ -296,6 +302,9 @@
 		7D7C3F84283B7D8700D6770C /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
 		7D7C3F87283B98ED00D6770C /* EditProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileInteractor.swift; sourceTree = "<group>"; };
 		7D7C3F8A283B992700D6770C /* EditProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePresenter.swift; sourceTree = "<group>"; };
+		7D7C3F8D283BCFFC00D6770C /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
+		7D7C3F91283BD03F00D6770C /* ProfileScreenSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenSizes.swift; sourceTree = "<group>"; };
+		7D7C3F94283BD65E00D6770C /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		7D7EF84E280ED70800B99CA4 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		7D7EF851280EED8F00B99CA4 /* RegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
 		7D7EF853280EEF8C00B99CA4 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
@@ -674,10 +683,13 @@
 		7D6DAEED2837AAD900AD28D6 /* ProfileScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7D7C3F90283BD01000D6770C /* Utils */,
 				7D6DAEEE2837B02500AD28D6 /* ProfileViewController.swift */,
 				7D6DAEF92837B80E00AD28D6 /* ProfileConfigurator.swift */,
 				7D6DAEFC2837BCA800AD28D6 /* ProfileRouter.swift */,
 				7D6DAF092837D53100AD28D6 /* ProfileModels.swift */,
+				7D7C3F8D283BCFFC00D6770C /* ProfileInteractor.swift */,
+				7D7C3F94283BD65E00D6770C /* ProfilePresenter.swift */,
 			);
 			path = ProfileScreen;
 			sourceTree = "<group>";
@@ -730,6 +742,14 @@
 				7DDC8A2B283249BE0029813E /* CoreDataServiceModel.swift */,
 			);
 			path = CoreDataService;
+			sourceTree = "<group>";
+		};
+		7D7C3F90283BD01000D6770C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7D7C3F91283BD03F00D6770C /* ProfileScreenSizes.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		7D7EF84C280ED6DB00B99CA4 /* Services */ = {
@@ -1232,7 +1252,9 @@
 				7DDC8A292832330D0029813E /* CoreDataService.swift in Sources */,
 				7DD4CB0B28251E8000873001 /* SearchModels.swift in Sources */,
 				7DAD275D2817E790005B9D6F /* ImageDownloadingCacheConfigProvider.swift in Sources */,
+				7D7C3F8E283BCFFC00D6770C /* ProfileInteractor.swift in Sources */,
 				7D81BB34281C45DA00CC9819 /* SearchViewController.swift in Sources */,
+				7D7C3F92283BD03F00D6770C /* ProfileScreenSizes.swift in Sources */,
 				30314CDC265AAEE500CADD41 /* BundleSettingsURL.swift in Sources */,
 				3076A0882601D421003B0EF9 /* StoryboardScenes.swift in Sources */,
 				7DA878A5282C20AA004E537F /* SplashInteractor.swift in Sources */,
@@ -1252,6 +1274,7 @@
 				7D6DAEF62837B3BC00AD28D6 /* EditProfileConfigurator.swift in Sources */,
 				7D178EB128087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
 				7D7EF854280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */,
+				7D7C3F95283BD65E00D6770C /* ProfilePresenter.swift in Sources */,
 				7DAD276328181730005B9D6F /* FilmsTableViewCell.swift in Sources */,
 				7DAD2766281830AB005B9D6F /* FavouriteInteractor.swift in Sources */,
 				7D7386D328101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
@@ -1338,7 +1361,9 @@
 				7DDC8A2A2832330D0029813E /* CoreDataService.swift in Sources */,
 				7DD4CB0C28251E8000873001 /* SearchModels.swift in Sources */,
 				7DAD275E2817E790005B9D6F /* ImageDownloadingCacheConfigProvider.swift in Sources */,
+				7D7C3F8F283BCFFC00D6770C /* ProfileInteractor.swift in Sources */,
 				7D81BB35281C45DA00CC9819 /* SearchViewController.swift in Sources */,
+				7D7C3F93283BD03F00D6770C /* ProfileScreenSizes.swift in Sources */,
 				7D0ACA9928096A2B00777442 /* RegistrationModel.swift in Sources */,
 				7D058F19280DC0C800683C3C /* NetworkLayer.swift in Sources */,
 				7DA878A6282C20AA004E537F /* SplashInteractor.swift in Sources */,
@@ -1358,6 +1383,7 @@
 				7D6DAEF72837B3BC00AD28D6 /* EditProfileConfigurator.swift in Sources */,
 				7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */,
 				7D178EB228087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
+				7D7C3F96283BD65E00D6770C /* ProfilePresenter.swift in Sources */,
 				7DAD276428181730005B9D6F /* FilmsTableViewCell.swift in Sources */,
 				7DAD2767281830AB005B9D6F /* FavouriteInteractor.swift in Sources */,
 				7D7386D428101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
