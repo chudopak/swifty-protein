@@ -193,6 +193,8 @@
 		7DAD276A2818316D005B9D6F /* FavouritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD27682818316D005B9D6F /* FavouritePresenter.swift */; };
 		7DAD276C281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD276B281833AD005B9D6F /* FavouriteConfigurator.swift */; };
 		7DAD276D281833AD005B9D6F /* FavouriteConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD276B281833AD005B9D6F /* FavouriteConfigurator.swift */; };
+		7DAD34D7283D03D80064E80B /* SaveAnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD34D6283D03D80064E80B /* SaveAnimateView.swift */; };
+		7DAD34D8283D03D80064E80B /* SaveAnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAD34D6283D03D80064E80B /* SaveAnimateView.swift */; };
 		7DAE55D02811681B0006C24A /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE55CF2811681B0006C24A /* KeychainService.swift */; };
 		7DAE55D12811681B0006C24A /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE55CF2811681B0006C24A /* KeychainService.swift */; };
 		7DB7E0C52806B56D00996926 /* LoginScreenElementsSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */; };
@@ -339,6 +341,7 @@
 		7DAD2765281830AB005B9D6F /* FavouriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteInteractor.swift; sourceTree = "<group>"; };
 		7DAD27682818316D005B9D6F /* FavouritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePresenter.swift; sourceTree = "<group>"; };
 		7DAD276B281833AD005B9D6F /* FavouriteConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteConfigurator.swift; sourceTree = "<group>"; };
+		7DAD34D6283D03D80064E80B /* SaveAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAnimateView.swift; sourceTree = "<group>"; };
 		7DAE55CF2811681B0006C24A /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		7DB7E0C42806B56D00996926 /* LoginScreenElementsSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenElementsSizes.swift; sourceTree = "<group>"; };
 		7DBC89382807065200F94B6C /* AuthorizationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTextField.swift; sourceTree = "<group>"; };
@@ -399,6 +402,7 @@
 			children = (
 				7D9715192805BB6200CC31B8 /* Utils */,
 				30314CA8265AAA8900CADD41 /* BaseViewController.swift */,
+				7DAD34D6283D03D80064E80B /* SaveAnimateView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1275,6 +1279,7 @@
 				7D178EB128087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
 				7D7EF854280EEF8C00B99CA4 /* RegistrationInteractor.swift in Sources */,
 				7D7C3F95283BD65E00D6770C /* ProfilePresenter.swift in Sources */,
+				7DAD34D7283D03D80064E80B /* SaveAnimateView.swift in Sources */,
 				7DAD276328181730005B9D6F /* FilmsTableViewCell.swift in Sources */,
 				7DAD2766281830AB005B9D6F /* FavouriteInteractor.swift in Sources */,
 				7D7386D328101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,
@@ -1384,6 +1389,7 @@
 				7DB7E0CA2806BBAB00996926 /* LoginRouter.swift in Sources */,
 				7D178EB228087636009C6280 /* RegistrationScreenElementsSizes.swift in Sources */,
 				7D7C3F96283BD65E00D6770C /* ProfilePresenter.swift in Sources */,
+				7DAD34D8283D03D80064E80B /* SaveAnimateView.swift in Sources */,
 				7DAD276428181730005B9D6F /* FilmsTableViewCell.swift in Sources */,
 				7DAD2767281830AB005B9D6F /* FavouriteInteractor.swift in Sources */,
 				7D7386D428101F36008C00FE /* RegistrationControllerConfigurator.swift in Sources */,

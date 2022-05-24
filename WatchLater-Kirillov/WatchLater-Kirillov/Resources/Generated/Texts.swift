@@ -60,8 +60,6 @@ internal enum Text {
     internal static let cancel = Text.tr("Localizable", "Common.cancel")
     /// Закрыть
     internal static let close = Text.tr("Localizable", "Common.close")
-    /// Сохранить
-    internal static let dave = Text.tr("Localizable", "Common.dave")
     /// Готово
     internal static let done = Text.tr("Localizable", "Common.done")
     /// Любимые жанры
@@ -86,6 +84,10 @@ internal enum Text {
     internal static let noPoster = Text.tr("Localizable", "Common.noPoster")
     /// Удалить
     internal static let remove = Text.tr("Localizable", "Common.remove")
+    /// Сохранить
+    internal static let save = Text.tr("Localizable", "Common.save")
+    /// Сохранено
+    internal static let saved = Text.tr("Localizable", "Common.saved")
     /// Сделать фото
     internal static let takeAPicture = Text.tr("Localizable", "Common.takeAPicture")
     /// Обновить

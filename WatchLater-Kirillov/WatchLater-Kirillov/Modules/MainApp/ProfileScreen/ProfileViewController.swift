@@ -46,7 +46,9 @@ class ProfileViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationController()
-        setImageView(loading: true)
+        if profileImageView.image == nil {
+            setImageView(loading: true)
+        }
         if FirstLaunchChecker.isFirstProfileLaunch {
             router.presentEditProfileScreen(navigationController: navigationController!,
                                             userInfo: userInfo)
@@ -186,6 +188,7 @@ extension ProfileViewController: ProfileViewControllerProtocol {
         userInfo?.photoId = imageData.id
         userInfo?.photoData = imageData.image.jpegData(compressionQuality: 1)
         profileImageView.image = imageData.image
+        setImageView(loading: false, noPhoto: false)
     }
     
     private func createGenresLabels(userInfo: UserInfo) {

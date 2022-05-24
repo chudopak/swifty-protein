@@ -35,20 +35,25 @@ final class EditProfileInteractor: EditProfileInteractorProtocol {
             case .success(let usersInfo):
                 print(usersInfo.count)
                 if let localInfo = usersInfo.first {
-                    self?.updateLocalInfo(localInfo: localInfo, newInfo: userInfo)
+                    self?.updateLocalInfo(localInfo: localInfo, newInfo: userInfo) {
+                        self?.presenter.successfulDataUpload(userInfo: userInfo)
+                    }
                     self?.savePicture(image: userInfo.photoData)
                     self?.uploadImageToBackend(data: userInfo.photoData)
                 } else {
+                    self?.saveUserInfoTextInfo(userInfo: userInfo) {
+                        self?.presenter.successfulDataUpload(userInfo: userInfo)
+                    }
                     self?.uploadImageToBackend(data: userInfo.photoData)
-                    self?.saveUserInfoTextInfo(userInfo: userInfo)
                 }
 
             case .failure:
                 print("Failed to fetch userInfo")
+                self?.saveUserInfoTextInfo(userInfo: userInfo) {
+                    self?.presenter.successfulDataUpload(userInfo: userInfo)
+                }
                 self?.uploadImageToBackend(data: userInfo.photoData)
-                self?.saveUserInfoTextInfo(userInfo: userInfo)
             }
-            self?.presenter.successfulDataUpload(userInfo: userInfo)
         }
     }
     
@@ -99,16 +104,21 @@ final class EditProfileInteractor: EditProfileInteractorProtocol {
         }
     }
     
-    private func updateLocalInfo(localInfo: ProfileInfo, newInfo: UserInfo) {
+    private func updateLocalInfo(
+        localInfo: ProfileInfo,
+        newInfo: UserInfo,
+        completion: @escaping () -> Void
+    ) {
         CoreDataService.shared.managedObjectContext.performAndWait {
             localInfo.aboutMe = newInfo.description
             localInfo.genres = newInfo.genres
             localInfo.name = newInfo.name
             CoreDataService.shared.saveContext()
+            completion()
         }
     }
     
-    private func saveUserInfoTextInfo(userInfo: UserInfo) {
+    private func saveUserInfoTextInfo(userInfo: UserInfo, completion: @escaping () -> Void) {
         CoreDataService.shared.save(with: ProfileInfo.self, predicate: nil) { object, context in
             object.aboutMe = userInfo.description
             object.genres = userInfo.genres
@@ -116,6 +126,7 @@ final class EditProfileInteractor: EditProfileInteractorProtocol {
             object.id = Int64(userInfo.id)
             object.photoId = userInfo.photoId
             CoreDataService.shared.saveContext()
+            completion()
         }
     }
     

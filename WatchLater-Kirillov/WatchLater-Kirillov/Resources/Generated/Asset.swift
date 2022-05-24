@@ -54,11 +54,13 @@ internal enum Asset {
   internal static let collectionInactive = ImageAsset(name: "CollectionInactive")
   internal static let profileImage = ImageAsset(name: "ProfileImage")
   internal static let watchLaterLogoFull = ImageAsset(name: "WatchLaterLogoFull")
+  internal static let checkmarkWhite = ImageAsset(name: "checkmarkWhite")
   internal static let logoShort = ImageAsset(name: "logoShort")
   internal static let noImage = ImageAsset(name: "noImage")
   internal static let searchIconGray = ImageAsset(name: "searchIconGray")
   internal static let uploadSymbol = ImageAsset(name: "uploadSymbol")
-  internal static let xMark = ImageAsset(name: "xMark")
+  internal static let xMarkCircle = ImageAsset(name: "xMarkCircle")
+  internal static let xMarkWhite = ImageAsset(name: "xMarkWhite")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

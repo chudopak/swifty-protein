@@ -313,6 +313,11 @@ extension EditProfileViewController: EditProfileViewControllerProtocol {
             aboutTextField.text = userInfo.description
             favoriteGenresTextField.text = convertGenresToString(genres: userInfo.genres)
         }
+        hideKeyboard()
+        SaveAnimateView.hud(inView: navigationController!.view,
+                            image: Asset.checkmarkWhite.image,
+                            text: Text.Common.saved,
+                            animated: true)
     }
     
     func setUserProfilePicture(image: UIImage) {
@@ -325,7 +330,7 @@ extension EditProfileViewController {
     
     private func makeSaveChangesButtonItem() -> UIBarButtonItem {
         let button = UIButton()
-        button.setTitle(Text.Common.dave, for: .normal)
+        button.setTitle(Text.Common.save, for: .normal)
         button.setTitleColor(Asset.Colors.deepBlue.color, for: .normal)
         button.setTitleColor(Asset.Colors.deepBlueHalfTransparent.color, for: .highlighted)
         button.addTarget(self, action: #selector(saveChanges), for: .touchUpInside)
@@ -401,7 +406,7 @@ extension EditProfileViewController {
         button.isEnabled = true
         button.layer.cornerRadius = EditProfileScreenSize.ProfileImage.buttonHeight / 2
         button.layer.borderWidth = EditProfileScreenSize.ProfileImage.borderWidth
-        button.setImage(Asset.xMark.image, for: .normal)
+        button.setImage(Asset.xMarkCircle.image, for: .normal)
         button.addTarget(self, action: #selector(clearImage), for: .touchUpInside)
         return button
     }
