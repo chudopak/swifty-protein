@@ -156,7 +156,6 @@ class EditProfileViewController: BaseViewController {
     }
     
     @objc private func saveChanges() {
-        print("Saving Changes")
         interactor.saveAllChanges(userInfo: getUserInfo())
     }
     
@@ -167,7 +166,6 @@ class EditProfileViewController: BaseViewController {
     }
     
     @objc private func uploadProfileImage() {
-        print("Uploading Changes")
         pickPhoto()
     }
     
@@ -314,7 +312,7 @@ extension EditProfileViewController: EditProfileViewControllerProtocol {
             favoriteGenresTextField.text = convertGenresToString(genres: userInfo.genres)
         }
         hideKeyboard()
-        SaveAnimateView.hud(inView: navigationController!.view,
+        SaveAnimateView.animate(inView: navigationController!.view,
                             image: Asset.checkmarkWhite.image,
                             text: Text.Common.saved,
                             animated: true)

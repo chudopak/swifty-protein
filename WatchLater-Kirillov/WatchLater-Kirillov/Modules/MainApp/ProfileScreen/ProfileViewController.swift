@@ -40,7 +40,6 @@ class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         setView()
         setConstraints()
-//        FirstLaunchChecker.isFirstProfileLaunch = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,10 +91,14 @@ class ProfileViewController: BaseViewController {
     }
     
     private func getTextViewHeight(description: String) -> CGFloat {
-        let textView = UITextView(frame: CGRect(x: 0,
-                                                y: 0,
-                                                width: DetailsScreenSizes.TextView.width,
-                                                height: CGFloat.greatestFiniteMagnitude))
+        let textView = UITextView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: DetailsScreenSizes.TextView.width,
+                height: CGFloat.greatestFiniteMagnitude
+            )
+        )
         textView.text = description
         textView.font = .systemFont(ofSize: DetailsScreenSizes.TextView.fontSize)
         textView.sizeToFit()
@@ -352,9 +355,6 @@ extension ProfileViewController {
         setNameLabelConstraints()
         setDescriptionLabelConstraints()
         setFavoriteGenresLabelConstraints()
-        scrollView.snp.makeConstraints { maker in
-            maker.bottom.equalTo(favoriteGenresLabel).offset(ProfileScreenSizes.scrollViewBottomOffset)
-        }
     }
     
     private func setEmptyViewConstraints() {

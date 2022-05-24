@@ -249,6 +249,7 @@ extension ImageDownloadingService: ProfileImageloadingProtocol {
     private func fetchImage(urlRequest: RequestBuilder,
                             completion: @escaping (Result<String, Error>) -> Void) {
         networkManager.request(urlRequest: urlRequest) { [weak self] data, response, error in
+            // TODO: Delete this line if api will work
             print(String(data: data!, encoding: .utf8))
             guard let data = self?.validateResponse(data: data,
                                                     response: response,
@@ -267,6 +268,7 @@ extension ImageDownloadingService: ProfileImageloadingProtocol {
         }
     }
     
+    //TODO: find the way how to make right request
     private func buildRequestMultipartData(url: URL, imageData: Data) -> RequestBuilder? {
         guard let accessToken = KeychainService.getString(key: .accessToken)
         else {

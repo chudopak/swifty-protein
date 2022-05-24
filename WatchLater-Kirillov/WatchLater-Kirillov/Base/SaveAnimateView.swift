@@ -18,10 +18,12 @@ class SaveAnimateView: UIView {
     private let transformStartScale: CGFloat = 1.5
     private let duration: TimeInterval = 0.4
     
-    class func hud(inView view: UIView,
-                   image: UIImage,
-                   text: String,
-                   animated: Bool) {
+    class func animate(
+        inView view: UIView,
+        image: UIImage,
+        text: String,
+        animated: Bool
+    ) {
         let hudView = SaveAnimateView()
         hudView.text = text
         hudView.image = image
