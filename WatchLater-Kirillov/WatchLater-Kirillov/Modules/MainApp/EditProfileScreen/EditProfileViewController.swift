@@ -313,9 +313,9 @@ extension EditProfileViewController: EditProfileViewControllerProtocol {
         }
         hideKeyboard()
         SaveAnimateView.animate(inView: navigationController!.view,
-                            image: Asset.checkmarkWhite.image,
-                            text: Text.Common.saved,
-                            animated: true)
+                                image: Asset.checkmarkWhite.image,
+                                text: Text.Common.saved,
+                                animated: true)
     }
     
     func setUserProfilePicture(image: UIImage) {

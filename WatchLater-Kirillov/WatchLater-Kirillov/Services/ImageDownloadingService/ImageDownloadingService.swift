@@ -249,8 +249,6 @@ extension ImageDownloadingService: ProfileImageloadingProtocol {
     private func fetchImage(urlRequest: RequestBuilder,
                             completion: @escaping (Result<String, Error>) -> Void) {
         networkManager.request(urlRequest: urlRequest) { [weak self] data, response, error in
-            // TODO: Delete this line if api will work
-            print(String(data: data!, encoding: .utf8))
             guard let data = self?.validateResponse(data: data,
                                                     response: response,
                                                     error: error,
