@@ -14,7 +14,10 @@ final class ProfileConfigurator {
         let vc = ProfileViewController()
         let router = ProfileRouter(viewController: vc)
         let presenter = ProfilePresenter(viewController: vc)
-        let interactor = ProfileInteractor(presenter: presenter)
+        let networkLayer = NetworkLayer(refreshService: RefreshTokenService())
+        let imageService = ImageDownloadingService(networkManager: networkLayer)
+        let interactor = ProfileInteractor(presenter: presenter,
+                                           imageService: imageService)
         vc.setupComponents(router: router,
                            interactor: interactor)
         return vc

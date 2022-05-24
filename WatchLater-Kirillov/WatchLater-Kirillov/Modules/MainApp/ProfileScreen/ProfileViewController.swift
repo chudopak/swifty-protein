@@ -11,6 +11,7 @@ import UIKit
 protocol ProfileViewControllerProtocol: AnyObject {
     func showUserInfo(userInfo: UserInfo)
     func openEditScreen()
+    func changeProfileImage(imageData: (id: String, image: UIImage))
 }
 
 class ProfileViewController: BaseViewController {
@@ -116,10 +117,6 @@ class ProfileViewController: BaseViewController {
         var labels = [UILabel]()
         labels.reserveCapacity(5)
         while i < genres.count {
-//            if genres[i].isEmpty {
-//                i += 1
-//                continue
-//            }
             let label = createGenreLabel(genreTitle: genres[i])
             if currentStackViewWidth + label.bounds.size.width < ProfileScreenSizes.Genres.maxWidth {
                 currentStackViewWidth += label.bounds.size.width + ProfileScreenSizes.Genres.labelSpace
@@ -183,6 +180,12 @@ extension ProfileViewController: ProfileViewControllerProtocol {
         setImageView(loading: false)
         router.presentEditProfileScreen(navigationController: navigationController!,
                                         userInfo: userInfo)
+    }
+    
+    func changeProfileImage(imageData: (id: String, image: UIImage)) {
+        userInfo?.photoId = imageData.id
+        userInfo?.photoData = imageData.image.jpegData(compressionQuality: 1)
+        profileImageView.image = imageData.image
     }
     
     private func createGenresLabels(userInfo: UserInfo) {

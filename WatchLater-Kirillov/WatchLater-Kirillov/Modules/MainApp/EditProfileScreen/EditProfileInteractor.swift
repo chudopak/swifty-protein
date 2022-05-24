@@ -27,7 +27,6 @@ final class EditProfileInteractor: EditProfileInteractorProtocol {
     
     func saveAllChanges(userInfo: UserInfo) {
         saveChanges(userInfo: userInfo)
-        savePicture(image: userInfo.photoData)
     }
     
     func saveChanges(userInfo: UserInfo) {
@@ -37,12 +36,16 @@ final class EditProfileInteractor: EditProfileInteractorProtocol {
                 print(usersInfo.count)
                 if let localInfo = usersInfo.first {
                     self?.updateLocalInfo(localInfo: localInfo, newInfo: userInfo)
+                    self?.savePicture(image: userInfo.photoData)
+                    self?.uploadImageToBackend(data: userInfo.photoData)
                 } else {
+                    self?.uploadImageToBackend(data: userInfo.photoData)
                     self?.saveUserInfoTextInfo(userInfo: userInfo)
                 }
 
             case .failure:
                 print("Failed to fetch userInfo")
+                self?.uploadImageToBackend(data: userInfo.photoData)
                 self?.saveUserInfoTextInfo(userInfo: userInfo)
             }
             self?.presenter.successfulDataUpload(userInfo: userInfo)
@@ -55,24 +58,43 @@ final class EditProfileInteractor: EditProfileInteractorProtocol {
             case .success(let usersInfo):
                 if let localInfo = usersInfo.first {
                     self?.updatePhoto(localInfo: localInfo, photoData: image)
-                } else {
                 }
 
             case .failure:
                 print("Failed to fetch userInfo")
             }
         }
-//        uploadImageToBackend(data: data)
     }
     
-    private func uploadImageToBackend(data: Data) {
-        imageService.uploadImage(data: data) { result in
+    private func uploadImageToBackend(data: Data?) {
+        guard let unwrappedData = data
+        else {
+            return
+        }
+        imageService.uploadImage(data: unwrappedData) { [weak self] result in
             switch result {
             case .success(let id):
-                print(id)
+                self?.saveNewPhotoId(id: id)
 
             case .failure(let error):
+                self?.saveNewPhotoId(id: "")
                 print("EditProfileInteractor, savePicture - \(error)")
+            }
+        }
+    }
+    
+    private func saveNewPhotoId(id: String) {
+        ProfileInfo.fetchUserInfo { result in
+            switch result {
+            case .success(let usersInfo):
+                if let localInfo = usersInfo.first {
+                    CoreDataService.shared.managedObjectContext.performAndWait {
+                        localInfo.photoId = id
+                    }
+                }
+
+            case .failure:
+                print("EditProfileInteractor, saveNewPhotoId - Failed to fetch userInfo")
             }
         }
     }

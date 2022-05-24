@@ -684,11 +684,11 @@
 			isa = PBXGroup;
 			children = (
 				7D7C3F90283BD01000D6770C /* Utils */,
-				7D6DAEEE2837B02500AD28D6 /* ProfileViewController.swift */,
 				7D6DAEF92837B80E00AD28D6 /* ProfileConfigurator.swift */,
 				7D6DAEFC2837BCA800AD28D6 /* ProfileRouter.swift */,
 				7D6DAF092837D53100AD28D6 /* ProfileModels.swift */,
 				7D7C3F8D283BCFFC00D6770C /* ProfileInteractor.swift */,
+				7D6DAEEE2837B02500AD28D6 /* ProfileViewController.swift */,
 				7D7C3F94283BD65E00D6770C /* ProfilePresenter.swift */,
 			);
 			path = ProfileScreen;

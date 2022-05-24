@@ -15,9 +15,12 @@ protocol ProfileInteractorProtocol {
 final class ProfileInteractor: ProfileInteractorProtocol {
     
     private let presenter: ProfilePresenterProtocol
+    private let imageService: ProfileImageloadingProtocol
     
-    init(presenter: ProfilePresenterProtocol) {
+    init(presenter: ProfilePresenterProtocol,
+         imageService: ProfileImageloadingProtocol) {
         self.presenter = presenter
+        self.imageService = imageService
     }
     
     func fetchUserInfo() {
@@ -31,9 +34,32 @@ final class ProfileInteractor: ProfileInteractorProtocol {
                     return
                 }
                 self?.presenter.sendInfoToView(userInfo: UserInfo(pofileCoreDataInfo: profile))
+                self?.fetchImage(profile: profile)
                 
             case .failure(let error):
+                // Here should be function that will fetch info from back but it doesn't work on API
                 print("ProfileInteractor, fetchUserInfo - \(error)")
+                self?.presenter.showEditViewController()
+            }
+        }
+    }
+    
+    private func fetchImage(profile: ProfileInfo) {
+        imageService.getProfilePhoto { result in
+            switch result {
+            case .success(let imageData):
+                CoreDataService.shared.managedObjectContext.performAndWait { [weak self] in
+                    if profile.photoId != imageData.id
+                        || profile.photoData == nil {
+                        profile.photoId = imageData.id
+                        profile.photoData = imageData.image.jpegData(compressionQuality: 1)
+                        self?.presenter.changeProfileImage(imageData: imageData)
+                        CoreDataService.shared.saveContext()
+                    }
+                }
+            
+            case .failure(let error):
+                print("ProfileInteractor - \(error)")
             }
         }
     }

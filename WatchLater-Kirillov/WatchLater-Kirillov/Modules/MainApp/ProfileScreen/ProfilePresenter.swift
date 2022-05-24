@@ -11,6 +11,7 @@ import UIKit
 protocol ProfilePresenterProtocol {
     func sendInfoToView(userInfo: UserInfo)
     func showEditViewController()
+    func changeProfileImage(imageData: (id: String, image: UIImage))
 }
 
 final class ProfilePresenter: ProfilePresenterProtocol {
@@ -30,6 +31,12 @@ final class ProfilePresenter: ProfilePresenterProtocol {
     func showEditViewController() {
         DispatchQueue.main.async { [weak self] in
             self?.viewController.openEditScreen()
+        }
+    }
+    
+    func changeProfileImage(imageData: (id: String, image: UIImage)) {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController.changeProfileImage(imageData: imageData)
         }
     }
 }

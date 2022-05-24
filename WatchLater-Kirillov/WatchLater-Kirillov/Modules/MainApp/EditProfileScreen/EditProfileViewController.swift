@@ -157,7 +157,6 @@ class EditProfileViewController: BaseViewController {
     
     @objc private func saveChanges() {
         print("Saving Changes")
-        // TODO: Check if eanything changed
         interactor.saveAllChanges(userInfo: getUserInfo())
     }
     

@@ -24,6 +24,7 @@ protocol ImageDownloadingServiceProtocol {
 protocol ProfileImageloadingProtocol {
     func uploadImage(data: Data,
                      completion: @escaping (Result<String, Error>) -> Void)
+    func getProfilePhoto(completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void)
 }
 
 // TODO: - May be cash in memory images and in storage (now only in storage)
@@ -88,18 +89,11 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
             return
         }
         networkManager.request(url: url) { [weak self] data, response, error in
-            guard error == nil,
-                  let responseHTTP = response as? HTTPURLResponse,
-                  responseHTTP.statusCode == 200,
-                  let data = data
+            guard let data = self?.validateResponse(data: data,
+                                                    response: response,
+                                                    error: error,
+                                                    completion: completion)
             else {
-                if let error = error {
-                    completion(.failure(error))
-                } else if data == nil {
-                    completion(.failure(BaseError.noData))
-                } else {
-                    completion(.failure(BaseError.range400Response))
-                }
                 return
             }
             guard let image = UIImage(data: data)
@@ -107,12 +101,8 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
                 completion(.failure(BaseError.unableToDecodeData))
                 return
             }
-            let newImage: UIImage
-            if let compressedImage = self?.compressImage(image: image, compressionQuality: 0.5) {
-                newImage = compressedImage
-            } else {
-                newImage = image
-            }
+            let compressedImage = self?.compressImage(image: image, compressionQuality: 0.5)
+            let newImage = compressedImage == nil ? image : compressedImage!
             completion(.success((urlString, newImage)))
         }
     }
@@ -135,18 +125,11 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
                             urlRequest: RequestBuilder,
                             completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void) {
         networkManager.request(urlRequest: urlRequest) { [weak self] data, response, error in
-            guard error == nil,
-                  let responseHTTP = response as? HTTPURLResponse,
-                  responseHTTP.statusCode == 200,
-                  let data = data
+            guard let data = self?.validateResponse(data: data,
+                                                    response: response,
+                                                    error: error,
+                                                    completion: completion)
             else {
-                if let error = error {
-                    completion(.failure(error))
-                } else if data == nil {
-                    completion(.failure(BaseError.noData))
-                } else {
-                    completion(.failure(BaseError.range400Response))
-                }
                 return
             }
             guard let imageDataJSON = decodeMessage(data: data, type: ImageData.self),
@@ -155,12 +138,8 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
                 completion(.failure(BaseError.unableToDecodeData))
                 return
             }
-            let newImage: UIImage
-            if let compressedImage = self?.compressImage(image: image, compressionQuality: 0.5) {
-                newImage = compressedImage
-            } else {
-                newImage = image
-            }
+            let compressedImage = self?.compressImage(image: image, compressionQuality: 0.5)
+            let newImage = compressedImage == nil ? image : compressedImage!
             if let savingResult = self?.imageCache.storeImage(imageId: id, image: newImage), !savingResult {
                 print("Failed to save poster with id - \(id)")
             }
@@ -193,6 +172,29 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
         }
         return (compressedImage)
     }
+    
+    private func validateResponse<T>(
+        data: Data?,
+        response: URLResponse?,
+        error: Error?,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) -> Data? {
+        guard error == nil,
+              let responseHTTP = response as? HTTPURLResponse,
+              responseHTTP.statusCode == 200,
+              let data = data
+        else {
+            if let error = error {
+                completion(.failure(error))
+            } else if data == nil {
+                completion(.failure(BaseError.noData))
+            } else {
+                completion(.failure(BaseError.range400Response))
+            }
+            return nil
+        }
+        return data
+    }
 }
 
 // TODO: post image doesn't work
@@ -200,8 +202,8 @@ extension ImageDownloadingService: ProfileImageloadingProtocol {
 
     func uploadImage(data: Data,
                      completion: @escaping (Result<String, Error>) -> Void) {
-        let urlComponents = baseURLComponents
-        baseURLComponents.path = profileImageUploadPath
+        var urlComponents = baseURLComponents
+        urlComponents.path = profileImageUploadPath
 
         guard let url = urlComponents.url,
               let request = buildRequestMultipartData(url: url, imageData: data)
@@ -212,23 +214,47 @@ extension ImageDownloadingService: ProfileImageloadingProtocol {
         fetchImage(urlRequest: request, completion: completion)
     }
     
+    func getProfilePhoto(completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void) {
+        var urlComponents = baseURLComponents
+        urlComponents.path = profileImageDownloadPath
+        guard let url = urlComponents.url,
+              let request = buildRequest(url: url)
+        else {
+            completion(.failure(BaseError.failedToBuildRequest))
+            return
+        }
+        fetchImage(urlRequest: request, completion: completion)
+    }
+    
+    private func fetchImage(urlRequest: RequestBuilder,
+                            completion: @escaping (Result<(id: String, image: UIImage), Error>) -> Void) {
+        networkManager.request(urlRequest: urlRequest) { [weak self] data, response, error in
+            guard let data = self?.validateResponse(data: data,
+                                                    response: response,
+                                                    error: error,
+                                                    completion: completion)
+            else {
+                return
+            }
+            guard let imageDataJSON = decodeMessage(data: data, type: ProfileImageData.self),
+                  let image = UIImage(data: imageDataJSON.image.data)
+            else {
+                completion(.failure(BaseError.unableToDecodeData))
+                return
+            }
+            completion(.success((imageDataJSON.id, image)))
+        }
+    }
+    
     private func fetchImage(urlRequest: RequestBuilder,
                             completion: @escaping (Result<String, Error>) -> Void) {
-        networkManager.request(urlRequest: urlRequest) { data, response, error in
-            guard error == nil,
-                  let responseHTTP = response as? HTTPURLResponse,
-                  responseHTTP.statusCode == 200,
-                  let data = data
+        networkManager.request(urlRequest: urlRequest) { [weak self] data, response, error in
+            print(String(data: data!, encoding: .utf8))
+            guard let data = self?.validateResponse(data: data,
+                                                    response: response,
+                                                    error: error,
+                                                    completion: completion)
             else {
-                if let error = error {
-                    completion(.failure(error))
-                } else if data == nil {
-                    completion(.failure(BaseError.noData))
-                } else {
-                    let responseHTTP = response as! HTTPURLResponse
-                    print(responseHTTP.statusCode)
-                    completion(.failure(BaseError.range400Response))
-                }
                 return
             }
             guard let posterIDOptional = decodeMessage(data: data, type: UserInfoBackground.self),
@@ -247,6 +273,7 @@ extension ImageDownloadingService: ProfileImageloadingProtocol {
             return nil
         }
         var urlRequest = URLRequest(url: url)
+//        let boundary = "Boundary-\(UUID().uuidString)"
         urlRequest.method = HTTPMethod.post
         urlRequest.setValue(NetworkConfiguration.Headers.acceptEverything.value,
                             forHTTPHeaderField: NetworkConfiguration.Headers.acceptEverything.field)
@@ -254,13 +281,21 @@ extension ImageDownloadingService: ProfileImageloadingProtocol {
                             forHTTPHeaderField: NetworkConfiguration.Headers.authorisation)
         urlRequest.setValue(NetworkConfiguration.Headers.multipartData.value,
                             forHTTPHeaderField: NetworkConfiguration.Headers.multipartData.field)
-        var dataBody = Data()
-        guard let contentType = "image=@eric-cartman.jpeg;type=image/jpeg".data(using: .utf8)
+        var body = Data()
+        guard let contentType = "image=@Screenshot 2021-07-30 at 6.12.20 PM.jpg;type=image/jpeg".data(using: .utf8)
+//                  guard let contentDisposition = "Content-Disposition: form-data; filename=\"\(UUID().uuidString)\"\r\n".data(using: .utf8),
+//              let boundaryPrefix = "--\(boundary)\r\n".data(using: .utf8),
+//              let newLine = "\r\n".data(using: .utf8)
         else {
             return nil
         }
-        dataBody.append(contentType)
-        dataBody.append(imageData)
+//        body.append(boundaryPrefix)
+//        body.append(contentDisposition)
+        body.append(contentType)
+        body.append(imageData)
+//        body.append(newLine)
+        
+        urlRequest.httpBody = body
         return RequestBuilder(urlRequest: urlRequest)
     }
 }
