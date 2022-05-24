@@ -78,6 +78,8 @@ internal enum Text {
     internal static let next = Text.tr("Localizable", "Common.next")
     /// Нет
     internal static let no = Text.tr("Localizable", "Common.no")
+    /// Нет любимых жанров
+    internal static let noFavoriteGenres = Text.tr("Localizable", "Common.noFavoriteGenres")
     /// Фото отсутствует
     internal static let noImage = Text.tr("Localizable", "Common.noImage")
     /// Нет Постера

@@ -22,6 +22,7 @@ Common.favoriteGenres = "Любимые жанры";
 Common.library = "Библиотека";
 Common.takeAPicture = "Сделать фото";
 Common.noImage = "Фото отсутствует";
+Common.noFavoriteGenres = "Нет любимых жанров";
 
 // MARK: - Authorization
 

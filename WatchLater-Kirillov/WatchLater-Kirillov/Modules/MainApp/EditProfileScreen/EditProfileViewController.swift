@@ -78,7 +78,6 @@ class EditProfileViewController: BaseViewController {
     
     private func setNavigationController() {
         navigationItem.leftBarButtonItem = backBarButton
-//        navigationItem.rightBarButtonItem = saveChangesButton
         navigationController!.navigationBar.prefersLargeTitles = true
         navigationItem.titleView = UIImageView(image: Asset.logoShort.image)
     }
@@ -109,7 +108,6 @@ class EditProfileViewController: BaseViewController {
         uploadPhotoButton.isHidden = !uploadButton
         uploadImageView.isHidden = !uploadButton
         uploadPhotoLabel.isHidden = !uploadButton
-        showSaveButton()
     }
     
     private func showSaveButton() {
@@ -125,7 +123,10 @@ class EditProfileViewController: BaseViewController {
         var trimmedGenres = [String]()
         trimmedGenres.reserveCapacity(genres.count)
         for genre in genres {
-            trimmedGenres.append(genre.trimmingCharacters(in: .whitespaces))
+            let item = genre.trimmingCharacters(in: .whitespaces)
+            if !item.isEmpty {
+                trimmedGenres.append(item)
+            }
         }
         print(trimmedGenres)
         let info = UserInfo(id: 0, name: name, description: about, genres: trimmedGenres, photoId: "", photoData: profileImageView.image?.jpegData(compressionQuality: 1))
@@ -156,6 +157,7 @@ class EditProfileViewController: BaseViewController {
     
     @objc private func saveChanges() {
         print("Saving Changes")
+        // TODO: Check if eanything changed
         interactor.saveAllChanges(userInfo: getUserInfo())
     }
     
@@ -173,6 +175,7 @@ class EditProfileViewController: BaseViewController {
     @objc private func clearImage() {
         profileImageView.image = nil
         makeVisible(uploadButton: true)
+        showSaveButton()
     }
     
     @objc private func nameDoneButtonPressed() {
@@ -270,7 +273,6 @@ extension EditProfileViewController: UIImagePickerControllerDelegate,
     }
     
     func showPhotoMenu() {
-        // TODO: Don't forget add localisable strings
         let alert = UIAlertController(
             title: nil,
             message: nil,
@@ -406,27 +408,33 @@ extension EditProfileViewController {
     }
     
     private func makeNameTextField() -> BaseTextField {
-        let textField = makeTextField(placeholder: Text.Common.name)
+        let textField = makeTextField(placeholder: Text.Common.name,
+                                      autoCapitalisatioinType: .words)
         textField.addTarget(self, action: #selector(nameDoneButtonPressed), for: .editingDidEndOnExit)
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
     }
     
     private func makeAboutTextField() -> BaseTextField {
-        let textField = makeTextField(placeholder: Text.Common.aboutYourself)
+        let textField = makeTextField(placeholder: Text.Common.aboutYourself,
+                                      autoCapitalisatioinType: .none)
         textField.addTarget(self, action: #selector(aboutDoneButtonPressed), for: .editingDidEndOnExit)
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
     }
     
     private func makeFavoriteGenresTextField() -> BaseTextField {
-        let textField = makeTextField(placeholder: Text.Common.favoriteGenres)
+        let textField = makeTextField(placeholder: Text.Common.favoriteGenres,
+                                      autoCapitalisatioinType: .words)
         textField.addTarget(self, action: #selector(favoriteGenresDoneButtonPressed), for: .editingDidEndOnExit)
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
     }
     
-    private func makeTextField(placeholder: String) -> BaseTextField {
+    private func makeTextField(
+        placeholder: String,
+        autoCapitalisatioinType: UITextAutocapitalizationType
+    ) -> BaseTextField {
         let inset = UIEdgeInsets(
             top: EditProfileScreenSize.TextField.textRectangleTopOffset,
             left: EditProfileScreenSize.TextField.textRectangleSideOffset,
@@ -435,7 +443,7 @@ extension EditProfileViewController {
         )
         let textField = BaseTextField(inset: inset)
         textField.textAlignment = .left
-        textField.autocapitalizationType = .words
+        textField.autocapitalizationType = autoCapitalisatioinType
         textField.textColor = Asset.Colors.loginTextColor.color
         textField.autocorrectionType = .no
         textField.returnKeyType = .done
