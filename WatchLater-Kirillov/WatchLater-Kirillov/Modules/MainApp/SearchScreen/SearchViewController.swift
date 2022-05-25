@@ -10,12 +10,14 @@ import UIKit
 
 protocol SearchViewControllerProtocol: AnyObject {
     func displayIMDBMovies(movies: [MovieData])
-    func showFailedState(isSearching: Bool)
+    func showFailedStateIMDB(isSearching: Bool)
+    func displayLocalMovies(movies: [MovieData])
+    func showFailedStateLocal()
 }
 
 protocol SearchViewControllerDelegate: AnyObject {
-    func presentDetailsScreen(imdbData: MovieData?,
-                              localData: FilmData?)
+    func presentDetailsScreen(movieData: MovieData?,
+                              filmData: FilmData?)
 }
 
 class SearchViewController: BaseViewController, UITextFieldDelegate {
@@ -23,12 +25,15 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
     private let imdbSegment = 0
     private let localSegment = 1
     
+    private var isKeyboardUp = false
+    
     private lazy var segmentControl = makeSegmentControl()
     private lazy var textField = makeTextField()
     private lazy var label = makeStartTypingLabel()
     private lazy var resultsTableView = makeResultsTableView()
     private lazy var spiner = makeSpinner()
     
+    private weak var filmChangedDelegate: FilmInfoChangedInformerDelegate!
     private var interactor: SearchInteractorProtocol!
     private var router: SearchRouter!
     
@@ -56,6 +61,7 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
         setView()
         setGestures()
         setConstraints()
+        setKeyBoboardObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,9 +70,11 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func setupComponents(interactor: SearchInteractorProtocol,
-                         router: SearchRouter) {
+                         router: SearchRouter,
+                         filmChangedDelegate: FilmInfoChangedInformerDelegate) {
         self.interactor = interactor
         self.router = router
+        self.filmChangedDelegate = filmChangedDelegate
     }
     
     private func setView() {
@@ -140,10 +148,13 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
                     self?.interactor.searchMoviesIMDB(expression: expression)
                 }
             }
+            imdbSearchText.previous = expression
         
         case .local:
-            // TODO: add core data
-            print("Don't forget core data \(expression)")
+            if localSearchText.previous != expression {
+                interactor.searchMoviesLocal(expression: expression)
+            }
+            localSearchText.previous = expression
         }
     }
     
@@ -160,6 +171,7 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
                 makeVisible(label: true)
             }
             resultsTableView.moviesData = imdbSearchResult
+            resultsTableView.searchArea = .IMDB
             
         case localSegment:
             imdbSearchText.current = textField.text ?? ""
@@ -170,6 +182,7 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
                 makeVisible(label: true)
             }
             resultsTableView.moviesData = localSearchResult
+            resultsTableView.searchArea = .local
             
         default:
             break
@@ -180,7 +193,6 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
         if let text = textField.text,
            !text.isEmpty {
             searchMovies(expression: text)
-            imdbSearchText.previous = text
         } else {
             makeVisible(label: true)
             if getSearchArea() == .IMDB {
@@ -189,8 +201,8 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
                         self?.resultsTableView.moviesData = [MovieData]()
                     }
                 }
+                imdbSearchText.previous = ""
             }
-            imdbSearchText.previous = ""
         }
     }
     
@@ -207,6 +219,30 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
     }
 }
 
+extension SearchViewController {
+    
+    private func setKeyBoboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if !isKeyboardUp {
+                setScrollViewKeyboardUpConstraint(keyboardHeight: keyboardSize.height)
+                isKeyboardUp = true
+            }
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        if isKeyboardUp {
+            setScrollViewKeyboardUpConstraint(keyboardHeight: 0)
+            isKeyboardUp = false
+        }
+    }
+}
+
 extension SearchViewController: SearchViewControllerProtocol {
     
     func displayIMDBMovies(movies: [MovieData]) {
@@ -214,7 +250,12 @@ extension SearchViewController: SearchViewControllerProtocol {
         imdbSearchResult = movies
     }
     
-    func showFailedState(isSearching: Bool) {
+    func displayLocalMovies(movies: [MovieData]) {
+        makeVisible(tableView: true)
+        localSearchResult = movies
+    }
+    
+    func showFailedStateIMDB(isSearching: Bool) {
         if let text = textField.text,
            !text.isEmpty {
             if isSearching {
@@ -226,24 +267,25 @@ extension SearchViewController: SearchViewControllerProtocol {
             makeVisible(label: true)
         }
     }
+    
+    func showFailedStateLocal() {
+        if let text = textField.text,
+           !text.isEmpty {
+            makeVisible(errorView: true)
+        } else {
+            makeVisible(label: true)
+        }
+    }
 }
 
 extension SearchViewController: SearchViewControllerDelegate {
     
-    func presentDetailsScreen(imdbData: MovieData?,
-                              localData: FilmData?) {
+    func presentDetailsScreen(movieData: MovieData?,
+                              filmData: FilmData?) {
         router.presentDetailsViewController(navigationController: navigationController!,
-                                            imdbData: imdbData,
-                                            localData: localData,
-                                            screenVCDelegate: self)
-    }
-}
-
-extension SearchViewController: FilmInfoChangedInformerDelegate {
-    func handleDeletedFilm(id: Int) {
-    }
-    
-    func cangeFilmInfo(filmData: FilmData) {
+                                            movieData: movieData,
+                                            filmData: filmData,
+                                            screenVCDelegate: filmChangedDelegate)
     }
 }
 
@@ -364,7 +406,7 @@ extension SearchViewController {
         resultsTableView.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview()
             maker.top.equalTo(textField.snp.bottom).offset(SearchScreenSizes.TextField.topOffset)
-            maker.bottom.equalTo(view.safeAreaLayoutGuide)
+            maker.bottom.equalTo(view)
         }
     }
     
@@ -373,6 +415,14 @@ extension SearchViewController {
             maker.top.equalTo(textField.snp.bottom).offset(SearchScreenSizes.Spinner.topOffset)
             maker.width.height.equalTo(SearchScreenSizes.Spinner.spinnerSize)
             maker.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setScrollViewKeyboardUpConstraint(keyboardHeight: CGFloat) {
+        resultsTableView.snp.updateConstraints { maker in
+//            maker.leading.trailing.equalToSuperview()
+//            maker.top.equalTo(textField.snp.bottom).offset(SearchScreenSizes.TextField.topOffset)
+            maker.bottom.equalTo(view).inset(keyboardHeight)
         }
     }
 }

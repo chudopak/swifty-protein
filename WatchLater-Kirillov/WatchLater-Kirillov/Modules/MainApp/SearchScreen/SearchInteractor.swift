@@ -14,6 +14,7 @@ protocol SearchInteractorProtocol {
     func cancelCurrentTask(expression: String,
                            completion: @escaping () -> Void)
     func searchMoviesIMDB(expression: String)
+    func searchMoviesLocal(expression: String)
 }
 
 class SearchInteractor: SearchInteractorProtocol {
@@ -42,16 +43,37 @@ class SearchInteractor: SearchInteractorProtocol {
             switch result {
             case .success(let movies):
                 print(movies)
-                self?.presenter.proceedMoviesData(movies: movies)
+                self?.presenter.proceedMoviesData(movies: movies, for: .IMDB)
             
             case .failure(let error):
                 print(error.localizedDescription)
                 if let error = error as? BaseError,
                    error == .cancelled {
-                    self?.presenter.showFailedState(isSearching: true)
+                    self?.presenter.showFailedStateIMDB(isSearching: true)
                 } else {
-                    self?.presenter.showFailedState(isSearching: false)
+                    self?.presenter.showFailedStateIMDB(isSearching: false)
                 }
+            }
+        }
+    }
+    
+    func searchMoviesLocal(expression: String) {
+        FilmInfo.fetchMoviesWith(
+            title: expression,
+            fetchLimit: 50
+        ) { [weak self] result in
+            switch result {
+            case .success(let filmsInfo):
+                var movies = [MovieData]()
+                movies.reserveCapacity(filmsInfo.count)
+                for film in filmsInfo {
+                    movies.append(MovieData(coreDataType: film))
+                }
+                self?.presenter.proceedMoviesData(movies: movies, for: .local)
+                
+            case .failure(let error):
+                print("searchMoviesLocal - \(error.localizedDescription)")
+                self?.presenter.showFailedStateLocal()
             }
         }
     }

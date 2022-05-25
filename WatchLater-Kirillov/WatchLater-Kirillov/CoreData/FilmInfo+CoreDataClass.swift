@@ -94,5 +94,24 @@ public class FilmInfo: NSManagedObject {
         CoreDataService.shared.managedObjectContext.performAndWait {
             completion(film)
         }
+    static func fetchMoviesWith(
+        title: String,
+        fetchLimit: Int,
+        completion: @escaping (Result<[FilmInfo], Error>) -> Void
+    ) {
+        let predicate = NSPredicate(
+            format: "%K CONTAINS[c] '\(title)'",
+            #keyPath(FilmInfo.title)
+        )
+        let sort = NSSortDescriptor(key: "id", ascending: true)
+        let fetchData = FetchRequestData(predicate: predicate,
+                                         sortDescriptors: [sort],
+                                         fetchLimit: fetchLimit,
+                                         fetchOffset: 0)
+        CoreDataService.shared.get(
+            type: FilmInfo.self,
+            fetchRequestData: fetchData,
+            completion: completion
+        )
     }
 }

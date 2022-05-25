@@ -10,7 +10,7 @@ import UIKit
 
 final class SearchScreenConfigurator {
     
-    func setupModule() -> SearchViewController {
+    func setupModule(filmChangedDelegate: FilmInfoChangedInformerDelegate) -> SearchViewController {
         let viewController = SearchViewController()
         let presenter = SearchPresenter(viewController: viewController)
         let searchService = SearchMovieService(networkManager: NetworkLayer(refreshService: RefreshTokenService()))
@@ -18,7 +18,8 @@ final class SearchScreenConfigurator {
                                           searchService: searchService)
         let router = SearchRouter(viewController: viewController)
         viewController.setupComponents(interactor: interactor,
-                                       router: router)
+                                       router: router,
+                                       filmChangedDelegate: filmChangedDelegate)
         return viewController
     }
 }

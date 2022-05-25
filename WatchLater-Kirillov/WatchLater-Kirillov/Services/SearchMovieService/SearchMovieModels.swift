@@ -20,6 +20,39 @@ struct MovieData: Codable {
     let description: String
     var rating: String?
     var year: String?
+    var isWatched: Bool?
+    let genres: [String]?
+    
+    init(
+        id: String,
+        image: String,
+        title: String,
+        description: String,
+        rating: String?,
+        year: String?,
+        isWatched: Bool?,
+        genres: [String]?
+    ) {
+        self.id = id
+        self.image = image
+        self.title = title
+        self.description = description
+        self.rating = rating
+        self.year = year
+        self.isWatched = isWatched
+        self.genres = genres
+    }
+    
+    init(coreDataType: FilmInfo) {
+        id = String(coreDataType.id)
+        image = coreDataType.posterID ?? ""
+        title = coreDataType.title
+        description = coreDataType.titleDescription
+        rating = coreDataType.rating
+        year = coreDataType.year
+        isWatched = coreDataType.isWatched
+        genres = coreDataType.genres
+    }
 }
 
 enum MoviesError: Error {

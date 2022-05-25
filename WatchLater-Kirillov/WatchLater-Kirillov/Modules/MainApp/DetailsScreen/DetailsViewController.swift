@@ -67,12 +67,12 @@ class DetailsViewController: BaseViewController {
         setViewInfo()
     }
     
-    func setupData(imdbData: MovieData?,
-                   localData: FilmData?) {
-        if let imdbData = imdbData {
-            setDetailsWithIMDBData(data: imdbData)
+    func setupData(movieData: MovieData?,
+                   filmData: FilmData?) {
+        if let imdbData = movieData {
+            setDetailsWithMovieData(data: imdbData)
         } else {
-            setDetailsWithLocalData(data: localData!)
+            setDetailsWithFilmData(data: filmData!)
         }
     }
     
@@ -193,23 +193,28 @@ class DetailsViewController: BaseViewController {
         genresStackViews = [UIStackView]()
     }
     
-    private func setDetailsWithIMDBData(data: MovieData) {
-        let imageType = ImageLinkType.IMDB(data.image)
-        // TODO: fix "unnowned" and "0"
+    private func setDetailsWithMovieData(data: MovieData) {
+        let imageType: ImageLinkType
+        if let url = URL(string: data.image),
+           UIApplication.shared.canOpenURL(url) {
+            imageType = ImageLinkType.IMDB(data.image)
+        } else {
+            imageType = ImageLinkType.local(data.image)
+        }
         let rating = getPrefix(string: data.rating ?? Text.Fillings.noData, prefixValue: 3)
         let year = data.year ?? Text.Fillings.noData
         movieDetails = MovieDetails(imageType: imageType,
                                     rating: rating,
                                     year: year,
                                     description: data.description,
-                                    genres: nil,
+                                    genres: data.genres,
                                     title: data.title,
-                                    isWatched: nil,
-                                    id: -1)
+                                    isWatched: data.isWatched,
+                                    id: Int(data.id) ?? -1)
         movieDetailsBeforeEditing = movieDetails
     }
     
-    private func setDetailsWithLocalData(data: FilmData) {
+    private func setDetailsWithFilmData(data: FilmData) {
         let imageType = ImageLinkType.local(data.posterId ?? Text.Fillings.noData)
         let rating = getPrefix(string: String(data.rating ?? 0), prefixValue: 3)
         let year = getPrefix(string: data.timestamp ?? Text.Fillings.noData, prefixValue: 4)

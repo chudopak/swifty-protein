@@ -120,8 +120,8 @@ class SplashViewController: BaseViewController {
                         self?.eyeImageView.frame.origin.x = SplashScreenSizes.eyeImageViewXCenter
                        }, completion: { [weak self] _ in
                         self?.isAnimationFinished = true
-                        if self?.isTokenValidationFinished != nil
-                            && self!.isTokenValidationFinished {
+                        if let isFinished = self?.isTokenValidationFinished,
+                              isFinished {
                             self?.presentNeededScreen()
                         }
                        })

@@ -126,7 +126,7 @@ class FavouriteViewController: BaseViewController {
     }
     
     @objc private func searchFilm() {
-        router.pushSearchViewController(to: navigationController!)
+        router.pushSearchViewController(to: navigationController!, favouriteVCDelegate: self)
     }
     
     @objc private func changeViewStyle() {

@@ -10,8 +10,8 @@ import UIKit
 
 final class DetailsScreenConfigurator {
     
-    func setupModule(imdbData: MovieData?,
-                     localData: FilmData?,
+    func setupModule(movieData: MovieData?,
+                     filmData: FilmData?,
                      previousViewController: FilmInfoChangedInformerDelegate) -> DetailsViewController {
         let vc = DetailsViewController()
         let presenter = DetailsPresenter(viewController: vc)
@@ -21,8 +21,8 @@ final class DetailsScreenConfigurator {
                                            imageDownloadingService: imageService,
                                            filmsService: filmsService)
         let router = DetailsRouter(viewController: vc)
-        vc.setupData(imdbData: imdbData,
-                     localData: localData)
+        vc.setupData(movieData: movieData,
+                     filmData: filmData)
         vc.setupComponents(interactor: interactor,
                            router: router,
                            previousVCDelegate: previousViewController)
