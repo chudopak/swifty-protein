@@ -17,7 +17,7 @@ final class SplashRouter {
     
     func presentLoginViewController() {
         let loginVC = LoginRouter.makeLoginViewController()
-        let navigationController = UINavigationController(rootViewController: loginVC)
+        let navigationController = BaseNavigationController(rootViewController: loginVC)
         navigationController.modalPresentationStyle = .fullScreen
         UIWindowService.replaceRootViewController(with: navigationController)
     }

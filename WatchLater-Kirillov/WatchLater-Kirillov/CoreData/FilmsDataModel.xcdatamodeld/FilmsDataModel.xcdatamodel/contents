@@ -19,7 +19,7 @@
         <attribute name="photoId" attributeType="String"/>
     </entity>
     <elements>
-        <element name="FilmInfo" positionX="-102.2213134765625" positionY="-18" width="167.2213134765625" height="163"/>
+        <element name="FilmInfo" positionX="-102.2213134765625" positionY="-18" width="167.2213134765625" height="149"/>
         <element name="ProfileInfo" positionX="-81" positionY="45" width="128" height="119"/>
     </elements>
 </model>

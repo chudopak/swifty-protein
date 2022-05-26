@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-@objc(FilmInfo)
 public class FilmInfo: NSManagedObject {
     static func fetchPageFromCoreData(
         page: Int,
