@@ -391,7 +391,7 @@
 		30314C9B265AA9FB00CADD41 /* WatchLater-Kirillov_Tests */ = {
 			isa = PBXGroup;
 			children = (
-				30314C9C265AA9FB00CADD41 /* WatchLater_Tests.swift */,
+				7D6BF99C283FB82E00444EAF /* LoginTests */,
 				30314C9E265AA9FB00CADD41 /* Info.plist */,
 			);
 			path = "WatchLater-Kirillov_Tests";
@@ -682,6 +682,14 @@
 				7D612D622811A335007C7515 /* RefreshServiceModel.swift */,
 			);
 			path = RefreshTokenService;
+			sourceTree = "<group>";
+		};
+		7D6BF99C283FB82E00444EAF /* LoginTests */ = {
+			isa = PBXGroup;
+			children = (
+				30314C9C265AA9FB00CADD41 /* WatchLater_Tests.swift */,
+			);
+			path = LoginTests;
 			sourceTree = "<group>";
 		};
 		7D6DAEED2837AAD900AD28D6 /* ProfileScreen */ = {
