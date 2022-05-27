@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import WatchLater_Kirillov_Dev
 
 <<<<<<<< HEAD:WatchLater-Kirillov/WatchLater-Kirillov_Tests/LoginTests/WatchLater_Tests.swift
 
@@ -14,17 +15,74 @@ class LoginTests: XCTestCase {
 class RegistrationInteractorTests: XCTestCase {
 >>>>>>>> 47ddf8e (Added Unit tests for LoginInteractor and LoginPresenter):WatchLater-Kirillov/WatchLater-Kirillov_Tests/WatchLater-Kirillov_UnitTests/RegistrationScreenTests/RegistrationInteractorTests.swift
 
+    private var interactor: RegistrationInteractor!
+    private var serviceSpy: RegistrationServiceSpy!
+    private var presenterSpy: RegistrationPresenterSpy!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        serviceSpy = RegistrationServiceSpy()
+        presenterSpy = RegistrationPresenterSpy()
+        interactor = RegistrationInteractor(presenter: presenterSpy, networkService: serviceSpy)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        serviceSpy = nil
+        presenterSpy = nil
+        interactor = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testInteractorEmptyData() throws {
+        let data = RegistrationData(email: "", password: "", repeatPassword: "")
+        
+        interactor.register(data: data)
+        
+        XCTAssertEqual(presenterSpy.isShowFailedState, true)
+        XCTAssertEqual(serviceSpy.isCalled, false)
+    }
+    
+    func testInteractorEmptyPassword() throws {
+        let data = RegistrationData(email: "asdf@mail.ru", password: "", repeatPassword: "asfd")
+        
+        interactor.register(data: data)
+        
+        XCTAssertEqual(presenterSpy.isShowFailedState, true)
+        XCTAssertEqual(serviceSpy.isCalled, false)
+    }
+    
+    func testInteractorEmptyRepeatPassword() throws {
+        let data = RegistrationData(email: "asdf@mail.ru", password: "asfd", repeatPassword: "")
+        
+        interactor.register(data: data)
+        
+        XCTAssertEqual(presenterSpy.isShowFailedState, true)
+        XCTAssertEqual(serviceSpy.isCalled, false)
+    }
+    
+    func testInteractorEmptyEmail() throws {
+        let data = RegistrationData(email: "", password: "asdf", repeatPassword: "sadf")
+        
+        interactor.register(data: data)
+        
+        XCTAssertEqual(presenterSpy.isShowFailedState, true)
+        XCTAssertEqual(serviceSpy.isCalled, false)
+    }
+    
+    func testInteractorPasswordsDoesNotMatch() throws {
+        let data = RegistrationData(email: "asdf@mail.ru", password: "asdf", repeatPassword: "sadf")
+        
+        interactor.register(data: data)
+        
+        XCTAssertEqual(presenterSpy.isShowFailedState, true)
+        XCTAssertEqual(serviceSpy.isCalled, false)
+    }
+    
+    func testInteractorProceedRegistrationResult() throws {
+        let data = RegistrationData(email: "asdf@mail.ru", password: "asdf", repeatPassword: "asdf")
+        
+        interactor.register(data: data)
+        
+        XCTAssertEqual(presenterSpy.isProceedRegistrationResult, true)
+        XCTAssertEqual(serviceSpy.isCalled, true)
     }
 
     func testPerformanceExample() throws {

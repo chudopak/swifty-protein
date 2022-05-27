@@ -76,6 +76,10 @@
 		7D4EC67A2840F9DC008ECAA9 /* LoginPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EC6792840F9DC008ECAA9 /* LoginPresenterTests.swift */; };
 		7D4EC67C2840FA3D008ECAA9 /* LoginViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EC67B2840FA3D008ECAA9 /* LoginViewControllerSpy.swift */; };
 		7D4EC67F28410152008ECAA9 /* RegistrationInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EC67E28410152008ECAA9 /* RegistrationInteractorTests.swift */; };
+		7D4EC68128410285008ECAA9 /* RegistrationPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EC68028410285008ECAA9 /* RegistrationPresenterSpy.swift */; };
+		7D4EC685284103CA008ECAA9 /* RegistrationServiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EC684284103CA008ECAA9 /* RegistrationServiceSpy.swift */; };
+		7D4EC687284116C3008ECAA9 /* RegistrationPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EC686284116C3008ECAA9 /* RegistrationPresenterTests.swift */; };
+		7D4EC68928411730008ECAA9 /* RegistrationViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EC68828411730008ECAA9 /* RegistrationViewControllerSpy.swift */; };
 		7D612D5528118246007C7515 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D5428118246007C7515 /* FavouriteViewController.swift */; };
 		7D612D5628118246007C7515 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D5428118246007C7515 /* FavouriteViewController.swift */; };
 		7D612D59281182EF007C7515 /* UIWindowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D612D58281182EF007C7515 /* UIWindowService.swift */; };
@@ -303,6 +307,10 @@
 		7D4EC6792840F9DC008ECAA9 /* LoginPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterTests.swift; sourceTree = "<group>"; };
 		7D4EC67B2840FA3D008ECAA9 /* LoginViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerSpy.swift; sourceTree = "<group>"; };
 		7D4EC67E28410152008ECAA9 /* RegistrationInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegistrationInteractorTests.swift; path = "WatchLater-Kirillov_Tests/WatchLater-Kirillov_UnitTests/RegistrationScreenTests/RegistrationInteractorTests.swift"; sourceTree = SOURCE_ROOT; };
+		7D4EC68028410285008ECAA9 /* RegistrationPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenterSpy.swift; sourceTree = "<group>"; };
+		7D4EC684284103CA008ECAA9 /* RegistrationServiceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationServiceSpy.swift; sourceTree = "<group>"; };
+		7D4EC686284116C3008ECAA9 /* RegistrationPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegistrationPresenterTests.swift; path = "WatchLater-Kirillov_Tests/WatchLater-Kirillov_UnitTests/RegistrationScreenTests/RegistrationPresenterTests.swift"; sourceTree = SOURCE_ROOT; };
+		7D4EC68828411730008ECAA9 /* RegistrationViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerSpy.swift; sourceTree = "<group>"; };
 		7D612D5428118246007C7515 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		7D612D58281182EF007C7515 /* UIWindowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowService.swift; sourceTree = "<group>"; };
 		7D612D5C28119E08007C7515 /* RefreshTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenService.swift; sourceTree = "<group>"; };
@@ -719,12 +727,9 @@
 		7D4EC6722840EE4E008ECAA9 /* LoginScreenTests */ = {
 			isa = PBXGroup;
 			children = (
-				7D4EC67E28410152008ECAA9 /* RegistrationInteractorTests.swift */,
+				7D4EC6822841033F008ECAA9 /* Spies */,
 				7D4EC6792840F9DC008ECAA9 /* LoginPresenterTests.swift */,
 				7D4EC6702840EE05008ECAA9 /* LoginInteractorTests.swift */,
-				7D4EC6752840EE8B008ECAA9 /* LoginPresenterSpy.swift */,
-				7D4EC6772840EFA7008ECAA9 /* LoginServiceLoginSucceedSpy.swift */,
-				7D4EC67B2840FA3D008ECAA9 /* LoginViewControllerSpy.swift */,
 			);
 			path = LoginScreenTests;
 			sourceTree = "<group>";
@@ -732,8 +737,31 @@
 		7D4EC67D28410119008ECAA9 /* RegistrationScreenTests */ = {
 			isa = PBXGroup;
 			children = (
+				7D4EC683284103A4008ECAA9 /* Spies */,
+				7D4EC67E28410152008ECAA9 /* RegistrationInteractorTests.swift */,
+				7D4EC686284116C3008ECAA9 /* RegistrationPresenterTests.swift */,
 			);
 			path = RegistrationScreenTests;
+			sourceTree = "<group>";
+		};
+		7D4EC6822841033F008ECAA9 /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+				7D4EC67B2840FA3D008ECAA9 /* LoginViewControllerSpy.swift */,
+				7D4EC6772840EFA7008ECAA9 /* LoginServiceLoginSucceedSpy.swift */,
+				7D4EC6752840EE8B008ECAA9 /* LoginPresenterSpy.swift */,
+			);
+			path = Spies;
+			sourceTree = "<group>";
+		};
+		7D4EC683284103A4008ECAA9 /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+				7D4EC68028410285008ECAA9 /* RegistrationPresenterSpy.swift */,
+				7D4EC684284103CA008ECAA9 /* RegistrationServiceSpy.swift */,
+				7D4EC68828411730008ECAA9 /* RegistrationViewControllerSpy.swift */,
+			);
+			path = Spies;
 			sourceTree = "<group>";
 		};
 		7D612D5328118201007C7515 /* FavouriteScreen */ = {
@@ -1578,12 +1606,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D4EC68928411730008ECAA9 /* RegistrationViewControllerSpy.swift in Sources */,
 				7D4EC6712840EE05008ECAA9 /* LoginInteractorTests.swift in Sources */,
 				7D4EC6762840EE8B008ECAA9 /* LoginPresenterSpy.swift in Sources */,
+				7D4EC687284116C3008ECAA9 /* RegistrationPresenterTests.swift in Sources */,
 				7D4EC67C2840FA3D008ECAA9 /* LoginViewControllerSpy.swift in Sources */,
 				7D4EC6782840EFA7008ECAA9 /* LoginServiceLoginSucceedSpy.swift in Sources */,
 				7D4EC67A2840F9DC008ECAA9 /* LoginPresenterTests.swift in Sources */,
 				7D4EC67F28410152008ECAA9 /* RegistrationInteractorTests.swift in Sources */,
+				7D4EC68128410285008ECAA9 /* RegistrationPresenterSpy.swift in Sources */,
+				7D4EC685284103CA008ECAA9 /* RegistrationServiceSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
