@@ -23,6 +23,10 @@ final class LoginInteractor: LoginInteractorProtocol {
     }
     
     func login(data: LoginData) {
+        if data.email.isEmpty || data.password.isEmpty {
+            presenter.failedToLogin(message: Text.Authorization.fieldsMustBeFilled)
+            return
+        }
         networkService.login(with: data) { [weak self] status in
             self?.presenter.procedLoginResult(state: status)
         }

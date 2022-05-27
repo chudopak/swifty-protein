@@ -10,6 +10,7 @@ import UIKit
 
 protocol RegistrationPresenterProtocol {
     func proceedRegistrationResult(state: RegistrationResponseState)
+    func showFailedState(message: String)
 }
 
 final class RegistrationPresenter: RegistrationPresenterProtocol {
@@ -39,6 +40,12 @@ final class RegistrationPresenter: RegistrationPresenterProtocol {
             DispatchQueue.main.async { [weak self] in
                 self?.registrationViewController.presentLoginViewControllerWithLoginAlert()
             }
+        }
+    }
+    
+    func showFailedState(message: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.registrationViewController.registrationFailedState(displayMessage: message)
         }
     }
 }

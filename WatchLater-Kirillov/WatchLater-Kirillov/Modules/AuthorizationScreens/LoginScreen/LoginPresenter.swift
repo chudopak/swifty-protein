@@ -10,6 +10,7 @@ import UIKit
 
 protocol LoginPresenterProtocol {
     func procedLoginResult(state: LoginResponseState)
+    func failedToLogin(message: String)
 }
 
 final class LoginPresenter: LoginPresenterProtocol {
@@ -34,6 +35,12 @@ final class LoginPresenter: LoginPresenterProtocol {
             DispatchQueue.main.async { [weak self] in
                 self?.loginViewController.loginFailedState(displayMessage: displayMessage)
             }
+        }
+    }
+    
+    func failedToLogin(message: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.loginViewController.loginFailedState(displayMessage: message)
         }
     }
 }
