@@ -42,6 +42,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7D4EC6542840BB29008ECAA9"
+               BuildableName = "WatchLater-Kirillov_UITests.xctest"
+               BlueprintName = "WatchLater-Kirillov_UITests"
+               ReferencedContainer = "container:WatchLater-Kirillov.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7D4EC6652840D92B008ECAA9"
+               BuildableName = "WatchLater-Kirillov_UnitTests.xctest"
+               BlueprintName = "WatchLater-Kirillov_UnitTests"
+               ReferencedContainer = "container:WatchLater-Kirillov.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
