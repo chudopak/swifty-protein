@@ -65,3 +65,4 @@ BaseError.noData = "There is no data in response.";
 BaseError.range400Response = "Response in 400's range.";
 BaseError.unableToDecodeData = "Can not decode data to needed type.";
 BaseError.cancelled = "Cancel task.";
+BaseError.badResult = "Bad result.";

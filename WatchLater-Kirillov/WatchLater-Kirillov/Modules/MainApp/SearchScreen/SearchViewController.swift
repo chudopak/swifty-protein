@@ -255,10 +255,10 @@ extension SearchViewController {
         controll.backgroundColor = Asset.Colors.grayTransperent.color
         controll.tintColor = .white
         controll.setTitleTextAttributes([.font: UIFont.boldSystemFont(ofSize: 15),
-                                         .foregroundColor: UIColor.black],
+                                         .foregroundColor: Asset.Colors.black.color],
                                         for: .normal)
         controll.setTitleTextAttributes([.font: UIFont.boldSystemFont(ofSize: 15),
-                                         .foregroundColor: UIColor.black],
+                                         .foregroundColor: Asset.Colors.black.color],
                                         for: .selected)
         if #available(iOS 13.0, *) {
             controll.selectedSegmentTintColor = .white

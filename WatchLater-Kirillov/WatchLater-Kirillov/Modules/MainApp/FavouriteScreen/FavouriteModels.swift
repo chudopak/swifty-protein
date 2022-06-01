@@ -30,8 +30,8 @@ struct FilmData: Codable, Equatable {
         else {
             return false
         }
-        let lYear = getPrefix(string: lhs.timestamp ?? "1970", prefixValue: 4)
-        let rYear = getPrefix(string: rhs.timestamp ?? "1970", prefixValue: 4)
+        let lYear = getPrefix(string: lhs.timestamp ?? Text.Fillings.noData, prefixValue: 4)
+        let rYear = getPrefix(string: rhs.timestamp ?? Text.Fillings.noData, prefixValue: 4)
         let lRating = getPrefix(string: String(lhs.rating ?? 0), prefixValue: 3)
         let rRating = getPrefix(string: String(rhs.rating ?? 0), prefixValue: 3)
         guard optionalsAreEqual(firstVal: lhs.description, secondVal: rhs.description)

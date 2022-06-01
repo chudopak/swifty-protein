@@ -66,7 +66,6 @@ final class CoreDataService {
         }
     }
     
-    // TODO: MUST BE CALLED IN THE MAIN THREAD AND NOW IT BLOCK MAIN THREAD
     func getSync<T>(
         type: T.Type,
         fetchRequestData: FetchRequestData

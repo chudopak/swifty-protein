@@ -32,10 +32,6 @@ class ProfileViewController: BaseViewController {
     
     private lazy var genresStackViews = [UIStackView]()
     
-    private var isFirstLaunch: Bool {
-        return true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()

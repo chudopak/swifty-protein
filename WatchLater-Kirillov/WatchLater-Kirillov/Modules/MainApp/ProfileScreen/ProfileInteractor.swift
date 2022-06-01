@@ -48,13 +48,13 @@ final class ProfileInteractor: ProfileInteractorProtocol {
         imageService.getProfilePhoto { result in
             switch result {
             case .success(let imageData):
-                CoreDataService.shared.managedObjectContext.performAndWait { [weak self] in
-                    if profile.photoId != imageData.id
-                        || profile.photoData == nil {
-                        profile.photoId = imageData.id
-                        profile.photoData = imageData.image.jpegData(compressionQuality: 1)
+                ProfileInfo.changeProfileInfo(info: profile) { [weak self] info in
+                    if info.photoId != imageData.id
+                        || info.photoData == nil {
+                        info.photoId = imageData.id
+                        info.photoData = imageData.image.jpegData(compressionQuality: 1)
                         self?.presenter.changeProfileImage(imageData: imageData)
-                        CoreDataService.shared.saveContext()
+                        ProfileInfo.saveProfileInfoChanges()
                     }
                 }
             

@@ -82,7 +82,7 @@ extension BaseError: LocalizedError {
             
         case .badResult:
             return NSLocalizedString(
-                "Bad result.",
+                Text.BaseError.badResult,
                 comment: ""
             )
         }

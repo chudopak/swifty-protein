@@ -33,6 +33,8 @@ internal enum Text {
   }
 
   internal enum BaseError {
+    /// Bad result.
+    internal static let badResult = Text.tr("Localizable", "BaseError.badResult")
     /// Cancel task.
     internal static let cancelled = Text.tr("Localizable", "BaseError.cancelled")
     /// Failed to build request.

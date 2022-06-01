@@ -11,7 +11,6 @@ import UIKit
 protocol EditProfileInteractorProtocol {
     func saveAllChanges(userInfo: UserInfo)
     func saveChanges(userInfo: UserInfo)
-    func savePicture(image: Data?)
 }
 
 final class EditProfileInteractor: EditProfileInteractorProtocol {
@@ -38,7 +37,7 @@ final class EditProfileInteractor: EditProfileInteractorProtocol {
                     self?.updateLocalInfo(localInfo: localInfo, newInfo: userInfo) {
                         self?.presenter.successfulDataUpload(userInfo: userInfo)
                     }
-                    self?.savePicture(image: userInfo.photoData)
+                    self?.updatePhoto(localInfo: localInfo, photoData: userInfo.photoData)
                     self?.uploadImageToBackend(data: userInfo.photoData)
                 } else {
                     self?.saveUserInfoTextInfo(userInfo: userInfo) {
@@ -53,20 +52,6 @@ final class EditProfileInteractor: EditProfileInteractorProtocol {
                     self?.presenter.successfulDataUpload(userInfo: userInfo)
                 }
                 self?.uploadImageToBackend(data: userInfo.photoData)
-            }
-        }
-    }
-    
-    func savePicture(image: Data?) {
-        ProfileInfo.fetchUserInfo { [weak self] result in
-            switch result {
-            case .success(let usersInfo):
-                if let localInfo = usersInfo.first {
-                    self?.updatePhoto(localInfo: localInfo, photoData: image)
-                }
-
-            case .failure:
-                print("Failed to fetch userInfo")
             }
         }
     }
@@ -93,8 +78,8 @@ final class EditProfileInteractor: EditProfileInteractorProtocol {
             switch result {
             case .success(let usersInfo):
                 if let localInfo = usersInfo.first {
-                    CoreDataService.shared.managedObjectContext.performAndWait {
-                        localInfo.photoId = id
+                    ProfileInfo.changeProfileInfo(info: localInfo) { info in
+                        info.photoId = id
                     }
                 }
 
@@ -109,32 +94,32 @@ final class EditProfileInteractor: EditProfileInteractorProtocol {
         newInfo: UserInfo,
         completion: @escaping () -> Void
     ) {
-        CoreDataService.shared.managedObjectContext.performAndWait {
-            localInfo.aboutMe = newInfo.description
-            localInfo.genres = newInfo.genres
-            localInfo.name = newInfo.name
-            CoreDataService.shared.saveContext()
+        ProfileInfo.changeProfileInfo(info: localInfo) { info in
+            info.aboutMe = newInfo.description
+            info.genres = newInfo.genres
+            info.name = newInfo.name
+            ProfileInfo.saveProfileInfoChanges()
             completion()
         }
     }
     
     private func saveUserInfoTextInfo(userInfo: UserInfo, completion: @escaping () -> Void) {
-        CoreDataService.shared.save(with: ProfileInfo.self, predicate: nil) { object, context in
+        ProfileInfo.addNewProfileInfo { object in
             object.aboutMe = userInfo.description
             object.genres = userInfo.genres
             object.name = userInfo.name
             object.id = Int64(userInfo.id)
             object.photoId = userInfo.photoId
-            CoreDataService.shared.saveContext()
+            ProfileInfo.saveProfileInfoChanges()
             completion()
         }
     }
     
     private func updatePhoto(localInfo: ProfileInfo, photoData: Data?, photoId: String = "") {
-        CoreDataService.shared.managedObjectContext.performAndWait {
-            localInfo.photoId = photoId
-            localInfo.photoData = photoData
-            CoreDataService.shared.saveContext()
+        ProfileInfo.changeProfileInfo(info: localInfo) { info in
+            info.photoId = photoId
+            info.photoData = photoData
+            ProfileInfo.saveProfileInfoChanges()
         }
     }
 }

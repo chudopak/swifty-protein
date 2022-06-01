@@ -9,22 +9,25 @@
 import UIKit
 
 enum FirstLaunchChecker {
-    private static let firstLauchKey = "First Launch"
-    private static let firstProfileLauchKey = "First Profile Launch"
+    
+    enum Constant {
+        static let firstLauchKey = "First Launch"
+        static let firstProfileLauchKey = "First Profile Launch"
+    }
 
     static var isFirstLaunch: Bool {
         get {
-            UserDefaults.standard.bool(forKey: firstLauchKey)
+            UserDefaults.standard.bool(forKey: Constant.firstLauchKey)
         } set {
-            UserDefaults.standard.setValue(newValue, forKey: firstLauchKey)
+            UserDefaults.standard.setValue(newValue, forKey: Constant.firstLauchKey)
         }
     }
     
     static var isFirstProfileLaunch: Bool {
         get {
-            !UserDefaults.standard.bool(forKey: firstProfileLauchKey)
+            !UserDefaults.standard.bool(forKey: Constant.firstProfileLauchKey)
         } set {
-            UserDefaults.standard.setValue(!newValue, forKey: firstProfileLauchKey)
+            UserDefaults.standard.setValue(!newValue, forKey: Constant.firstProfileLauchKey)
         }
     }
 }

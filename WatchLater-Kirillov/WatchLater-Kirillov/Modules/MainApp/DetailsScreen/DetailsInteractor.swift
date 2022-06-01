@@ -41,49 +41,32 @@ final class DetailsInteractor: DetailsInteractorProtocol {
     }
     
     func changeFilmWatchStatus(id: Int) {
-        changeObjectInCoreData(id: id) { [weak self] isChanged in
-            self?.presenter.sendFilmsWatchStatus(status: isChanged)
-            self?.filmsService.changeFilmWatchStatus(id: id) { [weak self, isChanged] result in
-                switch result {
-                case .failure(let error):
-                    print("DetailsInteractor, changeFilmWatchStatus - ", error.localizedDescription)
-                    self?.presenter.sendFailedToChangeStatusInBackend(isLocalChanged: isChanged)
-                    
-                default:
-                    break
+        FilmInfo.changeObjectInCoreData(id: id) { [weak self] result in
+            switch result {
+            case .success(let film):
+                FilmInfo.interactWithFilm(film: film) { filmInfo in
+                    filmInfo.isWatched = !filmInfo.isWatched
+                    FilmInfo.saveChanges()
                 }
-            }
+                self?.handleChangeFilmStatus(id: id, isChanged: true)
+
+            case .failure:
+                self?.handleChangeFilmStatus(id: id, isChanged: false)
+            }  
         }
     }
     
-    private func changeObjectInCoreData(id: Int, completion: @escaping (Bool) -> Void) {
-        let predicate = NSPredicate(
-            format: "%K = \(id)",
-            #keyPath(FilmInfo.id)
-        )
-        let fetchData = FetchRequestData(
-            predicate: predicate,
-            sortDescriptors: [],
-            fetchLimit: 1,
-            fetchOffset: .zero
-        )
-        CoreDataService.shared.get(
-                type: FilmInfo.self,
-                fetchRequestData: fetchData
-        ) { result in
+    private func handleChangeFilmStatus(id: Int, isChanged: Bool) {
+        presenter.sendFilmsWatchStatus(status: isChanged)
+        filmsService.changeFilmWatchStatus(id: id) { [weak self, isChanged] result in
             switch result {
-            case .success(let object):
-                if let obj = object.first {
-                    obj.isWatched = !obj.isWatched
-                    completion(true)
-                } else {
-                    completion(false)
-                }
-            
-            case .failure:
-                completion(false)
+            case .failure(let error):
+                print("DetailsInteractor, changeFilmWatchStatus - ", error.localizedDescription)
+                self?.presenter.sendFailedToChangeStatusInBackend(isLocalChanged: isChanged)
+                
+            default:
+                break
             }
-            CoreDataService.shared.saveContext()
         }
     }
     

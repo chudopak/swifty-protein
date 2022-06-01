@@ -198,14 +198,14 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         guard let back = filmsBack,
               !back.isEmpty
         else {
-            CoreDataService.shared.deleteObjects(objects: filmsLocal) {
-                CoreDataService.shared.saveContext()
+            FilmInfo.deleteFilms(films: filmsLocal) {
+                FilmInfo.saveChanges()
             }
             return
         }
         changeNotEqualFilmsInfo(back: back, filmsLocal: filmsLocal)
         changeCoreDataObjectsAmount(back: back, filmsLocal: filmsLocal)
-        CoreDataService.shared.saveContext()
+        FilmInfo.saveChanges()
     }
     
     private func changeNotEqualFilmsInfo(back: [FilmData], filmsLocal: [FilmInfo]) {
@@ -219,31 +219,30 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         let smallSize = back.count < filmsLocal.count ? back.count : filmsLocal.count
         if smallSize < filmsLocal.count {
             let filmsForDeletion = Array(filmsLocal[smallSize..<filmsLocal.count])
-            CoreDataService.shared.deleteObjects(objects: filmsForDeletion) {}
+            FilmInfo.deleteFilms(films: filmsForDeletion) {}
         } else {
-            CoreDataService.shared.save(
-                with: FilmInfo.self,
+            FilmInfo.saveObjects(
                 predicate: nil,
                 amount: back.count - smallSize
-            ) { [weak self] objects, managedObjectContext in
+            ) { [weak self] objects in
                 for i in 0..<back.count - smallSize {
                     self?.setFilmInfo(film: objects[i], back: back[i + smallSize])
                 }
-                CoreDataService.shared.saveContext()
+                FilmInfo.saveChanges()
             }
         }
     }
     
     private func setFilmInfo(film: FilmInfo, back: FilmData) {
-        CoreDataService.shared.managedObjectContext.performAndWait {
-            film.id = back.id
-            film.titleDescription = back.description ?? Text.Fillings.noData
-            film.posterID = back.posterId
-            film.rating = getPrefix(string: String(back.rating ?? 0), prefixValue: 3)
-            film.year = getPrefix(string: back.timestamp ?? Text.Fillings.noData, prefixValue: 4)
-            film.genres = back.genres
-            film.title = back.title
-            film.isWatched = back.isWatched ?? false
+        FilmInfo.interactWithFilm(film: film) { localFilm in
+            localFilm.id = back.id
+            localFilm.titleDescription = back.description ?? Text.Fillings.noData
+            localFilm.posterID = back.posterId
+            localFilm.rating = getPrefix(string: String(back.rating ?? 0), prefixValue: 3)
+            localFilm.year = getPrefix(string: back.timestamp ?? Text.Fillings.noData, prefixValue: 4)
+            localFilm.genres = back.genres
+            localFilm.title = back.title
+            localFilm.isWatched = back.isWatched ?? false
         }
     }
     
@@ -251,13 +250,13 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
         let backYear = getPrefix(string: back.timestamp ?? Text.Fillings.noData, prefixValue: 4)
         let backRating = getPrefix(string: String(back.rating ?? 0), prefixValue: 3)
         var result = false
-        CoreDataService.shared.managedObjectContext.performAndWait {
+        FilmInfo.interactWithFilm(film: local) { localFilm in
             guard let backDescripiton = back.description,
-                  local.titleDescription == backDescripiton,
-                  optionalsAreEqual(firstVal: back.posterId, secondVal: local.posterID),
-                  optionalsAreEqual(firstVal: back.genres, secondVal: local.genres),
-                  backYear == local.year,
-                  backRating == local.rating
+                  localFilm.titleDescription == backDescripiton,
+                  optionalsAreEqual(firstVal: back.posterId, secondVal: localFilm.posterID),
+                  optionalsAreEqual(firstVal: back.genres, secondVal: localFilm.genres),
+                  backYear == localFilm.year,
+                  backRating == localFilm.rating
             else {
                 return
             }
@@ -285,11 +284,7 @@ class FavouriteInteractor: FavouriteInteractorProtocol {
     }
     
     private func isMovieSegmentFull(watched: Bool) -> Bool {
-        if watched {
-            return viewedFilmsInfo.isFull
-        } else {
-            return willWatchFilmsInfo.isFull
-        }
+        return watched ? viewedFilmsInfo.isFull : willWatchFilmsInfo.isFull
     }
     
     private func getPageForOneFilm(watched: Bool) -> Int {

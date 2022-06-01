@@ -283,7 +283,7 @@ class DetailsViewController: BaseViewController {
                 image = imdb
                 
             case .local(let local):
-                image = local == "-1" ? nil : local
+                image = (local == "-1") ? nil : local
             }
             let data = FilmData(
                 id: movieDetails.id,
