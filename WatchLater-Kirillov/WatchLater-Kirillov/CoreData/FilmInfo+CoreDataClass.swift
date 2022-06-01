@@ -93,6 +93,8 @@ public class FilmInfo: NSManagedObject {
         CoreDataService.shared.managedObjectContext.performAndWait {
             completion(film)
         }
+    }
+    
     static func fetchMoviesWith(
         title: String,
         fetchLimit: Int,

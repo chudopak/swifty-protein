@@ -8,12 +8,7 @@
 import XCTest
 @testable import WatchLater_Kirillov_Dev
 
-<<<<<<<< HEAD:WatchLater-Kirillov/WatchLater-Kirillov_Tests/LoginTests/WatchLater_Tests.swift
-
-class LoginTests: XCTestCase {
-========
 class RegistrationInteractorTests: XCTestCase {
->>>>>>>> 47ddf8e (Added Unit tests for LoginInteractor and LoginPresenter):WatchLater-Kirillov/WatchLater-Kirillov_Tests/WatchLater-Kirillov_UnitTests/RegistrationScreenTests/RegistrationInteractorTests.swift
 
     private var interactor: RegistrationInteractor!
     private var serviceSpy: RegistrationServiceSpy!
