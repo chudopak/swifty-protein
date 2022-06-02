@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  swifty-protein
+
+  Created by Stepan Kirillov on 6/2/22.
+  
+*/
+
+// MARK: Common
+
+Common.hello = "Hello";

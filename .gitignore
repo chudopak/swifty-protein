@@ -1,0 +1,79 @@
+# Regular files
+**/.DS_Store
+
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+## User settings
+**/xcuserdata/
+## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
+**/*.xcscmblueprint
+**/*.xccheckout
+## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
+build/
+DerivedData/
+**/*.moved-aside
+**/*.pbxuser
+!default.pbxuser
+**/*.mode1v3
+!default.mode1v3
+**/*.mode2v3
+!default.mode2v3
+**/*.perspectivev3
+!default.perspectivev3
+**/app.app.dSYM.zip
+**/app.ipa
+**/app.app.dSYM/*
+fastlane/README.md
+fastlane/report.xml
+build/
+DerivedData/
+**/*.pbxuser
+!default.pbxuser
+**/*.mode1v3
+!default.mode1v3
+**/*.mode2v3
+!default.mode2v3
+**/*.perspectivev3
+!default.perspectivev3
+**/xcuserdata/
+**/*.moved-aside
+**/*.xccheckout
+**/*.xcscmblueprint
+**/*.hmap
+**/*.ipa
+**/*.dSYM.zip
+**/*.dSYM
+**/*/Pods
+/Firebase cloud functions/functions/node_modules
+
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+iOSInjectionProject/
+
+timeline.xctimeline
+playground.xcworkspace
+.build/
+# *.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+**/*.xcuserstate
+**/*.xcbkptlist
+
+**/*.generated.swift
+.env
+swiftlint.result.json
+swiftlint.result.json
+*/Resources/Generated/Assets.swift
+*/Resources/Generated/Icons.swift
+*/Resources/Generated/Texts.swift
+
+// Sonarqube
+.scannerwork/*
+compile_commands.json
+sonar-reports/*
+xcodebuild.log
