@@ -6,6 +6,8 @@
   
 */
 
+AppTitle = "Swifty Protein";
+
 // MARK: Common
 
 Common.hello = "Hello";

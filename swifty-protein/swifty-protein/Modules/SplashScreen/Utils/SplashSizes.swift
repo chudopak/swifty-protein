@@ -12,17 +12,18 @@ enum SplashSizes {
     static let duration: TimeInterval = 0.6
     static let delay: TimeInterval = 0.1
     
-    enum CenterMolecul {
-        static let width: CGFloat = 115
-        static let height: CGFloat = 115
+    enum TitleLabel {
+        static let fontSize: CGFloat = 28
+        static let height: CGFloat = 33
+        static let width: CGFloat = 150
+        static let fontName = "Noteworthy Light"
     }
     
     enum TopMolecul {
         static let width: CGFloat = 115
         static let height: CGFloat = 115
         
-        static let trailingOffset: CGFloat = 50
-        static let bottomOffset: CGFloat = 65
+        static let bottomOffset: CGFloat = 106
     }
     
     enum LeftBottomMolecul {
@@ -30,7 +31,7 @@ enum SplashSizes {
         static let height: CGFloat = 115
         
         static let leadingOffset: CGFloat = 20
-        static let topOffset: CGFloat = 25
+        static let topOffset: CGFloat = 65
     }
     
     enum RightBottomMolecul {
@@ -38,6 +39,6 @@ enum SplashSizes {
         static let height: CGFloat = 115
         
         static let trailingOffset: CGFloat = 20
-        static let topOffset: CGFloat = 100
+        static let topOffset: CGFloat = 141
     }
 }
