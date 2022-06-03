@@ -28,6 +28,8 @@
 		7D5E314E284A2EB500AE67A0 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E314D284A2EB500AE67A0 /* KeyboardView.swift */; };
 		7D5E3150284A2F3E00AE67A0 /* LoginSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E314F284A2F3E00AE67A0 /* LoginSizes.swift */; };
 		7D5E3153284A340F00AE67A0 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3152284A340F00AE67A0 /* CustomButton.swift */; };
+		7D5E3155284A5B4000AE67A0 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3154284A5B4000AE67A0 /* LoginPresenter.swift */; };
+		7D5E3157284A5E1300AE67A0 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3156284A5E1300AE67A0 /* LoginModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,8 @@
 		7D5E314D284A2EB500AE67A0 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		7D5E314F284A2F3E00AE67A0 /* LoginSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSizes.swift; sourceTree = "<group>"; };
 		7D5E3152284A340F00AE67A0 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		7D5E3154284A5B4000AE67A0 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		7D5E3156284A5E1300AE67A0 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +196,8 @@
 				7D5E314C284A2C1500AE67A0 /* Utils */,
 				7D5E3142284A11F700AE67A0 /* LoginViewController.swift */,
 				7D5E3144284A12F300AE67A0 /* LoginConfigurator.swift */,
+				7D5E3154284A5B4000AE67A0 /* LoginPresenter.swift */,
+				7D5E3156284A5E1300AE67A0 /* LoginModel.swift */,
 			);
 			path = LoginScreen;
 			sourceTree = "<group>";
@@ -401,9 +407,11 @@
 				7D04D15E2848BD4300B4566D /* SplashViewController.swift in Sources */,
 				7D42265F284905B40052FE6D /* SplashSizes.swift in Sources */,
 				7D5E3145284A12F300AE67A0 /* LoginConfigurator.swift in Sources */,
+				7D5E3155284A5B4000AE67A0 /* LoginPresenter.swift in Sources */,
 				7D04D15A2848BD4300B4566D /* AppDelegate.swift in Sources */,
 				7D507A6E2848CDE50024BB21 /* StoryboardSegues.swift in Sources */,
 				7D5E3148284A1B2300AE67A0 /* WindowService.swift in Sources */,
+				7D5E3157284A5E1300AE67A0 /* LoginModel.swift in Sources */,
 				7D04D15C2848BD4300B4566D /* SceneDelegate.swift in Sources */,
 				7D5E3150284A2F3E00AE67A0 /* LoginSizes.swift in Sources */,
 				7D507A6D2848CDE50024BB21 /* StoryboardScenes.swift in Sources */,

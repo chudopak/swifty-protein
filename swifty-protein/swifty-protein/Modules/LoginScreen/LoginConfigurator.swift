@@ -11,6 +11,8 @@ final class LoginConfigurator {
     
     func setupModule() -> LoginViewController {
         let vc = LoginViewController()
+        let presenter = LoginPresenter(viewController: vc)
+        vc.setupComponents(presenter: presenter)
         return vc
     }
 }

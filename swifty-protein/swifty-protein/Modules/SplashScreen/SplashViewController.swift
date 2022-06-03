@@ -37,7 +37,7 @@ final class SplashViewController: UIViewController {
     private func startFirstAnimationStage() {
         UIView.animate(
             withDuration: SplashSizes.duration,
-            delay: .zero,
+            delay: SplashSizes.delay,
             options: .curveEaseInOut,
             animations: { [weak self] in
                 self?.setFirstAnimationStageConstraints()

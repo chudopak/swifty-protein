@@ -11,3 +11,4 @@ AppTitle = "Swifty Protein";
 // MARK: Common
 
 Common.hello = "Привет";
+Common.createPassword = "Придумайте Пароль";
