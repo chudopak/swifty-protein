@@ -80,7 +80,7 @@ final class SplashViewController: UIViewController {
     }
 }
 
-// MARK: Creatin UI elements
+// MARK: Creating UI elements
 
 extension SplashViewController {
     

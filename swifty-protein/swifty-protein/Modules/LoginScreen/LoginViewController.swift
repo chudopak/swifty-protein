@@ -7,10 +7,13 @@
 
 import UIKit
 
+protocol LoginViewControllerFirstLaunchDelegate: AnyObject {
+}
+
 final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .brown
+        view.backgroundColor = Asset.primaryBackground.color
     }
 }

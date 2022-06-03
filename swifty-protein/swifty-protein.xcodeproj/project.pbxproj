@@ -24,6 +24,10 @@
 		7D5E3143284A11F700AE67A0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3142284A11F700AE67A0 /* LoginViewController.swift */; };
 		7D5E3145284A12F300AE67A0 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3144284A12F300AE67A0 /* LoginConfigurator.swift */; };
 		7D5E3148284A1B2300AE67A0 /* WindowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3147284A1B2300AE67A0 /* WindowService.swift */; };
+		7D5E314B284A2B3500AE67A0 /* FirstLaunchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E314A284A2B3500AE67A0 /* FirstLaunchChecker.swift */; };
+		7D5E314E284A2EB500AE67A0 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E314D284A2EB500AE67A0 /* KeyboardView.swift */; };
+		7D5E3150284A2F3E00AE67A0 /* LoginSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E314F284A2F3E00AE67A0 /* LoginSizes.swift */; };
+		7D5E3153284A340F00AE67A0 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3152284A340F00AE67A0 /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +53,10 @@
 		7D5E3142284A11F700AE67A0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7D5E3144284A12F300AE67A0 /* LoginConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfigurator.swift; sourceTree = "<group>"; };
 		7D5E3147284A1B2300AE67A0 /* WindowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowService.swift; sourceTree = "<group>"; };
+		7D5E314A284A2B3500AE67A0 /* FirstLaunchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchChecker.swift; sourceTree = "<group>"; };
+		7D5E314D284A2EB500AE67A0 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		7D5E314F284A2F3E00AE67A0 /* LoginSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSizes.swift; sourceTree = "<group>"; };
+		7D5E3152284A340F00AE67A0 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +100,8 @@
 		7D04D1582848BD4300B4566D /* swifty-protein */ = {
 			isa = PBXGroup;
 			children = (
+				7D5E3151284A33E600AE67A0 /* Views */,
+				7D5E3149284A2B2200AE67A0 /* Base */,
 				7D5E3146284A1A5F00AE67A0 /* Services */,
 				7D507A672848CD1E0024BB21 /* Delegates */,
 				7D507A662848CD0F0024BB21 /* Modules */,
@@ -179,6 +189,7 @@
 		7D5E3141284A11E000AE67A0 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7D5E314C284A2C1500AE67A0 /* Utils */,
 				7D5E3142284A11F700AE67A0 /* LoginViewController.swift */,
 				7D5E3144284A12F300AE67A0 /* LoginConfigurator.swift */,
 			);
@@ -191,6 +202,31 @@
 				7D5E3147284A1B2300AE67A0 /* WindowService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		7D5E3149284A2B2200AE67A0 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				7D5E314A284A2B3500AE67A0 /* FirstLaunchChecker.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		7D5E314C284A2C1500AE67A0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7D5E314D284A2EB500AE67A0 /* KeyboardView.swift */,
+				7D5E314F284A2F3E00AE67A0 /* LoginSizes.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		7D5E3151284A33E600AE67A0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7D5E3152284A340F00AE67A0 /* CustomButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		DBE8C2A31622A9E9486BBC65 /* Pods */ = {
@@ -359,6 +395,9 @@
 				7D507A6F2848CDE50024BB21 /* Asset.swift in Sources */,
 				7D42265C2848FCA50052FE6D /* SplashConfigurator.swift in Sources */,
 				7D507A702848CDE60024BB21 /* Texts.swift in Sources */,
+				7D5E314B284A2B3500AE67A0 /* FirstLaunchChecker.swift in Sources */,
+				7D5E3153284A340F00AE67A0 /* CustomButton.swift in Sources */,
+				7D5E314E284A2EB500AE67A0 /* KeyboardView.swift in Sources */,
 				7D04D15E2848BD4300B4566D /* SplashViewController.swift in Sources */,
 				7D42265F284905B40052FE6D /* SplashSizes.swift in Sources */,
 				7D5E3145284A12F300AE67A0 /* LoginConfigurator.swift in Sources */,
@@ -366,6 +405,7 @@
 				7D507A6E2848CDE50024BB21 /* StoryboardSegues.swift in Sources */,
 				7D5E3148284A1B2300AE67A0 /* WindowService.swift in Sources */,
 				7D04D15C2848BD4300B4566D /* SceneDelegate.swift in Sources */,
+				7D5E3150284A2F3E00AE67A0 /* LoginSizes.swift in Sources */,
 				7D507A6D2848CDE50024BB21 /* StoryboardScenes.swift in Sources */,
 				7D5E3143284A11F700AE67A0 /* LoginViewController.swift in Sources */,
 			);
