@@ -101,9 +101,12 @@ final class ImageDownloadingService: ImageDownloadingServiceProtocol {
                 completion(.failure(BaseError.unableToDecodeData))
                 return
             }
-            let compressedImage = self?.compressImage(image: image, compressionQuality: 0.5)
-            let newImage = compressedImage == nil ? image : compressedImage!
-            completion(.success((urlString, newImage)))
+            guard let compressedImage = self?.compressImage(image: image, compressionQuality: 0.5)
+            else {
+                completion(.success((urlString, image)))
+                return
+            }
+            completion(.success((urlString, compressedImage)))
         }
     }
     

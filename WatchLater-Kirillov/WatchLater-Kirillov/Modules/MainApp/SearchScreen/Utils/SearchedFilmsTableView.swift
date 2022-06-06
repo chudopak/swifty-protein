@@ -88,7 +88,6 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    // TODO: it will work with core data
     private func configureLocalCell(cell: SearchFilmTableViewCell,
                                     index: Int) {
         cell.posterImageView.image = nil
