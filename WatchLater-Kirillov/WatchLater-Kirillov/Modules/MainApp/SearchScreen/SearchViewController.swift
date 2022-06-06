@@ -420,8 +420,6 @@ extension SearchViewController {
     
     private func setScrollViewKeyboardUpConstraint(keyboardHeight: CGFloat) {
         resultsTableView.snp.updateConstraints { maker in
-//            maker.leading.trailing.equalToSuperview()
-//            maker.top.equalTo(textField.snp.bottom).offset(SearchScreenSizes.TextField.topOffset)
             maker.bottom.equalTo(view).inset(keyboardHeight)
         }
     }

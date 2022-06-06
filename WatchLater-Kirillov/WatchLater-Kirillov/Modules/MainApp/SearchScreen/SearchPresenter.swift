@@ -24,10 +24,13 @@ class SearchPresenter: SearchPresenterProtocol {
     
     func proceedMoviesData(movies: [MovieData], for searchArea: SearchArea) {
         DispatchQueue.main.async { [weak self] in
-            if searchArea == .IMDB {
+            switch searchArea {
+            case .IMDB:
                 self?.viewController.displayIMDBMovies(movies: movies)
-            } else {
+                
+            case .local:
                 self?.viewController.displayLocalMovies(movies: movies)
+                
             }
         }
     }

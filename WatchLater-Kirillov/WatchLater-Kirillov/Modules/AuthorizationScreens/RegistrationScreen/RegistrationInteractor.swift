@@ -23,11 +23,13 @@ class RegistrationInteractor: RegistrationInteractorProtocol {
     }
     
     func register(data: RegistrationData) {
-        if data.email.isEmpty || data.password.isEmpty || data.repeatPassword.isEmpty {
+        guard !data.email.isEmpty && !data.password.isEmpty && !data.repeatPassword.isEmpty
+        else {
             presenter.showFailedState(message: Text.Authorization.fieldsMustBeFilled)
             return
         }
-        if data.password != data.repeatPassword {
+        guard data.password == data.repeatPassword
+        else {
             presenter.showFailedState(message: Text.Authorization.passwordsNotMatch)
             return
         }

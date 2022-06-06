@@ -104,7 +104,7 @@ public class FilmInfo: NSManagedObject {
             format: "%K CONTAINS[c] '\(title)'",
             #keyPath(FilmInfo.title)
         )
-        let sort = NSSortDescriptor(key: "id", ascending: true)
+        let sort = NSSortDescriptor(key: #keyPath(FilmInfo.id), ascending: true)
         let fetchData = FetchRequestData(predicate: predicate,
                                          sortDescriptors: [sort],
                                          fetchLimit: fetchLimit,

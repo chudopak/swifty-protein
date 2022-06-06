@@ -25,14 +25,13 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     private lazy var loginFailedLabel = makeLoginFailedLabel()
     
     private var isFieldsSet: Bool {
-        guard let emailText = emailTextField.text,
-              !emailText.isEmpty,
-              let passwordText = passwordTextField.text,
-              !passwordText.isEmpty
-        else {
-            return false
+        if let emailText = emailTextField.text,
+          !emailText.isEmpty,
+          let passwordText = passwordTextField.text,
+          !passwordText.isEmpty {
+            return true
         }
-        return true
+        return false
     }
     
     private var isLoginFaieldSateActive = false

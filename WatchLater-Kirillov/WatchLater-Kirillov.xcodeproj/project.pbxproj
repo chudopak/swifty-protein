@@ -278,7 +278,6 @@
 		30F0801D265A8831009B2398 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56244E2942DF44367EB7FAF8 /* Pods-WatchLater-Kirillov_Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchLater-Kirillov_Dev.release.xcconfig"; path = "Target Support Files/Pods-WatchLater-Kirillov_Dev/Pods-WatchLater-Kirillov_Dev.release.xcconfig"; sourceTree = "<group>"; };
 		7946CCA3077BD7F294EB5C5C /* Pods_WatchLater_Kirillov_Prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchLater_Kirillov_Prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D04D12B2847873600B4566D /* WatchLater_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLater_Tests.swift; sourceTree = "<group>"; };
 		7D04D12F2847873600B4566D /* LoginServiceLoginSucceedSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceLoginSucceedSpy.swift; sourceTree = "<group>"; };
 		7D04D1302847873600B4566D /* LoginViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerSpy.swift; sourceTree = "<group>"; };
 		7D04D1312847873600B4566D /* LoginPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterSpy.swift; sourceTree = "<group>"; };
@@ -628,19 +627,10 @@
 		7D04D1292847873600B4566D /* WatchLater-Kirillov_Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7D04D12A2847873600B4566D /* LoginTests */,
 				7D04D12C2847873600B4566D /* WatchLater-Kirillov_UnitTests */,
 				7D04D13C2847873600B4566D /* WatchLater-Kirillov_UITests */,
 			);
 			path = "WatchLater-Kirillov_Tests";
-			sourceTree = "<group>";
-		};
-		7D04D12A2847873600B4566D /* LoginTests */ = {
-			isa = PBXGroup;
-			children = (
-				7D04D12B2847873600B4566D /* WatchLater_Tests.swift */,
-			);
-			path = LoginTests;
 			sourceTree = "<group>";
 		};
 		7D04D12C2847873600B4566D /* WatchLater-Kirillov_UnitTests */ = {

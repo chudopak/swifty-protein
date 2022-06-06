@@ -27,16 +27,15 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     private var isRegistrationFaieldSateActive = false
     
     private var isFieldsSet: Bool {
-        guard let emailText = emailTextField.text,
+        if let emailText = emailTextField.text,
               !emailText.isEmpty,
               let passwordText = passwordTextField.text,
               !passwordText.isEmpty,
               let repeatPasswordText = repeatPasswordTextField.text,
-              !repeatPasswordText.isEmpty
-        else {
-            return false
+              !repeatPasswordText.isEmpty {
+            return true
         }
-        return true
+        return false
     }
     
     private var interactor: RegistrationInteractorProtocol!
