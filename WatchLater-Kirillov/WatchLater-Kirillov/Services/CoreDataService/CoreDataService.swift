@@ -72,20 +72,14 @@ final class CoreDataService {
     ) -> [T]? where T: NSManagedObject {
         let request = buildFetchRequest(type: T.self, requestData: fetchRequestData)
         var filmsInfo: [T]?
-        let group = DispatchGroup()
-        group.enter()
-        DispatchQueue.main.async { [weak self, group] in
-            self?.persistentContainer.performBackgroundTask { [group] context in
-                do {
-                    filmsInfo = try context.fetch(request)
-                } catch {
-                    let nserror = error as NSError
-                    assertionFailure("Unresolved error \(nserror), \(nserror.userInfo)")
-                }
-                group.leave()
+        managedObjectContext.performAndWait { [weak self] in
+            do {
+                filmsInfo = try self?.managedObjectContext.fetch(request)
+            } catch {
+                let nserror = error as NSError
+                assertionFailure("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
-        group.wait()
         return filmsInfo
     }
     
