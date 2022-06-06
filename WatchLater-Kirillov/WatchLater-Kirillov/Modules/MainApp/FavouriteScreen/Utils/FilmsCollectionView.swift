@@ -16,7 +16,7 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
     
     private weak var delegate: FavouriteViewControllerDelegate!
     
-    var filmsInfo = [FilmInfoTmp]() {
+    var filmsInfo = [FilmData]() {
         didSet {
             filmsCollectionView.reloadData()
         }
@@ -50,7 +50,7 @@ class FilmsCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDat
         cell.titleLabel.text = filmsInfo[indexPath.row].title
         cell.ratingLabel.text = getRatingString(rating: filmsInfo[indexPath.row].rating)
         setPoster(index: indexPath.row, cell: cell)
-        if indexPath.row + 10 > filmsInfo.count
+        if indexPath.row + 5 > filmsInfo.count
             && !delegate.isPaginating {
             delegate.fetchNewFilms()
         }

@@ -10,22 +10,31 @@ import UIKit
 
 final class FavouriteRouter {
     
-    private weak var viewController: UIViewController!
+    private weak var viewController: FavouriteViewController!
     
-    init(viewController: UIViewController) {
+    init(viewController: FavouriteViewController) {
         self.viewController = viewController
     }
     
     func pushSearchViewController(to navigationController: UINavigationController,
                                   animated: Bool = true) {
-        navigationController.pushViewController(SearchScreenConfigurator().setupModule(), animated: animated)
+        navigationController.pushViewController(
+            SearchScreenConfigurator().setupModule(),
+            animated: animated
+        )
     }
     
     func pushDetailsViewController(to navigationController: UINavigationController,
-                                   film: FilmInfoTmp,
+                                   film: FilmData,
+                                   favouriteVCDelegate: FilmInfoChangedInformerDelegate,
                                    animated: Bool = true) {
-        navigationController.pushViewController(DetailsScreenConfigurator().setupModule(imdbData: nil,
-                                                                                        localData: film),
-                                                animated: animated)
+        navigationController.pushViewController(
+            DetailsScreenConfigurator().setupModule(
+                    imdbData: nil,
+                    localData: film,
+                    previousViewController: favouriteVCDelegate
+            ),
+            animated: animated
+        )
     }
 }

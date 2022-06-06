@@ -9,13 +9,12 @@
 import UIKit
 
 struct FilmsList: Codable {
-    let filmDtos: [FilmInfoTmp]?
+    let filmDtos: [FilmData]?
     let pageCount: Int?
     let size: Int?
 }
 
-// TODO: don't forget to add timestamp
-struct FilmInfoTmp: Codable, Equatable {
+struct FilmData: Codable, Equatable {
     let id: Int
     let title: String
     let description: String?
@@ -31,11 +30,15 @@ struct FilmInfoTmp: Codable, Equatable {
         else {
             return false
         }
+        let lYear = getPrefix(string: lhs.timestamp ?? Text.Fillings.noData, prefixValue: 4)
+        let rYear = getPrefix(string: rhs.timestamp ?? Text.Fillings.noData, prefixValue: 4)
+        let lRating = getPrefix(string: String(lhs.rating ?? 0), prefixValue: 3)
+        let rRating = getPrefix(string: String(rhs.rating ?? 0), prefixValue: 3)
         guard optionalsAreEqual(firstVal: lhs.description, secondVal: rhs.description)
-                && optionalsAreEqual(firstVal: lhs.rating, secondVal: rhs.rating)
+                && lRating == rRating
                 && optionalsAreEqual(firstVal: lhs.posterId, secondVal: rhs.posterId)
-                && optionalsAreEqual(firstVal: lhs.timestamp, secondVal: rhs.timestamp)
                 && optionalsAreEqual(firstVal: lhs.genres, secondVal: rhs.genres)
+                && lYear == rYear
         else {
             return false
         }
@@ -47,4 +50,14 @@ struct FilmInfoTmp: Codable, Equatable {
         }
         return true
     }
+}
+
+struct FilmsPaging {
+    var currentPage: Int
+    var isFull: Bool
+}
+
+enum EditedFilmInfo {
+    case deleted(Int)
+    case cangedWatchStatus(FilmData)
 }

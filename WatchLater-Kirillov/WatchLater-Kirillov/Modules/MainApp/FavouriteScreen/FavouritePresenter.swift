@@ -9,8 +9,11 @@
 import UIKit
 
 protocol FavouritePresenterProtocol {
-    func presentMovies(films: [FilmInfoTmp]?, watched: Bool)
-    func compareMoviesWithCurrent(films: [FilmInfoTmp]?, watched: Bool)
+    func presentMovies(films: [FilmData]?, watched: Bool)
+    func replaceLastPage(films: [FilmData]?, watched: Bool, startReplacePosition: Int)
+    func replaceMovie(film: [FilmData]?, watched: Bool, at position: Int)
+    func addOneMovieToLastPage(film: [FilmData]?, watched: Bool)
+    func notifyThatFilmsListIsFull(watched: Bool, isFull: Bool)
 }
 
 class FavouritePresenter: FavouritePresenterProtocol {
@@ -21,27 +24,51 @@ class FavouritePresenter: FavouritePresenterProtocol {
         favouriteViewController = viewController
     }
     
-    func presentMovies(films: [FilmInfoTmp]?, watched: Bool) {
-        guard var films = films
+    func presentMovies(films: [FilmData]?, watched: Bool) {
+        guard let films = films
         else {
-            favouriteViewController.showFilms(nil, watched: watched)
             return
         }
-        for i in 0..<films.count {
-            films[i].isWatched = watched
+        DispatchQueue.main.async { [weak self] in
+            self?.favouriteViewController.showFilms(films, watched: watched)
         }
-        favouriteViewController.showFilms(films, watched: watched)
     }
     
-    func compareMoviesWithCurrent(films: [FilmInfoTmp]?, watched: Bool) {
-        guard var films = films
+    func replaceLastPage(films: [FilmData]?, watched: Bool, startReplacePosition: Int) {
+        guard let films = films
         else {
-            favouriteViewController.checkMoviesForChanges(nil, watched: watched)
             return
         }
-        for i in 0..<films.count {
-            films[i].isWatched = watched
+        DispatchQueue.main.async { [weak self] in
+            self?.favouriteViewController.replacePageWithBackendFilms(films, watched: watched, startReplacePosition: startReplacePosition)
         }
-        favouriteViewController.checkMoviesForChanges(films, watched: watched)
+    }
+    
+    func replaceMovie(film: [FilmData]?, watched: Bool, at position: Int) {
+        guard let films = film,
+              let movie = films.first
+        else {
+            return
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.favouriteViewController.replaceFilm(movie, watched: watched, at: position)
+        }
+    }
+    
+    func addOneMovieToLastPage(film: [FilmData]?, watched: Bool) {
+        guard let films = film,
+              let movie = films.first
+        else {
+            return
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.favouriteViewController.appendOneFilm(movie, toList: watched)
+        }
+    }
+    
+    func notifyThatFilmsListIsFull(watched: Bool, isFull: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.favouriteViewController.notifyThatFilmListIsFull(watched: watched, isFull: isFull)
+        }
     }
 }

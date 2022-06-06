@@ -23,5 +23,4 @@ extension FilmInfo {
     @NSManaged public var year: String
     @NSManaged public var genres: [String]?
     @NSManaged public var isWatched: Bool
-    @NSManaged public var timestamp: String
 }

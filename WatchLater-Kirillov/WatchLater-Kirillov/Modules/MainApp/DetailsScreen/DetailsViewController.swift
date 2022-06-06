@@ -11,7 +11,8 @@ import SnapKit
 
 protocol DetailsViewControllerProtocol: AnyObject {
     func setPoster(result: Result<UIImage, Error>)
-    func showFailedMoviewChangingStatusState()
+    func showFailedMoviewChangingStatusStateLocal()
+    func showFailedMoviewChangingStatusStateBackend()
     func changeMovieWatchStatus()
 }
 
@@ -22,8 +23,10 @@ protocol DetailsViewControllerDelegate: AnyObject {
 class DetailsViewController: BaseViewController {
     
     private var movieDetails: MovieDetails!
+    private var movieDetailsBeforeEditing: MovieDetails!
     private var interactor: DetailsInteractorProtocol!
     private var router: DetailsRouter!
+    private weak var previousVCDelegate: FilmInfoChangedInformerDelegate!
     
     private lazy var scrollView = makeScrollView()
     private lazy var posterView = makePosterView()
@@ -47,6 +50,7 @@ class DetailsViewController: BaseViewController {
     private lazy var editScreenButton = makeEditScreenButtonItem()
     
     private lazy var genresStackViews = [UIStackView]()
+    private lazy var backBarButton = makeBackButtonItem()
     
     private var genres: [String]?
     private var scrollViewButtonConstraint: ConstraintMakerEditable?
@@ -64,7 +68,7 @@ class DetailsViewController: BaseViewController {
     }
     
     func setupData(imdbData: MovieData?,
-                   localData: FilmInfoTmp?) {
+                   localData: FilmData?) {
         if let imdbData = imdbData {
             setDetailsWithIMDBData(data: imdbData)
         } else {
@@ -73,9 +77,11 @@ class DetailsViewController: BaseViewController {
     }
     
     func setupComponents(interactor: DetailsInteractorProtocol,
-                         router: DetailsRouter) {
+                         router: DetailsRouter,
+                         previousVCDelegate: FilmInfoChangedInformerDelegate) {
         self.interactor = interactor
         self.router = router
+        self.previousVCDelegate = previousVCDelegate
     }
     
     private func setView() {
@@ -111,12 +117,7 @@ class DetailsViewController: BaseViewController {
     }
     
     private func setNavigationController() {
-        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(
-            title: "",
-            style: .plain,
-            target: self,
-            action: nil)
-        
+        navigationItem.leftBarButtonItem = backBarButton
         navigationController!.navigationBar.prefersLargeTitles = true
         navigationItem.titleView = UIImageView(image: Asset.logoShort.image)
     }
@@ -205,9 +206,10 @@ class DetailsViewController: BaseViewController {
                                     title: data.title,
                                     isWatched: nil,
                                     id: -1)
+        movieDetailsBeforeEditing = movieDetails
     }
     
-    private func setDetailsWithLocalData(data: FilmInfoTmp) {
+    private func setDetailsWithLocalData(data: FilmData) {
         let imageType = ImageLinkType.local(data.posterId ?? Text.Fillings.noData)
         let rating = getPrefix(string: String(data.rating ?? 0), prefixValue: 3)
         let year = getPrefix(string: data.timestamp ?? Text.Fillings.noData, prefixValue: 4)
@@ -219,6 +221,7 @@ class DetailsViewController: BaseViewController {
                                     title: data.title,
                                     isWatched: data.isWatched,
                                     id: data.id)
+        movieDetailsBeforeEditing = movieDetails
     }
     
     private func getPrefix(string: String, prefixValue: Int) -> String {
@@ -260,18 +263,41 @@ class DetailsViewController: BaseViewController {
     }
     
     @objc private func markAsWatched() {
-        // TODO: add film to local API as Viewed
         interactor.changeFilmWatchStatus(id: movieDetails.id)
     }
     
     @objc private func markAsUnwatched() {
-        // TODO: mark as unwatched
         interactor.changeFilmWatchStatus(id: movieDetails.id)
     }
     
     @objc private func presentEditMovieScreen() {
         router.presentEditViewController(navigationController: navigationController!,
                                          movieDetails: movieDetails)
+    }
+    
+    @objc private func presentPreviousScreen() {
+        if movieDetailsBeforeEditing != movieDetails {
+            let image: String?
+            switch movieDetails.imageType {
+            case .IMDB(let imdb):
+                image = imdb
+                
+            case .local(let local):
+                image = (local == "-1") ? nil : local
+            }
+            let data = FilmData(
+                id: movieDetails.id,
+                title: movieDetails.title,
+                description: movieDetails.description,
+                rating: Double(movieDetails.rating),
+                posterId: image,
+                genres: movieDetails.genres,
+                isWatched: movieDetails.isWatched,
+                timestamp: movieDetails.year
+            )
+            previousVCDelegate.cangeFilmInfo(filmData: data)
+        }
+        router.presentPreviousViewController(navigationController: navigationController!)
     }
 }
 
@@ -289,8 +315,13 @@ extension DetailsViewController: DetailsViewControllerProtocol {
         }
     }
     
-    func showFailedMoviewChangingStatusState() {
+    func showFailedMoviewChangingStatusStateLocal() {
         print("DetailsViewController, showFailedMoviewChangingStatusState - Called failed state")
+    }
+    
+    func showFailedMoviewChangingStatusStateBackend() {
+        // TODO: Show smth to user if failed
+        changeMovieWatchStatus()
     }
     
     func changeMovieWatchStatus() {
@@ -328,7 +359,7 @@ extension DetailsViewController {
     private func makePosterView() -> UIImageView {
         let view = UIImageView()
         view.clipsToBounds = true
-        view.contentMode = .scaleAspectFill
+        view.contentMode = .scaleToFill
         view.backgroundColor = Asset.Colors.grayTransperent.color
         return view
     }
@@ -504,6 +535,13 @@ extension DetailsViewController {
         let button = UIButton()
         button.setImage(Asset.editFilmInfo.image, for: .normal)
         button.addTarget(self, action: #selector(presentEditMovieScreen), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }
+    
+    private func makeBackButtonItem() -> UIBarButtonItem {
+        let button = UIButton()
+        button.setImage(Asset.arrow.image, for: .normal)
+        button.addTarget(self, action: #selector(presentPreviousScreen), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }
 }

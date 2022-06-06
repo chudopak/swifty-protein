@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="FilmInfo" representedClassName="FilmInfo" syncable="YES">
-        <attribute name="genres" attributeType="Transformable"/>
+    <entity name="FilmInfo" representedClassName=".FilmInfo" syncable="YES">
+        <attribute name="genres" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isWatched" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="posterID" optional="YES" attributeType="String"/>
         <attribute name="rating" attributeType="String"/>
-        <attribute name="timestamp" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <attribute name="titleDescription" attributeType="String"/>
         <attribute name="year" attributeType="String"/>
     </entity>
+    <entity name="ProfileInfo" representedClassName=".ProfileInfo" syncable="YES">
+        <attribute name="aboutMe" attributeType="String"/>
+        <attribute name="genres" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="photoData" optional="YES" attributeType="Binary"/>
+        <attribute name="photoId" attributeType="String"/>
+    </entity>
     <elements>
-        <element name="FilmInfo" positionX="-63" positionY="-18" width="128" height="164"/>
+        <element name="FilmInfo" positionX="-102.2213134765625" positionY="-18" width="167.2213134765625" height="163"/>
+        <element name="ProfileInfo" positionX="-81" positionY="45" width="128" height="119"/>
     </elements>
 </model>

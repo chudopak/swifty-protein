@@ -9,7 +9,7 @@
 import UIKit
 
 final class SearchRouter {
-    
+ 
     private weak var viewController: SearchViewController!
     
     init(viewController: SearchViewController) {
@@ -18,9 +18,13 @@ final class SearchRouter {
     
     func presentDetailsViewController(navigationController: UINavigationController,
                                       imdbData: MovieData?,
-                                      localData: FilmInfoTmp?) {
-        let detailsViewController = DetailsScreenConfigurator().setupModule(imdbData: imdbData,
-                                                                            localData: localData)
+                                      localData: FilmData?,
+                                      screenVCDelegate: FilmInfoChangedInformerDelegate) {
+        let detailsViewController = DetailsScreenConfigurator().setupModule(
+            imdbData: imdbData,
+            localData: localData,
+            previousViewController: screenVCDelegate
+        )
         navigationController.pushViewController(detailsViewController, animated: true)
     }
 }

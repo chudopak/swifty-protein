@@ -33,6 +33,8 @@ internal enum Text {
   }
 
   internal enum BaseError {
+    /// Bad result.
+    internal static let badResult = Text.tr("Localizable", "BaseError.badResult")
     /// Cancel task.
     internal static let cancelled = Text.tr("Localizable", "BaseError.cancelled")
     /// Failed to build request.
@@ -54,28 +56,46 @@ internal enum Text {
   internal enum Common {
     /// О фильме
     internal static let aboutMovie = Text.tr("Localizable", "Common.aboutMovie")
+    /// О себе
+    internal static let aboutYourself = Text.tr("Localizable", "Common.aboutYourself")
     /// Отмена
     internal static let cancel = Text.tr("Localizable", "Common.cancel")
     /// Закрыть
     internal static let close = Text.tr("Localizable", "Common.close")
-    /// Сохранить
-    internal static let dave = Text.tr("Localizable", "Common.dave")
     /// Готово
     internal static let done = Text.tr("Localizable", "Common.done")
+    /// Любимые жанры
+    internal static let favoriteGenres = Text.tr("Localizable", "Common.favoriteGenres")
+    /// Библиотека
+    internal static let library = Text.tr("Localizable", "Common.library")
     /// Войти
     internal static let login = Text.tr("Localizable", "Common.login")
     /// Выйти
     internal static let logout = Text.tr("Localizable", "Common.logout")
+    /// Имя
+    internal static let name = Text.tr("Localizable", "Common.name")
     /// Далее
     internal static let next = Text.tr("Localizable", "Common.next")
     /// Нет
     internal static let no = Text.tr("Localizable", "Common.no")
+    /// Нет любимых жанров
+    internal static let noFavoriteGenres = Text.tr("Localizable", "Common.noFavoriteGenres")
+    /// Фото отсутствует
+    internal static let noImage = Text.tr("Localizable", "Common.noImage")
     /// Нет Постера
     internal static let noPoster = Text.tr("Localizable", "Common.noPoster")
     /// Удалить
     internal static let remove = Text.tr("Localizable", "Common.remove")
+    /// Сохранить
+    internal static let save = Text.tr("Localizable", "Common.save")
+    /// Сохранено
+    internal static let saved = Text.tr("Localizable", "Common.saved")
+    /// Сделать фото
+    internal static let takeAPicture = Text.tr("Localizable", "Common.takeAPicture")
     /// Обновить
     internal static let update = Text.tr("Localizable", "Common.update")
+    /// Загрузить фото
+    internal static let uploadPhoto = Text.tr("Localizable", "Common.uploadPhoto")
     /// Просмотрено
     internal static let viewed = Text.tr("Localizable", "Common.viewed")
     /// Буду смотреть

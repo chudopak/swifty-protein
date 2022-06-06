@@ -98,6 +98,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().backgroundColor = Asset.Colors.tabBarBackground.color
         UITabBar.appearance().barTintColor = Asset.Colors.tabBarBackground.color
         UITabBar.appearance().tintColor = Asset.Colors.deepBlue.color
+        UITabBar.appearance().unselectedItemTintColor = Asset.Colors.black.color
+        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: Asset.Colors.black.color], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: Asset.Colors.deepBlue.color], for: .selected)
     }
 }
 

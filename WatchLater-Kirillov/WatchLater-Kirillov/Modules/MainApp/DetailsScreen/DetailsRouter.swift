@@ -22,4 +22,8 @@ final class DetailsRouter {
                                                               detailsViewController: viewController)
         navigationController.pushViewController(editMovieVC, animated: true)
     }
+    
+    func presentPreviousViewController(navigationController: UINavigationController) {
+        navigationController.popViewController(animated: true)
+    }
 }

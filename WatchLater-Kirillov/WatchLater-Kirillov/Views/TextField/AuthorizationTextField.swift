@@ -8,9 +8,7 @@
 
 import UIKit
 
-class AuthorizationTextField: UITextField {
-    
-    private var inset: UIEdgeInsets!
+class AuthorizationTextField: BaseTextField {
     
     private var privateType: TextFieldType!
     
@@ -19,8 +17,7 @@ class AuthorizationTextField: UITextField {
     }
     
     init(type: TextFieldType, inset: UIEdgeInsets) {
-        super.init(frame: .zero)
-        self.inset = inset
+        super.init(inset: inset)
         let placeholderString: String
         self.privateType = type
         switch type {
@@ -30,14 +27,14 @@ class AuthorizationTextField: UITextField {
             keyboardType = .emailAddress
             isSecureTextEntry = false
             textContentType = .none
-
+            
         case .password:
             placeholderString = Text.Authorization.Placeholder.password
             clearButtonMode = .never
             keyboardType = .default
             isSecureTextEntry = true
             textContentType = .password
-
+            
         case .repeatPassword:
             placeholderString = Text.Authorization.Placeholder.repeatPassword
             clearButtonMode = .never
@@ -63,34 +60,6 @@ class AuthorizationTextField: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func clearButtonRect(forBounds bounds: CGRect) -> CGRect {
-        let originalRect = super.clearButtonRect(forBounds: bounds)
-        return originalRect.offsetBy(dx: -inset.left, dy: 0)
-    }
-    
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        let rect = super.textRect(forBounds: bounds)
-        return rect.inset(by: inset)
-    }
-        
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        let rect = super.editingRect(forBounds: bounds)
-        return rect.inset(by: inset)
-    }
-    
-    func addBottomBoarder(color: UIColor, height: CGFloat, sideOffset: CGFloat) {
-        let borderView = UIView()
-        borderView.backgroundColor = color
-        borderView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(borderView)
-        NSLayoutConstraint.activate([
-            borderView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: sideOffset),
-            borderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -sideOffset),
-            borderView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            borderView.heightAnchor.constraint(equalToConstant: height)
-        ])
-    }
-    
     override func resignFirstResponder() -> Bool {
         if placeholder == nil
             || placeholder!.isEmpty {
@@ -107,7 +76,7 @@ class AuthorizationTextField: UITextField {
             
         case .password:
             placeholderString = Text.Authorization.Placeholder.password
-        
+            
         case .repeatPassword:
             placeholderString = Text.Authorization.Placeholder.repeatPassword
         }

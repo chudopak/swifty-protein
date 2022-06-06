@@ -41,14 +41,31 @@ final class DetailsInteractor: DetailsInteractorProtocol {
     }
     
     func changeFilmWatchStatus(id: Int) {
-        filmsService.changeFilmWatchStatus(id: id) { [weak self] result in
+        FilmInfo.changeObjectInCoreData(id: id) { [weak self] result in
             switch result {
-            case .success(let status):
-                self?.presenter.sendFilmsWatchStatus(status: status)
+            case .success(let film):
+                FilmInfo.interactWithFilm(film: film) { filmInfo in
+                    filmInfo.isWatched = !filmInfo.isWatched
+                    FilmInfo.saveChanges()
+                }
+                self?.handleChangeFilmStatus(id: id, isChanged: true)
 
+            case .failure:
+                self?.handleChangeFilmStatus(id: id, isChanged: false)
+            }  
+        }
+    }
+    
+    private func handleChangeFilmStatus(id: Int, isChanged: Bool) {
+        presenter.sendFilmsWatchStatus(status: isChanged)
+        filmsService.changeFilmWatchStatus(id: id) { [weak self, isChanged] result in
+            switch result {
             case .failure(let error):
                 print("DetailsInteractor, changeFilmWatchStatus - ", error.localizedDescription)
-                self?.presenter.sendFilmsWatchStatus(status: false)
+                self?.presenter.sendFailedToChangeStatusInBackend(isLocalChanged: isChanged)
+                
+            default:
+                break
             }
         }
     }

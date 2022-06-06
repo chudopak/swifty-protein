@@ -6,7 +6,8 @@ Common.done = "Готово";
 Common.cancel = "Отмена";
 Common.no = "Нет";
 Common.yes = "Да";
-Common.dave = "Сохранить";
+Common.save = "Сохранить";
+Common.saved = "Сохранено";
 Common.remove = "Удалить";
 Common.update = "Обновить";
 Common.logout = "Выйти";
@@ -15,6 +16,14 @@ Common.willWatch = "Буду смотреть";
 Common.viewed = "Просмотрено";
 Common.noPoster = "Нет Постера";
 Common.aboutMovie = "О фильме";
+Common.uploadPhoto = "Загрузить фото";
+Common.name = "Имя";
+Common.aboutYourself = "О себе";
+Common.favoriteGenres = "Любимые жанры";
+Common.library = "Библиотека";
+Common.takeAPicture = "Сделать фото";
+Common.noImage = "Фото отсутствует";
+Common.noFavoriteGenres = "Нет любимых жанров";
 
 // MARK: - Authorization
 
@@ -56,3 +65,4 @@ BaseError.noData = "There is no data in response.";
 BaseError.range400Response = "Response in 400's range.";
 BaseError.unableToDecodeData = "Can not decode data to needed type.";
 BaseError.cancelled = "Cancel task.";
+BaseError.badResult = "Bad result.";

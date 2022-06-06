@@ -15,7 +15,7 @@ protocol SearchViewControllerProtocol: AnyObject {
 
 protocol SearchViewControllerDelegate: AnyObject {
     func presentDetailsScreen(imdbData: MovieData?,
-                              localData: FilmInfoTmp?)
+                              localData: FilmData?)
 }
 
 class SearchViewController: BaseViewController, UITextFieldDelegate {
@@ -231,10 +231,19 @@ extension SearchViewController: SearchViewControllerProtocol {
 extension SearchViewController: SearchViewControllerDelegate {
     
     func presentDetailsScreen(imdbData: MovieData?,
-                              localData: FilmInfoTmp?) {
+                              localData: FilmData?) {
         router.presentDetailsViewController(navigationController: navigationController!,
                                             imdbData: imdbData,
-                                            localData: localData)
+                                            localData: localData,
+                                            screenVCDelegate: self)
+    }
+}
+
+extension SearchViewController: FilmInfoChangedInformerDelegate {
+    func handleDeletedFilm(id: Int) {
+    }
+    
+    func cangeFilmInfo(filmData: FilmData) {
     }
 }
 
@@ -246,10 +255,10 @@ extension SearchViewController {
         controll.backgroundColor = Asset.Colors.grayTransperent.color
         controll.tintColor = .white
         controll.setTitleTextAttributes([.font: UIFont.boldSystemFont(ofSize: 15),
-                                         .foregroundColor: UIColor.black],
+                                         .foregroundColor: Asset.Colors.black.color],
                                         for: .normal)
         controll.setTitleTextAttributes([.font: UIFont.boldSystemFont(ofSize: 15),
-                                         .foregroundColor: UIColor.black],
+                                         .foregroundColor: Asset.Colors.black.color],
                                         for: .selected)
         if #available(iOS 13.0, *) {
             controll.selectedSegmentTintColor = .white
