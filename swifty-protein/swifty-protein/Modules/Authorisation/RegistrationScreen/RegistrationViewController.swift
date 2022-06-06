@@ -10,12 +10,14 @@ import UIKit
 protocol RegistrationViewControllerProtocol: AnyObject {
     func changePasswordLabelState(index: Int, isFilled: Bool)
     func presentRepeatPasswordView()
+    func presentRestorePasswordQuestion()
+    func passwordsDoesnotMatch()
 }
 
-final class RegistrationViewController: UIViewController {
+final class RegistrationViewController: UIViewController, UITextFieldDelegate {
     
     enum ViewState {
-        case firstLaunch, repeatPassword
+        case firstLaunch, repeatPassword, passwordsNotEqual, question
     }
     
     private var viewState: ViewState = .firstLaunch
@@ -24,14 +26,26 @@ final class RegistrationViewController: UIViewController {
     
     private lazy var keyboard = makeKeyboardView()
     private lazy var passwordStackView = makeStackView(views: passwordLabels)
-    private lazy var inputPasswordLabel = makeInputPasswordLabel()
-    private lazy var backwardButton = makeSaveButton()
+    private lazy var inputPasswordLabel = makeLabel(text: Text.Common.createPassword)
+    private lazy var backwardButton = makeBackwardButton()
+    
+    private lazy var answerTextField = makeAnswerTextField()
+    private lazy var saveRegistrationDataButton = makeSaveRegistrationData()
+    private lazy var questionLabel = makeLabel(text: Text.Common.whereWereYouBorn)
+    private lazy var questionStackView = makeQuestionStackView(
+        views: [
+            questionLabel,
+            answerTextField,
+            saveRegistrationDataButton
+        ]
+    )
     
     private var presenter: RegistrationPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
+        setGestures()
         setConstraints()
     }
     
@@ -51,20 +65,37 @@ final class RegistrationViewController: UIViewController {
         view.addSubview(passwordStackView)
         view.addSubview(inputPasswordLabel)
         view.addSubview(backwardButton)
+        view.addSubview(answerTextField)
         backwardButton.isHidden = true
+        view.addSubview(questionStackView)
+        questionStackView.isHidden = true
+    }
+    
+    private func setGestures() {
+        let hideKeyboardGuesture = UITapGestureRecognizer(target: self,
+                                                          action: #selector(textFieldHideKeyboard))
+        hideKeyboardGuesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(hideKeyboardGuesture)
     }
     
     private func proceedFilledPassword() {
         switch viewState {
         case .firstLaunch:
             viewState = .repeatPassword
+            changeInputPasswordLabelDependsOnState()
             backwardButton.isHidden = false
-            inputPasswordLabel.text = Text.Common.repeatPassword
             clearPasswordLabels()
-            shakeInputPasswordLabel()
             
         case .repeatPassword:
-            print("repeatPassword")
+            viewState = .question
+            keyboard.isHidden = true
+            passwordStackView.isHidden = true
+            inputPasswordLabel.isHidden = true
+            backwardButton.isHidden = true
+            questionStackView.isHidden = false
+            
+        default:
+            break
         }
     }
     
@@ -77,8 +108,8 @@ final class RegistrationViewController: UIViewController {
     
     private func shakeInputPasswordLabel() {
         let animation = CABasicAnimation(keyPath: "position")
-        animation.duration = 0.07
-        animation.repeatCount = 4
+        animation.duration = RegistrationSizes.InputPasswordLabel.shakeDuration
+        animation.repeatCount = RegistrationSizes.InputPasswordLabel.shareRepeatings
         animation.autoreverses = true
         animation.fromValue = NSValue(
             cgPoint: CGPoint(
@@ -93,6 +124,73 @@ final class RegistrationViewController: UIViewController {
             )
         )
         inputPasswordLabel.layer.add(animation, forKey: "position")
+    }
+    
+    private func changeInputPasswordLabelDependsOnState() {
+        switch viewState {
+        case .firstLaunch:
+            inputPasswordLabel.text = Text.Common.createPassword
+            inputPasswordLabel.textColor = Asset.textColor.color
+
+        case .repeatPassword:
+            inputPasswordLabel.text = Text.Common.repeatPassword
+            inputPasswordLabel.textColor = Asset.textColor.color
+        
+        case .passwordsNotEqual:
+            inputPasswordLabel.text = Text.Common.passwordsNotEqual
+            // TODO: Set to color from assets
+            inputPasswordLabel.textColor = .red
+        
+        default:
+            break
+        }
+    }
+    
+    private func showConfirmAlert() {
+        let alert = UIAlertController(
+            title: Text.Common.confirmSave,
+            message: "",
+            preferredStyle: .alert
+        )
+        let cancelAlert = UIAlertAction(
+            title: Text.Common.cancel,
+            style: .cancel
+        ) { _ in
+            print("Registered")
+        }
+        let confirmAlert = UIAlertAction(
+            title: Text.Common.confirm,
+            style: .default,
+            handler: nil
+        )
+        alert.addAction(confirmAlert)
+        alert.addAction(cancelAlert)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func showWrongDataAlert() {
+        
+    }
+    
+    @objc private func hideRepeatPasswordView() {
+        viewState = .firstLaunch
+        backwardButton.isHidden = true
+        changeInputPasswordLabelDependsOnState()
+        clearPasswordLabels()
+        presenter.clearPasswords()
+    }
+    
+    @objc private func textFieldHideKeyboard() {
+        answerTextField.resignFirstResponder()
+    }
+    
+    @objc private func saveDataTapped() {
+        guard let text = answerTextField.text
+        else {
+            // TODO: show error view
+            return
+        }
+        // TODO: Send info to presenter
     }
 }
 
@@ -110,11 +208,26 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
     func presentRepeatPasswordView() {
         proceedFilledPassword()
     }
+    
+    func passwordsDoesnotMatch() {
+        viewState = .passwordsNotEqual
+        changeInputPasswordLabelDependsOnState()
+        clearPasswordLabels()
+        shakeInputPasswordLabel()
+    }
+    
+    func presentRestorePasswordQuestion() {
+        proceedFilledPassword()
+    }
 }
 
 extension RegistrationViewController: KeyboardDelegate {
     
     func handleKeyboardTap(key: KeyboardView.KeyType) {
+        if viewState == .passwordsNotEqual {
+            viewState = .repeatPassword
+            changeInputPasswordLabelDependsOnState()
+        }
         switch key {
         case .number(let number):
             fillPasswordDependsOnViewState(number: number)
@@ -131,6 +244,9 @@ extension RegistrationViewController: KeyboardDelegate {
 
         case .repeatPassword:
             presenter.handleNewRepeatedPasswordNumber(number: number)
+        
+        default:
+            break
         }
     }
     
@@ -141,6 +257,9 @@ extension RegistrationViewController: KeyboardDelegate {
 
         case .repeatPassword:
             presenter.deleteRepeatPasswordLastNumber()
+            
+        default:
+            break
         }
     }
 }
@@ -171,21 +290,69 @@ extension RegistrationViewController {
         return stackView
     }
     
-    private func makeInputPasswordLabel() -> UILabel {
+    private func makeLabel(text: String) -> UILabel {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = Asset.textColor.color
-        label.text = Text.Common.createPassword
+        label.text = text
         return label
     }
     
-    private func makeSaveButton() -> CustomButton {
+    private func makeBackwardButton() -> CustomButton {
         let button = CustomButton()
         button.setTitle(Text.Common.backward, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.backgroundColor = .clear
         button.setTitleColor(Asset.textColor.color, for: .normal)
+        button.addTarget(self, action: #selector(hideRepeatPasswordView), for: .touchUpInside)
         return button
+    }
+    
+    private func makeAnswerTextField() -> UITextField {
+        // TODO: Think about colors
+        let field = UITextField()
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.delegate = self
+        field.backgroundColor = Asset.darkBlueAndWhiteHalfTransparent.color
+        field.textAlignment = .left
+        field.autocapitalizationType = .none
+        field.layer.borderWidth = RegistrationSizes.AnswerTextField.boarderWidth
+        field.layer.cornerRadius = RegistrationSizes.AnswerTextField.cornerRadius
+        field.layer.borderColor = Asset.textColor.color.cgColor
+        field.borderStyle = .roundedRect
+        field.textColor = Asset.textColor.color
+        field.tintColor = Asset.textColor.color
+        field.autocorrectionType = .no
+        field.keyboardType = .default
+        field.returnKeyType = .search
+        field.attributedPlaceholder = NSAttributedString(
+            string: Text.Common.typeAnswerPlaceholder,
+            attributes: [
+                NSAttributedString.Key.foregroundColor: Asset.textColorHalfTransparent.color
+            ]
+        )
+        return field
+    }
+    
+    private func makeSaveRegistrationData() -> CustomButton {
+        let button = CustomButton()
+        button.setTitle(Text.Common.save, for: .normal)
+        button.backgroundColor = Asset.darkBlueAndWhiteHalfTransparent.color
+        button.layer.cornerRadius = RegistrationSizes.SaveAnswerButton.cornerRadius
+        button.setTitleColor(Asset.textColor.color, for: .normal)
+        button.addTarget(self, action: #selector(saveDataTapped), for: .touchUpInside)
+        return button
+    }
+    
+    private func makeQuestionStackView(views: [UIView]) -> UIStackView {
+        let stackView = UIStackView()
+        for view in views {
+            stackView.addArrangedSubview(view)
+        }
+        stackView.axis = .vertical
+        stackView.spacing = RegistrationSizes.QuestionStackView.spacing
+        stackView.distribution = .fillEqually
+        return stackView
     }
 }
 
@@ -196,6 +363,8 @@ extension RegistrationViewController {
         setPasswordStackConstraints()
         setInputPasswordLabelConstraints()
         setBackwardButtonConstraints()
+//        setQuestionLabelConstraints()
+        setAnswerStackViewConstraints()
     }
     
     private func setPasswordNumberLabelConstraints(label: UILabel) {
@@ -237,6 +406,20 @@ extension RegistrationViewController {
             maker.width.equalTo(RegistrationSizes.SavePasswordButton.width)
             maker.height.equalTo(RegistrationSizes.SavePasswordButton.height)
             maker.top.equalTo(keyboard.snp.bottom).offset(RegistrationSizes.SavePasswordButton.topOffset)
+        }
+    }
+    
+    private func setQuestionLabelConstraints() {
+        questionLabel.snp.makeConstraints { maker in
+            maker.height.equalTo(25)
+        }
+    }
+    
+    private func setAnswerStackViewConstraints() {
+        questionStackView.snp.makeConstraints { maker in
+            maker.center.equalToSuperview()
+            maker.width.equalToSuperview().multipliedBy(RegistrationSizes.QuestionStackView.widthMultiplyer)
+            maker.height.equalTo(RegistrationSizes.QuestionStackView.height)
         }
     }
 }

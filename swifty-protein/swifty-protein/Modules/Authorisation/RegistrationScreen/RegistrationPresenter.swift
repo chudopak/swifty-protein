@@ -12,6 +12,7 @@ protocol RegistrationPresenterProtocol {
     func handleNewRepeatedPasswordNumber(number: Int)
     func deletePasswordLastNumber()
     func deleteRepeatPasswordLastNumber()
+    func clearPasswords()
 }
 
 final class RegistrationPresenter: RegistrationPresenterProtocol {
@@ -42,8 +43,13 @@ final class RegistrationPresenter: RegistrationPresenterProtocol {
             repeatPassword.append(String(number))
             print(repeatPassword)
         }
-        if password.count == RegistrationSizes.passwordLength {
-            // TODO: Don't forget to show question view
+        if repeatPassword.count == RegistrationSizes.passwordLength {
+            if password == repeatPassword {
+                viewController.presentRestorePasswordQuestion()
+            } else {
+                repeatPassword.removeAll()
+                viewController.passwordsDoesnotMatch()
+            }
         }
     }
     
@@ -59,5 +65,10 @@ final class RegistrationPresenter: RegistrationPresenterProtocol {
             repeatPassword.removeLast()
             viewController.changePasswordLabelState(index: repeatPassword.count, isFilled: false)
         }
+    }
+    
+    func clearPasswords() {
+        password.removeAll()
+        repeatPassword.removeAll()
     }
 }

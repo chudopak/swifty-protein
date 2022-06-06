@@ -16,14 +16,26 @@ internal enum Text {
   internal enum Common {
     /// Backward
     internal static let backward = Text.tr("Localizable", "Common.backward")
+    /// Cancel
+    internal static let cancel = Text.tr("Localizable", "Common.cancel")
+    /// Confirm
+    internal static let confirm = Text.tr("Localizable", "Common.confirm")
+    /// Confirm Save?
+    internal static let confirmSave = Text.tr("Localizable", "Common.confirmSave")
     /// Create Password
     internal static let createPassword = Text.tr("Localizable", "Common.createPassword")
     /// Hello
     internal static let hello = Text.tr("Localizable", "Common.hello")
+    /// Passwords Not Equal
+    internal static let passwordsNotEqual = Text.tr("Localizable", "Common.passwordsNotEqual")
     /// Repeat Password
     internal static let repeatPassword = Text.tr("Localizable", "Common.repeatPassword")
     /// Save
     internal static let save = Text.tr("Localizable", "Common.save")
+    /// Input answer
+    internal static let typeAnswerPlaceholder = Text.tr("Localizable", "Common.typeAnswerPlaceholder")
+    /// Where were you born?
+    internal static let whereWereYouBorn = Text.tr("Localizable", "Common.whereWereYouBorn")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

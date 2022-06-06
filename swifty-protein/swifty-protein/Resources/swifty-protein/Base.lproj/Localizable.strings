@@ -15,3 +15,10 @@ Common.createPassword = "Create Password";
 Common.save = "Save";
 Common.repeatPassword = "Repeat Password";
 Common.backward = "Backward";
+Common.passwordsNotEqual = "Passwords Not Equal";
+Common.whereWereYouBorn = "Where were you born?";
+Common.typeAnswerPlaceholder = "Input answer";
+Common.cancel = "Cancel";
+Common.confirm = "Confirm";
+Common.confirmSave = "Confirm Save?";
+
