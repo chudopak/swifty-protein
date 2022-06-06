@@ -14,8 +14,16 @@ internal enum Text {
   internal static let appTitle = Text.tr("Localizable", "AppTitle")
 
   internal enum Common {
+    /// Backward
+    internal static let backward = Text.tr("Localizable", "Common.backward")
+    /// Create Password
+    internal static let createPassword = Text.tr("Localizable", "Common.createPassword")
     /// Hello
     internal static let hello = Text.tr("Localizable", "Common.hello")
+    /// Repeat Password
+    internal static let repeatPassword = Text.tr("Localizable", "Common.repeatPassword")
+    /// Save
+    internal static let save = Text.tr("Localizable", "Common.save")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

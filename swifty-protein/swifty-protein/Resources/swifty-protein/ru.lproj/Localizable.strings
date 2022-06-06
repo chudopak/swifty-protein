@@ -12,3 +12,6 @@ AppTitle = "Swifty Protein";
 
 Common.hello = "Привет";
 Common.createPassword = "Придумайте Пароль";
+Common.save = "Сохранить";
+Common.repeatPassword = "Повторите Пароль";
+Common.backward = "Назад";

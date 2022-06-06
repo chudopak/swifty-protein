@@ -15,6 +15,7 @@ protocol LoginPresenterProtocol {
 final class LoginPresenter: LoginPresenterProtocol {
     
     private var password = ""
+    private var repeatPassword = ""
     
     private weak var viewController: LoginViewControllerProtocol!
     

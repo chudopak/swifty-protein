@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol LoginViewControllerFirstLaunchDelegate: AnyObject {
+protocol KeyboardDelegate: AnyObject {
     func handleKeyboardTap(key: KeyboardView.KeyType)
 }
 
@@ -16,6 +16,12 @@ protocol LoginViewControllerProtocol: AnyObject {
 }
 
 final class LoginViewController: UIViewController {
+    
+    enum ViewState {
+        case biometry, keyboardInput
+    }
+    
+    private var viewState: ViewState = .biometry
     
     private var passwordLabels = [UIView]()
     
@@ -45,18 +51,34 @@ final class LoginViewController: UIViewController {
         }
         view.addSubview(passwordStackView)
     }
+    
+    private func makeActive(view: ViewState) {
+        switch view {
+        case .biometry:
+            break
+            
+        case .keyboardInput:
+            break
+        }
+    }
+    
+    private func proceedFilledPassword() {
+    }
 }
 
-extension LoginViewController: LoginViewControllerFirstLaunchDelegate {
+extension LoginViewController: KeyboardDelegate {
     
     func handleKeyboardTap(key: KeyboardView.KeyType) {
         switch key {
         case .number(let number):
-            presenter.handleNewPasswordNumber(number: number)
+            fillPasswordDependsOnViewState(number: number)
             
         case .delete:
             presenter.deleteLastNumber()
         }
+    }
+    
+    private func fillPasswordDependsOnViewState(number: Int) {
     }
 }
 
@@ -67,7 +89,10 @@ extension LoginViewController: LoginViewControllerProtocol {
             passwordLabels[index].backgroundColor = isFilled
                                                         ? Asset.textColor.color
                                                         : .clear
-            view.layoutIfNeeded()
+            passwordLabels[index].layoutIfNeeded()
+            if index + 1 == passwordLabels.count {
+                proceedFilledPassword()
+            }
         }
     }
 }
@@ -99,6 +124,22 @@ extension LoginViewController {
         stackView.spacing = LoginSizes.PasswordStack.spacing
         return stackView
     }
+    
+    private func makeInputPasswordLabel() -> UILabel {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = Asset.textColor.color
+        return label
+    }
+    
+    private func makeSaveButton() -> CustomButton {
+        let button = CustomButton()
+        button.setTitle(Text.Common.backward, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.backgroundColor = .clear
+        button.setTitleColor(Asset.textColor.color, for: .normal)
+        return button
+    }
 }
 
 // MARK: Constraints
@@ -128,9 +169,10 @@ extension LoginViewController {
     
     private func setKeyboardConstraints() {
         keyboard.snp.makeConstraints { maker in
-            maker.center.equalToSuperview()
-            maker.width.equalToSuperview().multipliedBy(LoginSizes.KeboardView.widthMultiplyer)
-            maker.height.equalTo(LoginSizes.KeboardView.height)
+            maker.centerX.equalToSuperview()
+            maker.centerY.equalToSuperview().offset(LoginSizes.KeyboardView.centerYOffset)
+            maker.width.equalTo(LoginSizes.KeyboardView.width)
+            maker.height.equalTo(LoginSizes.KeyboardView.height)
         }
     }
 }

@@ -15,7 +15,7 @@ final class KeyboardView: UIView {
         case delete
     }
     
-    private weak var delegate: LoginViewControllerFirstLaunchDelegate!
+    private weak var delegate: KeyboardDelegate!
     
     private lazy var zero = makeNumberButton(number: 0)
     private lazy var one = makeNumberButton(number: 1)
@@ -29,7 +29,7 @@ final class KeyboardView: UIView {
     private lazy var nine = makeNumberButton(number: 9)
     private lazy var deleteButton = makeDeleteButton()
     
-    init(delegate: LoginViewControllerFirstLaunchDelegate) {
+    init(delegate: KeyboardDelegate) {
         super.init(frame: .zero)
         self.delegate = delegate
         setView()
@@ -70,8 +70,8 @@ extension KeyboardView {
     
     private func makeNumberButton(number: Int) -> CustomButton {
         let button = CustomButton()
-        button.layer.cornerRadius = LoginSizes.KeboardButton.cornerRadius
-        button.layer.borderWidth = LoginSizes.KeboardButton.boarderWidth
+        button.layer.cornerRadius = LoginSizes.KeyboardButton.cornerRadius
+        button.layer.borderWidth = LoginSizes.KeyboardButton.boarderWidth
         button.tag = number
         button.setTitle(String(number), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
@@ -128,13 +128,13 @@ extension KeyboardView {
         isFirstRow: Bool = false
     ) {
         view.snp.makeConstraints { maker in
-            maker.height.equalTo(LoginSizes.KeboardButton.height)
-            maker.width.equalTo(LoginSizes.KeboardButton.width)
+            maker.height.equalTo(LoginSizes.KeyboardButton.height)
+            maker.width.equalTo(LoginSizes.KeyboardButton.width)
             maker.leading.equalToSuperview()
             if isFirstRow {
                 maker.top.equalToSuperview()
             } else {
-                maker.top.equalTo(topView.snp.bottom).offset(LoginSizes.KeboardButton.sideOffset)
+                maker.top.equalTo(topView.snp.bottom).offset(LoginSizes.KeyboardButton.sideOffset)
             }
         }
     }
@@ -145,13 +145,13 @@ extension KeyboardView {
         isFirstRow: Bool = false
     ) {
         view.snp.makeConstraints { maker in
-            maker.height.equalTo(LoginSizes.KeboardButton.height)
-            maker.width.equalTo(LoginSizes.KeboardButton.width)
+            maker.height.equalTo(LoginSizes.KeyboardButton.height)
+            maker.width.equalTo(LoginSizes.KeyboardButton.width)
             maker.centerX.equalToSuperview()
             if isFirstRow {
                 maker.top.equalToSuperview()
             } else {
-                maker.top.equalTo(topView.snp.bottom).offset(LoginSizes.KeboardButton.sideOffset)
+                maker.top.equalTo(topView.snp.bottom).offset(LoginSizes.KeyboardButton.sideOffset)
             }
         }
     }
@@ -162,13 +162,13 @@ extension KeyboardView {
         isFirstRow: Bool = false
     ) {
         view.snp.makeConstraints { maker in
-            maker.height.equalTo(LoginSizes.KeboardButton.height)
-            maker.width.equalTo(LoginSizes.KeboardButton.width)
+            maker.height.equalTo(LoginSizes.KeyboardButton.height)
+            maker.width.equalTo(LoginSizes.KeyboardButton.width)
             maker.trailing.equalToSuperview()
             if isFirstRow {
                 maker.top.equalToSuperview()
             } else {
-                maker.top.equalTo(topView.snp.bottom).offset(LoginSizes.KeboardButton.sideOffset)
+                maker.top.equalTo(topView.snp.bottom).offset(LoginSizes.KeyboardButton.sideOffset)
             }
         }
     }

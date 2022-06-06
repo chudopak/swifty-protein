@@ -11,18 +11,19 @@ enum LoginSizes {
     
     static let passwordLength = 5
     
-    enum KeboardView {
-        static let widthMultiplyer: CGFloat = 0.8
+    enum KeyboardView {
+        static let width: CGFloat = 256
         static let height: CGFloat = 355
+        static let centerYOffset: CGFloat = 30
     }
     
-    enum KeboardButton {
+    enum KeyboardButton {
         static let width: CGFloat = 70
         static let height: CGFloat = 70
         static let cornerRadius: CGFloat = 35
         static let boarderWidth: CGFloat = 2
         
-        static let sideOffset: CGFloat = 25
+        static let sideOffset: CGFloat = 20
     }
     
     enum DeleteButton {
@@ -42,5 +43,16 @@ enum LoginSizes {
         static let height: CGFloat = 14
         static let cornerRadius: CGFloat = 7
         static let boarderWidth: CGFloat = 1
+    }
+    
+    enum InputPasswordLabel {
+        static let height: CGFloat = 18
+        static let bottomOffset: CGFloat = 10
+    }
+    
+    enum SavePasswordButton {
+        static let width: CGFloat = 150
+        static let height: CGFloat = 22
+        static let topOffset: CGFloat = 20
     }
 }

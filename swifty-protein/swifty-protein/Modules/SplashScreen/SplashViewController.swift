@@ -73,10 +73,18 @@ final class SplashViewController: UIViewController {
                 self?.setThirdAnimationStageConstraints()
                 self?.view.layoutIfNeeded()
             },
-            completion: { _ in
-                WindowService.replaceRootViewController(with: LoginConfigurator().setupModule())
+            completion: { [weak self] _ in
+                self?.presentNeededScreen()
             }
         )
+    }
+    
+    private func presentNeededScreen() {
+        if FirstLaunchChecker.isFirstLaunch {
+            WindowService.replaceRootViewController(with: RegistrationConfigurator().setupModule())
+        } else {
+            WindowService.replaceRootViewController(with: LoginConfigurator().setupModule())
+        }
     }
 }
 

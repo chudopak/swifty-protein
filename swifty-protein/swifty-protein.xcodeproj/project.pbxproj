@@ -30,6 +30,10 @@
 		7D5E3153284A340F00AE67A0 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3152284A340F00AE67A0 /* CustomButton.swift */; };
 		7D5E3155284A5B4000AE67A0 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3154284A5B4000AE67A0 /* LoginPresenter.swift */; };
 		7D5E3157284A5E1300AE67A0 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3156284A5E1300AE67A0 /* LoginModel.swift */; };
+		7DA1F964284E072600547D4D /* RegistrationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F963284E072600547D4D /* RegistrationConfigurator.swift */; };
+		7DA1F966284E073400547D4D /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F965284E073400547D4D /* RegistrationViewController.swift */; };
+		7DA1F969284E084800547D4D /* RegistrationSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F968284E084800547D4D /* RegistrationSizes.swift */; };
+		7DA1F96C284E09A800547D4D /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F96B284E09A800547D4D /* RegistrationPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +65,10 @@
 		7D5E3152284A340F00AE67A0 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		7D5E3154284A5B4000AE67A0 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		7D5E3156284A5E1300AE67A0 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		7DA1F963284E072600547D4D /* RegistrationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationConfigurator.swift; sourceTree = "<group>"; };
+		7DA1F965284E073400547D4D /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		7DA1F968284E084800547D4D /* RegistrationSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSizes.swift; sourceTree = "<group>"; };
+		7DA1F96B284E09A800547D4D /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +183,7 @@
 		7D507A662848CD0F0024BB21 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				7D5E3141284A11E000AE67A0 /* LoginScreen */,
+				7DA1F961284E069400547D4D /* Authorisation */,
 				7D42265A2848F1010052FE6D /* SplashScreen */,
 			);
 			path = Modules;
@@ -221,7 +229,6 @@
 		7D5E314C284A2C1500AE67A0 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				7D5E314D284A2EB500AE67A0 /* KeyboardView.swift */,
 				7D5E314F284A2F3E00AE67A0 /* LoginSizes.swift */,
 			);
 			path = Utils;
@@ -230,9 +237,38 @@
 		7D5E3151284A33E600AE67A0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7D5E314D284A2EB500AE67A0 /* KeyboardView.swift */,
 				7D5E3152284A340F00AE67A0 /* CustomButton.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		7DA1F961284E069400547D4D /* Authorisation */ = {
+			isa = PBXGroup;
+			children = (
+				7DA1F962284E070800547D4D /* RegistrationScreen */,
+				7D5E3141284A11E000AE67A0 /* LoginScreen */,
+			);
+			path = Authorisation;
+			sourceTree = "<group>";
+		};
+		7DA1F962284E070800547D4D /* RegistrationScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7DA1F967284E083800547D4D /* Utils */,
+				7DA1F963284E072600547D4D /* RegistrationConfigurator.swift */,
+				7DA1F965284E073400547D4D /* RegistrationViewController.swift */,
+				7DA1F96B284E09A800547D4D /* RegistrationPresenter.swift */,
+			);
+			path = RegistrationScreen;
+			sourceTree = "<group>";
+		};
+		7DA1F967284E083800547D4D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7DA1F968284E084800547D4D /* RegistrationSizes.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		DBE8C2A31622A9E9486BBC65 /* Pods */ = {
@@ -401,8 +437,10 @@
 				7D507A6F2848CDE50024BB21 /* Asset.swift in Sources */,
 				7D42265C2848FCA50052FE6D /* SplashConfigurator.swift in Sources */,
 				7D507A702848CDE60024BB21 /* Texts.swift in Sources */,
+				7DA1F96C284E09A800547D4D /* RegistrationPresenter.swift in Sources */,
 				7D5E314B284A2B3500AE67A0 /* FirstLaunchChecker.swift in Sources */,
 				7D5E3153284A340F00AE67A0 /* CustomButton.swift in Sources */,
+				7DA1F969284E084800547D4D /* RegistrationSizes.swift in Sources */,
 				7D5E314E284A2EB500AE67A0 /* KeyboardView.swift in Sources */,
 				7D04D15E2848BD4300B4566D /* SplashViewController.swift in Sources */,
 				7D42265F284905B40052FE6D /* SplashSizes.swift in Sources */,
@@ -415,7 +453,9 @@
 				7D04D15C2848BD4300B4566D /* SceneDelegate.swift in Sources */,
 				7D5E3150284A2F3E00AE67A0 /* LoginSizes.swift in Sources */,
 				7D507A6D2848CDE50024BB21 /* StoryboardScenes.swift in Sources */,
+				7DA1F966284E073400547D4D /* RegistrationViewController.swift in Sources */,
 				7D5E3143284A11F700AE67A0 /* LoginViewController.swift in Sources */,
+				7DA1F964284E072600547D4D /* RegistrationConfigurator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
