@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7CA42F1D9D30890009B3691D /* Pods_swifty_protein.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 575924ED8CAE0BE972D72C42 /* Pods_swifty_protein.framework */; };
 		7D04D15A2848BD4300B4566D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D04D1592848BD4300B4566D /* AppDelegate.swift */; };
 		7D04D15C2848BD4300B4566D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D04D15B2848BD4300B4566D /* SceneDelegate.swift */; };
 		7D04D15E2848BD4300B4566D /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D04D15D2848BD4300B4566D /* SplashViewController.swift */; };
@@ -35,12 +34,14 @@
 		7DA1F969284E084800547D4D /* RegistrationSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F968284E084800547D4D /* RegistrationSizes.swift */; };
 		7DA1F96C284E09A800547D4D /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F96B284E09A800547D4D /* RegistrationPresenter.swift */; };
 		7DA1F96E284E425D00547D4D /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F96D284E425D00547D4D /* RegistrationModel.swift */; };
+		7DA31B20284F38570022BA65 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B1F284F38570022BA65 /* PopUpView.swift */; };
+		7DA31B23284F3BC60022BA65 /* PopupSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B22284F3BC60022BA65 /* PopupSizes.swift */; };
+		7DA31B27284F82940022BA65 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B26284F82940022BA65 /* KeychainService.swift */; };
+		C60A2DCB8A02D7EA5791611B /* Pods_swifty_protein.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD991638D761715875F55D4E /* Pods_swifty_protein.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		25314FE7D13A57628FFD25C8 /* Pods-swifty-protein.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.release.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.release.xcconfig"; sourceTree = "<group>"; };
-		575924ED8CAE0BE972D72C42 /* Pods_swifty_protein.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swifty_protein.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6BC4E055172580E36B557371 /* Pods-swifty-protein.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.debug.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.debug.xcconfig"; sourceTree = "<group>"; };
+		027CA39AD9E806A981940DA9 /* Pods-swifty-protein.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.release.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.release.xcconfig"; sourceTree = "<group>"; };
 		7D04D1562848BD4300B4566D /* swifty-protein.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swifty-protein.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D04D1592848BD4300B4566D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D04D15B2848BD4300B4566D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +72,11 @@
 		7DA1F968284E084800547D4D /* RegistrationSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSizes.swift; sourceTree = "<group>"; };
 		7DA1F96B284E09A800547D4D /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		7DA1F96D284E425D00547D4D /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
+		7DA31B1F284F38570022BA65 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
+		7DA31B22284F3BC60022BA65 /* PopupSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupSizes.swift; sourceTree = "<group>"; };
+		7DA31B26284F82940022BA65 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		AD991638D761715875F55D4E /* Pods_swifty_protein.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swifty_protein.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5A1041B3D5CCA47E3DC1284 /* Pods-swifty-protein.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.debug.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,28 +84,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CA42F1D9D30890009B3691D /* Pods_swifty_protein.framework in Frameworks */,
+				C60A2DCB8A02D7EA5791611B /* Pods_swifty_protein.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4BFE817B44E325981BBA753A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				575924ED8CAE0BE972D72C42 /* Pods_swifty_protein.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		7D04D14D2848BD4300B4566D = {
 			isa = PBXGroup;
 			children = (
 				7D04D1582848BD4300B4566D /* swifty-protein */,
 				7D04D1572848BD4300B4566D /* Products */,
 				DBE8C2A31622A9E9486BBC65 /* Pods */,
-				4BFE817B44E325981BBA753A /* Frameworks */,
+				E1E65C5C309DE20FF080B382 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -215,7 +213,8 @@
 		7D5E3146284A1A5F00AE67A0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				7D5E3147284A1B2300AE67A0 /* WindowService.swift */,
+				7DA31B25284F82410022BA65 /* KeychainService */,
+				7DA31B24284F822B0022BA65 /* WindowService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -239,6 +238,7 @@
 		7D5E3151284A33E600AE67A0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7DA31B21284F3BB00022BA65 /* Pupup */,
 				7D5E314D284A2EB500AE67A0 /* KeyboardView.swift */,
 				7D5E3152284A340F00AE67A0 /* CustomButton.swift */,
 			);
@@ -274,13 +274,46 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		7DA31B21284F3BB00022BA65 /* Pupup */ = {
+			isa = PBXGroup;
+			children = (
+				7DA31B1F284F38570022BA65 /* PopUpView.swift */,
+				7DA31B22284F3BC60022BA65 /* PopupSizes.swift */,
+			);
+			path = Pupup;
+			sourceTree = "<group>";
+		};
+		7DA31B24284F822B0022BA65 /* WindowService */ = {
+			isa = PBXGroup;
+			children = (
+				7D5E3147284A1B2300AE67A0 /* WindowService.swift */,
+			);
+			path = WindowService;
+			sourceTree = "<group>";
+		};
+		7DA31B25284F82410022BA65 /* KeychainService */ = {
+			isa = PBXGroup;
+			children = (
+				7DA31B26284F82940022BA65 /* KeychainService.swift */,
+			);
+			path = KeychainService;
+			sourceTree = "<group>";
+		};
 		DBE8C2A31622A9E9486BBC65 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6BC4E055172580E36B557371 /* Pods-swifty-protein.debug.xcconfig */,
-				25314FE7D13A57628FFD25C8 /* Pods-swifty-protein.release.xcconfig */,
+				D5A1041B3D5CCA47E3DC1284 /* Pods-swifty-protein.debug.xcconfig */,
+				027CA39AD9E806A981940DA9 /* Pods-swifty-protein.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E1E65C5C309DE20FF080B382 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AD991638D761715875F55D4E /* Pods_swifty_protein.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,13 +323,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D04D16A2848BD4700B4566D /* Build configuration list for PBXNativeTarget "swifty-protein" */;
 			buildPhases = (
-				69F1364677F9CB409A035BA9 /* [CP] Check Pods Manifest.lock */,
+				F4E3A7225E729A6E69D92ABD /* [CP] Check Pods Manifest.lock */,
 				7D04D16F2848C06E00B4566D /* SwiftLint */,
 				7D507A682848CD420024BB21 /* SwiftGen */,
 				7D04D1522848BD4300B4566D /* Sources */,
 				7D04D1532848BD4300B4566D /* Frameworks */,
 				7D04D1542848BD4300B4566D /* Resources */,
-				65EAACC344131A8F9B3C3B32 /* [CP] Embed Pods Frameworks */,
+				D741F84C8536B74721CC971A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -355,45 +388,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		65EAACC344131A8F9B3C3B32 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-swifty-protein/Pods-swifty-protein-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-swifty-protein/Pods-swifty-protein-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-swifty-protein/Pods-swifty-protein-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		69F1364677F9CB409A035BA9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-swifty-protein-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7D04D16F2848C06E00B4566D /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -430,6 +424,45 @@
 			shellPath = /bin/sh;
 			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" config run --config ./swifty-protein/Resources/swiftgen.yml\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
 		};
+		D741F84C8536B74721CC971A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-swifty-protein/Pods-swifty-protein-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-swifty-protein/Pods-swifty-protein-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-swifty-protein/Pods-swifty-protein-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4E3A7225E729A6E69D92ABD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-swifty-protein-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -444,8 +477,10 @@
 				7D5E314B284A2B3500AE67A0 /* FirstLaunchChecker.swift in Sources */,
 				7D5E3153284A340F00AE67A0 /* CustomButton.swift in Sources */,
 				7DA1F969284E084800547D4D /* RegistrationSizes.swift in Sources */,
+				7DA31B27284F82940022BA65 /* KeychainService.swift in Sources */,
 				7D5E314E284A2EB500AE67A0 /* KeyboardView.swift in Sources */,
 				7D04D15E2848BD4300B4566D /* SplashViewController.swift in Sources */,
+				7DA31B20284F38570022BA65 /* PopUpView.swift in Sources */,
 				7DA1F96E284E425D00547D4D /* RegistrationModel.swift in Sources */,
 				7D42265F284905B40052FE6D /* SplashSizes.swift in Sources */,
 				7D5E3145284A12F300AE67A0 /* LoginConfigurator.swift in Sources */,
@@ -460,6 +495,7 @@
 				7DA1F966284E073400547D4D /* RegistrationViewController.swift in Sources */,
 				7D5E3143284A11F700AE67A0 /* LoginViewController.swift in Sources */,
 				7DA1F964284E072600547D4D /* RegistrationConfigurator.swift in Sources */,
+				7DA31B23284F3BC60022BA65 /* PopupSizes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,7 +642,7 @@
 		};
 		7D04D16B2848BD4700B4566D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6BC4E055172580E36B557371 /* Pods-swifty-protein.debug.xcconfig */;
+			baseConfigurationReference = D5A1041B3D5CCA47E3DC1284 /* Pods-swifty-protein.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -626,7 +662,7 @@
 		};
 		7D04D16C2848BD4700B4566D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 25314FE7D13A57628FFD25C8 /* Pods-swifty-protein.release.xcconfig */;
+			baseConfigurationReference = 027CA39AD9E806A981940DA9 /* Pods-swifty-protein.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

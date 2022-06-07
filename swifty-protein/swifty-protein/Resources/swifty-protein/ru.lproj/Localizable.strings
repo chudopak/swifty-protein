@@ -16,8 +16,19 @@ Common.save = "Сохранить";
 Common.repeatPassword = "Повторите Пароль";
 Common.backward = "Назад";
 Common.passwordsNotEqual = "Пароли не совпадают";
-Common.whereWereYouBorn = "Где вы родились?";
 Common.typeAnswerPlaceholder = "Введите ответ";
 Common.cancel = "Отмена";
 Common.confirm = "Принять";
+Common.confirmation = "Подтвердить";
 Common.confirmSave = "Сохранить?";
+Common.error = "Ошибка";
+Common.success = "Успех";
+
+Questions.whereWereYouBorn = "Где вы родились?";
+
+// MARK: Descriptions
+
+Descriptions.emptyAnswer = "Ответ не может быть пустым";
+Descriptions.longAnswer = "Ответ слишком длинный. Его будет тяжело запомнить.";
+Descriptions.confirmAnswer = "Вы уверены? Лучше куда-то записать пароль, а то, если забудите, нужно будет переустанавливать приложение :)";
+Descriptions.successRegistration = "Вы успешно зарегистрированы!";

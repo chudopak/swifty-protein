@@ -80,6 +80,11 @@ final class SplashViewController: UIViewController {
     }
     
     private func presentNeededScreen() {
+        // TODO: don't forgeet to delete it
+//        KeychainService.delete(key: .password)
+//        KeychainService.delete(key: .recreatePasswordAnswer)
+//        FirstLaunchChecker.isFirstLaunch = true
+        
         if FirstLaunchChecker.isFirstLaunch {
             WindowService.replaceRootViewController(with: RegistrationConfigurator().setupModule())
         } else {

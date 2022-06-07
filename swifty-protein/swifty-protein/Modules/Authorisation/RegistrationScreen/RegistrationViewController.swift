@@ -12,6 +12,9 @@ protocol RegistrationViewControllerProtocol: AnyObject {
     func presentRepeatPasswordView()
     func presentRestorePasswordQuestion()
     func passwordsDoesnotMatch()
+    func presentAnswerError(description: String)
+    func presentConfirmPopup(description: String)
+    func completeRegistration(isDataSeaved: Bool)
 }
 
 final class RegistrationViewController: UIViewController, UITextFieldDelegate {
@@ -31,7 +34,7 @@ final class RegistrationViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var answerTextField = makeAnswerTextField()
     private lazy var saveRegistrationDataButton = makeSaveRegistrationData()
-    private lazy var questionLabel = makeLabel(text: Text.Common.whereWereYouBorn)
+    private lazy var questionLabel = makeLabel(text: Text.Questions.whereWereYouBorn)
     private lazy var questionStackView = makeQuestionStackView(
         views: [
             questionLabel,
@@ -168,8 +171,20 @@ final class RegistrationViewController: UIViewController, UITextFieldDelegate {
         present(alert, animated: true, completion: nil)
     }
     
-    private func showWrongDataAlert() {
-        
+    private func showPopup(popup: Popup) {
+        view.addSubview(popup)
+        setPopupConstraints(view: popup)
+        UIView.animate(
+            withDuration: 0.2,
+            animations: {
+                popup.alpha = 1
+            },
+            completion: { completion in
+                if completion {
+                    popup.showPopup()
+                }
+            }
+        )
     }
     
     @objc private func hideRepeatPasswordView() {
@@ -185,12 +200,7 @@ final class RegistrationViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func saveDataTapped() {
-        guard let text = answerTextField.text
-        else {
-            // TODO: show error view
-            return
-        }
-        // TODO: Send info to presenter
+        presenter.handleAnswer(answer: answerTextField.text)
     }
 }
 
@@ -218,6 +228,33 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
     
     func presentRestorePasswordQuestion() {
         proceedFilledPassword()
+    }
+    
+    func presentAnswerError(description: String) {
+        let popup = Popup(title: Text.Common.error, description: description)
+        popup.addButton(title: Text.Common.confirm, type: .custom, action: nil)
+        popup.alpha = 0
+        showPopup(popup: popup)
+    }
+    
+    func presentConfirmPopup(description: String) {
+        let popup = Popup(title: Text.Common.confirmation, description: description)
+        popup.addButton(title: Text.Common.cancel, type: .custom, action: nil)
+        popup.addButton(title: Text.Common.confirm, type: .custom) { [weak self] in
+            self?.presenter.saveRegistrationData(question: Text.Questions.whereWereYouBorn)
+        }
+        popup.alpha = 0
+        showPopup(popup: popup)
+    }
+    
+    func completeRegistration(isDataSeaved: Bool) {
+        if isDataSeaved {
+            WindowService.replaceRootViewController(with: LoginConfigurator().setupModule())
+        } else {
+            let popup = Popup(title: Text.Common.error, description: Text.Descriptions.saveDataError)
+            popup.alpha = 0
+            showPopup(popup: popup)
+        }
     }
 }
 
@@ -363,7 +400,6 @@ extension RegistrationViewController {
         setPasswordStackConstraints()
         setInputPasswordLabelConstraints()
         setBackwardButtonConstraints()
-//        setQuestionLabelConstraints()
         setAnswerStackViewConstraints()
     }
     
@@ -420,6 +456,12 @@ extension RegistrationViewController {
             maker.center.equalToSuperview()
             maker.width.equalToSuperview().multipliedBy(RegistrationSizes.QuestionStackView.widthMultiplyer)
             maker.height.equalTo(RegistrationSizes.QuestionStackView.height)
+        }
+    }
+    
+    private func setPopupConstraints(view: UIView) {
+        view.snp.makeConstraints { maker in
+            maker.top.bottom.leading.trailing.equalToSuperview()
         }
     }
 }

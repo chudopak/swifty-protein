@@ -6,3 +6,8 @@
 //
 
 import UIKit
+
+struct RecreatePasswordData: Codable {
+    let question: String
+    let answer: String
+}

@@ -8,6 +8,7 @@ def common_pods
   use_frameworks!
   pod "SnapKit"
   pod "SwiftGen"
+  pod "KeychainSwift"
 end
 
 target 'swifty-protein' do

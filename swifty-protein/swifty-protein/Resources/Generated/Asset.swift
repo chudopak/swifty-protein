@@ -23,7 +23,9 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 internal enum Asset {
   internal static let accentColor = ColorAsset(name: "AccentColor")
   internal static let darkBlueAndWhiteHalfTransparent = ColorAsset(name: "darkBlueAndWhiteHalfTransparent")
+  internal static let grayTransparent = ColorAsset(name: "grayTransparent")
   internal static let primaryBackground = ColorAsset(name: "primaryBackground")
+  internal static let redFailure = ColorAsset(name: "redFailure")
   internal static let textColor = ColorAsset(name: "textColor")
   internal static let textColorHalfTransparent = ColorAsset(name: "textColorHalfTransparent")
   internal static let titleTextColor = ColorAsset(name: "titleTextColor")
