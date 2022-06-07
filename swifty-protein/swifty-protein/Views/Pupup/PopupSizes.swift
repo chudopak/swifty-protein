@@ -30,4 +30,9 @@ struct PopupSizes {
     let separateButtonsLineHeight: CGFloat = 1
     
     let stackViewSpacing: CGFloat = 1
+    
+    let animationDuration: TimeInterval = 0.5
+    let animationDelay: TimeInterval = 0
+    let animationSpringDampings: CGFloat = 0.7
+    let animationSpringVelocity: CGFloat = 1
 }

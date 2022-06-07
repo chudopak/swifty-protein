@@ -6,10 +6,7 @@
 //
 
 import UIKit
-
-protocol KeyboardDelegate: AnyObject {
-    func handleKeyboardTap(key: KeyboardView.KeyType)
-}
+import LocalAuthentication
 
 protocol LoginViewControllerProtocol: AnyObject {
     func changePasswordLabelState(index: Int, isFilled: Bool)
@@ -22,19 +19,35 @@ final class LoginViewController: UIViewController {
     }
     
     private var viewState: ViewState = .biometry
+    private var isBiometryAvalilable = true
     
     private var passwordLabels = [UIView]()
     
     private lazy var keyboard = makeKeyboardView()
     private lazy var passwordStackView = makeStackView(views: passwordLabels)
+    private lazy var loginWithBiometryButton = makeLoginWithBiometryButton()
     
     private var presenter: LoginPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("WE ARE IN LOGIN")
         setView()
         setConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let context = LAContext()
+        var error: NSError?
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            isBiometryAvalilable = true
+            viewState = .biometry
+        } else {
+            isBiometryAvalilable = false
+            viewState = .keyboardInput
+        }
+        makeActive(view: viewState)
     }
     
     func setupComponents(presenter: LoginPresenterProtocol) {
@@ -51,19 +64,62 @@ final class LoginViewController: UIViewController {
             setPasswordNumberLabelConstraints(label: label)
         }
         view.addSubview(passwordStackView)
+        view.addSubview(loginWithBiometryButton)
     }
     
     private func makeActive(view: ViewState) {
         switch view {
         case .biometry:
-            break
+            keyboard.isHidden = true
+            passwordStackView.isHidden = true
+            loginWithBiometryButton.isHidden = false
             
         case .keyboardInput:
-            break
+            keyboard.isHidden = false
+            passwordStackView.isHidden = false
+            loginWithBiometryButton.isHidden = true
         }
     }
     
     private func proceedFilledPassword() {
+    }
+    
+    private func getBiometryType() -> BiometryType {
+        let authContext = LAContext()
+        var error: NSError?
+       _ = authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+       switch authContext.biometryType {
+       case .none:
+           return .none
+
+       case .touchID:
+           return .touchID
+
+       case .faceID:
+           return .faceID
+
+       @unknown default:
+           return .none
+       }
+    }
+    
+    private func showPopup(popup: Popup) {
+        view.addSubview(popup)
+        setPopupConstraints(view: popup)
+        UIView.animate(
+            withDuration: 0.2,
+            animations: {
+                popup.alpha = 1
+            },
+            completion: { completion in
+                if completion {
+                    popup.showPopup()
+                }
+            }
+        )
+    }
+    
+    @objc private func biometryLogin() {
     }
 }
 
@@ -80,6 +136,22 @@ extension LoginViewController: KeyboardDelegate {
     }
     
     private func fillPasswordDependsOnViewState(number: Int) {
+    }
+}
+
+extension LoginViewController: BiometryDelegate {
+    
+    func handleBiometry() {
+        switch getBiometryType() {
+        case .none:
+            let popup = Popup(title: Text.Common.error, description: Text.Descriptions.biometryUnavalable)
+            popup.addButton(title: Text.Common.confirm, type: .custom, action: nil)
+            popup.alpha = 0
+            showPopup(popup: popup)
+            
+        default:
+            print("Show Biometry view")
+        }
     }
 }
 
@@ -104,6 +176,7 @@ extension LoginViewController {
     
     private func makeKeyboardView() -> KeyboardView {
         let view = KeyboardView(delegate: self)
+        view.biometryDelegate = self
         return view
     }
     
@@ -141,6 +214,21 @@ extension LoginViewController {
         button.setTitleColor(Asset.textColor.color, for: .normal)
         return button
     }
+    
+    private func makeLoginWithBiometryButton() -> CustomButton {
+        let button = CustomButton()
+        switch getBiometryType() {
+        case .faceID:
+            button.setImage(UIImage(systemName: SFSymbols.faceId), for: .normal)
+            
+        default:
+            button.setImage(UIImage(systemName: SFSymbols.touchId), for: .normal)
+        }
+        button.tintColor = Asset.textColor.color
+        button.imageView?.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(biometryLogin), for: .touchUpInside)
+        return button
+    }
 }
 
 // MARK: Constraints
@@ -150,6 +238,7 @@ extension LoginViewController {
     private func setConstraints() {
         setKeyboardConstraints()
         setPasswordStackConstraints()
+        setLoginWithBiometryButtonConstraints()
     }
     
     private func setPasswordNumberLabelConstraints(label: UILabel) {
@@ -174,6 +263,21 @@ extension LoginViewController {
             maker.centerY.equalToSuperview().offset(LoginSizes.KeyboardView.centerYOffset)
             maker.width.equalTo(LoginSizes.KeyboardView.width)
             maker.height.equalTo(LoginSizes.KeyboardView.height)
+        }
+    }
+    
+    private func setLoginWithBiometryButtonConstraints() {
+        loginWithBiometryButton.snp.makeConstraints { maker in
+            maker.centerX.equalToSuperview()
+            maker.centerY.equalToSuperview().offset(LoginSizes.BiometryButtonLogin.centerYOffset)
+            maker.width.equalTo(LoginSizes.BiometryButtonLogin.width)
+            maker.height.equalTo(LoginSizes.BiometryButtonLogin.height)
+        }
+    }
+    
+    private func setPopupConstraints(view: UIView) {
+        view.snp.makeConstraints { maker in
+            maker.top.bottom.leading.trailing.equalToSuperview()
         }
     }
 }

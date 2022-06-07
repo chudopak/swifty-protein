@@ -43,6 +43,8 @@ internal enum Text {
   }
 
   internal enum Descriptions {
+    /// Biometry is not avalable
+    internal static let biometryUnavalable = Text.tr("Localizable", "Descriptions.biometryUnavalable")
     /// Are you sure? Write answer somewere or you will need to download app again :)
     internal static let confirmAnswer = Text.tr("Localizable", "Descriptions.confirmAnswer")
     /// There MUST be an answer

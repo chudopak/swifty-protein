@@ -33,3 +33,4 @@ Descriptions.longAnswer = "Answer to long. It will be hard to remember.";
 Descriptions.confirmAnswer = "Are you sure? Write answer somewere or you will need to download app again :)";
 Descriptions.successRegistration = "You have successfully registered!";
 Descriptions.saveDataError = "Save error. Try again.";
+Descriptions.biometryUnavalable = "Biometry is not avalable";

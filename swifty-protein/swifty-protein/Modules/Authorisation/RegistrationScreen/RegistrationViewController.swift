@@ -149,28 +149,6 @@ final class RegistrationViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    private func showConfirmAlert() {
-        let alert = UIAlertController(
-            title: Text.Common.confirmSave,
-            message: "",
-            preferredStyle: .alert
-        )
-        let cancelAlert = UIAlertAction(
-            title: Text.Common.cancel,
-            style: .cancel
-        ) { _ in
-            print("Registered")
-        }
-        let confirmAlert = UIAlertAction(
-            title: Text.Common.confirm,
-            style: .default,
-            handler: nil
-        )
-        alert.addAction(confirmAlert)
-        alert.addAction(cancelAlert)
-        present(alert, animated: true, completion: nil)
-    }
-    
     private func showPopup(popup: Popup) {
         view.addSubview(popup)
         setPopupConstraints(view: popup)

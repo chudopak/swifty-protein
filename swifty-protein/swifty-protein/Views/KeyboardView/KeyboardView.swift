@@ -7,6 +7,15 @@
 
 import UIKit
 import SnapKit
+import LocalAuthentication
+
+protocol KeyboardDelegate: AnyObject {
+    func handleKeyboardTap(key: KeyboardView.KeyType)
+}
+
+protocol BiometryDelegate: AnyObject {
+    func handleBiometry()
+}
 
 final class KeyboardView: UIView {
     
@@ -16,6 +25,15 @@ final class KeyboardView: UIView {
     }
     
     private weak var delegate: KeyboardDelegate!
+    weak var biometryDelegate: BiometryDelegate? {
+        didSet {
+            if biometryDelegate == nil {
+                biometryButton.isHidden = true
+            } else {
+                biometryButton.isHidden = false
+            }
+        }
+    }
     
     private lazy var zero = makeNumberButton(number: 0)
     private lazy var one = makeNumberButton(number: 1)
@@ -28,6 +46,7 @@ final class KeyboardView: UIView {
     private lazy var eight = makeNumberButton(number: 8)
     private lazy var nine = makeNumberButton(number: 9)
     private lazy var deleteButton = makeDeleteButton()
+    private lazy var biometryButton = makeBiometryButton()
     
     init(delegate: KeyboardDelegate) {
         super.init(frame: .zero)
@@ -53,6 +72,27 @@ final class KeyboardView: UIView {
         addSubview(eight)
         addSubview(nine)
         addSubview(deleteButton)
+        addSubview(biometryButton)
+        biometryButton.isHidden = true
+    }
+    
+    private func getBiometryType() -> BiometryType {
+        let authContext = LAContext()
+        var error: NSError?
+       _ = authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+       switch authContext.biometryType {
+       case .none:
+           return .none
+
+       case .touchID:
+           return .touchID
+
+       case .faceID:
+           return .faceID
+
+       @unknown default:
+           return .none
+       }
     }
     
     @objc private func numberButtonTapped(sender: UIButton) {
@@ -62,6 +102,10 @@ final class KeyboardView: UIView {
     @objc private func deleteButtonTapped() {
         delegate.handleKeyboardTap(key: .delete)
     }
+    
+    @objc private func biometryButtonTapped() {
+        biometryDelegate?.handleBiometry()
+    }
 }
 
 // MARK: Creating UI elements
@@ -70,8 +114,8 @@ extension KeyboardView {
     
     private func makeNumberButton(number: Int) -> CustomButton {
         let button = CustomButton()
-        button.layer.cornerRadius = LoginSizes.KeyboardButton.cornerRadius
-        button.layer.borderWidth = LoginSizes.KeyboardButton.boarderWidth
+        button.layer.cornerRadius = KeyboardSizes.KeyboardButton.cornerRadius
+        button.layer.borderWidth = KeyboardSizes.KeyboardButton.boarderWidth
         button.tag = number
         button.setTitle(String(number), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
@@ -84,19 +128,42 @@ extension KeyboardView {
     
     private func makeDeleteButton() -> CustomButton {
         let button = CustomButton()
-        let image = UIImage(systemName: "delete.left")
+        let image = UIImage(systemName: SFSymbols.deleteLeft)
         button.setImage(image, for: .normal)
         button.tintColor = Asset.textColor.color
         button.imageView?.contentMode = .scaleAspectFit
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
         button.imageEdgeInsets = UIEdgeInsets(
-            top: LoginSizes.DeleteButton.verticalInset,
-            left: LoginSizes.DeleteButton.horizontalInset,
-            bottom: LoginSizes.DeleteButton.verticalInset,
-            right: LoginSizes.DeleteButton.horizontalInset
+            top: KeyboardSizes.DeleteButton.verticalInset,
+            left: KeyboardSizes.DeleteButton.horizontalInset,
+            bottom: KeyboardSizes.DeleteButton.verticalInset,
+            right: KeyboardSizes.DeleteButton.horizontalInset
         )
         button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        return button
+    }
+    
+    private func makeBiometryButton() -> CustomButton {
+        let button = CustomButton()
+        switch getBiometryType() {
+        case .faceID:
+            button.setImage(UIImage(systemName: SFSymbols.faceId), for: .normal)
+            
+        default:
+            button.setImage(UIImage(systemName: SFSymbols.touchId), for: .normal)
+        }
+        button.tintColor = Asset.textColor.color
+        button.imageView?.contentMode = .scaleAspectFit
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.imageEdgeInsets = UIEdgeInsets(
+            top: KeyboardSizes.DeleteButton.verticalInset,
+            left: KeyboardSizes.DeleteButton.horizontalInset,
+            bottom: KeyboardSizes.DeleteButton.verticalInset,
+            right: KeyboardSizes.DeleteButton.horizontalInset
+        )
+        button.addTarget(self, action: #selector(biometryButtonTapped), for: .touchUpInside)
         return button
     }
 }
@@ -120,6 +187,7 @@ extension KeyboardView {
         
         setCenterButtonConstraints(view: zero, topView: eight)
         setRightButtonConstraints(view: deleteButton, topView: nine)
+        setLeftButtonConstraints(view: biometryButton, topView: seven)
     }
     
     private func setLeftButtonConstraints(
@@ -128,13 +196,13 @@ extension KeyboardView {
         isFirstRow: Bool = false
     ) {
         view.snp.makeConstraints { maker in
-            maker.height.equalTo(LoginSizes.KeyboardButton.height)
-            maker.width.equalTo(LoginSizes.KeyboardButton.width)
+            maker.height.equalTo(KeyboardSizes.KeyboardButton.height)
+            maker.width.equalTo(KeyboardSizes.KeyboardButton.width)
             maker.leading.equalToSuperview()
             if isFirstRow {
                 maker.top.equalToSuperview()
             } else {
-                maker.top.equalTo(topView.snp.bottom).offset(LoginSizes.KeyboardButton.sideOffset)
+                maker.top.equalTo(topView.snp.bottom).offset(KeyboardSizes.KeyboardButton.sideOffset)
             }
         }
     }
@@ -145,13 +213,13 @@ extension KeyboardView {
         isFirstRow: Bool = false
     ) {
         view.snp.makeConstraints { maker in
-            maker.height.equalTo(LoginSizes.KeyboardButton.height)
-            maker.width.equalTo(LoginSizes.KeyboardButton.width)
+            maker.height.equalTo(KeyboardSizes.KeyboardButton.height)
+            maker.width.equalTo(KeyboardSizes.KeyboardButton.width)
             maker.centerX.equalToSuperview()
             if isFirstRow {
                 maker.top.equalToSuperview()
             } else {
-                maker.top.equalTo(topView.snp.bottom).offset(LoginSizes.KeyboardButton.sideOffset)
+                maker.top.equalTo(topView.snp.bottom).offset(KeyboardSizes.KeyboardButton.sideOffset)
             }
         }
     }
@@ -162,13 +230,13 @@ extension KeyboardView {
         isFirstRow: Bool = false
     ) {
         view.snp.makeConstraints { maker in
-            maker.height.equalTo(LoginSizes.KeyboardButton.height)
-            maker.width.equalTo(LoginSizes.KeyboardButton.width)
+            maker.height.equalTo(KeyboardSizes.KeyboardButton.height)
+            maker.width.equalTo(KeyboardSizes.KeyboardButton.width)
             maker.trailing.equalToSuperview()
             if isFirstRow {
                 maker.top.equalToSuperview()
             } else {
-                maker.top.equalTo(topView.snp.bottom).offset(LoginSizes.KeyboardButton.sideOffset)
+                maker.top.equalTo(topView.snp.bottom).offset(KeyboardSizes.KeyboardButton.sideOffset)
             }
         }
     }

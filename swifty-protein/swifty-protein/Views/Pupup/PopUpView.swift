@@ -104,7 +104,7 @@ final class Popup: UIView {
             containerView.addSubview(separateButtonsLine!)
             calculateStackAndContainerHeight()
         } else if buttonsStackView != nil,
-                  buttons.count < 4 {
+                  buttons.count <= popupSizes.maxButtons {
             buttonsStackView?.removeFromSuperview()
             separateButtonsLine?.removeFromSuperview()
             buttonsStackView = makeStackView(axis: .vertical)
@@ -132,10 +132,10 @@ final class Popup: UIView {
     private func animateOut() {
         let height = bounds.size.height * 0.5 + containerView.bounds.size.height * 0.5
         UIView.animate(
-            withDuration: 0.5,
-            delay: 0,
-            usingSpringWithDamping: 0.7,
-            initialSpringVelocity: 1,
+            withDuration: popupSizes.animationDuration,
+            delay: popupSizes.animationDelay,
+            usingSpringWithDamping: popupSizes.animationSpringDampings,
+            initialSpringVelocity: popupSizes.animationSpringVelocity,
             options: .curveEaseIn,
             animations: { [weak self] in
                 self?.containerView.transform = CGAffineTransform(translationX: 0, y: -height)
@@ -157,10 +157,10 @@ final class Popup: UIView {
         containerView.alpha = 0
         containerView.isHidden = false
         UIView.animate(
-            withDuration: 0.5,
-            delay: 0,
-            usingSpringWithDamping: 0.7,
-            initialSpringVelocity: 1,
+            withDuration: popupSizes.animationDuration,
+            delay: popupSizes.animationDelay,
+            usingSpringWithDamping: popupSizes.animationSpringDampings,
+            initialSpringVelocity: popupSizes.animationSpringVelocity,
             options: .curveEaseIn,
             animations: { [weak self] in
                 self?.containerView.transform = .identity

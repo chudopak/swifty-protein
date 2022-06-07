@@ -32,3 +32,4 @@ Descriptions.emptyAnswer = "Ответ не может быть пустым";
 Descriptions.longAnswer = "Ответ слишком длинный. Его будет тяжело запомнить.";
 Descriptions.confirmAnswer = "Вы уверены? Лучше куда-то записать пароль, а то, если забудите, нужно будет переустанавливать приложение :)";
 Descriptions.successRegistration = "Вы успешно зарегистрированы!";
+Descriptions.biometryUnavalable = "Биометрия недоступна.";

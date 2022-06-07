@@ -37,6 +37,8 @@
 		7DA31B20284F38570022BA65 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B1F284F38570022BA65 /* PopUpView.swift */; };
 		7DA31B23284F3BC60022BA65 /* PopupSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B22284F3BC60022BA65 /* PopupSizes.swift */; };
 		7DA31B27284F82940022BA65 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B26284F82940022BA65 /* KeychainService.swift */; };
+		7DA31B29284F98730022BA65 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B28284F98730022BA65 /* Models.swift */; };
+		7DA31B2C284F9FAB0022BA65 /* KeyboardSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B2B284F9FAB0022BA65 /* KeyboardSizes.swift */; };
 		C60A2DCB8A02D7EA5791611B /* Pods_swifty_protein.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD991638D761715875F55D4E /* Pods_swifty_protein.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +77,8 @@
 		7DA31B1F284F38570022BA65 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		7DA31B22284F3BC60022BA65 /* PopupSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupSizes.swift; sourceTree = "<group>"; };
 		7DA31B26284F82940022BA65 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		7DA31B28284F98730022BA65 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		7DA31B2B284F9FAB0022BA65 /* KeyboardSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSizes.swift; sourceTree = "<group>"; };
 		AD991638D761715875F55D4E /* Pods_swifty_protein.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swifty_protein.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A1041B3D5CCA47E3DC1284 /* Pods-swifty-protein.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.debug.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -223,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				7D5E314A284A2B3500AE67A0 /* FirstLaunchChecker.swift */,
+				7DA31B28284F98730022BA65 /* Models.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -238,8 +243,8 @@
 		7D5E3151284A33E600AE67A0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7DA31B2A284F9F940022BA65 /* KeyboardView */,
 				7DA31B21284F3BB00022BA65 /* Pupup */,
-				7D5E314D284A2EB500AE67A0 /* KeyboardView.swift */,
 				7D5E3152284A340F00AE67A0 /* CustomButton.swift */,
 			);
 			path = Views;
@@ -297,6 +302,15 @@
 				7DA31B26284F82940022BA65 /* KeychainService.swift */,
 			);
 			path = KeychainService;
+			sourceTree = "<group>";
+		};
+		7DA31B2A284F9F940022BA65 /* KeyboardView */ = {
+			isa = PBXGroup;
+			children = (
+				7D5E314D284A2EB500AE67A0 /* KeyboardView.swift */,
+				7DA31B2B284F9FAB0022BA65 /* KeyboardSizes.swift */,
+			);
+			path = KeyboardView;
 			sourceTree = "<group>";
 		};
 		DBE8C2A31622A9E9486BBC65 /* Pods */ = {
@@ -487,6 +501,7 @@
 				7D5E3155284A5B4000AE67A0 /* LoginPresenter.swift in Sources */,
 				7D04D15A2848BD4300B4566D /* AppDelegate.swift in Sources */,
 				7D507A6E2848CDE50024BB21 /* StoryboardSegues.swift in Sources */,
+				7DA31B2C284F9FAB0022BA65 /* KeyboardSizes.swift in Sources */,
 				7D5E3148284A1B2300AE67A0 /* WindowService.swift in Sources */,
 				7D5E3157284A5E1300AE67A0 /* LoginModel.swift in Sources */,
 				7D04D15C2848BD4300B4566D /* SceneDelegate.swift in Sources */,
@@ -494,6 +509,7 @@
 				7D507A6D2848CDE50024BB21 /* StoryboardScenes.swift in Sources */,
 				7DA1F966284E073400547D4D /* RegistrationViewController.swift in Sources */,
 				7D5E3143284A11F700AE67A0 /* LoginViewController.swift in Sources */,
+				7DA31B29284F98730022BA65 /* Models.swift in Sources */,
 				7DA1F964284E072600547D4D /* RegistrationConfigurator.swift in Sources */,
 				7DA31B23284F3BC60022BA65 /* PopupSizes.swift in Sources */,
 			);
