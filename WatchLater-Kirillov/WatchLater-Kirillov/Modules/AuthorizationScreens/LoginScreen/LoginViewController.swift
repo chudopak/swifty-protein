@@ -25,10 +25,13 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     private lazy var loginFailedLabel = makeLoginFailedLabel()
     
     private var isFieldsSet: Bool {
-        return emailTextField.text != nil
-            && !emailTextField.text!.isEmpty
-            && passwordTextField.text != nil
-            && !passwordTextField.text!.isEmpty
+        if let emailText = emailTextField.text,
+          !emailText.isEmpty,
+          let passwordText = passwordTextField.text,
+          !passwordText.isEmpty {
+            return true
+        }
+        return false
     }
     
     private var isLoginFaieldSateActive = false
@@ -38,7 +41,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        loginFailedLabel.isHidden = true
         setGestures()
         setConstraints()
     }
@@ -64,6 +66,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         view.addSubview(loginButton)
         view.addSubview(registrationButton)
         view.addSubview(loginFailedLabel)
+        loginFailedLabel.isHidden = true
     }
     
     private func setGestures() {
@@ -73,13 +76,9 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         view.addGestureRecognizer(hideKeyboardGuesture)
     }
     
-    private func getLoginData() -> LoginData? {
-        guard isFieldsSet
-        else {
-            return nil
-        }
-        return LoginData(email: emailTextField.text!,
-                         password: passwordTextField.text!)
+    private func getLoginData() -> LoginData {
+        return LoginData(email: emailTextField.text ?? "",
+                         password: passwordTextField.text ?? "")
     }
     
     private func showLoginFailedState(displayMessage: String) {
@@ -100,12 +99,11 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     private func handleTextFieldsActivity(active: AuthorizationTextField,
                                           nextToBeField: AuthorizationTextField) {
         _ = active.resignFirstResponder()
-        if let loginData = getLoginData() {
+        if isFieldsSet {
             loginButton.isEnabled = false
-            interactor.login(data: loginData)
-            print(loginData)
-        } else if active.text != nil
-                    && !active.text!.isEmpty {
+            interactor.login(data: getLoginData())
+        } else if let activeText = active.text,
+                    !activeText.isEmpty {
             nextToBeField.becomeFirstResponder()
         }
     }
@@ -138,11 +136,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     @objc private func loginButtonTaped() {
         hideKeyboard()
-        if let loginData = getLoginData() {
-            loginButton.isEnabled = false
-            interactor.login(data: loginData)
-            print(loginData)
-        }
+        loginButton.isEnabled = false
+        interactor.login(data: getLoginData())
     }
     
     @objc private func textFieldDidChange() {

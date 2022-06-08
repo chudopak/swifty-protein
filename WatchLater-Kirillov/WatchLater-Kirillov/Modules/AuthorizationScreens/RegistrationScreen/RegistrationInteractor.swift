@@ -23,6 +23,16 @@ class RegistrationInteractor: RegistrationInteractorProtocol {
     }
     
     func register(data: RegistrationData) {
+        guard !data.email.isEmpty && !data.password.isEmpty && !data.repeatPassword.isEmpty
+        else {
+            presenter.showFailedState(message: Text.Authorization.fieldsMustBeFilled)
+            return
+        }
+        guard data.password == data.repeatPassword
+        else {
+            presenter.showFailedState(message: Text.Authorization.passwordsNotMatch)
+            return
+        }
         networkService.register(with: data) { [weak self] status in
             self?.presenter.proceedRegistrationResult(state: status)
         }

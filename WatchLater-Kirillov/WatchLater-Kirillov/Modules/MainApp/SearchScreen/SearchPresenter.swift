@@ -9,8 +9,9 @@
 import UIKit
 
 protocol SearchPresenterProtocol {
-    func proceedMoviesData(movies: [MovieData])
-    func showFailedState(isSearching: Bool)
+    func proceedMoviesData(movies: [MovieData], for searchArea: SearchArea)
+    func showFailedStateIMDB(isSearching: Bool)
+    func showFailedStateLocal()
 }
 
 class SearchPresenter: SearchPresenterProtocol {
@@ -21,15 +22,28 @@ class SearchPresenter: SearchPresenterProtocol {
         self.viewController = viewController
     }
     
-    func proceedMoviesData(movies: [MovieData]) {
+    func proceedMoviesData(movies: [MovieData], for searchArea: SearchArea) {
         DispatchQueue.main.async { [weak self] in
-            self?.viewController.displayIMDBMovies(movies: movies)
+            switch searchArea {
+            case .IMDB:
+                self?.viewController.displayIMDBMovies(movies: movies)
+                
+            case .local:
+                self?.viewController.displayLocalMovies(movies: movies)
+                
+            }
         }
     }
     
-    func showFailedState(isSearching: Bool) {
+    func showFailedStateIMDB(isSearching: Bool) {
         DispatchQueue.main.async { [weak self] in
-            self?.viewController.showFailedState(isSearching: isSearching)
+            self?.viewController.showFailedStateIMDB(isSearching: isSearching)
+        }
+    }
+    
+    func showFailedStateLocal() {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController.showFailedStateLocal()
         }
     }
 }

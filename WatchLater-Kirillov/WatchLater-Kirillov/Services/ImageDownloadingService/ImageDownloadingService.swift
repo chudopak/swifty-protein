@@ -269,7 +269,7 @@ extension ImageDownloadingService: ProfileImageloadingProtocol {
         }
     }
     
-    //TODO: find the way how to make right request
+    // TODO: find the way how to make right request
     private func buildRequestMultipartData(url: URL, imageData: Data) -> RequestBuilder? {
         guard let accessToken = KeychainService.getString(key: .accessToken)
         else {

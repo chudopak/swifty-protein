@@ -53,7 +53,7 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
                 }
                 return
             }
-            self!.handleRefreshRequest(data: data.data,
+            self?.handleRefreshRequest(data: data.data,
                                        statusCode: responsHTTP.statusCode,
                                        completion: completion)
         }
@@ -79,7 +79,7 @@ final class RefreshTokenService: RefreshTokenServiceProtocol {
                 }
                 return
             }
-            self!.handleValidateRequest(statusCode: responsHTTP.statusCode,
+            self?.handleValidateRequest(statusCode: responsHTTP.statusCode,
                                         completion: completion)
         }
     }

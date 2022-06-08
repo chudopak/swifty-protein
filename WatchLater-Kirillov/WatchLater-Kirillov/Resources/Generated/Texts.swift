@@ -14,6 +14,8 @@ internal enum Text {
   internal enum Authorization {
     /// Неверные логин или пароль
     internal static let failed = Text.tr("Localizable", "Authorization.failed")
+    /// Поля должны быть заполнены
+    internal static let fieldsMustBeFilled = Text.tr("Localizable", "Authorization.fieldsMustBeFilled")
     /// Пароли не совпадают
     internal static let passwordsNotMatch = Text.tr("Localizable", "Authorization.passwordsNotMatch")
     /// Регистрация

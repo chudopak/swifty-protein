@@ -14,7 +14,7 @@ protocol RegistrationViewControllerProtocol: AnyObject {
     func presentLoginViewControllerWithLoginAlert()
 }
 
-class RegistrationViewController: BaseViewController, UITextFieldDelegate, RegistrationViewControllerProtocol {
+class RegistrationViewController: BaseViewController, UITextFieldDelegate {
     
     private lazy var logoImageView = makeLogoImageView()
     private lazy var emailTextField = makeTextField(type: .email)
@@ -27,12 +27,15 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate, Regis
     private var isRegistrationFaieldSateActive = false
     
     private var isFieldsSet: Bool {
-        return emailTextField.text != nil
-            && !emailTextField.text!.isEmpty
-            && passwordTextField.text != nil
-            && !passwordTextField.text!.isEmpty
-            && repeatPasswordTextField.text != nil
-            && !repeatPasswordTextField.text!.isEmpty
+        if let emailText = emailTextField.text,
+              !emailText.isEmpty,
+              let passwordText = passwordTextField.text,
+              !passwordText.isEmpty,
+              let repeatPasswordText = repeatPasswordTextField.text,
+              !repeatPasswordText.isEmpty {
+            return true
+        }
+        return false
     }
     
     private var interactor: RegistrationInteractorProtocol!
@@ -57,29 +60,14 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate, Regis
         textField.placeholder = ""
     }
     
-    func registrationFailedState(displayMessage: String) {
-        changeLoadingState(isVisible: false)
-        showRegistrationFailedState(message: displayMessage)
-    }
-    
-    func presentThumbnailsViewController() {
-        changeLoadingState(isVisible: false)
-        RegistrationRouter.presentViewController(MainTabBar())
-    }
-    
-    func presentLoginViewControllerWithLoginAlert() {
-        changeLoadingState(isVisible: false)
-        // We can present some alert here to notify the user about succes registration
-        RegistrationRouter.popViewController(from: navigationController!)
-    }
-    
     private func configureView() {
         view.backgroundColor = Asset.Colors.primaryBackground.color
         navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(
             title: "",
             style: .plain,
             target: self,
-            action: nil)
+            action: nil
+        )
         view.addSubview(logoImageView)
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
@@ -91,31 +79,19 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate, Regis
         spinner.isHidden = true
     }
     
-    private func getRegistrationData() -> RegistrationData? {
-        guard isFieldsSet
-        else {
-            return nil
-        }
-        return RegistrationData(email: emailTextField.text!,
-                                password: passwordTextField.text!)
+    private func getRegistrationData() -> RegistrationData {
+        return RegistrationData(email: emailTextField.text ?? "",
+                                password: passwordTextField.text ?? "",
+                                repeatPassword: repeatPasswordTextField.text ?? "")
     }
     
     private func isPasswordsMatch() -> Bool {
         if isFieldsSet
-            && passwordTextField.text! == repeatPasswordTextField.text! {
+            && optionalsAreEqual(firstVal: passwordTextField.text,
+                                 secondVal: repeatPasswordTextField.text) {
             return true
         }
         return false
-    }
-    
-    private func validateRegistrationDataForRequest() {
-        if isPasswordsMatch(),
-           let registrationData = getRegistrationData() {
-            processRegistration(with: registrationData)
-            print(registrationData)
-        } else {
-            showRegistrationFailedState(message: Text.Authorization.passwordsNotMatch)
-        }
     }
     
     private func processRegistration(with data: RegistrationData) {
@@ -153,9 +129,9 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate, Regis
                                           nextToBeField: AuthorizationTextField) {
         _ = active.resignFirstResponder()
         if isFieldsSet {
-            validateRegistrationDataForRequest()
-        } else if active.text != nil
-                    && !active.text!.isEmpty {
+            processRegistration(with: getRegistrationData())
+        } else if let activeText = active.text,
+                  !activeText.isEmpty {
             nextToBeField.becomeFirstResponder()
         }
     }
@@ -207,7 +183,25 @@ class RegistrationViewController: BaseViewController, UITextFieldDelegate, Regis
     
     @objc private func registerButtonTapped() {
         hideKeyboard()
-        validateRegistrationDataForRequest()
+        processRegistration(with: getRegistrationData())
+    }
+}
+
+extension RegistrationViewController: RegistrationViewControllerProtocol {
+    func registrationFailedState(displayMessage: String) {
+        changeLoadingState(isVisible: false)
+        showRegistrationFailedState(message: displayMessage)
+    }
+    
+    func presentThumbnailsViewController() {
+        changeLoadingState(isVisible: false)
+        RegistrationRouter.presentViewController(MainTabBar())
+    }
+    
+    func presentLoginViewControllerWithLoginAlert() {
+        changeLoadingState(isVisible: false)
+        // We can present some alert here to notify the user about succes registration
+        RegistrationRouter.popViewController(from: navigationController!)
     }
 }
 

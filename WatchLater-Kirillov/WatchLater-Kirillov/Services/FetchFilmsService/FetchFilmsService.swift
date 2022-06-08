@@ -69,7 +69,7 @@ class FetchFilmsService: FetchFilmsServiceProtocol {
                 }
                 return
             }
-            self!.handleResponse(data: data,
+            self?.handleResponse(data: data,
                                  status: responsHTTP.statusCode,
                                  completion: completion)
         }

@@ -35,6 +35,7 @@ Authorization.registration = "Регистрация";
 Authorization.failed = "Неверные логин или пароль";
 Authorization.passwordsNotMatch = "Пароли не совпадают";
 Authorization.somethingWentWrong = "Что-то пошло не так";
+Authorization.fieldsMustBeFilled = "Поля должны быть заполнены";
 
 // MARK: - TabBar titles
 

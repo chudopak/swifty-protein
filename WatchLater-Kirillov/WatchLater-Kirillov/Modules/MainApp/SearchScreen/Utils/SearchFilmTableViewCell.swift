@@ -40,7 +40,7 @@ extension SearchFilmTableViewCell {
         let imageView = UIImageView()
         imageView.backgroundColor = Asset.Colors.grayTransperent.color
         imageView.isUserInteractionEnabled = true
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }
     

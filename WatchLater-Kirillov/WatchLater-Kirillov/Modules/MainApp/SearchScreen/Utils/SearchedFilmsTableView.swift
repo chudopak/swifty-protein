@@ -64,10 +64,10 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
         imageDownloadingService.clearKingFisherCache()
         switch searchArea {
         case .IMDB:
-            delegate.presentDetailsScreen(imdbData: moviesData[indexPath.row], localData: nil)
+            delegate.presentDetailsScreen(movieData: moviesData[indexPath.row], filmData: nil)
         
         case .local:
-            delegate.presentDetailsScreen(imdbData: nil, localData: nil)
+            delegate.presentDetailsScreen(movieData: moviesData[indexPath.row], filmData: nil)
         }
     }
     
@@ -88,9 +88,39 @@ class SearchedFilmsTableView: UIView, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    // TODO: it will work with core data
     private func configureLocalCell(cell: SearchFilmTableViewCell,
                                     index: Int) {
+        cell.posterImageView.image = nil
+        if !moviesData[index].image.isEmpty {
+            setImageForLocalCell(cell: cell, index: index)
+        } else {
+            cell.posterImageView.image = Asset.noImage.image
+        }
+        cell.yearLabel.text = moviesData[index].year ?? Text.Fillings.unowned
+        cell.titleLabel.text = moviesData[index].title
+        if let rating = moviesData[index].rating {
+            cell.ratingLabel.text = getRatingString(rating: rating)
+        } else {
+            cell.ratingLabel.text = Text.Fillings.noData
+        }
+    }
+    
+    private func setImageForLocalCell(cell: SearchFilmTableViewCell,
+                                      index: Int) {
+        cell.imageId = moviesData[index].image
+        imageDownloadingService.downloadData(id: moviesData[index].image) { result in
+            switch result {
+            case .success(let imageData):
+                if cell.imageId == imageData.id {
+                    DispatchQueue.main.async {
+                        cell.posterImageView.image = imageData.image
+                    }
+                }
+                
+            case .failure:
+                cell.posterImageView.image = Asset.noImage.image
+            }
+        }
     }
     
     private func getRatingString(rating: String) -> String {
