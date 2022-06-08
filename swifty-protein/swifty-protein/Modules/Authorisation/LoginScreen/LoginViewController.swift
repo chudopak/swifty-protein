@@ -36,6 +36,7 @@ final class LoginViewController: UIViewController {
         
         setNavigationController()
         clearPasswordLabels()
+        presenter.clearPassword()
         let context = LAContext()
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {

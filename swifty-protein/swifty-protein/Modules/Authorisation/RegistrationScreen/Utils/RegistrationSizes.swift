@@ -26,11 +26,6 @@ enum RegistrationSizes {
         static let sideOffset: CGFloat = 20
     }
     
-    enum DeleteButton {
-        static let verticalInset: CGFloat = 15
-        static let horizontalInset: CGFloat = 10
-    }
-    
     enum PasswordStack {
         static let width: CGFloat = 110
         static let bottom: CGFloat = 30

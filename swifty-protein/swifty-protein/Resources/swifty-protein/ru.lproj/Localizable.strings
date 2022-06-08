@@ -25,6 +25,7 @@ Common.confirmSave = "Сохранить?";
 Common.error = "Ошибка";
 Common.success = "Успех";
 Common.restorePassword = "Восстановление пароля";
+Common.compare = "Сравнить";
 
 Questions.whereWereYouBorn = "Где вы родились?";
 
@@ -32,9 +33,11 @@ Questions.whereWereYouBorn = "Где вы родились?";
 
 Descriptions.emptyAnswer = "Ответ не может быть пустым";
 Descriptions.longAnswer = "Ответ слишком длинный. Его будет тяжело запомнить.";
+Descriptions.wrongAnswer = "Неверный ответ.";
 Descriptions.confirmAnswer = "Вы уверены? Лучше куда-то записать пароль, а то, если забудите, нужно будет переустанавливать приложение :)";
 Descriptions.successRegistration = "Вы успешно зарегистрированы!";
 Descriptions.biometryUnavalable = "Биометрия недоступна.";
 Descriptions.unexpectedError = "Произошла ошибка.";
 Descriptions.loginWithTouchID = "Авторизируйтесь при помощи Touch ID.";
 Descriptions.wrongPassword = "Неверный пароль.";
+Descriptions.passwordChangd = "Пароль успешно изменен.";

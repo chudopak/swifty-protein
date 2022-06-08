@@ -11,6 +11,7 @@ protocol LoginPresenterProtocol {
     func handleNewPasswordNumber(number: Int)
     func deleteLastNumber()
     func tryLogin()
+    func clearPassword()
 }
 
 final class LoginPresenter: LoginPresenterProtocol {
@@ -41,16 +42,20 @@ final class LoginPresenter: LoginPresenterProtocol {
     func tryLogin() {
         guard let savedPassword = KeychainService.getString(key: .password)
         else {
-            password = ""
+            clearPassword()
             viewController.showFailedToLoginPopup(description: Text.Descriptions.unexpectedError)
             return
         }
         if savedPassword == password {
-            password = ""
+            clearPassword()
             viewController.presentProteinListScreen()
         } else {
-            password = ""
+            clearPassword()
             viewController.showFailedToLoginPopup(description: Text.Descriptions.wrongPassword)
         }
+    }
+    
+    func clearPassword() {
+        password = ""
     }
 }

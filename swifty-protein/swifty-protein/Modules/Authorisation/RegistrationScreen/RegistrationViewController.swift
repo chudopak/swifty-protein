@@ -68,7 +68,6 @@ final class RegistrationViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(passwordStackView)
         view.addSubview(inputPasswordLabel)
         view.addSubview(backwardButton)
-        view.addSubview(answerTextField)
         backwardButton.isHidden = true
         view.addSubview(questionStackView)
         questionStackView.isHidden = true
@@ -347,6 +346,7 @@ extension RegistrationViewController {
                 NSAttributedString.Key.foregroundColor: Asset.textColorHalfTransparent.color
             ]
         )
+        field.addTarget(self, action: #selector(saveDataTapped), for: .editingDidEndOnExit)
         return field
     }
     

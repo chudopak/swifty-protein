@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        setNavigationBarAppearance()
         return true
     }
 
@@ -31,5 +32,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didDiscardSceneSessions sceneSessions: Set<UISceneSession>
     ) {
+    }
+    
+    private func setNavigationBarAppearance() {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.titleTextAttributes =
+            [.foregroundColor: Asset.titleTextColor.color]
+        navBarAppearance.largeTitleTextAttributes =
+            [.foregroundColor: Asset.titleTextColor.color]
+        navBarAppearance.backgroundColor = Asset.navigationBarColor.color
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().tintColor = Asset.buttonsColor.color
     }
 }

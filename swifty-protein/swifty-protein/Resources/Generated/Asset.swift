@@ -25,6 +25,7 @@ internal enum Asset {
   internal static let buttonsColor = ColorAsset(name: "buttonsColor")
   internal static let darkBlueAndWhiteHalfTransparent = ColorAsset(name: "darkBlueAndWhiteHalfTransparent")
   internal static let grayTransparent = ColorAsset(name: "grayTransparent")
+  internal static let navigationBarColor = ColorAsset(name: "navigationBarColor")
   internal static let primaryBackground = ColorAsset(name: "primaryBackground")
   internal static let redFailure = ColorAsset(name: "redFailure")
   internal static let textColor = ColorAsset(name: "textColor")

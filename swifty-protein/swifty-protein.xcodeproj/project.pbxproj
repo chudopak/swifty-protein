@@ -35,6 +35,7 @@
 		7D7222662850CCC200A0BAE7 /* RestorePasswordConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7222652850CCC200A0BAE7 /* RestorePasswordConfigurator.swift */; };
 		7D7222692850D39900A0BAE7 /* RestorePasswordSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7222682850D39900A0BAE7 /* RestorePasswordSizes.swift */; };
 		7D72226B2850D57800A0BAE7 /* RestorePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D72226A2850D57800A0BAE7 /* RestorePasswordPresenter.swift */; };
+		7D72226D2850E52200A0BAE7 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D72226C2850E52200A0BAE7 /* Functions.swift */; };
 		7DA1F964284E072600547D4D /* RegistrationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F963284E072600547D4D /* RegistrationConfigurator.swift */; };
 		7DA1F966284E073400547D4D /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F965284E073400547D4D /* RegistrationViewController.swift */; };
 		7DA1F969284E084800547D4D /* RegistrationSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F968284E084800547D4D /* RegistrationSizes.swift */; };
@@ -81,6 +82,7 @@
 		7D7222652850CCC200A0BAE7 /* RestorePasswordConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePasswordConfigurator.swift; sourceTree = "<group>"; };
 		7D7222682850D39900A0BAE7 /* RestorePasswordSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePasswordSizes.swift; sourceTree = "<group>"; };
 		7D72226A2850D57800A0BAE7 /* RestorePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePasswordPresenter.swift; sourceTree = "<group>"; };
+		7D72226C2850E52200A0BAE7 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		7DA1F963284E072600547D4D /* RegistrationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationConfigurator.swift; sourceTree = "<group>"; };
 		7DA1F965284E073400547D4D /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		7DA1F968284E084800547D4D /* RegistrationSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSizes.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			children = (
 				7D5E314A284A2B3500AE67A0 /* FirstLaunchChecker.swift */,
 				7DA31B28284F98730022BA65 /* Models.swift */,
+				7D72226C2850E52200A0BAE7 /* Functions.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				7D507A6F2848CDE50024BB21 /* Asset.swift in Sources */,
 				7D42265C2848FCA50052FE6D /* SplashConfigurator.swift in Sources */,
 				7D507A702848CDE60024BB21 /* Texts.swift in Sources */,
+				7D72226D2850E52200A0BAE7 /* Functions.swift in Sources */,
 				7DA1F96C284E09A800547D4D /* RegistrationPresenter.swift in Sources */,
 				7D5E314B284A2B3500AE67A0 /* FirstLaunchChecker.swift in Sources */,
 				7D5E3153284A340F00AE67A0 /* CustomButton.swift in Sources */,

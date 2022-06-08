@@ -18,6 +18,8 @@ internal enum Text {
     internal static let backward = Text.tr("Localizable", "Common.backward")
     /// Cancel
     internal static let cancel = Text.tr("Localizable", "Common.cancel")
+    /// Compare
+    internal static let compare = Text.tr("Localizable", "Common.compare")
     /// Confirm
     internal static let confirm = Text.tr("Localizable", "Common.confirm")
     /// Confirmation
@@ -57,12 +59,16 @@ internal enum Text {
     internal static let loginWithTouchID = Text.tr("Localizable", "Descriptions.loginWithTouchID")
     /// Answer to long. It will be hard to remember.
     internal static let longAnswer = Text.tr("Localizable", "Descriptions.longAnswer")
+    /// Password successfully changed.
+    internal static let passwordChangd = Text.tr("Localizable", "Descriptions.passwordChangd")
     /// Save error. Try again.
     internal static let saveDataError = Text.tr("Localizable", "Descriptions.saveDataError")
     /// You have successfully registered!
     internal static let successRegistration = Text.tr("Localizable", "Descriptions.successRegistration")
     /// Some unexpected error happened.
     internal static let unexpectedError = Text.tr("Localizable", "Descriptions.unexpectedError")
+    /// Wrong answer.
+    internal static let wrongAnswer = Text.tr("Localizable", "Descriptions.wrongAnswer")
     /// Incorrect password.
     internal static let wrongPassword = Text.tr("Localizable", "Descriptions.wrongPassword")
   }

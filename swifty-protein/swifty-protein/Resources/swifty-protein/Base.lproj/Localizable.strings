@@ -25,6 +25,7 @@ Common.confirmSave = "Confirm Save?";
 Common.error = "Error";
 Common.success = "Success";
 Common.restorePassword = "Restore password";
+Common.compare = "Compare";
 
 Questions.whereWereYouBorn = "Where were you born?";
 
@@ -32,6 +33,7 @@ Questions.whereWereYouBorn = "Where were you born?";
 
 Descriptions.emptyAnswer = "There MUST be an answer";
 Descriptions.longAnswer = "Answer to long. It will be hard to remember.";
+Descriptions.wrongAnswer = "Wrong answer.";
 Descriptions.confirmAnswer = "Are you sure? Write answer somewere or you will need to download app again :)";
 Descriptions.successRegistration = "You have successfully registered!";
 Descriptions.saveDataError = "Save error. Try again.";
@@ -39,3 +41,4 @@ Descriptions.biometryUnavalable = "Biometry is not avalable";
 Descriptions.unexpectedError = "Some unexpected error happened.";
 Descriptions.loginWithTouchID = "Authenticate with Touch ID.";
 Descriptions.wrongPassword = "Incorrect password.";
+Descriptions.passwordChangd = "Password successfully changed.";
