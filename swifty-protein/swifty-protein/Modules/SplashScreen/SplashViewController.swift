@@ -88,7 +88,9 @@ final class SplashViewController: UIViewController {
         if FirstLaunchChecker.isFirstLaunch {
             WindowService.replaceRootViewController(with: RegistrationConfigurator().setupModule())
         } else {
-            WindowService.replaceRootViewController(with: LoginConfigurator().setupModule())
+            let navigationController = UINavigationController(rootViewController: LoginConfigurator().setupModule())
+            WindowService.setLoginViewController(vc: navigationController)
+            WindowService.replaceRootViewController(with: navigationController)
         }
     }
 }

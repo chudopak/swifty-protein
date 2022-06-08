@@ -12,6 +12,7 @@ AppTitle = "Swifty Protein";
 
 Common.hello = "Привет";
 Common.createPassword = "Придумайте Пароль";
+Common.inputPassword = "Введите пароль";
 Common.save = "Сохранить";
 Common.repeatPassword = "Повторите Пароль";
 Common.backward = "Назад";
@@ -23,6 +24,7 @@ Common.confirmation = "Подтвердить";
 Common.confirmSave = "Сохранить?";
 Common.error = "Ошибка";
 Common.success = "Успех";
+Common.restorePassword = "Восстановление пароля";
 
 Questions.whereWereYouBorn = "Где вы родились?";
 
@@ -33,3 +35,6 @@ Descriptions.longAnswer = "Ответ слишком длинный. Его бу
 Descriptions.confirmAnswer = "Вы уверены? Лучше куда-то записать пароль, а то, если забудите, нужно будет переустанавливать приложение :)";
 Descriptions.successRegistration = "Вы успешно зарегистрированы!";
 Descriptions.biometryUnavalable = "Биометрия недоступна.";
+Descriptions.unexpectedError = "Произошла ошибка.";
+Descriptions.loginWithTouchID = "Авторизируйтесь при помощи Touch ID.";
+Descriptions.wrongPassword = "Неверный пароль.";

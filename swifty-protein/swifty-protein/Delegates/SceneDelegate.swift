@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+    private var shouldReplaceWithLoginVC = false
     
     func scene(
         _ scene: UIScene,
@@ -23,5 +24,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let loginVC = SplashConfigurator().setupModule()
         window!.rootViewController = loginVC
         window!.makeKeyAndVisible()
+    }
+    
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        shouldReplaceWithLoginVC = true
+    }
+    
+    func sceneWillEnterForeground(_ scene: UIScene) {
+        if shouldReplaceWithLoginVC {
+            WindowService.presentLoginViewController()
+            shouldReplaceWithLoginVC = false
+        }
     }
 }

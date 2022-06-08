@@ -18,3 +18,8 @@ enum SFSymbols {
     static let faceId = "faceid"
     static let deleteLeft = "delete.left"
 }
+
+enum NavigationBarTitleView {
+    static let width: CGFloat = 42
+    static let height: CGFloat = 42
+}

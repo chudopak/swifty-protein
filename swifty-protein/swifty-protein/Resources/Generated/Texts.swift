@@ -30,10 +30,14 @@ internal enum Text {
     internal static let error = Text.tr("Localizable", "Common.error")
     /// Hello
     internal static let hello = Text.tr("Localizable", "Common.hello")
+    /// Input Password
+    internal static let inputPassword = Text.tr("Localizable", "Common.inputPassword")
     /// Passwords Not Equal
     internal static let passwordsNotEqual = Text.tr("Localizable", "Common.passwordsNotEqual")
     /// Repeat Password
     internal static let repeatPassword = Text.tr("Localizable", "Common.repeatPassword")
+    /// Restore password
+    internal static let restorePassword = Text.tr("Localizable", "Common.restorePassword")
     /// Save
     internal static let save = Text.tr("Localizable", "Common.save")
     /// Success
@@ -49,12 +53,18 @@ internal enum Text {
     internal static let confirmAnswer = Text.tr("Localizable", "Descriptions.confirmAnswer")
     /// There MUST be an answer
     internal static let emptyAnswer = Text.tr("Localizable", "Descriptions.emptyAnswer")
+    /// Authenticate with Touch ID.
+    internal static let loginWithTouchID = Text.tr("Localizable", "Descriptions.loginWithTouchID")
     /// Answer to long. It will be hard to remember.
     internal static let longAnswer = Text.tr("Localizable", "Descriptions.longAnswer")
     /// Save error. Try again.
     internal static let saveDataError = Text.tr("Localizable", "Descriptions.saveDataError")
     /// You have successfully registered!
     internal static let successRegistration = Text.tr("Localizable", "Descriptions.successRegistration")
+    /// Some unexpected error happened.
+    internal static let unexpectedError = Text.tr("Localizable", "Descriptions.unexpectedError")
+    /// Incorrect password.
+    internal static let wrongPassword = Text.tr("Localizable", "Descriptions.wrongPassword")
   }
 
   internal enum Questions {

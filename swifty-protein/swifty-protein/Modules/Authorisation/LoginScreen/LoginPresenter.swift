@@ -10,12 +10,12 @@ import UIKit
 protocol LoginPresenterProtocol {
     func handleNewPasswordNumber(number: Int)
     func deleteLastNumber()
+    func tryLogin()
 }
 
 final class LoginPresenter: LoginPresenterProtocol {
     
     private var password = ""
-    private var repeatPassword = ""
     
     private weak var viewController: LoginViewControllerProtocol!
     
@@ -25,12 +25,9 @@ final class LoginPresenter: LoginPresenterProtocol {
     
     func handleNewPasswordNumber(number: Int) {
         if password.count < LoginSizes.passwordLength {
-            viewController.changePasswordLabelState(index: password.count, isFilled: true)
             password.append(String(number))
+            viewController.changePasswordLabelState(index: password.count - 1, isFilled: true)
             print(password)
-        }
-        if password.count == LoginSizes.passwordLength {
-            // TODO: show question popup 
         }
     }
     
@@ -38,6 +35,22 @@ final class LoginPresenter: LoginPresenterProtocol {
         if !password.isEmpty {
             password.removeLast()
             viewController.changePasswordLabelState(index: password.count, isFilled: false)
+        }
+    }
+    
+    func tryLogin() {
+        guard let savedPassword = KeychainService.getString(key: .password)
+        else {
+            password = ""
+            viewController.showFailedToLoginPopup(description: Text.Descriptions.unexpectedError)
+            return
+        }
+        if savedPassword == password {
+            password = ""
+            viewController.presentProteinListScreen()
+        } else {
+            password = ""
+            viewController.showFailedToLoginPopup(description: Text.Descriptions.wrongPassword)
         }
     }
 }

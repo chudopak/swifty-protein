@@ -17,20 +17,6 @@ enum LoginSizes {
         static let centerYOffset: CGFloat = 30
     }
     
-//    enum KeyboardButton {
-//        static let width: CGFloat = 70
-//        static let height: CGFloat = 70
-//        static let cornerRadius: CGFloat = 35
-//        static let boarderWidth: CGFloat = 2
-//
-//        static let sideOffset: CGFloat = 20
-//    }
-    
-//    enum DeleteButton {
-//        static let verticalInset: CGFloat = 15
-//        static let horizontalInset: CGFloat = 10
-//    }
-    
     enum PasswordStack {
         static let width: CGFloat = 110
         static let bottom: CGFloat = 30
@@ -50,15 +36,10 @@ enum LoginSizes {
         static let bottomOffset: CGFloat = 10
     }
     
-    enum SavePasswordButton {
-        static let width: CGFloat = 150
-        static let height: CGFloat = 22
+    enum RestorePasswordButton {
+        static let width: CGFloat = 230
+        static let height: CGFloat = 50
         static let topOffset: CGFloat = 20
-    }
-    
-    enum BiometryButtonLogin {
-        static let width: CGFloat = 150
-        static let height: CGFloat = 150
-        static let centerYOffset: CGFloat = 30
+        static let fontSize: CGFloat = 19
     }
 }

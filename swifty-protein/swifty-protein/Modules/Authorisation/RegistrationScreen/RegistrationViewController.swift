@@ -19,7 +19,7 @@ protocol RegistrationViewControllerProtocol: AnyObject {
 
 final class RegistrationViewController: UIViewController, UITextFieldDelegate {
     
-    enum ViewState {
+    private enum ViewState {
         case firstLaunch, repeatPassword, passwordsNotEqual, question
     }
     
@@ -141,8 +141,7 @@ final class RegistrationViewController: UIViewController, UITextFieldDelegate {
         
         case .passwordsNotEqual:
             inputPasswordLabel.text = Text.Common.passwordsNotEqual
-            // TODO: Set to color from assets
-            inputPasswordLabel.textColor = .red
+            inputPasswordLabel.textColor = Asset.redFailure.color
         
         default:
             break
@@ -227,7 +226,9 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
     
     func completeRegistration(isDataSeaved: Bool) {
         if isDataSeaved {
-            WindowService.replaceRootViewController(with: LoginConfigurator().setupModule())
+            let navigationController = UINavigationController(rootViewController: LoginConfigurator().setupModule())
+            WindowService.setLoginViewController(vc: navigationController)
+            WindowService.replaceRootViewController(with: navigationController)
         } else {
             let popup = Popup(title: Text.Common.error, description: Text.Descriptions.saveDataError)
             popup.alpha = 0
@@ -318,7 +319,7 @@ extension RegistrationViewController {
         button.setTitle(Text.Common.backward, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.backgroundColor = .clear
-        button.setTitleColor(Asset.textColor.color, for: .normal)
+        button.setTitleColor(Asset.buttonsColor.color, for: .normal)
         button.addTarget(self, action: #selector(hideRepeatPasswordView), for: .touchUpInside)
         return button
     }

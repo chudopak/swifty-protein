@@ -29,6 +29,12 @@
 		7D5E3153284A340F00AE67A0 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3152284A340F00AE67A0 /* CustomButton.swift */; };
 		7D5E3155284A5B4000AE67A0 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3154284A5B4000AE67A0 /* LoginPresenter.swift */; };
 		7D5E3157284A5E1300AE67A0 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3156284A5E1300AE67A0 /* LoginModel.swift */; };
+		7D72225F28509F3700A0BAE7 /* ProteinListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D72225E28509F3700A0BAE7 /* ProteinListViewController.swift */; };
+		7D72226128509F9F00A0BAE7 /* ProteinListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D72226028509F9F00A0BAE7 /* ProteinListConfigurator.swift */; };
+		7D7222642850CC6300A0BAE7 /* RestorePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7222632850CC6300A0BAE7 /* RestorePasswordViewController.swift */; };
+		7D7222662850CCC200A0BAE7 /* RestorePasswordConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7222652850CCC200A0BAE7 /* RestorePasswordConfigurator.swift */; };
+		7D7222692850D39900A0BAE7 /* RestorePasswordSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7222682850D39900A0BAE7 /* RestorePasswordSizes.swift */; };
+		7D72226B2850D57800A0BAE7 /* RestorePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D72226A2850D57800A0BAE7 /* RestorePasswordPresenter.swift */; };
 		7DA1F964284E072600547D4D /* RegistrationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F963284E072600547D4D /* RegistrationConfigurator.swift */; };
 		7DA1F966284E073400547D4D /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F965284E073400547D4D /* RegistrationViewController.swift */; };
 		7DA1F969284E084800547D4D /* RegistrationSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F968284E084800547D4D /* RegistrationSizes.swift */; };
@@ -69,6 +75,12 @@
 		7D5E3152284A340F00AE67A0 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		7D5E3154284A5B4000AE67A0 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		7D5E3156284A5E1300AE67A0 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		7D72225E28509F3700A0BAE7 /* ProteinListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinListViewController.swift; sourceTree = "<group>"; };
+		7D72226028509F9F00A0BAE7 /* ProteinListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinListConfigurator.swift; sourceTree = "<group>"; };
+		7D7222632850CC6300A0BAE7 /* RestorePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePasswordViewController.swift; sourceTree = "<group>"; };
+		7D7222652850CCC200A0BAE7 /* RestorePasswordConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePasswordConfigurator.swift; sourceTree = "<group>"; };
+		7D7222682850D39900A0BAE7 /* RestorePasswordSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePasswordSizes.swift; sourceTree = "<group>"; };
+		7D72226A2850D57800A0BAE7 /* RestorePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePasswordPresenter.swift; sourceTree = "<group>"; };
 		7DA1F963284E072600547D4D /* RegistrationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationConfigurator.swift; sourceTree = "<group>"; };
 		7DA1F965284E073400547D4D /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		7DA1F968284E084800547D4D /* RegistrationSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSizes.swift; sourceTree = "<group>"; };
@@ -187,6 +199,7 @@
 		7D507A662848CD0F0024BB21 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				7D72225D28509F0B00A0BAE7 /* ProteinsListScreen */,
 				7DA1F961284E069400547D4D /* Authorisation */,
 				7D42265A2848F1010052FE6D /* SplashScreen */,
 			);
@@ -250,9 +263,38 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7D72225D28509F0B00A0BAE7 /* ProteinsListScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7D72225E28509F3700A0BAE7 /* ProteinListViewController.swift */,
+				7D72226028509F9F00A0BAE7 /* ProteinListConfigurator.swift */,
+			);
+			path = ProteinsListScreen;
+			sourceTree = "<group>";
+		};
+		7D7222622850CC4900A0BAE7 /* RestorePasswordScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7D7222672850D38400A0BAE7 /* Utils */,
+				7D7222632850CC6300A0BAE7 /* RestorePasswordViewController.swift */,
+				7D7222652850CCC200A0BAE7 /* RestorePasswordConfigurator.swift */,
+				7D72226A2850D57800A0BAE7 /* RestorePasswordPresenter.swift */,
+			);
+			path = RestorePasswordScreen;
+			sourceTree = "<group>";
+		};
+		7D7222672850D38400A0BAE7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7D7222682850D39900A0BAE7 /* RestorePasswordSizes.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		7DA1F961284E069400547D4D /* Authorisation */ = {
 			isa = PBXGroup;
 			children = (
+				7D7222622850CC4900A0BAE7 /* RestorePasswordScreen */,
 				7DA1F962284E070800547D4D /* RegistrationScreen */,
 				7D5E3141284A11E000AE67A0 /* LoginScreen */,
 			);
@@ -492,14 +534,19 @@
 				7D5E3153284A340F00AE67A0 /* CustomButton.swift in Sources */,
 				7DA1F969284E084800547D4D /* RegistrationSizes.swift in Sources */,
 				7DA31B27284F82940022BA65 /* KeychainService.swift in Sources */,
+				7D7222642850CC6300A0BAE7 /* RestorePasswordViewController.swift in Sources */,
 				7D5E314E284A2EB500AE67A0 /* KeyboardView.swift in Sources */,
 				7D04D15E2848BD4300B4566D /* SplashViewController.swift in Sources */,
 				7DA31B20284F38570022BA65 /* PopUpView.swift in Sources */,
 				7DA1F96E284E425D00547D4D /* RegistrationModel.swift in Sources */,
 				7D42265F284905B40052FE6D /* SplashSizes.swift in Sources */,
 				7D5E3145284A12F300AE67A0 /* LoginConfigurator.swift in Sources */,
+				7D72226128509F9F00A0BAE7 /* ProteinListConfigurator.swift in Sources */,
 				7D5E3155284A5B4000AE67A0 /* LoginPresenter.swift in Sources */,
 				7D04D15A2848BD4300B4566D /* AppDelegate.swift in Sources */,
+				7D7222662850CCC200A0BAE7 /* RestorePasswordConfigurator.swift in Sources */,
+				7D72225F28509F3700A0BAE7 /* ProteinListViewController.swift in Sources */,
+				7D7222692850D39900A0BAE7 /* RestorePasswordSizes.swift in Sources */,
 				7D507A6E2848CDE50024BB21 /* StoryboardSegues.swift in Sources */,
 				7DA31B2C284F9FAB0022BA65 /* KeyboardSizes.swift in Sources */,
 				7D5E3148284A1B2300AE67A0 /* WindowService.swift in Sources */,
@@ -507,6 +554,7 @@
 				7D04D15C2848BD4300B4566D /* SceneDelegate.swift in Sources */,
 				7D5E3150284A2F3E00AE67A0 /* LoginSizes.swift in Sources */,
 				7D507A6D2848CDE50024BB21 /* StoryboardScenes.swift in Sources */,
+				7D72226B2850D57800A0BAE7 /* RestorePasswordPresenter.swift in Sources */,
 				7DA1F966284E073400547D4D /* RegistrationViewController.swift in Sources */,
 				7D5E3143284A11F700AE67A0 /* LoginViewController.swift in Sources */,
 				7DA31B29284F98730022BA65 /* Models.swift in Sources */,

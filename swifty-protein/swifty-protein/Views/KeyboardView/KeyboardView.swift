@@ -27,10 +27,10 @@ final class KeyboardView: UIView {
     private weak var delegate: KeyboardDelegate!
     weak var biometryDelegate: BiometryDelegate? {
         didSet {
-            if biometryDelegate == nil {
-                biometryButton.isHidden = true
-            } else {
+            if biometryDelegate != nil && getBiometryType() != .none {
                 biometryButton.isHidden = false
+            } else {
+                biometryButton.isHidden = true
             }
         }
     }
@@ -79,20 +79,17 @@ final class KeyboardView: UIView {
     private func getBiometryType() -> BiometryType {
         let authContext = LAContext()
         var error: NSError?
-       _ = authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
-       switch authContext.biometryType {
-       case .none:
-           return .none
+        _ = authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+        switch authContext.biometryType {
+        case .touchID:
+            return .touchID
 
-       case .touchID:
-           return .touchID
+        case .faceID:
+            return .faceID
 
-       case .faceID:
-           return .faceID
-
-       @unknown default:
-           return .none
-       }
+        default:
+            return .none
+        }
     }
     
     @objc private func numberButtonTapped(sender: UIButton) {

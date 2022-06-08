@@ -10,22 +10,18 @@ import LocalAuthentication
 
 protocol LoginViewControllerProtocol: AnyObject {
     func changePasswordLabelState(index: Int, isFilled: Bool)
+    func presentProteinListScreen()
+    func showFailedToLoginPopup(description: String)
 }
 
 final class LoginViewController: UIViewController {
-    
-    enum ViewState {
-        case biometry, keyboardInput
-    }
-    
-    private var viewState: ViewState = .biometry
-    private var isBiometryAvalilable = true
     
     private var passwordLabels = [UIView]()
     
     private lazy var keyboard = makeKeyboardView()
     private lazy var passwordStackView = makeStackView(views: passwordLabels)
-    private lazy var loginWithBiometryButton = makeLoginWithBiometryButton()
+    private lazy var inputPasswordLabel = makeLabel(text: Text.Common.inputPassword)
+    private lazy var restorePasswordButton = makeRestorePasswordButton()
     
     private var presenter: LoginPresenterProtocol!
     
@@ -38,20 +34,21 @@ final class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setNavigationController()
+        clearPasswordLabels()
         let context = LAContext()
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            isBiometryAvalilable = true
-            viewState = .biometry
-        } else {
-            isBiometryAvalilable = false
-            viewState = .keyboardInput
+            loginWithBiometry()
         }
-        makeActive(view: viewState)
     }
     
     func setupComponents(presenter: LoginPresenterProtocol) {
         self.presenter = presenter
+    }
+    
+    private func setNavigationController() {
+        navigationController?.navigationBar.isHidden = true
     }
     
     private func setView() {
@@ -64,24 +61,8 @@ final class LoginViewController: UIViewController {
             setPasswordNumberLabelConstraints(label: label)
         }
         view.addSubview(passwordStackView)
-        view.addSubview(loginWithBiometryButton)
-    }
-    
-    private func makeActive(view: ViewState) {
-        switch view {
-        case .biometry:
-            keyboard.isHidden = true
-            passwordStackView.isHidden = true
-            loginWithBiometryButton.isHidden = false
-            
-        case .keyboardInput:
-            keyboard.isHidden = false
-            passwordStackView.isHidden = false
-            loginWithBiometryButton.isHidden = true
-        }
-    }
-    
-    private func proceedFilledPassword() {
+        view.addSubview(inputPasswordLabel)
+        view.addSubview(restorePasswordButton)
     }
     
     private func getBiometryType() -> BiometryType {
@@ -89,16 +70,13 @@ final class LoginViewController: UIViewController {
         var error: NSError?
        _ = authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
        switch authContext.biometryType {
-       case .none:
-           return .none
-
        case .touchID:
            return .touchID
 
        case .faceID:
            return .faceID
 
-       @unknown default:
+       default:
            return .none
        }
     }
@@ -119,7 +97,47 @@ final class LoginViewController: UIViewController {
         )
     }
     
-    @objc private func biometryLogin() {
+    private func showErrorPopup(description: String) {
+        let popup = Popup(title: Text.Common.error, description: description)
+        popup.addButton(title: Text.Common.confirm, type: .custom, action: nil)
+        popup.alpha = 0
+        showPopup(popup: popup)
+    }
+    
+    private func loginWithBiometry() {
+        let context = LAContext()
+        var error: NSError?
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = Text.Descriptions.loginWithTouchID
+            context.evaluatePolicy(
+                .deviceOwnerAuthenticationWithBiometrics,
+                localizedReason: reason
+            ) { succes, error in
+                DispatchQueue.main.async { [weak self] in
+                    if succes {
+                        self?.presentProteinListScreen()
+                    } else {
+                        if let error = error {
+                            print(error)
+                        }
+                    }
+                }
+            }
+        } else {
+            showErrorPopup(description: Text.Descriptions.biometryUnavalable)
+        }
+    }
+    
+    private func clearPasswordLabels() {
+        for view in passwordLabels {
+            view.backgroundColor = .clear
+        }
+        view.layoutIfNeeded()
+    }
+    
+    @objc private func restorePassword() {
+        let restorePasswordVC = RestorePasswordConfigurator().setupModule()
+        navigationController?.pushViewController(restorePasswordVC, animated: true)
     }
 }
 
@@ -128,14 +146,11 @@ extension LoginViewController: KeyboardDelegate {
     func handleKeyboardTap(key: KeyboardView.KeyType) {
         switch key {
         case .number(let number):
-            fillPasswordDependsOnViewState(number: number)
+            presenter.handleNewPasswordNumber(number: number)
             
         case .delete:
             presenter.deleteLastNumber()
         }
-    }
-    
-    private func fillPasswordDependsOnViewState(number: Int) {
     }
 }
 
@@ -144,13 +159,10 @@ extension LoginViewController: BiometryDelegate {
     func handleBiometry() {
         switch getBiometryType() {
         case .none:
-            let popup = Popup(title: Text.Common.error, description: Text.Descriptions.biometryUnavalable)
-            popup.addButton(title: Text.Common.confirm, type: .custom, action: nil)
-            popup.alpha = 0
-            showPopup(popup: popup)
+            showErrorPopup(description: Text.Descriptions.biometryUnavalable)
             
         default:
-            print("Show Biometry view")
+            loginWithBiometry()
         }
     }
 }
@@ -164,9 +176,25 @@ extension LoginViewController: LoginViewControllerProtocol {
                                                         : .clear
             passwordLabels[index].layoutIfNeeded()
             if index + 1 == passwordLabels.count {
-                proceedFilledPassword()
+                presenter.tryLogin()
             }
         }
+    }
+    
+    func presentProteinListScreen() {
+        if WindowService.isMainScreenExist {
+            WindowService.presentProteinListNavigationController()
+        } else {
+            let proteinListVC = ProteinListConfigurator().setupModule()
+            let navigationController = UINavigationController(rootViewController: proteinListVC)
+            WindowService.replaceRootViewController(with: navigationController)
+            WindowService.setProteinListNavigationController(vc: navigationController)
+        }
+    }
+    
+    func showFailedToLoginPopup(description: String) {
+        clearPasswordLabels()
+        showErrorPopup(description: description)
     }
 }
 
@@ -199,34 +227,22 @@ extension LoginViewController {
         return stackView
     }
     
-    private func makeInputPasswordLabel() -> UILabel {
+    private func makeLabel(text: String) -> UILabel {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = Asset.textColor.color
+        label.text = text
         return label
     }
     
-    private func makeSaveButton() -> CustomButton {
+    private func makeRestorePasswordButton() -> CustomButton {
         let button = CustomButton()
-        button.setTitle(Text.Common.backward, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.setTitle(Text.Common.restorePassword, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: LoginSizes.RestorePasswordButton.fontSize)
+        button.titleLabel?.textAlignment = .center
         button.backgroundColor = .clear
-        button.setTitleColor(Asset.textColor.color, for: .normal)
-        return button
-    }
-    
-    private func makeLoginWithBiometryButton() -> CustomButton {
-        let button = CustomButton()
-        switch getBiometryType() {
-        case .faceID:
-            button.setImage(UIImage(systemName: SFSymbols.faceId), for: .normal)
-            
-        default:
-            button.setImage(UIImage(systemName: SFSymbols.touchId), for: .normal)
-        }
-        button.tintColor = Asset.textColor.color
-        button.imageView?.contentMode = .scaleAspectFit
-        button.addTarget(self, action: #selector(biometryLogin), for: .touchUpInside)
+        button.setTitleColor(Asset.buttonsColor.color, for: .normal)
+        button.addTarget(self, action: #selector(restorePassword), for: .touchUpInside)
         return button
     }
 }
@@ -238,7 +254,8 @@ extension LoginViewController {
     private func setConstraints() {
         setKeyboardConstraints()
         setPasswordStackConstraints()
-        setLoginWithBiometryButtonConstraints()
+        setInputPasswordLabelConstraints()
+        setRestorePasswordButtonConstraints()
     }
     
     private func setPasswordNumberLabelConstraints(label: UILabel) {
@@ -266,18 +283,26 @@ extension LoginViewController {
         }
     }
     
-    private func setLoginWithBiometryButtonConstraints() {
-        loginWithBiometryButton.snp.makeConstraints { maker in
-            maker.centerX.equalToSuperview()
-            maker.centerY.equalToSuperview().offset(LoginSizes.BiometryButtonLogin.centerYOffset)
-            maker.width.equalTo(LoginSizes.BiometryButtonLogin.width)
-            maker.height.equalTo(LoginSizes.BiometryButtonLogin.height)
-        }
-    }
-    
     private func setPopupConstraints(view: UIView) {
         view.snp.makeConstraints { maker in
             maker.top.bottom.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    private func setInputPasswordLabelConstraints() {
+        inputPasswordLabel.snp.makeConstraints { maker in
+            maker.leading.trailing.equalTo(view.layoutMarginsGuide)
+            maker.height.equalTo(LoginSizes.InputPasswordLabel.height)
+            maker.bottom.equalTo(passwordStackView.snp.top).offset(-LoginSizes.InputPasswordLabel.bottomOffset)
+        }
+    }
+    
+    private func setRestorePasswordButtonConstraints() {
+        restorePasswordButton.snp.makeConstraints { maker in
+            maker.centerX.equalToSuperview()
+            maker.width.equalTo(LoginSizes.RestorePasswordButton.width)
+            maker.height.equalTo(LoginSizes.RestorePasswordButton.height)
+            maker.top.equalTo(keyboard.snp.bottom).offset(LoginSizes.RestorePasswordButton.topOffset)
         }
     }
 }
