@@ -14,7 +14,7 @@ enum RestorePasswordSizes {
     enum KeyboardView {
         static let width: CGFloat = 256
         static let height: CGFloat = 355
-        static let centerYOffset: CGFloat = 30
+        static let centerYOffset: CGFloat = 45
     }
     
     enum SavePasswordButton {

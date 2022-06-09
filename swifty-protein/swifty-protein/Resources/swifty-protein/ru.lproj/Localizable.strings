@@ -41,3 +41,4 @@ Descriptions.unexpectedError = "Произошла ошибка.";
 Descriptions.loginWithTouchID = "Авторизируйтесь при помощи Touch ID.";
 Descriptions.wrongPassword = "Неверный пароль.";
 Descriptions.passwordChangd = "Пароль успешно изменен.";
+Descriptions.failedToLoadLigands = "Что-то пошло не так при загрузки кодов белков.";

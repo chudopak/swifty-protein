@@ -55,6 +55,8 @@ internal enum Text {
     internal static let confirmAnswer = Text.tr("Localizable", "Descriptions.confirmAnswer")
     /// There MUST be an answer
     internal static let emptyAnswer = Text.tr("Localizable", "Descriptions.emptyAnswer")
+    /// Something went wrong while loading ligands.
+    internal static let failedToLoadLigands = Text.tr("Localizable", "Descriptions.failedToLoadLigands")
     /// Authenticate with Touch ID.
     internal static let loginWithTouchID = Text.tr("Localizable", "Descriptions.loginWithTouchID")
     /// Answer to long. It will be hard to remember.

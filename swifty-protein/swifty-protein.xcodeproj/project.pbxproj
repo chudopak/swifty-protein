@@ -36,6 +36,17 @@
 		7D7222692850D39900A0BAE7 /* RestorePasswordSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7222682850D39900A0BAE7 /* RestorePasswordSizes.swift */; };
 		7D72226B2850D57800A0BAE7 /* RestorePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D72226A2850D57800A0BAE7 /* RestorePasswordPresenter.swift */; };
 		7D72226D2850E52200A0BAE7 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D72226C2850E52200A0BAE7 /* Functions.swift */; };
+		7D7E7B882851F53600D2CEB5 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E7B872851F53600D2CEB5 /* Configuration.swift */; };
+		7D7E7B8A2851F67C00D2CEB5 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E7B892851F67C00D2CEB5 /* NetworkLayer.swift */; };
+		7D7E7B8C2851F71300D2CEB5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E7B8B2851F71300D2CEB5 /* Model.swift */; };
+		7D7E7B8F2851FB0100D2CEB5 /* LigandsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E7B8E2851FB0100D2CEB5 /* LigandsService.swift */; };
+		7D7E7B91285205C200D2CEB5 /* ProteinListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E7B90285205C200D2CEB5 /* ProteinListPresenter.swift */; };
+		7D7E7B932852103300D2CEB5 /* ligands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E7B922852103300D2CEB5 /* ligands.txt */; };
+		7D7E7B962852134500D2CEB5 /* ProteinListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E7B952852134500D2CEB5 /* ProteinListTableViewCell.swift */; };
+		7D7E7B9828521C8200D2CEB5 /* ProteinListSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E7B9728521C8200D2CEB5 /* ProteinListSizes.swift */; };
+		7D7E7B9B28522BAA00D2CEB5 /* ProteinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E7B9A28522BAA00D2CEB5 /* ProteinViewController.swift */; };
+		7D7E7B9D28522C1700D2CEB5 /* ProteinConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E7B9C28522C1700D2CEB5 /* ProteinConfigurator.swift */; };
+		7D7E7B9F28522CD000D2CEB5 /* ProteinPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E7B9E28522CD000D2CEB5 /* ProteinPresenter.swift */; };
 		7DA1F964284E072600547D4D /* RegistrationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F963284E072600547D4D /* RegistrationConfigurator.swift */; };
 		7DA1F966284E073400547D4D /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F965284E073400547D4D /* RegistrationViewController.swift */; };
 		7DA1F969284E084800547D4D /* RegistrationSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1F968284E084800547D4D /* RegistrationSizes.swift */; };
@@ -46,11 +57,11 @@
 		7DA31B27284F82940022BA65 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B26284F82940022BA65 /* KeychainService.swift */; };
 		7DA31B29284F98730022BA65 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B28284F98730022BA65 /* Models.swift */; };
 		7DA31B2C284F9FAB0022BA65 /* KeyboardSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B2B284F9FAB0022BA65 /* KeyboardSizes.swift */; };
-		C60A2DCB8A02D7EA5791611B /* Pods_swifty_protein.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD991638D761715875F55D4E /* Pods_swifty_protein.framework */; };
+		84FB4E1EBED261095446D9F5 /* Pods_swifty_protein.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A72A6CFC122606F6845EF1A /* Pods_swifty_protein.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		027CA39AD9E806A981940DA9 /* Pods-swifty-protein.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.release.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.release.xcconfig"; sourceTree = "<group>"; };
+		7A72A6CFC122606F6845EF1A /* Pods_swifty_protein.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swifty_protein.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D04D1562848BD4300B4566D /* swifty-protein.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swifty-protein.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D04D1592848BD4300B4566D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D04D15B2848BD4300B4566D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +94,17 @@
 		7D7222682850D39900A0BAE7 /* RestorePasswordSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePasswordSizes.swift; sourceTree = "<group>"; };
 		7D72226A2850D57800A0BAE7 /* RestorePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePasswordPresenter.swift; sourceTree = "<group>"; };
 		7D72226C2850E52200A0BAE7 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		7D7E7B872851F53600D2CEB5 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		7D7E7B892851F67C00D2CEB5 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
+		7D7E7B8B2851F71300D2CEB5 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		7D7E7B8E2851FB0100D2CEB5 /* LigandsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandsService.swift; sourceTree = "<group>"; };
+		7D7E7B90285205C200D2CEB5 /* ProteinListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinListPresenter.swift; sourceTree = "<group>"; };
+		7D7E7B922852103300D2CEB5 /* ligands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ligands.txt; sourceTree = "<group>"; };
+		7D7E7B952852134500D2CEB5 /* ProteinListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinListTableViewCell.swift; sourceTree = "<group>"; };
+		7D7E7B9728521C8200D2CEB5 /* ProteinListSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinListSizes.swift; sourceTree = "<group>"; };
+		7D7E7B9A28522BAA00D2CEB5 /* ProteinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinViewController.swift; sourceTree = "<group>"; };
+		7D7E7B9C28522C1700D2CEB5 /* ProteinConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinConfigurator.swift; sourceTree = "<group>"; };
+		7D7E7B9E28522CD000D2CEB5 /* ProteinPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinPresenter.swift; sourceTree = "<group>"; };
 		7DA1F963284E072600547D4D /* RegistrationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationConfigurator.swift; sourceTree = "<group>"; };
 		7DA1F965284E073400547D4D /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		7DA1F968284E084800547D4D /* RegistrationSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSizes.swift; sourceTree = "<group>"; };
@@ -93,8 +115,8 @@
 		7DA31B26284F82940022BA65 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		7DA31B28284F98730022BA65 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		7DA31B2B284F9FAB0022BA65 /* KeyboardSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSizes.swift; sourceTree = "<group>"; };
-		AD991638D761715875F55D4E /* Pods_swifty_protein.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swifty_protein.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5A1041B3D5CCA47E3DC1284 /* Pods-swifty-protein.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.debug.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.debug.xcconfig"; sourceTree = "<group>"; };
+		BD0AC22FB8DCA348C0DDC529 /* Pods-swifty-protein.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.release.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.release.xcconfig"; sourceTree = "<group>"; };
+		C260BC898D08BFDE7F41368D /* Pods-swifty-protein.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.debug.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C60A2DCB8A02D7EA5791611B /* Pods_swifty_protein.framework in Frameworks */,
+				84FB4E1EBED261095446D9F5 /* Pods_swifty_protein.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +137,7 @@
 				7D04D1582848BD4300B4566D /* swifty-protein */,
 				7D04D1572848BD4300B4566D /* Products */,
 				DBE8C2A31622A9E9486BBC65 /* Pods */,
-				E1E65C5C309DE20FF080B382 /* Frameworks */,
+				C2CB10A3C113AADCFB0326CC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,6 +152,7 @@
 		7D04D1582848BD4300B4566D /* swifty-protein */ = {
 			isa = PBXGroup;
 			children = (
+				7D7E7B862851F51500D2CEB5 /* Networking */,
 				7D5E3151284A33E600AE67A0 /* Views */,
 				7D5E3149284A2B2200AE67A0 /* Base */,
 				7D5E3146284A1A5F00AE67A0 /* Services */,
@@ -179,6 +202,7 @@
 		7D507A602848CA420024BB21 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7D7E7B922852103300D2CEB5 /* ligands.txt */,
 				7D507A712848D5460024BB21 /* Localizable.strings */,
 				7D507A652848CBE60024BB21 /* Generated */,
 				7D507A622848CB980024BB21 /* swiftgen.yml */,
@@ -201,6 +225,7 @@
 		7D507A662848CD0F0024BB21 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				7D7E7B9928522B8000D2CEB5 /* ProteinScreen */,
 				7D72225D28509F0B00A0BAE7 /* ProteinsListScreen */,
 				7DA1F961284E069400547D4D /* Authorisation */,
 				7D42265A2848F1010052FE6D /* SplashScreen */,
@@ -232,6 +257,7 @@
 		7D5E3146284A1A5F00AE67A0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7D7E7B8D2851FA5500D2CEB5 /* LigandsService */,
 				7DA31B25284F82410022BA65 /* KeychainService */,
 				7DA31B24284F822B0022BA65 /* WindowService */,
 			);
@@ -269,8 +295,10 @@
 		7D72225D28509F0B00A0BAE7 /* ProteinsListScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7D7E7B942852133300D2CEB5 /* Utils */,
 				7D72225E28509F3700A0BAE7 /* ProteinListViewController.swift */,
 				7D72226028509F9F00A0BAE7 /* ProteinListConfigurator.swift */,
+				7D7E7B90285205C200D2CEB5 /* ProteinListPresenter.swift */,
 			);
 			path = ProteinsListScreen;
 			sourceTree = "<group>";
@@ -292,6 +320,43 @@
 				7D7222682850D39900A0BAE7 /* RestorePasswordSizes.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		7D7E7B862851F51500D2CEB5 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				7D7E7B872851F53600D2CEB5 /* Configuration.swift */,
+				7D7E7B892851F67C00D2CEB5 /* NetworkLayer.swift */,
+				7D7E7B8B2851F71300D2CEB5 /* Model.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		7D7E7B8D2851FA5500D2CEB5 /* LigandsService */ = {
+			isa = PBXGroup;
+			children = (
+				7D7E7B8E2851FB0100D2CEB5 /* LigandsService.swift */,
+			);
+			path = LigandsService;
+			sourceTree = "<group>";
+		};
+		7D7E7B942852133300D2CEB5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7D7E7B952852134500D2CEB5 /* ProteinListTableViewCell.swift */,
+				7D7E7B9728521C8200D2CEB5 /* ProteinListSizes.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		7D7E7B9928522B8000D2CEB5 /* ProteinScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7D7E7B9A28522BAA00D2CEB5 /* ProteinViewController.swift */,
+				7D7E7B9C28522C1700D2CEB5 /* ProteinConfigurator.swift */,
+				7D7E7B9E28522CD000D2CEB5 /* ProteinPresenter.swift */,
+			);
+			path = ProteinScreen;
 			sourceTree = "<group>";
 		};
 		7DA1F961284E069400547D4D /* Authorisation */ = {
@@ -358,21 +423,21 @@
 			path = KeyboardView;
 			sourceTree = "<group>";
 		};
+		C2CB10A3C113AADCFB0326CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A72A6CFC122606F6845EF1A /* Pods_swifty_protein.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DBE8C2A31622A9E9486BBC65 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D5A1041B3D5CCA47E3DC1284 /* Pods-swifty-protein.debug.xcconfig */,
-				027CA39AD9E806A981940DA9 /* Pods-swifty-protein.release.xcconfig */,
+				C260BC898D08BFDE7F41368D /* Pods-swifty-protein.debug.xcconfig */,
+				BD0AC22FB8DCA348C0DDC529 /* Pods-swifty-protein.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		E1E65C5C309DE20FF080B382 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				AD991638D761715875F55D4E /* Pods_swifty_protein.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,13 +447,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D04D16A2848BD4700B4566D /* Build configuration list for PBXNativeTarget "swifty-protein" */;
 			buildPhases = (
-				F4E3A7225E729A6E69D92ABD /* [CP] Check Pods Manifest.lock */,
+				42E8F062A900E157F085FAE5 /* [CP] Check Pods Manifest.lock */,
 				7D04D16F2848C06E00B4566D /* SwiftLint */,
 				7D507A682848CD420024BB21 /* SwiftGen */,
 				7D04D1522848BD4300B4566D /* Sources */,
 				7D04D1532848BD4300B4566D /* Frameworks */,
 				7D04D1542848BD4300B4566D /* Resources */,
-				D741F84C8536B74721CC971A /* [CP] Embed Pods Frameworks */,
+				9CD392E0CCACA1E6048CE104 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -438,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D04D1662848BD4700B4566D /* LaunchScreen.storyboard in Resources */,
+				7D7E7B932852103300D2CEB5 /* ligands.txt in Resources */,
 				7D507A732848D5460024BB21 /* Localizable.strings in Resources */,
 				7D04D1632848BD4700B4566D /* Assets.xcassets in Resources */,
 				7D507A642848CB980024BB21 /* swiftgen.yml in Resources */,
@@ -447,6 +513,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		42E8F062A900E157F085FAE5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-swifty-protein-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7D04D16F2848C06E00B4566D /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -483,7 +571,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" config run --config ./swifty-protein/Resources/swiftgen.yml\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
 		};
-		D741F84C8536B74721CC971A /* [CP] Embed Pods Frameworks */ = {
+		9CD392E0CCACA1E6048CE104 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -498,28 +586,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-swifty-protein/Pods-swifty-protein-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F4E3A7225E729A6E69D92ABD /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-swifty-protein-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -539,6 +605,8 @@
 				7DA1F969284E084800547D4D /* RegistrationSizes.swift in Sources */,
 				7DA31B27284F82940022BA65 /* KeychainService.swift in Sources */,
 				7D7222642850CC6300A0BAE7 /* RestorePasswordViewController.swift in Sources */,
+				7D7E7B9B28522BAA00D2CEB5 /* ProteinViewController.swift in Sources */,
+				7D7E7B91285205C200D2CEB5 /* ProteinListPresenter.swift in Sources */,
 				7D5E314E284A2EB500AE67A0 /* KeyboardView.swift in Sources */,
 				7D04D15E2848BD4300B4566D /* SplashViewController.swift in Sources */,
 				7DA31B20284F38570022BA65 /* PopUpView.swift in Sources */,
@@ -548,6 +616,7 @@
 				7D72226128509F9F00A0BAE7 /* ProteinListConfigurator.swift in Sources */,
 				7D5E3155284A5B4000AE67A0 /* LoginPresenter.swift in Sources */,
 				7D04D15A2848BD4300B4566D /* AppDelegate.swift in Sources */,
+				7D7E7B8F2851FB0100D2CEB5 /* LigandsService.swift in Sources */,
 				7D7222662850CCC200A0BAE7 /* RestorePasswordConfigurator.swift in Sources */,
 				7D72225F28509F3700A0BAE7 /* ProteinListViewController.swift in Sources */,
 				7D7222692850D39900A0BAE7 /* RestorePasswordSizes.swift in Sources */,
@@ -555,13 +624,20 @@
 				7DA31B2C284F9FAB0022BA65 /* KeyboardSizes.swift in Sources */,
 				7D5E3148284A1B2300AE67A0 /* WindowService.swift in Sources */,
 				7D5E3157284A5E1300AE67A0 /* LoginModel.swift in Sources */,
+				7D7E7B9828521C8200D2CEB5 /* ProteinListSizes.swift in Sources */,
 				7D04D15C2848BD4300B4566D /* SceneDelegate.swift in Sources */,
 				7D5E3150284A2F3E00AE67A0 /* LoginSizes.swift in Sources */,
 				7D507A6D2848CDE50024BB21 /* StoryboardScenes.swift in Sources */,
 				7D72226B2850D57800A0BAE7 /* RestorePasswordPresenter.swift in Sources */,
+				7D7E7B8A2851F67C00D2CEB5 /* NetworkLayer.swift in Sources */,
+				7D7E7B882851F53600D2CEB5 /* Configuration.swift in Sources */,
+				7D7E7B9F28522CD000D2CEB5 /* ProteinPresenter.swift in Sources */,
+				7D7E7B9D28522C1700D2CEB5 /* ProteinConfigurator.swift in Sources */,
 				7DA1F966284E073400547D4D /* RegistrationViewController.swift in Sources */,
+				7D7E7B962852134500D2CEB5 /* ProteinListTableViewCell.swift in Sources */,
 				7D5E3143284A11F700AE67A0 /* LoginViewController.swift in Sources */,
 				7DA31B29284F98730022BA65 /* Models.swift in Sources */,
+				7D7E7B8C2851F71300D2CEB5 /* Model.swift in Sources */,
 				7DA1F964284E072600547D4D /* RegistrationConfigurator.swift in Sources */,
 				7DA31B23284F3BC60022BA65 /* PopupSizes.swift in Sources */,
 			);
@@ -710,7 +786,7 @@
 		};
 		7D04D16B2848BD4700B4566D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5A1041B3D5CCA47E3DC1284 /* Pods-swifty-protein.debug.xcconfig */;
+			baseConfigurationReference = C260BC898D08BFDE7F41368D /* Pods-swifty-protein.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -730,7 +806,7 @@
 		};
 		7D04D16C2848BD4700B4566D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 027CA39AD9E806A981940DA9 /* Pods-swifty-protein.release.xcconfig */;
+			baseConfigurationReference = BD0AC22FB8DCA348C0DDC529 /* Pods-swifty-protein.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
