@@ -9,6 +9,7 @@ def common_pods
   pod "SnapKit"
   pod "SwiftGen"
   pod "KeychainSwift"
+  pod 'Alamofire', '~> 5.4'
 end
 
 target 'swifty-protein' do

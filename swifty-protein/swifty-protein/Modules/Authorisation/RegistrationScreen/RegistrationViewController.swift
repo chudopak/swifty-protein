@@ -424,12 +424,6 @@ extension RegistrationViewController {
         }
     }
     
-    private func setQuestionLabelConstraints() {
-        questionLabel.snp.makeConstraints { maker in
-            maker.height.equalTo(25)
-        }
-    }
-    
     private func setAnswerStackViewConstraints() {
         questionStackView.snp.makeConstraints { maker in
             maker.center.equalToSuperview()

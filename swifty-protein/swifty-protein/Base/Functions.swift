@@ -15,3 +15,13 @@ func decodeMessage<T: Codable>(data: Data?, type: T.Type) -> T? {
     }
     return decoded
 }
+
+func splitString(str: String, separator: String.Element) -> [String] {
+    let dataSplited = str.split(separator: separator)
+    var ligands = [String]()
+    ligands.reserveCapacity(dataSplited.count)
+    for lingand in dataSplited {
+        ligands.append(String(lingand))
+    }
+    return ligands
+}

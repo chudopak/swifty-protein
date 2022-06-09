@@ -42,3 +42,4 @@ Descriptions.unexpectedError = "Some unexpected error happened.";
 Descriptions.loginWithTouchID = "Authenticate with Touch ID.";
 Descriptions.wrongPassword = "Incorrect password.";
 Descriptions.passwordChangd = "Password successfully changed.";
+Descriptions.failedToLoadLigands = "Something went wrong while loading ligands.";
