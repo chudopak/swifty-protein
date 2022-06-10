@@ -18,6 +18,7 @@ final class ProteinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.fetchProteinData(name: ligand)
         setView()
     }
     

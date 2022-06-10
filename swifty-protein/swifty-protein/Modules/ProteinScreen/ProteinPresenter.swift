@@ -8,6 +8,7 @@
 import UIKit
 
 protocol ProteinPresenterProtocol {
+    func fetchProteinData(name: String)
 }
 
 final class ProteinPresenter: ProteinPresenterProtocol {
@@ -19,5 +20,21 @@ final class ProteinPresenter: ProteinPresenterProtocol {
          ligandsService: LigandsServiceProtocol) {
         self.viewController = viewController
         self.ligandsService = ligandsService
+    }
+    
+    func fetchProteinData(name: String) {
+        ligandsService.fetchProteinData(name: name) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let proteinData):
+                    for i in proteinData.elements {
+                        print(i.coordinates, i.name)
+                    }
+                    
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }

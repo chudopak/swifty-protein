@@ -14,6 +14,13 @@
 		7D04D1662848BD4700B4566D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D04D1642848BD4700B4566D /* LaunchScreen.storyboard */; };
 		7D42265C2848FCA50052FE6D /* SplashConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42265B2848FCA50052FE6D /* SplashConfigurator.swift */; };
 		7D42265F284905B40052FE6D /* SplashSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42265E284905B40052FE6D /* SplashSizes.swift */; };
+		7D491F4C285369AE00FA1B5A /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F4A285369AE00FA1B5A /* DataModel.xcdatamodeld */; };
+		7D491F572853716400FA1B5A /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F562853716400FA1B5A /* CoreDataService.swift */; };
+		7D491F592853717C00FA1B5A /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F582853717C00FA1B5A /* CoreDataModel.swift */; };
+		7D491F662853752C00FA1B5A /* ProteinInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F622853752C00FA1B5A /* ProteinInfo+CoreDataClass.swift */; };
+		7D491F672853752C00FA1B5A /* ProteinInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F632853752C00FA1B5A /* ProteinInfo+CoreDataProperties.swift */; };
+		7D491F682853752C00FA1B5A /* Element+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F642853752C00FA1B5A /* Element+CoreDataClass.swift */; };
+		7D491F692853752C00FA1B5A /* Element+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F652853752C00FA1B5A /* Element+CoreDataProperties.swift */; };
 		7D507A642848CB980024BB21 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7D507A622848CB980024BB21 /* swiftgen.yml */; };
 		7D507A6D2848CDE50024BB21 /* StoryboardScenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D507A692848CDE50024BB21 /* StoryboardScenes.swift */; };
 		7D507A6E2848CDE50024BB21 /* StoryboardSegues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D507A6A2848CDE50024BB21 /* StoryboardSegues.swift */; };
@@ -29,6 +36,7 @@
 		7D5E3153284A340F00AE67A0 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3152284A340F00AE67A0 /* CustomButton.swift */; };
 		7D5E3155284A5B4000AE67A0 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3154284A5B4000AE67A0 /* LoginPresenter.swift */; };
 		7D5E3157284A5E1300AE67A0 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3156284A5E1300AE67A0 /* LoginModel.swift */; };
+		7D5F37EE285330C1003CC21A /* ProteinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F37ED285330C1003CC21A /* ProteinModel.swift */; };
 		7D72225F28509F3700A0BAE7 /* ProteinListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D72225E28509F3700A0BAE7 /* ProteinListViewController.swift */; };
 		7D72226128509F9F00A0BAE7 /* ProteinListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D72226028509F9F00A0BAE7 /* ProteinListConfigurator.swift */; };
 		7D7222642850CC6300A0BAE7 /* RestorePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7222632850CC6300A0BAE7 /* RestorePasswordViewController.swift */; };
@@ -71,6 +79,13 @@
 		7D04D1672848BD4700B4566D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D42265B2848FCA50052FE6D /* SplashConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashConfigurator.swift; sourceTree = "<group>"; };
 		7D42265E284905B40052FE6D /* SplashSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashSizes.swift; sourceTree = "<group>"; };
+		7D491F4B285369AE00FA1B5A /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		7D491F562853716400FA1B5A /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		7D491F582853717C00FA1B5A /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
+		7D491F622853752C00FA1B5A /* ProteinInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProteinInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7D491F632853752C00FA1B5A /* ProteinInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProteinInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7D491F642853752C00FA1B5A /* Element+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Element+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7D491F652853752C00FA1B5A /* Element+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Element+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7D507A622848CB980024BB21 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		7D507A692848CDE50024BB21 /* StoryboardScenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardScenes.swift; sourceTree = "<group>"; };
 		7D507A6A2848CDE50024BB21 /* StoryboardSegues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSegues.swift; sourceTree = "<group>"; };
@@ -87,6 +102,7 @@
 		7D5E3152284A340F00AE67A0 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		7D5E3154284A5B4000AE67A0 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		7D5E3156284A5E1300AE67A0 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		7D5F37ED285330C1003CC21A /* ProteinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinModel.swift; sourceTree = "<group>"; };
 		7D72225E28509F3700A0BAE7 /* ProteinListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinListViewController.swift; sourceTree = "<group>"; };
 		7D72226028509F9F00A0BAE7 /* ProteinListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinListConfigurator.swift; sourceTree = "<group>"; };
 		7D7222632850CC6300A0BAE7 /* RestorePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePasswordViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +168,7 @@
 		7D04D1582848BD4300B4566D /* swifty-protein */ = {
 			isa = PBXGroup;
 			children = (
+				7D491F492853698200FA1B5A /* CoreData */,
 				7D7E7B862851F51500D2CEB5 /* Networking */,
 				7D5E3151284A33E600AE67A0 /* Views */,
 				7D5E3149284A2B2200AE67A0 /* Base */,
@@ -197,6 +214,27 @@
 				7D42265E284905B40052FE6D /* SplashSizes.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		7D491F492853698200FA1B5A /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7D491F622853752C00FA1B5A /* ProteinInfo+CoreDataClass.swift */,
+				7D491F632853752C00FA1B5A /* ProteinInfo+CoreDataProperties.swift */,
+				7D491F642853752C00FA1B5A /* Element+CoreDataClass.swift */,
+				7D491F652853752C00FA1B5A /* Element+CoreDataProperties.swift */,
+				7D491F4A285369AE00FA1B5A /* DataModel.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		7D491F552853714D00FA1B5A /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+				7D491F562853716400FA1B5A /* CoreDataService.swift */,
+				7D491F582853717C00FA1B5A /* CoreDataModel.swift */,
+			);
+			path = CoreDataService;
 			sourceTree = "<group>";
 		};
 		7D507A602848CA420024BB21 /* Resources */ = {
@@ -257,6 +295,7 @@
 		7D5E3146284A1A5F00AE67A0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7D491F552853714D00FA1B5A /* CoreDataService */,
 				7D7E7B8D2851FA5500D2CEB5 /* LigandsService */,
 				7DA31B25284F82410022BA65 /* KeychainService */,
 				7DA31B24284F822B0022BA65 /* WindowService */,
@@ -355,6 +394,7 @@
 				7D7E7B9A28522BAA00D2CEB5 /* ProteinViewController.swift */,
 				7D7E7B9C28522C1700D2CEB5 /* ProteinConfigurator.swift */,
 				7D7E7B9E28522CD000D2CEB5 /* ProteinPresenter.swift */,
+				7D5F37ED285330C1003CC21A /* ProteinModel.swift */,
 			);
 			path = ProteinScreen;
 			sourceTree = "<group>";
@@ -600,23 +640,29 @@
 				7D507A702848CDE60024BB21 /* Texts.swift in Sources */,
 				7D72226D2850E52200A0BAE7 /* Functions.swift in Sources */,
 				7DA1F96C284E09A800547D4D /* RegistrationPresenter.swift in Sources */,
+				7D491F692853752C00FA1B5A /* Element+CoreDataProperties.swift in Sources */,
 				7D5E314B284A2B3500AE67A0 /* FirstLaunchChecker.swift in Sources */,
 				7D5E3153284A340F00AE67A0 /* CustomButton.swift in Sources */,
 				7DA1F969284E084800547D4D /* RegistrationSizes.swift in Sources */,
 				7DA31B27284F82940022BA65 /* KeychainService.swift in Sources */,
 				7D7222642850CC6300A0BAE7 /* RestorePasswordViewController.swift in Sources */,
 				7D7E7B9B28522BAA00D2CEB5 /* ProteinViewController.swift in Sources */,
+				7D491F662853752C00FA1B5A /* ProteinInfo+CoreDataClass.swift in Sources */,
+				7D491F682853752C00FA1B5A /* Element+CoreDataClass.swift in Sources */,
 				7D7E7B91285205C200D2CEB5 /* ProteinListPresenter.swift in Sources */,
 				7D5E314E284A2EB500AE67A0 /* KeyboardView.swift in Sources */,
 				7D04D15E2848BD4300B4566D /* SplashViewController.swift in Sources */,
 				7DA31B20284F38570022BA65 /* PopUpView.swift in Sources */,
+				7D5F37EE285330C1003CC21A /* ProteinModel.swift in Sources */,
 				7DA1F96E284E425D00547D4D /* RegistrationModel.swift in Sources */,
+				7D491F4C285369AE00FA1B5A /* DataModel.xcdatamodeld in Sources */,
 				7D42265F284905B40052FE6D /* SplashSizes.swift in Sources */,
 				7D5E3145284A12F300AE67A0 /* LoginConfigurator.swift in Sources */,
 				7D72226128509F9F00A0BAE7 /* ProteinListConfigurator.swift in Sources */,
 				7D5E3155284A5B4000AE67A0 /* LoginPresenter.swift in Sources */,
 				7D04D15A2848BD4300B4566D /* AppDelegate.swift in Sources */,
 				7D7E7B8F2851FB0100D2CEB5 /* LigandsService.swift in Sources */,
+				7D491F672853752C00FA1B5A /* ProteinInfo+CoreDataProperties.swift in Sources */,
 				7D7222662850CCC200A0BAE7 /* RestorePasswordConfigurator.swift in Sources */,
 				7D72225F28509F3700A0BAE7 /* ProteinListViewController.swift in Sources */,
 				7D7222692850D39900A0BAE7 /* RestorePasswordSizes.swift in Sources */,
@@ -629,11 +675,13 @@
 				7D5E3150284A2F3E00AE67A0 /* LoginSizes.swift in Sources */,
 				7D507A6D2848CDE50024BB21 /* StoryboardScenes.swift in Sources */,
 				7D72226B2850D57800A0BAE7 /* RestorePasswordPresenter.swift in Sources */,
+				7D491F572853716400FA1B5A /* CoreDataService.swift in Sources */,
 				7D7E7B8A2851F67C00D2CEB5 /* NetworkLayer.swift in Sources */,
 				7D7E7B882851F53600D2CEB5 /* Configuration.swift in Sources */,
 				7D7E7B9F28522CD000D2CEB5 /* ProteinPresenter.swift in Sources */,
 				7D7E7B9D28522C1700D2CEB5 /* ProteinConfigurator.swift in Sources */,
 				7DA1F966284E073400547D4D /* RegistrationViewController.swift in Sources */,
+				7D491F592853717C00FA1B5A /* CoreDataModel.swift in Sources */,
 				7D7E7B962852134500D2CEB5 /* ProteinListTableViewCell.swift in Sources */,
 				7D5E3143284A11F700AE67A0 /* LoginViewController.swift in Sources */,
 				7DA31B29284F98730022BA65 /* Models.swift in Sources */,
@@ -846,6 +894,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7D491F4A285369AE00FA1B5A /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7D491F4B285369AE00FA1B5A /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 7D491F4B285369AE00FA1B5A /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7D04D14E2848BD4300B4566D /* Project object */;
 }

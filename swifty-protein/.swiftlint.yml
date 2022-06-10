@@ -215,8 +215,8 @@ closing_brace:
   severity: error
 
 closure_body_length:
-  warning: 25
-  error: 30
+  warning: 40
+  error: 50
 
 closure_end_indentation:
   severity: error

@@ -18,10 +18,10 @@ func decodeMessage<T: Codable>(data: Data?, type: T.Type) -> T? {
 
 func splitString(str: String, separator: String.Element) -> [String] {
     let dataSplited = str.split(separator: separator)
-    var ligands = [String]()
-    ligands.reserveCapacity(dataSplited.count)
+    var arrayStrings = [String]()
+    arrayStrings.reserveCapacity(dataSplited.count)
     for lingand in dataSplited {
-        ligands.append(String(lingand))
+        arrayStrings.append(String(lingand))
     }
-    return ligands
+    return arrayStrings
 }
