@@ -28,7 +28,7 @@ final class ProteinPresenter: ProteinPresenterProtocol {
                 switch result {
                 case .success(let proteinData):
                     for i in proteinData.elements {
-                        print(i.coordinates, i.name)
+                        print(i.coordinates, i.name, i.color)
                     }
                     
                 case .failure(let error):

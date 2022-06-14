@@ -17,10 +17,10 @@
 		7D491F4C285369AE00FA1B5A /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F4A285369AE00FA1B5A /* DataModel.xcdatamodeld */; };
 		7D491F572853716400FA1B5A /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F562853716400FA1B5A /* CoreDataService.swift */; };
 		7D491F592853717C00FA1B5A /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F582853717C00FA1B5A /* CoreDataModel.swift */; };
-		7D491F662853752C00FA1B5A /* ProteinInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F622853752C00FA1B5A /* ProteinInfo+CoreDataClass.swift */; };
-		7D491F672853752C00FA1B5A /* ProteinInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F632853752C00FA1B5A /* ProteinInfo+CoreDataProperties.swift */; };
-		7D491F682853752C00FA1B5A /* Element+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F642853752C00FA1B5A /* Element+CoreDataClass.swift */; };
-		7D491F692853752C00FA1B5A /* Element+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F652853752C00FA1B5A /* Element+CoreDataProperties.swift */; };
+		7D491F762853A64300FA1B5A /* Element+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F722853A64300FA1B5A /* Element+CoreDataProperties.swift */; };
+		7D491F772853A64300FA1B5A /* Element+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F732853A64300FA1B5A /* Element+CoreDataClass.swift */; };
+		7D491F782853A64300FA1B5A /* ProteinInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F742853A64300FA1B5A /* ProteinInfo+CoreDataProperties.swift */; };
+		7D491F792853A64300FA1B5A /* ProteinInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D491F752853A64300FA1B5A /* ProteinInfo+CoreDataClass.swift */; };
 		7D507A642848CB980024BB21 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7D507A622848CB980024BB21 /* swiftgen.yml */; };
 		7D507A6D2848CDE50024BB21 /* StoryboardScenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D507A692848CDE50024BB21 /* StoryboardScenes.swift */; };
 		7D507A6E2848CDE50024BB21 /* StoryboardSegues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D507A6A2848CDE50024BB21 /* StoryboardSegues.swift */; };
@@ -82,10 +82,10 @@
 		7D491F4B285369AE00FA1B5A /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		7D491F562853716400FA1B5A /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		7D491F582853717C00FA1B5A /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
-		7D491F622853752C00FA1B5A /* ProteinInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProteinInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
-		7D491F632853752C00FA1B5A /* ProteinInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProteinInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7D491F642853752C00FA1B5A /* Element+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Element+CoreDataClass.swift"; sourceTree = "<group>"; };
-		7D491F652853752C00FA1B5A /* Element+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Element+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7D491F722853A64300FA1B5A /* Element+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Element+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7D491F732853A64300FA1B5A /* Element+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Element+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7D491F742853A64300FA1B5A /* ProteinInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProteinInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7D491F752853A64300FA1B5A /* ProteinInfo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProteinInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7D507A622848CB980024BB21 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		7D507A692848CDE50024BB21 /* StoryboardScenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardScenes.swift; sourceTree = "<group>"; };
 		7D507A6A2848CDE50024BB21 /* StoryboardSegues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSegues.swift; sourceTree = "<group>"; };
@@ -219,10 +219,10 @@
 		7D491F492853698200FA1B5A /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				7D491F622853752C00FA1B5A /* ProteinInfo+CoreDataClass.swift */,
-				7D491F632853752C00FA1B5A /* ProteinInfo+CoreDataProperties.swift */,
-				7D491F642853752C00FA1B5A /* Element+CoreDataClass.swift */,
-				7D491F652853752C00FA1B5A /* Element+CoreDataProperties.swift */,
+				7D491F732853A64300FA1B5A /* Element+CoreDataClass.swift */,
+				7D491F722853A64300FA1B5A /* Element+CoreDataProperties.swift */,
+				7D491F752853A64300FA1B5A /* ProteinInfo+CoreDataClass.swift */,
+				7D491F742853A64300FA1B5A /* ProteinInfo+CoreDataProperties.swift */,
 				7D491F4A285369AE00FA1B5A /* DataModel.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -640,18 +640,17 @@
 				7D507A702848CDE60024BB21 /* Texts.swift in Sources */,
 				7D72226D2850E52200A0BAE7 /* Functions.swift in Sources */,
 				7DA1F96C284E09A800547D4D /* RegistrationPresenter.swift in Sources */,
-				7D491F692853752C00FA1B5A /* Element+CoreDataProperties.swift in Sources */,
 				7D5E314B284A2B3500AE67A0 /* FirstLaunchChecker.swift in Sources */,
 				7D5E3153284A340F00AE67A0 /* CustomButton.swift in Sources */,
 				7DA1F969284E084800547D4D /* RegistrationSizes.swift in Sources */,
 				7DA31B27284F82940022BA65 /* KeychainService.swift in Sources */,
 				7D7222642850CC6300A0BAE7 /* RestorePasswordViewController.swift in Sources */,
 				7D7E7B9B28522BAA00D2CEB5 /* ProteinViewController.swift in Sources */,
-				7D491F662853752C00FA1B5A /* ProteinInfo+CoreDataClass.swift in Sources */,
-				7D491F682853752C00FA1B5A /* Element+CoreDataClass.swift in Sources */,
 				7D7E7B91285205C200D2CEB5 /* ProteinListPresenter.swift in Sources */,
 				7D5E314E284A2EB500AE67A0 /* KeyboardView.swift in Sources */,
 				7D04D15E2848BD4300B4566D /* SplashViewController.swift in Sources */,
+				7D491F762853A64300FA1B5A /* Element+CoreDataProperties.swift in Sources */,
+				7D491F782853A64300FA1B5A /* ProteinInfo+CoreDataProperties.swift in Sources */,
 				7DA31B20284F38570022BA65 /* PopUpView.swift in Sources */,
 				7D5F37EE285330C1003CC21A /* ProteinModel.swift in Sources */,
 				7DA1F96E284E425D00547D4D /* RegistrationModel.swift in Sources */,
@@ -662,7 +661,6 @@
 				7D5E3155284A5B4000AE67A0 /* LoginPresenter.swift in Sources */,
 				7D04D15A2848BD4300B4566D /* AppDelegate.swift in Sources */,
 				7D7E7B8F2851FB0100D2CEB5 /* LigandsService.swift in Sources */,
-				7D491F672853752C00FA1B5A /* ProteinInfo+CoreDataProperties.swift in Sources */,
 				7D7222662850CCC200A0BAE7 /* RestorePasswordConfigurator.swift in Sources */,
 				7D72225F28509F3700A0BAE7 /* ProteinListViewController.swift in Sources */,
 				7D7222692850D39900A0BAE7 /* RestorePasswordSizes.swift in Sources */,
@@ -681,6 +679,7 @@
 				7D7E7B9F28522CD000D2CEB5 /* ProteinPresenter.swift in Sources */,
 				7D7E7B9D28522C1700D2CEB5 /* ProteinConfigurator.swift in Sources */,
 				7DA1F966284E073400547D4D /* RegistrationViewController.swift in Sources */,
+				7D491F772853A64300FA1B5A /* Element+CoreDataClass.swift in Sources */,
 				7D491F592853717C00FA1B5A /* CoreDataModel.swift in Sources */,
 				7D7E7B962852134500D2CEB5 /* ProteinListTableViewCell.swift in Sources */,
 				7D5E3143284A11F700AE67A0 /* LoginViewController.swift in Sources */,
@@ -688,6 +687,7 @@
 				7D7E7B8C2851F71300D2CEB5 /* Model.swift in Sources */,
 				7DA1F964284E072600547D4D /* RegistrationConfigurator.swift in Sources */,
 				7DA31B23284F3BC60022BA65 /* PopupSizes.swift in Sources */,
+				7D491F792853A64300FA1B5A /* ProteinInfo+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

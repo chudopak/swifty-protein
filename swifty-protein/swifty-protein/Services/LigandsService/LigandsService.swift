@@ -50,7 +50,20 @@ final class LigandsService: LigandsServiceProtocol {
     
     func fetchProteinData(name: String,
                           completion: @escaping (Result<ProteinData, Error>) -> Void) {
-        // TODO: Don't forget at first check in core data if protein exists
+        ProteinInfo.fetchProteinInfo(proteinName: name) { [weak self] proteinData in
+            if let data = proteinData {
+                print("GOt saved from core data")
+                completion(.success(data))
+            } else {
+                self?.fetchProteinDataFromServer(name: name, completion: completion)
+            }
+        }
+    }
+    
+    private func fetchProteinDataFromServer(
+        name: String,
+        completion: @escaping (Result<ProteinData, Error>) -> Void
+    ) {
         guard let url = buildFetchProteinUrl(name: name)
         else {
             completion(.failure(BaseError.canNotBuildUrl("LigandsService, fetchProteinData")))
@@ -87,6 +100,7 @@ final class LigandsService: LigandsServiceProtocol {
             return
         }
         completion(.success(proteinData))
+        ProteinInfo.saveObject(proteinData: proteinData, predicate: nil)
     }
     
     private func parseProteinData(name: String,

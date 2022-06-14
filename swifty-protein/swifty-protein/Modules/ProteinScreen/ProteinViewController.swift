@@ -18,6 +18,7 @@ final class ProteinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         presenter.fetchProteinData(name: ligand)
         setView()
     }

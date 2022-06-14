@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Element" representedClassName="Element" syncable="YES">
-        <attribute name="color" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="UIColor"/>
-        <attribute name="conections" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
+    <entity name="Element" representedClassName=".Element" syncable="YES">
+        <attribute name="conections" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
         <attribute name="index" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="x" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="y" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="z" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="proteinObj" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProteinInfo" inverseName="elements" inverseEntity="ProteinInfo"/>
     </entity>
-    <entity name="ProteinInfo" representedClassName="ProteinInfo" syncable="YES">
+    <entity name="ProteinInfo" representedClassName=".ProteinInfo" syncable="YES">
         <attribute name="name" attributeType="String"/>
-        <relationship name="elements" toMany="YES" deletionRule="Cascade" destinationEntity="Element"/>
+        <relationship name="elements" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Element" inverseName="proteinObj" inverseEntity="Element"/>
     </entity>
     <elements>
-        <element name="ProteinInfo" positionX="-434.5379028320312" positionY="-56.96987915039062" width="88.90350341796875" height="73"/>
-        <element name="Element" positionX="-54" positionY="0" width="128" height="148"/>
+        <element name="Element" positionX="-54" positionY="0" width="128" height="134"/>
+        <element name="ProteinInfo" positionX="-434.5379028320312" positionY="-56.96987915039062" width="88.90350341796875" height="59"/>
     </elements>
 </model>
