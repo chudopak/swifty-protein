@@ -164,6 +164,10 @@ final class LigandsService: LigandsServiceProtocol {
             }
         }
         // Elements start count index from 1 thats why "- 1" below
+        guard elements.count > elemIndex - 1
+        else {
+            return true
+        }
         elements[elemIndex - 1].conections = conections
         return true
     }

@@ -27,6 +27,8 @@
 		7D507A6F2848CDE50024BB21 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D507A6B2848CDE50024BB21 /* Asset.swift */; };
 		7D507A702848CDE60024BB21 /* Texts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D507A6C2848CDE50024BB21 /* Texts.swift */; };
 		7D507A732848D5460024BB21 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D507A712848D5460024BB21 /* Localizable.strings */; };
+		7D5798D2285891A600FEE2D7 /* ProteinSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5798D1285891A600FEE2D7 /* ProteinSizes.swift */; };
+		7D5798D428589F4000FEE2D7 /* ProteinScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5798D328589F4000FEE2D7 /* ProteinScene.swift */; };
 		7D5E3143284A11F700AE67A0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3142284A11F700AE67A0 /* LoginViewController.swift */; };
 		7D5E3145284A12F300AE67A0 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3144284A12F300AE67A0 /* LoginConfigurator.swift */; };
 		7D5E3148284A1B2300AE67A0 /* WindowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E3147284A1B2300AE67A0 /* WindowService.swift */; };
@@ -93,6 +95,8 @@
 		7D507A6C2848CDE50024BB21 /* Texts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
 		7D507A722848D5460024BB21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "swifty-protein/Base.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7D507A742848D7490024BB21 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = "swifty-protein/ru.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7D5798D1285891A600FEE2D7 /* ProteinSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinSizes.swift; sourceTree = "<group>"; };
+		7D5798D328589F4000FEE2D7 /* ProteinScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinScene.swift; sourceTree = "<group>"; };
 		7D5E3142284A11F700AE67A0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7D5E3144284A12F300AE67A0 /* LoginConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfigurator.swift; sourceTree = "<group>"; };
 		7D5E3147284A1B2300AE67A0 /* WindowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowService.swift; sourceTree = "<group>"; };
@@ -280,6 +284,15 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
+		7D5798D02858917900FEE2D7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7D5798D1285891A600FEE2D7 /* ProteinSizes.swift */,
+				7D5798D328589F4000FEE2D7 /* ProteinScene.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		7D5E3141284A11E000AE67A0 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +404,7 @@
 		7D7E7B9928522B8000D2CEB5 /* ProteinScreen */ = {
 			isa = PBXGroup;
 			children = (
+				7D5798D02858917900FEE2D7 /* Utils */,
 				7D7E7B9A28522BAA00D2CEB5 /* ProteinViewController.swift */,
 				7D7E7B9C28522C1700D2CEB5 /* ProteinConfigurator.swift */,
 				7D7E7B9E28522CD000D2CEB5 /* ProteinPresenter.swift */,
@@ -677,10 +691,12 @@
 				7D7E7B8A2851F67C00D2CEB5 /* NetworkLayer.swift in Sources */,
 				7D7E7B882851F53600D2CEB5 /* Configuration.swift in Sources */,
 				7D7E7B9F28522CD000D2CEB5 /* ProteinPresenter.swift in Sources */,
+				7D5798D428589F4000FEE2D7 /* ProteinScene.swift in Sources */,
 				7D7E7B9D28522C1700D2CEB5 /* ProteinConfigurator.swift in Sources */,
 				7DA1F966284E073400547D4D /* RegistrationViewController.swift in Sources */,
 				7D491F772853A64300FA1B5A /* Element+CoreDataClass.swift in Sources */,
 				7D491F592853717C00FA1B5A /* CoreDataModel.swift in Sources */,
+				7D5798D2285891A600FEE2D7 /* ProteinSizes.swift in Sources */,
 				7D7E7B962852134500D2CEB5 /* ProteinListTableViewCell.swift in Sources */,
 				7D5E3143284A11F700AE67A0 /* LoginViewController.swift in Sources */,
 				7DA31B29284F98730022BA65 /* Models.swift in Sources */,

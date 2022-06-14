@@ -49,9 +49,9 @@ struct Coordinates {
 
 enum CPKColors {
     
-    static let other = "other"
+    private static let other = "other"
     
-    static let elements: [String: UIColor] = {
+    private static let elements: [String: UIColor] = {
         var elem = [String: UIColor]()
         elem["h"] = Asset.hydrogen.color
         elem["c"] = Asset.carbon.color
@@ -93,4 +93,13 @@ enum CPKColors {
         }
         return color
     }
+}
+
+struct MoleculeExtremeCoordinates {
+    var xMin: Double = 0
+    var xMax: Double = 0
+    var yMin: Double = 0
+    var yMax: Double = 0
+    var zMin: Double = 0
+    var zMax: Double = 0
 }

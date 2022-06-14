@@ -27,11 +27,10 @@ final class ProteinPresenter: ProteinPresenterProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let proteinData):
-                    for i in proteinData.elements {
-                        print(i.coordinates, i.name, i.color)
-                    }
+                    self?.viewController.renderScene(with: proteinData)
                     
                 case .failure(let error):
+                    // TODO: Show error view
                     print(error.localizedDescription)
                 }
             }
