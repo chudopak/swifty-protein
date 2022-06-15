@@ -29,6 +29,7 @@ enum BaseError: Error {
     case range400Response(String, Int)
     case noData(String)
     case canNotParseProteinData(String)
+    case unownedError(String)
 }
 
 extension BaseError: LocalizedError {
@@ -55,6 +56,12 @@ extension BaseError: LocalizedError {
         case .canNotParseProteinData(let errorPlace):
             return NSLocalizedString(
                 "\(errorPlace) - can not parse protein data, something bad with format",
+                comment: ""
+            )
+            
+        case .unownedError(let errorPlace):
+            return NSLocalizedString(
+                "\(errorPlace) - unowned error",
                 comment: ""
             )
         }

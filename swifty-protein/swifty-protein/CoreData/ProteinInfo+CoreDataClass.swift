@@ -79,7 +79,6 @@ public class ProteinInfo: NSManagedObject {
             )
             elements.append(elementData)
         }
-        elements.sort { $0.index < $1.index }
         return ProteinData(name: obj.name, elements: elements)
     }
     

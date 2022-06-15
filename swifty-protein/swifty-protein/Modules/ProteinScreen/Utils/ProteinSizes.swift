@@ -9,12 +9,13 @@ import UIKit
 
 enum ProteinSizes {
     
-    enum Sphere {
-        static let radius: CGFloat = 0.3
+    enum Molecule {
+        static let sphereRadius: CGFloat = 0.4
+        static let cylinderRadius: CGFloat = 0.1
     }
     
     enum Camera {
-        static let minStartHeight: Double = 10
+        static let minStartHeight: Double = 7
         static let farDepthLimitOffsetFromStartHeight: Double = 30
         static let reserveToFitAllAtoms: Double = 2
     }

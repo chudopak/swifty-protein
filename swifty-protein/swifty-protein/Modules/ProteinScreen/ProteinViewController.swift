@@ -32,7 +32,6 @@ final class ProteinViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        spinner.startAnimating()
         setNavigationBar()
     }
     
@@ -50,6 +49,7 @@ final class ProteinViewController: UIViewController {
         view.addSubview(spinner)
         view.addSubview(sceneView)
         sceneView.isHidden = true
+        spinner.startAnimating()
     }
     
     private func setNavigationBar() {

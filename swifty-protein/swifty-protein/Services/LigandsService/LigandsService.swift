@@ -78,10 +78,12 @@ final class LigandsService: LigandsServiceProtocol {
             else {
                 if let error = error {
                     completion(.failure(error))
+                } else if data == nil {
+                    completion(.failure(BaseError.noData("LigandsService, fetchProteinData")))
                 } else if let responsHTTP = response as? HTTPURLResponse {
                     completion(.failure(BaseError.range400Response("LigandsService, fetchProteinData", responsHTTP.statusCode)))
                 } else {
-                    completion(.failure(BaseError.noData("LigandsService, fetchProteinData")))
+                    completion(.failure(BaseError.unownedError("LigandsService, fetchProteinData")))
                 }
                 return
             }
