@@ -26,6 +26,7 @@ Common.error = "Error";
 Common.success = "Success";
 Common.restorePassword = "Restore password";
 Common.compare = "Compare";
+Common.tryAgain = "Try again";
 
 Questions.whereWereYouBorn = "Where were you born?";
 
@@ -43,3 +44,4 @@ Descriptions.loginWithTouchID = "Authenticate with Touch ID.";
 Descriptions.wrongPassword = "Incorrect password.";
 Descriptions.passwordChangd = "Password successfully changed.";
 Descriptions.failedToLoadLigands = "Something went wrong while loading ligands.";
+Descriptions.failedToLoadMolecule = "Failed to load molecule data :(";

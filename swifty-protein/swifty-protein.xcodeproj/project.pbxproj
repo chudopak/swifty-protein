@@ -67,6 +67,7 @@
 		7DA31B27284F82940022BA65 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B26284F82940022BA65 /* KeychainService.swift */; };
 		7DA31B29284F98730022BA65 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B28284F98730022BA65 /* Models.swift */; };
 		7DA31B2C284F9FAB0022BA65 /* KeyboardSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B2B284F9FAB0022BA65 /* KeyboardSizes.swift */; };
+		7DC79BFA2859E70100F3F8D4 /* ProteinErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC79BF92859E70100F3F8D4 /* ProteinErrorView.swift */; };
 		84FB4E1EBED261095446D9F5 /* Pods_swifty_protein.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A72A6CFC122606F6845EF1A /* Pods_swifty_protein.framework */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +136,7 @@
 		7DA31B26284F82940022BA65 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		7DA31B28284F98730022BA65 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		7DA31B2B284F9FAB0022BA65 /* KeyboardSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSizes.swift; sourceTree = "<group>"; };
+		7DC79BF92859E70100F3F8D4 /* ProteinErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinErrorView.swift; sourceTree = "<group>"; };
 		BD0AC22FB8DCA348C0DDC529 /* Pods-swifty-protein.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.release.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.release.xcconfig"; sourceTree = "<group>"; };
 		C260BC898D08BFDE7F41368D /* Pods-swifty-protein.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.debug.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -289,6 +291,7 @@
 			children = (
 				7D5798D1285891A600FEE2D7 /* ProteinSizes.swift */,
 				7D5798D328589F4000FEE2D7 /* ProteinScene.swift */,
+				7DC79BF92859E70100F3F8D4 /* ProteinErrorView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -688,6 +691,7 @@
 				7D507A6D2848CDE50024BB21 /* StoryboardScenes.swift in Sources */,
 				7D72226B2850D57800A0BAE7 /* RestorePasswordPresenter.swift in Sources */,
 				7D491F572853716400FA1B5A /* CoreDataService.swift in Sources */,
+				7DC79BFA2859E70100F3F8D4 /* ProteinErrorView.swift in Sources */,
 				7D7E7B8A2851F67C00D2CEB5 /* NetworkLayer.swift in Sources */,
 				7D7E7B882851F53600D2CEB5 /* Configuration.swift in Sources */,
 				7D7E7B9F28522CD000D2CEB5 /* ProteinPresenter.swift in Sources */,

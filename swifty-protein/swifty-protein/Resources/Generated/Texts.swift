@@ -44,6 +44,8 @@ internal enum Text {
     internal static let save = Text.tr("Localizable", "Common.save")
     /// Success
     internal static let success = Text.tr("Localizable", "Common.success")
+    /// Try again
+    internal static let tryAgain = Text.tr("Localizable", "Common.tryAgain")
     /// Input answer
     internal static let typeAnswerPlaceholder = Text.tr("Localizable", "Common.typeAnswerPlaceholder")
   }
@@ -57,6 +59,8 @@ internal enum Text {
     internal static let emptyAnswer = Text.tr("Localizable", "Descriptions.emptyAnswer")
     /// Something went wrong while loading ligands.
     internal static let failedToLoadLigands = Text.tr("Localizable", "Descriptions.failedToLoadLigands")
+    /// Failed to load molecule data :(
+    internal static let failedToLoadMolecule = Text.tr("Localizable", "Descriptions.failedToLoadMolecule")
     /// Authenticate with Touch ID.
     internal static let loginWithTouchID = Text.tr("Localizable", "Descriptions.loginWithTouchID")
     /// Answer to long. It will be hard to remember.

@@ -30,8 +30,8 @@ final class ProteinPresenter: ProteinPresenterProtocol {
                     self?.viewController.renderScene(with: proteinData)
                     
                 case .failure(let error):
-                    // TODO: Show error view
                     print(error.localizedDescription)
+                    self?.viewController.showFailedView()
                 }
             }
         }

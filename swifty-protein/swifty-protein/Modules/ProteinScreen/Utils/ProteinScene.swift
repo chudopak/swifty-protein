@@ -18,6 +18,19 @@ class ProteinScene: SCNScene, SCNNodeRendererDelegate {
         atoms.reserveCapacity(proteinData.elements.count)
         var elements = proteinData.elements
         elements.sort(by: { $0.index < $1.index })
+        
+        configureAtoms(elements: elements)
+        configureConections(elements: elements)
+        let camera = createCamera(elements: elements)
+        rootNode.addChildNode(camera)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureAtoms(elements: [ElementData]) {
         for element in elements {
             let atom = createAtom(
                 name: element.name,
@@ -27,7 +40,22 @@ class ProteinScene: SCNScene, SCNNodeRendererDelegate {
             atoms.append(atom)
             rootNode.addChildNode(atom)
         }
-        
+    }
+    
+    private func createAtom(
+        name: String,
+        radius: CGFloat,
+        coordinates: Coordinates
+    ) -> SCNNode {
+        let sphere = SCNSphere(radius: radius)
+        sphere.firstMaterial?.diffuse.contents = CPKColors.getColor(string: name)
+        let sphereNode = SCNNode(geometry: sphere)
+        sphereNode.position = SCNVector3(coordinates.x, coordinates.y, coordinates.z)
+        sphere.name = name
+        return sphereNode
+    }
+    
+    private func configureConections(elements: [ElementData]) {
         for i in 0..<elements.count {
             for index in elements[i].conections
             where elements.count > index - 1
@@ -44,27 +72,52 @@ class ProteinScene: SCNScene, SCNNodeRendererDelegate {
                 rootNode.addChildNode(cylinder)
             }
         }
-
-        let camera = createCamera(elements: elements)
-        rootNode.addChildNode(camera)
     }
     
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func isConnectionExists(atom1: Int, atom2: Int) -> Bool {
+        guard let conections = activeConections[atom1]
+        else {
+            return false
+        }
+        for elem in conections where elem == atom2 {
+            return true
+        }
+        return false
     }
     
-    private func createAtom(
-        name: String,
-        radius: CGFloat,
-        coordinates: Coordinates
-    ) -> SCNNode {
-        let sphere = SCNSphere(radius: radius)
-        sphere.firstMaterial?.diffuse.contents = CPKColors.getColor(string: name)
-        let sphereNode = SCNNode(geometry: sphere)
-        sphereNode.position = SCNVector3(coordinates.x, coordinates.y, coordinates.z)
-        sphere.name = name
-        return sphereNode
+    private func createConnection(parentAtom: SCNNode, connectAtom: SCNNode) -> SCNNode {
+        let height = getCylinderHeight(v1: parentAtom.position, v2: connectAtom.position)
+        let position = getCylinderCenter(v1: parentAtom.position, v2: connectAtom.position)
+        
+        let cylinder = SCNCylinder(
+            radius: ProteinSizes.Molecule.cylinderRadius,
+            height: CGFloat(height)
+        )
+        cylinder.firstMaterial?.diffuse.contents = UIColor.white
+        
+        let nodeWithCylinder = SCNNode(geometry: cylinder)
+        nodeWithCylinder.position = position
+        nodeWithCylinder.look(
+            at: parentAtom.position,
+            up: rootNode.worldUp,
+            localFront: nodeWithCylinder.worldUp
+        )
+        return nodeWithCylinder
+    }
+    
+    private func getCylinderHeight(v1: SCNVector3, v2: SCNVector3) -> Double {
+        let xd = v2.x - v1.x
+        let yd = v2.y - v1.y
+        let zd = v2.z - v1.z
+        let distance = Double(sqrt(xd * xd + yd * yd + zd * zd))
+        return abs(distance)
+    }
+    
+    private func getCylinderCenter(v1: SCNVector3, v2: SCNVector3) -> SCNVector3 {
+        let x = (v1.x + v2.x) / 2
+        let y = (v1.y + v2.y) / 2
+        let z = (v1.z + v2.z) / 2
+        return SCNVector3(x, y, z)
     }
     
     private func createCamera(elements: [ElementData]) -> SCNNode {
@@ -122,51 +175,5 @@ class ProteinScene: SCNScene, SCNNodeRendererDelegate {
         return xMax < yMax
                     ? yMax
                     : xMax
-    }
-    
-    private func isConnectionExists(atom1: Int, atom2: Int) -> Bool {
-        guard let conections = activeConections[atom1]
-        else {
-            return false
-        }
-        for elem in conections where elem == atom2 {
-            return true
-        }
-        return false
-    }
-    
-    private func createConnection(parentAtom: SCNNode, connectAtom: SCNNode) -> SCNNode {
-        let height = getCylinderHeight(v1: parentAtom.position, v2: connectAtom.position)
-        let position = getCylinderCenter(v1: parentAtom.position, v2: connectAtom.position)
-        
-        let cylinder = SCNCylinder(
-            radius: ProteinSizes.Molecule.cylinderRadius,
-            height: CGFloat(height)
-        )
-        cylinder.firstMaterial?.diffuse.contents = UIColor.white
-        
-        let nodeWithCylinder = SCNNode(geometry: cylinder)
-        nodeWithCylinder.position = position
-        nodeWithCylinder.look(
-            at: parentAtom.position,
-            up: rootNode.worldUp,
-            localFront: nodeWithCylinder.worldUp
-        )
-        return nodeWithCylinder
-    }
-    
-    private func getCylinderHeight(v1: SCNVector3, v2: SCNVector3) -> Double {
-        let xd = v2.x - v1.x
-        let yd = v2.y - v1.y
-        let zd = v2.z - v1.z
-        let distance = Double(sqrt(xd * xd + yd * yd + zd * zd))
-        return abs(distance)
-    }
-    
-    private func getCylinderCenter(v1: SCNVector3, v2: SCNVector3) -> SCNVector3 {
-        let x = (v1.x + v2.x) / 2
-        let y = (v1.y + v2.y) / 2
-        let z = (v1.z + v2.z) / 2
-        return SCNVector3(x, y, z)
     }
 }
