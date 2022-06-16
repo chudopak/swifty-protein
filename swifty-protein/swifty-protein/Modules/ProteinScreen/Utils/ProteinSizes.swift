@@ -50,5 +50,26 @@ enum ProteinSizes {
         static let cornerRadius: CGFloat = 15
         static let bottomOffset: CGFloat = 20
         static let animationDuration: TimeInterval = 0.5
+        static let elementsSideOffset: CGFloat = 20
+        
+        static let symbolSize: CGFloat = 70
+        static let symbolFontSize: CGFloat = 60
+        
+        static let atomNameFontSize: CGFloat = 15
+        static let atomNameHeight: CGFloat = 20
+        static let atomNameWidth: CGFloat = 100
+        
+        static let atomNumberSize: CGFloat = 20
+        static let atomNumberFontSize: CGFloat = 17
+        
+        static let containerSize: CGFloat = 100
+        static let containerTopOffset: CGFloat = 20
+        static let containerLeadingOffset: CGFloat = 20
+        static let containerCornerRadius: CGFloat = 10
+        static let containerElementsSideOffset: CGFloat = 5
+        
+        static let stackHeight: CGFloat = 40
+        static let stackSuperViewTopOffset: CGFloat = 20
+        static let stackTopOffset: CGFloat = 17.5
     }
 }

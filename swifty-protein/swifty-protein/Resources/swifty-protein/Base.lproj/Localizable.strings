@@ -45,3 +45,9 @@ Descriptions.wrongPassword = "Incorrect password.";
 Descriptions.passwordChangd = "Password successfully changed.";
 Descriptions.failedToLoadLigands = "Something went wrong while loading ligands.";
 Descriptions.failedToLoadMolecule = "Failed to load molecule data :(";
+
+//MARK: atom description
+
+AtomDescription.atomicNumber = "Atomic number";
+AtomDescription.electronicConfiguration = "Electronic configuration";
+AtomDescription.atomMass = "Atom mass";

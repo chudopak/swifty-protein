@@ -13,6 +13,15 @@ internal enum Text {
   /// Swifty Protein
   internal static let appTitle = Text.tr("Localizable", "AppTitle")
 
+  internal enum AtomDescription {
+    /// Atomic number
+    internal static let atomicNumber = Text.tr("Localizable", "AtomDescription.atomicNumber")
+    /// Atom mass
+    internal static let atomMass = Text.tr("Localizable", "AtomDescription.atomMass")
+    /// Electronic configuration
+    internal static let electronicConfiguration = Text.tr("Localizable", "AtomDescription.electronicConfiguration")
+  }
+
   internal enum Common {
     /// Backward
     internal static let backward = Text.tr("Localizable", "Common.backward")

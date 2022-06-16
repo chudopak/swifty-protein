@@ -178,6 +178,11 @@ extension ProteinViewController: ProteinViewControllerProtocol {
     }
     
     func showAtomDetails(atom: AtomDetails?) {
+        if let atomDetails = atom {
+            atomDetailsView.setDetaildFields(atom: atomDetails)
+        } else {
+            atomDetailsView.showErrorView()
+        }
         atomDetailsViewAnimateIn()
     }
 }

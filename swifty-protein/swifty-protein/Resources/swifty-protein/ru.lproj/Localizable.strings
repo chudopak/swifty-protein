@@ -44,3 +44,9 @@ Descriptions.wrongPassword = "Неверный пароль.";
 Descriptions.passwordChangd = "Пароль успешно изменен.";
 Descriptions.failedToLoadLigands = "Что-то пошло не так при загрузки кодов белков.";
 Descriptions.failedToLoadMolecule = "Не удалось загрузить данные молекулы :(";
+
+//MARK: atom description
+
+AtomDescription.atomicNumber = "Атомное число";
+AtomDescription.electronicConfiguration = "Электронная конфигурация";
+AtomDescription.atomMass = "Атомная масса";
