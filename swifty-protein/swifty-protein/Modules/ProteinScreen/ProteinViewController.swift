@@ -12,6 +12,7 @@ import SnapKit
 protocol ProteinViewControllerProtocol: AnyObject {
     func renderScene(with proteinData: ProteinData)
     func showFailedView()
+    func showAtomDetails(atom: AtomDetails?)
 }
 
 protocol ProteinViewControllerDelegate: AnyObject {
@@ -31,12 +32,14 @@ final class ProteinViewController: UIViewController {
     private lazy var sceneView = makeSceneView()
     private lazy var spinner = makeSpinner()
     private lazy var errorView = ProteinErrorView(delegate: self)
+    private lazy var atomDetailsView = makeAtomDetailsView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         presenter.fetchProteinData(name: ligand)
         setView()
+        registerGestureRecognizer()
         setConstraints()
     }
     
@@ -59,6 +62,7 @@ final class ProteinViewController: UIViewController {
         view.addSubview(spinner)
         view.addSubview(sceneView)
         view.addSubview(errorView)
+        view.addSubview(atomDetailsView)
         setViewState(state: .loading)
     }
     
@@ -69,6 +73,11 @@ final class ProteinViewController: UIViewController {
             target: self,
             action: nil
         )
+    }
+    
+    private func registerGestureRecognizer() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(searchNode(sender:)))
+        sceneView.addGestureRecognizer(tap)
     }
     
     private func setViewState(state: ViewState) {
@@ -91,6 +100,69 @@ final class ProteinViewController: UIViewController {
             spinner.isHidden = true
             errorView.isHidden = false
         }
+        atomDetailsView.isHidden = true
+    }
+    
+    private func atomDetailsViewAnimateIn() {
+        atomDetailsView.transform = CGAffineTransform(translationX: 0,
+                                                      y: ProteinSizes.AtomDetails.hegiht)
+        atomDetailsView.alpha = 0
+        atomDetailsView.isHidden = false
+        UIView.animate(
+            withDuration: ProteinSizes.AtomDetails.animationDuration,
+            delay: .zero,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 1,
+            options: .curveEaseIn,
+            animations: { [weak self] in
+                self?.atomDetailsView.transform = .identity
+                self?.atomDetailsView.alpha = 1
+            },
+            completion: nil
+        )
+    }
+    
+    private func atomDetailsViewAnimateOut() {
+        UIView.animate(
+            withDuration: ProteinSizes.AtomDetails.animationDuration,
+            delay: .zero,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 1,
+            options: .curveEaseIn,
+            animations: { [weak self] in
+                self?.atomDetailsView.transform = CGAffineTransform(translationX: 0,
+                                                                    y: ProteinSizes.AtomDetails.hegiht)
+                self?.atomDetailsView.alpha = 0
+            },
+            completion: { [weak self] _ in
+                self?.atomDetailsView.isHidden = true
+                self?.atomDetailsView.transform = .identity
+                self?.atomDetailsView.alpha = 1
+            }
+        )
+    }
+    
+    private func manageSelectedNode(node: SCNNode) {
+        print("Node NAme - \(node.name!)")
+        presenter.getAtomDetails(name: node.name)
+    }
+    
+    @objc private func searchNode(sender: UITapGestureRecognizer) {
+        guard sender.state == .ended,
+              let view = sender.view as? SCNView
+        else {
+            atomDetailsViewAnimateOut()
+            return
+        }
+        let location = sender.location(in: view)
+        let results = view.hitTest(location, options: [.searchMode: 1])
+                    .filter({ $0.node.name != nil && $0.node.name != ElementData.Prefixes.conect })
+        guard let selectedNode = results.first?.node
+        else {
+            atomDetailsViewAnimateOut()
+            return
+        }
+        manageSelectedNode(node: selectedNode)
     }
 }
 
@@ -103,6 +175,10 @@ extension ProteinViewController: ProteinViewControllerProtocol {
     
     func showFailedView() {
         setViewState(state: .error)
+    }
+    
+    func showAtomDetails(atom: AtomDetails?) {
+        atomDetailsViewAnimateIn()
     }
 }
 
@@ -130,6 +206,12 @@ extension ProteinViewController {
         spinner.color = Asset.textColor.color
         return spinner
     }
+    
+    private func makeAtomDetailsView() -> ProteinAtomDetailsView {
+        let atomDetailsView = ProteinAtomDetailsView()
+        atomDetailsView.layer.cornerRadius = ProteinSizes.AtomDetails.cornerRadius
+        return atomDetailsView
+    }
 }
 
 extension ProteinViewController {
@@ -138,6 +220,7 @@ extension ProteinViewController {
         setSceneViewConstraints()
         setSpinnerConstraints()
         setErrorViewConstraints()
+        setAtomDetailsViewConstraints()
     }
     
     private func setSceneViewConstraints() {
@@ -159,6 +242,13 @@ extension ProteinViewController {
             maker.center.equalToSuperview()
             maker.width.equalTo(ProteinSizes.ErrorView.width)
             maker.height.equalTo(ProteinSizes.ErrorView.height)
+        }
+    }
+    private func setAtomDetailsViewConstraints() {
+        atomDetailsView.snp.makeConstraints { maker in
+            maker.leading.trailing.equalToSuperview()
+            maker.height.equalTo(ProteinSizes.AtomDetails.hegiht)
+            maker.bottom.equalToSuperview().offset(ProteinSizes.AtomDetails.bottomOffset)
         }
     }
 }

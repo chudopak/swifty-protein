@@ -44,4 +44,11 @@ enum ProteinSizes {
         
         static let descriptionOffset: CGFloat = 10
     }
+    
+    enum AtomDetails {
+        static let hegiht: CGFloat = 300
+        static let cornerRadius: CGFloat = 15
+        static let bottomOffset: CGFloat = 20
+        static let animationDuration: TimeInterval = 0.5
+    }
 }

@@ -67,6 +67,9 @@
 		7DA31B27284F82940022BA65 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B26284F82940022BA65 /* KeychainService.swift */; };
 		7DA31B29284F98730022BA65 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B28284F98730022BA65 /* Models.swift */; };
 		7DA31B2C284F9FAB0022BA65 /* KeyboardSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA31B2B284F9FAB0022BA65 /* KeyboardSizes.swift */; };
+		7DC2931F285B191E009EAECC /* ProteinAtomDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC2931E285B191E009EAECC /* ProteinAtomDetailsView.swift */; };
+		7DC29322285B2989009EAECC /* PeriodicTable.json in Resources */ = {isa = PBXBuildFile; fileRef = 7DC29321285B2989009EAECC /* PeriodicTable.json */; };
+		7DC29325285B40E8009EAECC /* AtomsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC29324285B40E8009EAECC /* AtomsService.swift */; };
 		7DC79BFA2859E70100F3F8D4 /* ProteinErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC79BF92859E70100F3F8D4 /* ProteinErrorView.swift */; };
 		84FB4E1EBED261095446D9F5 /* Pods_swifty_protein.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A72A6CFC122606F6845EF1A /* Pods_swifty_protein.framework */; };
 /* End PBXBuildFile section */
@@ -136,6 +139,9 @@
 		7DA31B26284F82940022BA65 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		7DA31B28284F98730022BA65 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		7DA31B2B284F9FAB0022BA65 /* KeyboardSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSizes.swift; sourceTree = "<group>"; };
+		7DC2931E285B191E009EAECC /* ProteinAtomDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinAtomDetailsView.swift; sourceTree = "<group>"; };
+		7DC29321285B2989009EAECC /* PeriodicTable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PeriodicTable.json; sourceTree = "<group>"; };
+		7DC29324285B40E8009EAECC /* AtomsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomsService.swift; sourceTree = "<group>"; };
 		7DC79BF92859E70100F3F8D4 /* ProteinErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinErrorView.swift; sourceTree = "<group>"; };
 		BD0AC22FB8DCA348C0DDC529 /* Pods-swifty-protein.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.release.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.release.xcconfig"; sourceTree = "<group>"; };
 		C260BC898D08BFDE7F41368D /* Pods-swifty-protein.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swifty-protein.debug.xcconfig"; path = "Target Support Files/Pods-swifty-protein/Pods-swifty-protein.debug.xcconfig"; sourceTree = "<group>"; };
@@ -246,6 +252,7 @@
 		7D507A602848CA420024BB21 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7DC29321285B2989009EAECC /* PeriodicTable.json */,
 				7D7E7B922852103300D2CEB5 /* ligands.txt */,
 				7D507A712848D5460024BB21 /* Localizable.strings */,
 				7D507A652848CBE60024BB21 /* Generated */,
@@ -292,6 +299,7 @@
 				7D5798D1285891A600FEE2D7 /* ProteinSizes.swift */,
 				7D5798D328589F4000FEE2D7 /* ProteinScene.swift */,
 				7DC79BF92859E70100F3F8D4 /* ProteinErrorView.swift */,
+				7DC2931E285B191E009EAECC /* ProteinAtomDetailsView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -311,6 +319,7 @@
 		7D5E3146284A1A5F00AE67A0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7DC29323285B40D6009EAECC /* AtomsServicee */,
 				7D491F552853714D00FA1B5A /* CoreDataService */,
 				7D7E7B8D2851FA5500D2CEB5 /* LigandsService */,
 				7DA31B25284F82410022BA65 /* KeychainService */,
@@ -480,6 +489,14 @@
 			path = KeyboardView;
 			sourceTree = "<group>";
 		};
+		7DC29323285B40D6009EAECC /* AtomsServicee */ = {
+			isa = PBXGroup;
+			children = (
+				7DC29324285B40E8009EAECC /* AtomsService.swift */,
+			);
+			path = AtomsServicee;
+			sourceTree = "<group>";
+		};
 		C2CB10A3C113AADCFB0326CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -564,6 +581,7 @@
 				7D507A732848D5460024BB21 /* Localizable.strings in Resources */,
 				7D04D1632848BD4700B4566D /* Assets.xcassets in Resources */,
 				7D507A642848CB980024BB21 /* swiftgen.yml in Resources */,
+				7DC29322285B2989009EAECC /* PeriodicTable.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,8 +681,10 @@
 				7DA31B27284F82940022BA65 /* KeychainService.swift in Sources */,
 				7D7222642850CC6300A0BAE7 /* RestorePasswordViewController.swift in Sources */,
 				7D7E7B9B28522BAA00D2CEB5 /* ProteinViewController.swift in Sources */,
+				7DC2931F285B191E009EAECC /* ProteinAtomDetailsView.swift in Sources */,
 				7D7E7B91285205C200D2CEB5 /* ProteinListPresenter.swift in Sources */,
 				7D5E314E284A2EB500AE67A0 /* KeyboardView.swift in Sources */,
+				7DC29325285B40E8009EAECC /* AtomsService.swift in Sources */,
 				7D04D15E2848BD4300B4566D /* SplashViewController.swift in Sources */,
 				7D491F762853A64300FA1B5A /* Element+CoreDataProperties.swift in Sources */,
 				7D491F782853A64300FA1B5A /* ProteinInfo+CoreDataProperties.swift in Sources */,

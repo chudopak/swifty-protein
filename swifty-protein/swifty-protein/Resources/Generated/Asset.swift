@@ -39,6 +39,7 @@ internal enum Asset {
   internal static let phosphorus = ColorAsset(name: "phosphorus ")
   internal static let sulfur = ColorAsset(name: "sulfur")
   internal static let titanium = ColorAsset(name: "titanium")
+  internal static let atomInfoBackgroundColor = ColorAsset(name: "atomInfoBackgroundColor")
   internal static let buttonsColor = ColorAsset(name: "buttonsColor")
   internal static let darkBlueAndWhiteHalfTransparent = ColorAsset(name: "darkBlueAndWhiteHalfTransparent")
   internal static let grayTransparent = ColorAsset(name: "grayTransparent")

@@ -9,17 +9,21 @@ import UIKit
 
 protocol ProteinPresenterProtocol {
     func fetchProteinData(name: String)
+    func getAtomDetails(name: String?)
 }
 
 final class ProteinPresenter: ProteinPresenterProtocol {
     
     private weak var viewController: ProteinViewControllerProtocol!
     private let ligandsService: LigandsServiceProtocol
+    private let atomsService: AtomsServiceProtocol
     
     init(viewController: ProteinViewControllerProtocol,
-         ligandsService: LigandsServiceProtocol) {
+         ligandsService: LigandsServiceProtocol,
+         atomsService: AtomsServiceProtocol) {
         self.viewController = viewController
         self.ligandsService = ligandsService
+        self.atomsService = atomsService
     }
     
     func fetchProteinData(name: String) {
@@ -34,6 +38,17 @@ final class ProteinPresenter: ProteinPresenterProtocol {
                     self?.viewController.showFailedView()
                 }
             }
+        }
+    }
+    
+    func getAtomDetails(name: String?) {
+        guard let atomName = name
+        else {
+            viewController.showAtomDetails(atom: nil)
+            return
+        }
+        atomsService.fetchAtomData(name: atomName) { [weak self] atom in
+            self?.viewController.showAtomDetails(atom: atom)
         }
     }
 }

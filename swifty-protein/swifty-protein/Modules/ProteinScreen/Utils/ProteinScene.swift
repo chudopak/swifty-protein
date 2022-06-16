@@ -51,7 +51,7 @@ class ProteinScene: SCNScene, SCNNodeRendererDelegate {
         sphere.firstMaterial?.diffuse.contents = CPKColors.getColor(string: name)
         let sphereNode = SCNNode(geometry: sphere)
         sphereNode.position = SCNVector3(coordinates.x, coordinates.y, coordinates.z)
-        sphere.name = name
+        sphereNode.name = name
         return sphereNode
     }
     
@@ -102,6 +102,7 @@ class ProteinScene: SCNScene, SCNNodeRendererDelegate {
             up: rootNode.worldUp,
             localFront: nodeWithCylinder.worldUp
         )
+        nodeWithCylinder.name = ElementData.Prefixes.conect
         return nodeWithCylinder
     }
     

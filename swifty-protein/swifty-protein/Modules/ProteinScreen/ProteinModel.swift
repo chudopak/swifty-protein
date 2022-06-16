@@ -7,6 +7,21 @@
 
 import UIKit
 
+struct PeriodicTable: Codable {
+    let elements: [AtomDetails]?
+}
+
+struct AtomDetails: Codable {
+    let symbol: String
+    let atomicNumber: Int
+    let name_en: String
+    let name_ru: String
+    let electronicConfiguration: String
+    let atomicMass: String?
+    let boilingPoint: Int?
+    let yearDiscovered: Int?
+}
+
 struct ProteinData {
     let name: String
     let elements: [ElementData]
