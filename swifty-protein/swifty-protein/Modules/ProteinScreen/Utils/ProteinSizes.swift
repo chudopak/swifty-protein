@@ -46,6 +46,9 @@ enum ProteinSizes {
     }
     
     enum AtomDetails {
+        static let springWithDamping: CGFloat = 0.7
+        static let springVelocity: CGFloat = 1
+        
         static let hegiht: CGFloat = 250
         static let cornerRadius: CGFloat = 15
         static let bottomOffset: CGFloat = 20

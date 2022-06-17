@@ -37,9 +37,13 @@ final class ProteinViewController: UIViewController {
     private var defaultDetailsViewCenter = CGPoint.zero
     private var detailsViewInitialCenter = CGPoint.zero
     
+    private var selectedNode: SCNNode?
+    private var savedGeometry: SCNGeometry?
+    
+    private var isDetailsViewAnimating = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         presenter.fetchProteinData(name: ligand)
         setView()
         registerGestureRecognizer()
@@ -82,6 +86,12 @@ final class ProteinViewController: UIViewController {
             target: self,
             action: nil
         )
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: SFSymbols.share),
+            style: .plain,
+            target: self,
+            action: #selector(shareProtein)
+        )
     }
     
     private func registerGestureRecognizer() {
@@ -123,48 +133,67 @@ final class ProteinViewController: UIViewController {
         atomDetailsView.isHidden = true
     }
     
+    private func returnAtomInNormalState() {
+        selectedNode?.removeAllActions()
+        selectedNode?.scale = SCNVector3(1, 1, 1)
+        selectedNode = nil
+    }
+    
+    private func runScaleInOutAction() {
+        guard let node = selectedNode
+        else {
+            return
+        }
+        let secuence = SCNAction.sequence([
+            SCNAction.scale(to: 0.75, duration: 0.3),
+            SCNAction.scale(to: 1.25, duration: 0.3)
+        ])
+        let action = SCNAction.repeatForever(secuence)
+        node.runAction(action)
+    }
+    
     private func atomDetailsViewAnimateIn() {
-        atomDetailsView.transform = CGAffineTransform(translationX: 0,
+        atomDetailsView.transform = CGAffineTransform(translationX: .zero,
                                                       y: ProteinSizes.AtomDetails.hegiht)
-        atomDetailsView.alpha = 0
+        atomDetailsView.alpha = .zero
         atomDetailsView.isHidden = false
+        isDetailsViewAnimating = true
         UIView.animate(
             withDuration: ProteinSizes.AtomDetails.animationDuration,
             delay: .zero,
-            usingSpringWithDamping: 0.7,
-            initialSpringVelocity: 1,
+            usingSpringWithDamping: ProteinSizes.AtomDetails.springWithDamping,
+            initialSpringVelocity: ProteinSizes.AtomDetails.springVelocity,
             options: .curveEaseIn,
             animations: { [weak self] in
                 self?.atomDetailsView.transform = .identity
                 self?.atomDetailsView.alpha = 1
             },
-            completion: nil
+            completion: { [weak self] _ in
+                self?.isDetailsViewAnimating = false
+            }
         )
     }
     
     private func atomDetailsViewAnimateOut() {
+        isDetailsViewAnimating = true
         UIView.animate(
             withDuration: ProteinSizes.AtomDetails.animationDuration,
             delay: .zero,
-            usingSpringWithDamping: 0.7,
-            initialSpringVelocity: 1,
+            usingSpringWithDamping: ProteinSizes.AtomDetails.springWithDamping,
+            initialSpringVelocity: ProteinSizes.AtomDetails.springVelocity,
             options: .curveEaseIn,
             animations: { [weak self] in
-                self?.atomDetailsView.transform = CGAffineTransform(translationX: 0,
+                self?.atomDetailsView.transform = CGAffineTransform(translationX: .zero,
                                                                     y: ProteinSizes.AtomDetails.hegiht)
-                self?.atomDetailsView.alpha = 0
+                self?.atomDetailsView.alpha = .zero
             },
             completion: { [weak self] _ in
+                self?.isDetailsViewAnimating = false
                 self?.atomDetailsView.isHidden = true
                 self?.atomDetailsView.transform = .identity
                 self?.atomDetailsView.alpha = 1
             }
         )
-    }
-    
-    private func manageSelectedNode(node: SCNNode) {
-        print("Node NAme - \(node.name!)")
-        presenter.getAtomDetails(name: node.name)
     }
     
     private func animateDownDetailsViewCenterTransition() {
@@ -179,7 +208,7 @@ final class ProteinViewController: UIViewController {
             options: .curveEaseIn,
             animations: { [weak self] in
                 self?.atomDetailsView.center = targetCenter
-                self?.atomDetailsView.alpha = 0
+                self?.atomDetailsView.alpha = .zero
             },
             completion: { [weak self] _ in
                 self?.atomDetailsView.isHidden = true
@@ -203,10 +232,16 @@ final class ProteinViewController: UIViewController {
     }
     
     @objc private func searchNode(sender: UITapGestureRecognizer) {
+        if isDetailsViewAnimating {
+            return
+        }
+        returnAtomInNormalState()
         guard sender.state == .ended,
               let view = sender.view as? SCNView
         else {
-            atomDetailsViewAnimateOut()
+            if !atomDetailsView.isHidden {
+                atomDetailsViewAnimateOut()
+            }
             return
         }
         let location = sender.location(in: view)
@@ -214,9 +249,12 @@ final class ProteinViewController: UIViewController {
                     .filter({ $0.node.name != nil && $0.node.name != ElementData.Prefixes.conect })
         guard let selectedNode = results.first?.node
         else {
-            atomDetailsViewAnimateOut()
+            if !atomDetailsView.isHidden {
+                atomDetailsViewAnimateOut()
+            }
             return
         }
+        self.selectedNode = selectedNode
         presenter.getAtomDetails(name: selectedNode.name)
     }
     
@@ -242,9 +280,27 @@ final class ProteinViewController: UIViewController {
         default:
             if detailsView.center.y - defaultDetailsViewCenter.y > detailsView.bounds.height / 2 {
                 animateDownDetailsViewCenterTransition()
+                returnAtomInNormalState()
             } else {
                 animateUpDetailsViewCenterTransition()
             }
+        }
+    }
+    
+    @objc private func shareProtein() {
+        UIGraphicsBeginImageContextWithOptions(self.view.frame.size, true, 0.0)
+        self.view.drawHierarchy(in: self.view.frame, afterScreenUpdates: false)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        if let image = img {
+            let activityViewController = UIActivityViewController(
+                activityItems: ["That is \(ligand) ligand", image],
+                applicationActivities: nil
+            )
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            activityViewController.excludedActivityTypes = [ .airDrop ]
+            self.present(activityViewController, animated: true, completion: nil)
         }
     }
 }
@@ -267,6 +323,7 @@ extension ProteinViewController: ProteinViewControllerProtocol {
             atomDetailsView.showErrorView()
         }
         atomDetailsViewAnimateIn()
+        runScaleInOutAction()
     }
 }
 

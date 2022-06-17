@@ -17,6 +17,7 @@ enum SFSymbols {
     static let touchId = "touchid"
     static let faceId = "faceid"
     static let deleteLeft = "delete.left"
+    static let share = "square.and.arrow.up"
 }
 
 enum NavigationBarTitleView {
