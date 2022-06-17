@@ -67,3 +67,7 @@ extension BaseError: LocalizedError {
         }
     }
 }
+
+enum Localisation {
+    static let ru = "ru"
+}

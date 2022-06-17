@@ -18,8 +18,12 @@ internal enum Text {
     internal static let atomicNumber = Text.tr("Localizable", "AtomDescription.atomicNumber")
     /// Atom mass
     internal static let atomMass = Text.tr("Localizable", "AtomDescription.atomMass")
+    /// Boiling point
+    internal static let boilingPoint = Text.tr("Localizable", "AtomDescription.boilingPoint")
     /// Electronic configuration
     internal static let electronicConfiguration = Text.tr("Localizable", "AtomDescription.electronicConfiguration")
+    /// Year discovered
+    internal static let yearDiscovered = Text.tr("Localizable", "AtomDescription.yearDiscovered")
   }
 
   internal enum Common {
@@ -57,6 +61,8 @@ internal enum Text {
     internal static let tryAgain = Text.tr("Localizable", "Common.tryAgain")
     /// Input answer
     internal static let typeAnswerPlaceholder = Text.tr("Localizable", "Common.typeAnswerPlaceholder")
+    /// Unnowned
+    internal static let unnowned = Text.tr("Localizable", "Common.unnowned")
   }
 
   internal enum Descriptions {
@@ -66,6 +72,8 @@ internal enum Text {
     internal static let confirmAnswer = Text.tr("Localizable", "Descriptions.confirmAnswer")
     /// There MUST be an answer
     internal static let emptyAnswer = Text.tr("Localizable", "Descriptions.emptyAnswer")
+    /// Failed to load atom data :(
+    internal static let failedToLoadAtom = Text.tr("Localizable", "Descriptions.failedToLoadAtom")
     /// Something went wrong while loading ligands.
     internal static let failedToLoadLigands = Text.tr("Localizable", "Descriptions.failedToLoadLigands")
     /// Failed to load molecule data :(

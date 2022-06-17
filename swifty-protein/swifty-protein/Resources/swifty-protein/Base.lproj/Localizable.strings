@@ -27,6 +27,7 @@ Common.success = "Success";
 Common.restorePassword = "Restore password";
 Common.compare = "Compare";
 Common.tryAgain = "Try again";
+Common.unnowned = "Unnowned";
 
 Questions.whereWereYouBorn = "Where were you born?";
 
@@ -45,9 +46,12 @@ Descriptions.wrongPassword = "Incorrect password.";
 Descriptions.passwordChangd = "Password successfully changed.";
 Descriptions.failedToLoadLigands = "Something went wrong while loading ligands.";
 Descriptions.failedToLoadMolecule = "Failed to load molecule data :(";
+Descriptions.failedToLoadAtom = "Failed to load atom data :(";
 
 //MARK: atom description
 
 AtomDescription.atomicNumber = "Atomic number";
 AtomDescription.electronicConfiguration = "Electronic configuration";
 AtomDescription.atomMass = "Atom mass";
+AtomDescription.yearDiscovered = "Year discovered";
+AtomDescription.boilingPoint = "Boiling point";

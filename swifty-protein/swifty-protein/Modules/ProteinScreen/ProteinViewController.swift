@@ -34,18 +34,27 @@ final class ProteinViewController: UIViewController {
     private lazy var errorView = ProteinErrorView(delegate: self)
     private lazy var atomDetailsView = makeAtomDetailsView()
     
+    private var defaultDetailsViewCenter = CGPoint.zero
+    private var detailsViewInitialCenter = CGPoint.zero
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         presenter.fetchProteinData(name: ligand)
         setView()
         registerGestureRecognizer()
+        registerPanGeesture()
         setConstraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBar()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        defaultDetailsViewCenter = atomDetailsView.center
     }
     
     func setupComponents(presenter: ProteinPresenter) {
@@ -76,8 +85,19 @@ final class ProteinViewController: UIViewController {
     }
     
     private func registerGestureRecognizer() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(searchNode(sender:)))
+        let tap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(searchNode(sender:))
+        )
         sceneView.addGestureRecognizer(tap)
+    }
+    
+    private func registerPanGeesture() {
+        let gesture = UIPanGestureRecognizer(
+            target: self,
+            action: #selector(moveDetailsView(sender:))
+        )
+        atomDetailsView.addGestureRecognizer(gesture)
     }
     
     private func setViewState(state: ViewState) {
@@ -147,6 +167,41 @@ final class ProteinViewController: UIViewController {
         presenter.getAtomDetails(name: node.name)
     }
     
+    private func animateDownDetailsViewCenterTransition() {
+        let targetCenter = CGPoint(
+            x: defaultDetailsViewCenter.x,
+            y: defaultDetailsViewCenter.y + atomDetailsView.bounds.height
+        )
+        let defaultCenter = defaultDetailsViewCenter
+        UIView.animate(
+            withDuration: ProteinSizes.AtomDetails.panAnimationDuration,
+            delay: .zero,
+            options: .curveEaseIn,
+            animations: { [weak self] in
+                self?.atomDetailsView.center = targetCenter
+                self?.atomDetailsView.alpha = 0
+            },
+            completion: { [weak self] _ in
+                self?.atomDetailsView.isHidden = true
+                self?.atomDetailsView.center = defaultCenter
+                self?.atomDetailsView.alpha = 1
+            }
+        )
+    }
+    
+    private func animateUpDetailsViewCenterTransition() {
+        let defaultCenter = defaultDetailsViewCenter
+        UIView.animate(
+            withDuration: ProteinSizes.AtomDetails.panAnimationDuration,
+            delay: .zero,
+            options: .curveEaseIn,
+            animations: { [weak self] in
+                self?.atomDetailsView.center = defaultCenter
+            },
+            completion: nil
+        )
+    }
+    
     @objc private func searchNode(sender: UITapGestureRecognizer) {
         guard sender.state == .ended,
               let view = sender.view as? SCNView
@@ -162,7 +217,35 @@ final class ProteinViewController: UIViewController {
             atomDetailsViewAnimateOut()
             return
         }
-        manageSelectedNode(node: selectedNode)
+        presenter.getAtomDetails(name: selectedNode.name)
+    }
+    
+    @objc private func moveDetailsView(sender: UIPanGestureRecognizer) {
+        guard let detailsView = sender.view as? ProteinAtomDetailsView
+        else {
+            return
+        }
+        let translation = sender.translation(in: detailsView.superview)
+        switch sender.state {
+        case .began:
+            detailsViewInitialCenter = detailsView.center
+
+        case .changed:
+            let newCenter: CGPoint
+            if detailsViewInitialCenter.y + translation.y > defaultDetailsViewCenter.y {
+                newCenter = CGPoint(x: detailsViewInitialCenter.x, y: detailsViewInitialCenter.y + translation.y)
+            } else {
+                newCenter = detailsViewInitialCenter
+            }
+            detailsView.center = newCenter
+            
+        default:
+            if detailsView.center.y - defaultDetailsViewCenter.y > detailsView.bounds.height / 2 {
+                animateDownDetailsViewCenterTransition()
+            } else {
+                animateUpDetailsViewCenterTransition()
+            }
+        }
     }
 }
 

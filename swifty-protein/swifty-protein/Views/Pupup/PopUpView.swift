@@ -86,10 +86,12 @@ final class Popup: UIView {
     }
     
     private func setGestures() {
-        let hideKeyboardGuesture = UITapGestureRecognizer(target: self,
-                                                          action: #selector(hidePopup))
-        hideKeyboardGuesture.cancelsTouchesInView = false
-        addGestureRecognizer(hideKeyboardGuesture)
+        let hidePopupGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(hidePopup)
+        )
+        hidePopupGesture.cancelsTouchesInView = false
+        addGestureRecognizer(hidePopupGesture)
     }
     
     private func setStackView(button: CustomButton) {

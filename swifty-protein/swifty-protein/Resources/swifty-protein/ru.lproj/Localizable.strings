@@ -27,6 +27,7 @@ Common.success = "Успех";
 Common.restorePassword = "Восстановление пароля";
 Common.compare = "Сравнить";
 Common.tryAgain = "Попробовать снова";
+Common.unnowned = "Неизвестно";
 
 Questions.whereWereYouBorn = "Где вы родились?";
 
@@ -44,9 +45,12 @@ Descriptions.wrongPassword = "Неверный пароль.";
 Descriptions.passwordChangd = "Пароль успешно изменен.";
 Descriptions.failedToLoadLigands = "Что-то пошло не так при загрузки кодов белков.";
 Descriptions.failedToLoadMolecule = "Не удалось загрузить данные молекулы :(";
+Descriptions.failedToLoadAtom = "Не удалось загрузить данные атома :(";
 
 //MARK: atom description
 
 AtomDescription.atomicNumber = "Атомное число";
 AtomDescription.electronicConfiguration = "Электронная конфигурация";
 AtomDescription.atomMass = "Атомная масса";
+AtomDescription.yearDiscovered = "Год открытия";
+AtomDescription.boilingPoint = "Точка кипения";
