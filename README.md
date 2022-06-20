@@ -2,11 +2,11 @@
 The application allows you to view in 3D proteins models according to standardized representation.
 **SceneKit** and data from **PDB (Protein Data Bank)** API is used for visualization.
 
-To sign up to the application, you need to create a password and answer the question to restore the passwor, in case you forget it, which will be saved in the  **Keychain**.
+To sign up to the application, you need to create a password and answer the question to restore the password, in case you forget it, which will be saved in the **Keychain**.
 
-To login you can use biometry or password.
+To login, you can use biometry or password.
 
-Also you can share your modelisation in social media or save it to your device.
+Also, you can share your modelisation in social media or save it to your device.
 
 App support two languages - **Russian** and **English**.
 
